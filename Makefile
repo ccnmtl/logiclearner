@@ -17,10 +17,10 @@ $(JS_SENTINAL): package.json
 	touch $(JS_SENTINAL)
 
 install:
-	touch package.json 
+	touch package.json
 	make $(JS_SENTINAL)
 
 clean:
-	rm -rf $(NODE_MODULES) $(DIST) $(DATA_SENTINAL)
+	rm -rf $(NODE_MODULES) $(DIST)
 
 .PHONY: clean install

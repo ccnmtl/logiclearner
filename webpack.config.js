@@ -1,5 +1,7 @@
 const path = require('path');
 const webpack = require('webpack');
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const devMode = process.env.NODE_ENV !== "production";
 
 module.exports = {
     entry: './src/index.tsx',
@@ -18,8 +20,7 @@ module.exports = {
         },
         {
             test: /\.css$/,
-            use: ['style-loader', 'css-loader'],
-            include: path.resolve(__dirname, './src')
+            use: [devMode ? 'style-loader' : MiniCssExtractPlugin.loader, 'css-loader']
         },
         {
             test: /\.(gif|png|jpe?g|svg)$/i,
@@ -30,7 +31,7 @@ module.exports = {
         new webpack.DefinePlugin({
             __BUILD__: JSON.stringify(Date.now())
         })
-    ],
+    ].concat(devMode ? [] : [new MiniCssExtractPlugin()]),
     devServer: {
         port: 8000,
         historyApiFallback: true,
