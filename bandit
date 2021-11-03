@@ -1,0 +1,3 @@
+[bandit]
+skips: B106,B311
+exclude_dirs=writlarge/main/tests

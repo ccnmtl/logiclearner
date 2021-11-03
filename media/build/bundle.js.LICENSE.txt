@@ -1,0 +1,78 @@
+/*
+object-assign
+(c) Sindre Sorhus
+@license MIT
+*/
+
+/*! ./Logger */
+
+/*! ./createConsoleLogger */
+
+/*! ansi-regex */
+
+/*! https://mths.be/punycode v1.3.2 by @mathias */
+
+/*! strip-ansi */
+
+/*! tapable/lib/SyncBailHook */
+
+/*! webpack/lib/logging/runtime.js */
+
+/*!******************************************!*\
+  !*** ./node_modules/strip-ansi/index.js ***!
+  \******************************************/
+
+/*!********************************************!*\
+  !*** ./client-src/modules/logger/index.js ***!
+  \********************************************/
+
+/*!************************************************!*\
+  !*** ./client-src/modules/strip-ansi/index.js ***!
+  \************************************************/
+
+/*!****************************************************!*\
+  !*** ./node_modules/webpack/lib/logging/Logger.js ***!
+  \****************************************************/
+
+/*!*****************************************************!*\
+  !*** ./node_modules/webpack/lib/logging/runtime.js ***!
+  \*****************************************************/
+
+/*!*******************************************************!*\
+  !*** ./client-src/modules/logger/SyncBailHookFake.js ***!
+  \*******************************************************/
+
+/*!*****************************************************************!*\
+  !*** ./node_modules/webpack/lib/logging/createConsoleLogger.js ***!
+  \*****************************************************************/
+
+/*!******************************************************************!*\
+  !*** ./node_modules/strip-ansi/node_modules/ansi-regex/index.js ***!
+  \******************************************************************/
+
+/** @license React v0.20.2
+ * scheduler.production.min.js
+ *
+ * Copyright (c) Facebook, Inc. and its affiliates.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+/** @license React v17.0.2
+ * react-dom.production.min.js
+ *
+ * Copyright (c) Facebook, Inc. and its affiliates.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+/** @license React v17.0.2
+ * react.production.min.js
+ *
+ * Copyright (c) Facebook, Inc. and its affiliates.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
