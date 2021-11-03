@@ -1,7 +1,7 @@
 node_modules
-dist
 cypress/screenshots
 cypress/videos
+cypress/fixtures/
 .DS_Store
 ._.DS_Store
 ._*
@@ -16,5 +16,6 @@ local_settings.py
 .settings
 .coverage
 media/CACHE
+media/build
 uploads
 reports
