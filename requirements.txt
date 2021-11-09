@@ -114,3 +114,4 @@ asgiref==3.4.1
 entrypoints==0.3
 djangowind==1.2.4
 aiocontextvars==0.2.2
+django-s3sign==0.2.1
