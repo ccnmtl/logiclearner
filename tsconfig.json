@@ -10,7 +10,7 @@
         "esModuleInterop": true,
         "resolveJsonModule": true
     },
-    "include": ["src/**/*"],
+    "include": ["media/js/src/**/*"],
     "exclude": [
         "node_modules",
         "dist"

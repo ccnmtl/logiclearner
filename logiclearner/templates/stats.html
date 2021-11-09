@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block title %}Stats{% endblock %}
+
+{% block content %}
+<h2>Graphs</h2>
+{% with graphite_base="https://graphite.ctl.columbia.edu/render/" %}
+    {% with graphite_name="logiclearner" %}
+        {% with width=900 height=200 %}
+            <ul class="nav nav-tabs">
+                <li class="nav-item"><a class="nav-link" href="#daily" data-toggle="tab">Daily</a></li>
+                <li class="nav-item"><a class="nav-link" href="#weekly" data-toggle="tab">Weekly</a></li>
+                <li class="nav-item"><a class="nav-link" href="#monthly" data-toggle="tab">Monthly</a></li>
+                <li class="nav-item"><a class="nav-link" href="#yearly" data-toggle="tab">Yearly</a></li>
+            </ul>
+
+            <div class="tab-content">
+                <div class="tab-pane active" id="daily">
+                    {% with from="-24hours" %}
+                        {% include "graphite/application_graphs.html" %}
+                    {% endwith %}
+                </div>
+                <div class="tab-pane" id="weekly">
+                    {% with from="-7days" %}
+                        {% include "graphite/application_graphs.html" %}
+                    {% endwith %}
+                </div>
+                <div class="tab-pane" id="monthly">
+                    {% with from="-4weeks" %}
+                        {% include "graphite/application_graphs.html" %}
+                    {% endwith %}
+                </div>
+                <div class="tab-pane" id="yearly">
+                    {% with from="-1years" %}
+                        {% include "graphite/application_graphs.html" %}
+                    {% endwith %}
+                </div>
+            </div>
+        {% endwith %}
+    {% endwith %}
+{% endwith %}
+{% endblock %}

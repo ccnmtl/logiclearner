@@ -1,26 +1,35 @@
-STAGING_URL=https://logiclearner.stage.ctl.columbia.edu/
-PROD_URL=https://logiclearner.ctl.columbia.edu/
-STAGING_BUCKET=logiclearner.stage.ctl.columbia.edu
-PROD_BUCKET=logiclearner.ctl.columbia.edu
-INTERMEDIATE_STEPS ?= echo nothing
-NODE_MODULES ?= ./node_modules
-DIST ?= dist
-JS_SENTINAL ?= $(NODE_MODULES)/sentinal
+APP=logiclearner
+
+all: jenkins js-typecheck cypress-test
+.PHONY: all
 
 include *.mk
 
-.DEFAULT_GOAL = install
+webpack: $(JS_SENTINAL)
+	npm run dev
+.PHONY: webpack
 
-$(JS_SENTINAL): package.json
-	rm -rf $(NODE_MODULES)
-	npm install
-	touch $(JS_SENTINAL)
+js-typecheck: $(JS_SENTINAL)
+	npm run typecheck
+.PHONY: js-typecheck
 
-install:
-	touch package.json
-	make $(JS_SENTINAL)
+js-build: $(JS_SENTINAL)
+	rm -rf media/build/*
+	npm run build:prod
+.PHONY: js-build
 
-clean:
-	rm -rf $(NODE_MODULES) $(DIST)
+cypress-run: $(JS_SENTINAL)
+	npm run cypress:run
+.PHONY: cypress-run
 
-.PHONY: clean install
+cypress-open: $(JS_SENTINAL)
+	npm run cypress:open
+.PHONY: cypress-open
+
+cypress-test: js-build
+	npm run cypress:test
+.PHONY: cypress-test
+
+dev:
+	trap 'kill 0' EXIT; make runserver & make webpack
+.PHONY: dev
