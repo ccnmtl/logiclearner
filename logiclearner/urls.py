@@ -11,10 +11,6 @@ admin.autodiscover()
 urlpatterns = [
     path('', views.IndexView.as_view()),
     path('admin/', admin.site.urls),
-
-    path('accounts/', include('django.contrib.auth.urls')),
-
-    path('_impersonate/', include('impersonate.urls')),
     path('stats/', TemplateView.as_view(template_name="stats.html")),
     path('smoketest/', include('smoketest.urls')),
     path('infranil/', include('infranil.urls')),
