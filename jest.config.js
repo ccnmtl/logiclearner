@@ -1,5 +1,5 @@
 module.exports = {
-  roots: ["src"],
+  roots: ["media/js/src"],
   setupFilesAfterEnv: ["./jest.setup.ts"],
   moduleFileExtensions: ["ts", "tsx", "js"],
   testPathIgnorePatterns: ["node_modules/"],
