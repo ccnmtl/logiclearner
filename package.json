@@ -8,14 +8,13 @@
     "build:prod": "webpack --node-env production",
     "cypress:run": "cypress run",
     "cypress:open": "cypress open",
-    "dev": "webpack serve --node-env development",
-    "prod": "webpack serve --node-env production",
+    "dev": "webpack --node-env development --watch",
     "test": "jest",
     "test:watch": "jest --watch",
     "typecheck": "tsc --noEmit -p tsconfig.json",
     "eslint": "eslint --ext .js,.tsx src/",
     "cypress:run": "cypress run",
-    "cypress:test": "start-server-and-test prod http://localhost:8000 cypress:run",
+    "cypress:test": "start-server-and-test 'make runserver' http://localhost:8000 cypress:run",
     "cypress:open": "cypress open"
   },
   "repository": {
@@ -65,7 +64,6 @@
     "style-loader": "^3.2.1",
     "ts-jest": "^27.0.5",
     "webpack": "^5.52.1",
-    "webpack-cli": "^4.8.0",
-    "webpack-dev-server": "^4.2.1"
+    "webpack-cli": "^4.8.0"
   }
 }
