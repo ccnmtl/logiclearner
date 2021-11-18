@@ -66,7 +66,7 @@ module.exports = {
     "overrides": [{
         "files": ["*.{ts,tsx}"],
         "rules": {
-            "max-len": [2, {"code": 100, "tabWidth": 4, "ignoreUrls": true}],
+            "max-len": [2, {"code": 200, "tabWidth": 4, "ignoreUrls": true}],
         },
         "parser": "@typescript-eslint/parser",
         "parserOptions": {
