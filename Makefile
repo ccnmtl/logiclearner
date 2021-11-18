@@ -5,6 +5,10 @@ all: jenkins js-typecheck cypress-test
 
 include *.mk
 
+integrationserver: $(PY_SENTINAL)
+	$(MANAGE) integrationserver --noinput
+.PHONY: integrationserver
+
 webpack: $(JS_SENTINAL)
 	npm run dev
 .PHONY: webpack

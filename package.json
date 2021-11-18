@@ -14,7 +14,7 @@
     "typecheck": "tsc --noEmit -p tsconfig.json",
     "eslint": "eslint --ext .js,.tsx src/",
     "cypress:run": "cypress run",
-    "cypress:test": "start-server-and-test 'make runserver' http://localhost:8000 cypress:run",
+    "cypress:test": "start-server-and-test 'make integrationserver' http://localhost:8000 cypress:run",
     "cypress:open": "cypress open"
   },
   "repository": {
