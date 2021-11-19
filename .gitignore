@@ -16,6 +16,5 @@ local_settings.py
 .settings
 .coverage
 media/CACHE
-media/build
 uploads
 reports
