@@ -18,7 +18,7 @@ INSTALLED_APPS += [  # noqa
     'bootstrap4',
     'infranil',
     'django_extensions',
-
+    'rest_framework',
     'logiclearner.main',
 ]
 
