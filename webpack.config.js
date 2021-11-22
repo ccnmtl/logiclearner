@@ -13,14 +13,15 @@ module.exports = {
         extensions: ['.ts', '.tsx', '.js']
     },
     module: {
-        rules: [{
+        rules: [
+        {
             test: /\.(ts|js)x?$/,
             exclude: /node_modules/,
             loader: 'babel-loader'
         },
         {
-            test: /\.css$/,
-            use: [devMode ? 'style-loader' : MiniCssExtractPlugin.loader, 'css-loader']
+            test: /\.(css|scss)$/,
+            use: [devMode ? 'style-loader' : MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader']
         },
         {
             test: /\.(gif|png|jpe?g|svg)$/i,
