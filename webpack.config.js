@@ -1,7 +1,6 @@
 const path = require('path');
 const webpack = require('webpack');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-const devMode = process.env.NODE_ENV !== "production";
 
 module.exports = {
     entry: './media/js/src/index.tsx',
@@ -21,7 +20,38 @@ module.exports = {
         },
         {
             test: /\.(css|scss)$/,
-            use: [devMode ? 'style-loader' : MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader']
+            use: [
+                {
+                    loader: MiniCssExtractPlugin.loader,
+                    options: {
+                        publicPath: '',
+                    }
+                },
+                {
+                    loader: 'css-loader',
+                    options: {
+                        sourceMap: true,
+                    }
+                },
+                {
+                    loader: 'postcss-loader',
+                    options: {
+                        postcssOptions: {
+                            plugins: [
+                                'precss',
+                                'autoprefixer'
+                            ]
+                        },
+                        sourceMap: true,
+                    }
+                },
+                {
+                    loader: 'sass-loader',
+                    options: {
+                        sourceMap: true,
+                    }
+                }
+            ]
         },
         {
             test: /\.(gif|png|jpe?g|svg)$/i,
@@ -32,7 +62,7 @@ module.exports = {
         new webpack.DefinePlugin({
             __BUILD__: JSON.stringify(Date.now())
         })
-    ].concat(devMode ? [] : [new MiniCssExtractPlugin()]),
+    ].concat([new MiniCssExtractPlugin()]),
     devServer: {
         port: 8000,
         historyApiFallback: true,
