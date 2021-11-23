@@ -4,7 +4,8 @@ export const LevelsDashboard: React.FC = () => {
 
     return (
         <>
-            <div className="d-flex flex-column min-vh-100 justify-content-center align-items-center">
+            <div className="d-flex flex-column min-vh-100 justify-content-center
+                            align-items-center">
                 <div className="card" style={{width: '20rem', height: '10rem'}}>
                     <div className="card-body">
                         <div className="text-center">
