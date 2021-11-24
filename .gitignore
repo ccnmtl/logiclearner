@@ -18,3 +18,4 @@ local_settings.py
 media/CACHE
 uploads
 reports
+media/build
