@@ -9,14 +9,31 @@ module.exports = {
         filename: 'bundle.js',
     },
     resolve: {
-        extensions: ['.ts', '.tsx', '.js']
+        extensions: ['*', '.ts', '.tsx', '.js']
     },
     module: {
         rules: [
         {
-            test: /\.(ts|js)x?$/,
+            test: /\.m?js/,
+            resolve: {
+                fullySpecified: false
+            },
+        },
+        {
+            test: /\.(tsx|ts|js)$/,
+            include: path.resolve(__dirname, 'media/js/src'),
             exclude: /node_modules/,
-            loader: 'babel-loader'
+            use: [
+                {
+                    loader: 'babel-loader',
+                    options: {
+                        presets: ['@babel/preset-env', '@babel/preset-react']
+                    }
+                },
+                {
+                    loader: 'ts-loader'
+                }
+            ]
         },
         {
             test: /\.(css|scss)$/,
@@ -58,11 +75,13 @@ module.exports = {
             type: 'asset/resource',
         }]
     },
+
     plugins: [
         new webpack.DefinePlugin({
             __BUILD__: JSON.stringify(Date.now())
         })
     ].concat([new MiniCssExtractPlugin()]),
+
     devServer: {
         port: 8000,
         historyApiFallback: true,

@@ -65,6 +65,7 @@
     "start-server-and-test": "^1.14.0",
     "style-loader": "^3.2.1",
     "ts-jest": "^27.0.5",
+    "ts-loader": "^9.0.0",
     "webpack": "^5.52.1",
     "webpack-cli": "^4.8.0",
     "postcss-loader": "^6.1.0"
