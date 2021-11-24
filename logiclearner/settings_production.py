@@ -16,6 +16,16 @@ locals().update(
         #       s3static=False,
     ))
 
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.contrib.gis.db.backends.postgis',
+        'NAME': 'logiclearner',
+        'HOST': '',
+        'PORT': 6432,
+        'USER': '',
+        'PASSWORD': '',
+    }
+}
 try:
     from logiclearner.local_settings import *  # noqa: F403
 except ImportError:
