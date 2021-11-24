@@ -7,6 +7,7 @@ module.exports = {
     output: {
         path: path.resolve(__dirname, 'media/build'),
         filename: 'bundle.js',
+        publicPath: 'auto'
     },
     resolve: {
         extensions: ['*', '.ts', '.tsx', '.js']
