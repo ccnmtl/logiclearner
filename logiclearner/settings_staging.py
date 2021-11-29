@@ -16,6 +16,17 @@ locals().update(
         #       s3static=False,
     ))
 
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'logiclearner',
+        'HOST': '',
+        'PORT': 6432,
+        'USER': '',
+        'PASSWORD': '',
+    }
+}
+
 try:
     from logiclearner.local_settings import *  # noqa: F403
 except ImportError:

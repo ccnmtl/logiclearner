@@ -1,37 +1,88 @@
 const path = require('path');
 const webpack = require('webpack');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-const devMode = process.env.NODE_ENV !== "production";
 
 module.exports = {
     entry: './media/js/src/index.tsx',
     output: {
         path: path.resolve(__dirname, 'media/build'),
         filename: 'bundle.js',
+        publicPath: 'auto'
     },
     resolve: {
-        extensions: ['.ts', '.tsx', '.js']
+        extensions: ['*', '.ts', '.tsx', '.js']
     },
     module: {
-        rules: [{
-            test: /\.(ts|js)x?$/,
-            exclude: /node_modules/,
-            loader: 'babel-loader'
+        rules: [
+        {
+            test: /\.m?js/,
+            resolve: {
+                fullySpecified: false
+            },
         },
         {
-            test: /\.css$/,
-            use: [devMode ? 'style-loader' : MiniCssExtractPlugin.loader, 'css-loader']
+            test: /\.(tsx|ts|js)$/,
+            include: path.resolve(__dirname, 'media/js/src'),
+            exclude: /node_modules/,
+            use: [
+                {
+                    loader: 'babel-loader',
+                    options: {
+                        presets: ['@babel/preset-env', '@babel/preset-react']
+                    }
+                },
+                {
+                    loader: 'ts-loader'
+                }
+            ]
+        },
+        {
+            test: /\.(css|scss)$/,
+            use: [
+                {
+                    loader: MiniCssExtractPlugin.loader,
+                    options: {
+                        publicPath: '',
+                    }
+                },
+                {
+                    loader: 'css-loader',
+                    options: {
+                        sourceMap: true,
+                    }
+                },
+                {
+                    loader: 'postcss-loader',
+                    options: {
+                        postcssOptions: {
+                            plugins: [
+                                'precss',
+                                'autoprefixer'
+                            ]
+                        },
+                        sourceMap: true,
+                    }
+                },
+                {
+                    loader: 'sass-loader',
+                    options: {
+                        sourceMap: true,
+                    }
+                }
+            ]
         },
         {
             test: /\.(gif|png|jpe?g|svg)$/i,
             type: 'asset/resource',
         }]
     },
+
     plugins: [
         new webpack.DefinePlugin({
             __BUILD__: JSON.stringify(Date.now())
         })
-    ].concat(devMode ? [] : [new MiniCssExtractPlugin()]),
+    ].concat([new MiniCssExtractPlugin()]),
+
     devServer: {
         port: 8000,
         historyApiFallback: true,
