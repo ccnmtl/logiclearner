@@ -7,7 +7,7 @@ module.exports = {
     output: {
         path: path.resolve(__dirname, 'media/build'),
         filename: 'bundle.js',
-        publicPath: 'auto'
+        publicPath: '/media/build/'
     },
     resolve: {
         extensions: ['*', '.ts', '.tsx', '.js']
@@ -89,8 +89,6 @@ module.exports = {
         devMiddleware: {
             writeToDisk: true,
         },
-        static: {
-            directory: './'
-        }
+        publicPath: '/media/build/'
     }
 };
