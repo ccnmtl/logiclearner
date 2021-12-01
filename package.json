@@ -8,14 +8,12 @@
     "build:prod": "webpack --node-env production",
     "cypress:run": "cypress run",
     "cypress:open": "cypress open",
+    "cypress:test": "start-server-and-test 'make integrationserver' http-get://localhost:8000 cypress:run",
     "dev": "webpack --node-env development --watch",
     "test": "jest",
     "test:watch": "jest --watch",
     "typecheck": "tsc --noEmit -p tsconfig.json",
-    "eslint": "eslint --ext .js,.tsx src/",
-    "cypress:run": "cypress run",
-    "cypress:test": "start-server-and-test 'make integrationserver' http-get://localhost:8000 cypress:run",
-    "cypress:open": "cypress open"
+    "eslint": "eslint --ext .js,.tsx src/"
   },
   "repository": {
     "type": "git",
