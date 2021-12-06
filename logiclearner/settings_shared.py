@@ -18,10 +18,12 @@ INSTALLED_APPS += [  # noqa
     'bootstrap4',
     'infranil',
     'django_extensions',
-
     'logiclearner.main',
+    'contactus'
 ]
 
+CONTACT_US_EMAIL = 'ctl-logiclearner@columbia.edu'
+SERVER_EMAIL = 'automated@mail.ctl.columbia.edu'
 
 THUMBNAIL_SUBDIR = "thumbs"
 LOGIN_REDIRECT_URL = "/"
