@@ -1,5 +1,4 @@
 from django.urls import include, path, re_path
-from django.conf.urls import url
 from django.contrib import admin
 from django.conf import settings
 from django.views.generic import TemplateView
@@ -10,7 +9,7 @@ admin.autodiscover()
 
 
 urlpatterns = [
-    url('^contact/', include('contactus.urls')),
+    path('contact/', include('contactus.urls')),
     path('admin/', admin.site.urls),
     path('stats/', TemplateView.as_view(template_name="stats.html")),
     path('smoketest/', include('smoketest.urls')),
