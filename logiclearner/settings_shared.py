@@ -20,8 +20,11 @@ INSTALLED_APPS += [  # noqa
     'django_extensions',
     'rest_framework',
     'logiclearner.main',
+    'contactus'
 ]
 
+CONTACT_US_EMAIL = 'ctl-logiclearner@columbia.edu'
+SERVER_EMAIL = 'automated@mail.ctl.columbia.edu'
 
 THUMBNAIL_SUBDIR = "thumbs"
 LOGIN_REDIRECT_URL = "/"
