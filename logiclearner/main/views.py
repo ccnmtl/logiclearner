@@ -14,11 +14,6 @@ class SolutionApiView(APIView):
     def dispatch(self, *args, **kwargs):
         return super(SolutionApiView, self).dispatch(*args, **kwargs)
 
-    # def get(self, request):
-    #     requests.request(
-    #         "GET"
-    #     )
-
 
 class HintApiView(APIView):
     @method_decorator(csrf_exempt)
