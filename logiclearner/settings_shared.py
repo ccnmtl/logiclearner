@@ -31,7 +31,7 @@ LOGIN_REDIRECT_URL = "/"
 
 ACCOUNT_ACTIVATION_DAYS = 7
 
-#customizing-type-of-auto-created-primary-keys
+# customizing-type-of-auto-created-primary-keys
 # https://docs.djangoproject.com/en/3.2/releases/3.2/
 DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
 

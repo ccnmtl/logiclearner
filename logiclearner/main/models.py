@@ -6,6 +6,7 @@ DIFFICULTY = [
     (2, 'Apprentice')
 ]
 
+
 class Statement(models.Model):
     question = models.TextField()
     answer = models.TextField()
