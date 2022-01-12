@@ -2,5 +2,17 @@ from django.contrib import admin
 from logiclearner.main.models import Statement, Solution
 
 
-admin.site.register(Statement)
+class SolutionInLine(admin.TabularInline):
+    model = Solution
+
+
+class StatementAdmin(admin.ModelAdmin):
+    list_display = ("question", "difficulty", "created_at")
+    list_filter = ("difficulty", "created_at")
+    inlines = [
+        SolutionInLine
+    ]
+
+
+admin.site.register(Statement, StatementAdmin)
 admin.site.register(Solution)
