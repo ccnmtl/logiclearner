@@ -8,6 +8,10 @@ from logiclearner.main import views
 admin.autodiscover()
 
 urlpatterns = [
+    re_path('^api/statements/(?P<difficulty>.+)/$',
+            views.StatementListAPIView.as_view()),
+    re_path('^api/solution/(?P<statement>.+)/$',
+            views.SolutionListAPIView.as_view()),
     re_path(r'^api/hint', views.HintApiView.as_view()),
     re_path(r'^api/solution', views.SolutionApiView.as_view()),
     path('contact/', include('contactus.urls')),
