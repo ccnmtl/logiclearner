@@ -7,6 +7,7 @@ from logiclearner.main.serializers import (
     StatementSerializer, SolutionSerializer
 )
 from rest_framework import generics
+from django.http.response import Http404
 
 
 class IndexView(TemplateView):
@@ -33,7 +34,11 @@ class StatementListAPIView(generics.ListAPIView):
         This view should return a list of all the statements for
         the difficulty level determined by the difficulty portion of the URL.
         """
-        difficulty = self.kwargs['difficulty']
+        difficulty = self.kwargs.get('difficulty', None)
+
+        if not difficulty:
+            raise Http404()
+
         return Statement.objects.filter(difficulty=difficulty)
 
 
@@ -45,5 +50,9 @@ class SolutionListAPIView(generics.ListAPIView):
         This view should return a list of all the solution steps for a given
         statement determined by the statement pk in the URL.
         """
-        statement_id = self.kwargs['statement']
+        statement_id = self.kwargs.get('statement', None)
+
+        if not statement_id:
+            raise Http404()
+
         return Solution.objects.filter(statement__pk=statement_id)

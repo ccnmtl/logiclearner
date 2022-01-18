@@ -6,11 +6,12 @@ class StatementSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Statement
-        fields = ['question', 'answer', 'difficulty', 'created_at',
+        fields = ['pk', 'question', 'answer', 'difficulty', 'created_at',
                   'modified_at']
 
 
 class SolutionSerializer(serializers.ModelSerializer):
     class Meta:
         model = Solution
-        fields = ['statement', 'ordinal', 'text', 'created_at', 'modified_at']
+        fields = ['pk', 'statement', 'ordinal', 'text', 'created_at',
+                  'modified_at']
