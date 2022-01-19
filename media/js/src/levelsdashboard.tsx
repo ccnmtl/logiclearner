@@ -12,6 +12,9 @@ export const LevelsDashboard: React.FC = () => {
                             <p className="card-text">LEVEL I:</p>
                             <p>NOVICE</p>
                             <span className="float-end">1/10</span>
+                            <div><a className={'btn btn-primary'}
+                                href={'/questions/0'}>Level I</a>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -22,6 +25,9 @@ export const LevelsDashboard: React.FC = () => {
                             <p className="card-text">LEVEL II:</p>
                             <p>LEARNER</p>
                             <span className="float-end">10/10</span>
+                            <div><a className={'btn btn-primary'}
+                                href={'/questions/1'}>Level II</a>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -32,6 +38,9 @@ export const LevelsDashboard: React.FC = () => {
                             <p className="card-text">LEVEL III:</p>
                             <p>APPRENTICE</p>
                             <span className="float-end">2/10</span>
+                            <div><a className={'btn btn-primary'}
+                                href={'/questions/2'}>Level III</a>
+                            </div>
                         </div>
                     </div>
                 </div>
