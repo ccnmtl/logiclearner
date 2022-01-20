@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import {getStatements} from './utils';
 
 interface QuestionsDashboardProps {
     difficulty: number;
@@ -18,18 +19,16 @@ export const QuestionsDashboard: React.FC<QuestionsDashboardProps> = (
 
     const [statements, setStatements] = useState<Statement[]>([]);
 
-    useEffect(() => {
-        async function fetchStatements() {
-            const response = await fetch(`/api/statements/${difficulty}/`);
-            if (response.status !== 200) {
-                throw new Error(`GET request failed: ${response.statusText}`);
-            }
-            // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-            const json: Array<Statement> = await response.json();
+    async function fetchStatements() {
+        const json: Array<Statement> = await getStatements(difficulty);
 
-            setStatements(json);
-        }
+        setStatements(json);
+    }
+
+    useEffect(() => {
+
         void fetchStatements();
+
     }, []);
 
     const questionList= statements.map((statement, index) =>
