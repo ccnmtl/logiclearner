@@ -8,10 +8,15 @@ from logiclearner.main.serializers import (
 )
 from rest_framework import generics
 from django.http.response import Http404
+from django.shortcuts import render
 
 
 class IndexView(TemplateView):
     template_name = "main/index.html"
+
+
+def handler404(request):
+    return render(request, '404.html')
 
 
 class SolutionApiView(APIView):
