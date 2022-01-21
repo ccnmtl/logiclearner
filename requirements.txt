@@ -4,7 +4,6 @@ httplib2==0.20.1
 feedparser==6.0.8
 Markdown==3.3.4 # pyup: < 3
 psycopg2==2.9.1
-Pillow==8.4.0
 versiontools==1.9.1
 statsd==3.3.0
 pep8==1.7.1
@@ -115,3 +114,6 @@ entrypoints==0.3
 djangowind==1.2.4
 aiocontextvars==0.2.2
 django-s3sign==0.2.1
+
+python-cas==1.5.0
+requirements/src/django_cas_ng-4.2.2ctl-py2.py3-none-any.whl

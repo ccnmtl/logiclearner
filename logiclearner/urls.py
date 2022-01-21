@@ -4,13 +4,22 @@ from django.conf import settings
 from django.views.generic import TemplateView
 from django.views.static import serve
 from logiclearner.main import views
+from django_cas_ng import views as cas_views
 
 admin.autodiscover()
+
 
 urlpatterns = [
 
     path('contact/', include('contactus.urls')),
     path('admin/', admin.site.urls),
+    path('accounts/login/', views.handler404),
+    path('accounts/logout/', views.handler404),
+    re_path(r'^accounts/', include('django.contrib.auth.urls')),
+    path('cas/login', cas_views.LoginView.as_view(),
+         name='cas_ng_login'),
+    path('cas/logout', cas_views.LogoutView.as_view(),
+         name='cas_ng_logout'),
     path('stats/', TemplateView.as_view(template_name="stats.html")),
     path('smoketest/', include('smoketest.urls')),
     path('infranil/', include('infranil.urls')),

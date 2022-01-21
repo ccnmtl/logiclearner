@@ -24,35 +24,35 @@
 {% endif %}
 
 <div id="content-main">
-    <form method="get" action="{{ CAS_BASE }}cas/login">
-        <input type="hidden" name="destination"
-        value="https://{{ request.get_host }}/accounts/caslogin/?next=/admin/" />
-        <p>If you have a Columbia UNI, you already have an account and can
-        login through CAS with it <input type="submit" value="Here" /></p>
+    <form method="get" action="/cas/login">
+        <input type="hidden" name="next" value="{{next|default:'/admin/'}}" />
+        <p>Login with your Columbia UNI</p>
+        <input type="submit" value="Here" />
     </form>
+    {% if debug %}
+        <p>Otherwise:</p>
 
-    <p>Otherwise:</p>
-
-    <form action="{{ app_path }}" method="post" id="login-form">{% csrf_token %}
-        <div class="form-row">
-            {{ form.username.errors }}
-            <label for="id_username" class="required">{{ form.username.label }}:</label> {{ form.username }}
-        </div>
-        <div class="form-row">
-            {{ form.password.errors }}
-            <label for="id_password" class="required">{% trans 'Password:' %}</label> {{ form.password }}
-            <input type="hidden" name="next" value="{{ next }}" />
-        </div>
-        {% url 'admin_password_reset' as password_reset_url %}
-        {% if password_reset_url %}
-        <div class="password-reset-link">
-            <a href="{{ password_reset_url }}" title="Reset Password">{% trans 'Forgotten your password or username?' %}</a>
-        </div>
-        {% endif %}
-        <div class="submit-row">
-            <label>&nbsp;</label><input type="submit" value="{% trans 'Log in' %}" />
-        </div>
-    </form>
+        <form action="{{ app_path }}" method="post" id="login-form">{% csrf_token %}
+            <div class="form-row">
+                {{ form.username.errors }}
+                <label for="id_username" class="required">{{ form.username.label }}:</label> {{ form.username }}
+            </div>
+            <div class="form-row">
+                {{ form.password.errors }}
+                <label for="id_password" class="required">{% trans 'Password:' %}</label> {{ form.password }}
+                <input type="hidden" name="next" value="{{ next }}" />
+            </div>
+            {% url 'admin_password_reset' as password_reset_url %}
+            {% if password_reset_url %}
+            <div class="password-reset-link">
+                <a href="{{ password_reset_url }}" title="Reset Password">{% trans 'Forgotten your password or username?' %}</a>
+            </div>
+            {% endif %}
+            <div class="submit-row">
+                <label>&nbsp;</label><input type="submit" value="{% trans 'Log in' %}" />
+            </div>
+        </form>
+    {% endif %}
 
     <script type="text/javascript">
     document.getElementById('id_username').focus()
