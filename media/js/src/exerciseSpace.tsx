@@ -1,4 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
+import { Nav } from './nav';
+import { Footer } from './footer';
 
 interface ExerciseSpaceProps {
     difficulty: number;
@@ -20,6 +22,7 @@ export const ExerciseSpace: React.FC<ExerciseSpaceProps> = (
 
     return (
         <>
+            <Nav />
             <form>
                 <div className='form-group'>
                     <label htmlFor='statementInput'>Statement</label>
@@ -36,6 +39,7 @@ export const ExerciseSpace: React.FC<ExerciseSpaceProps> = (
                 </select>
                 <button type='submit' className='btn btn-primary'>Go</button>
             </form>
+            <Footer />
         </>
     );
 };

@@ -1,9 +1,12 @@
 import React from 'react';
+import { Nav } from './nav';
+import { Footer } from './footer';
 
 export const LevelsDashboard: React.FC = () => {
 
     return (
         <>
+            <Nav />
             <div className="d-flex flex-column min-vh-100 justify-content-center
                             align-items-center">
                 <div className="card" style={{width: '20rem', height: '10rem'}}>
@@ -45,6 +48,7 @@ export const LevelsDashboard: React.FC = () => {
                     </div>
                 </div>
             </div>
+            <Footer />
         </>
     );
 };

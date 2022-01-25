@@ -22,7 +22,7 @@ const authedFetch = function(url: string, method: HTTPMethod, data?: unknown) {
 /**
  * Get statments according to difficulty
  */
-export const getStatements = function(difficulty: number) {
+export const getStatements = async function(difficulty: number) {
 
     const url = `/api/statements/${difficulty}/`;
 
