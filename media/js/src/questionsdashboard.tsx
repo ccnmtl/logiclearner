@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import {getStatements} from './utils';
 import { Nav } from './nav';
 import { Footer } from './footer';
+import { Question } from './question';
 
 interface QuestionsDashboardProps {
     difficulty: number;
@@ -10,7 +11,6 @@ interface QuestionsDashboardProps {
 
 // also involed here would be questionProgress: boolean;
 // questionComplete: boolean;
-
 type Statement = {
     pk: number;
     question: string;
@@ -27,21 +27,19 @@ export const QuestionsDashboard: React.FC<QuestionsDashboardProps> = (
     async function fetchStatements() {
         // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
         const json: Array<Statement> = await getStatements(difficulty);
-
         setStatements(json);
     }
 
     useEffect(() => {
-
         void fetchStatements();
-
     }, []);
 
-    const questionList= statements.map((statement, index) =>
-        <div className="p-3 mb-2 bg-light w-50 text-dark" key={statement.pk}>
-            <span className="h2">{index + 1} </span> {statement.question}
-        </div>
-    );
+    const questionList= statements.map((statement, idx) => {
+        return (<Question
+            statement={statement}
+            idx={idx}
+            key={statement.pk} />);
+    });
     return (
         <>
             <Nav />

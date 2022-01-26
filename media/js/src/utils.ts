@@ -1,4 +1,11 @@
 type HTTPMethod = 'GET' | 'PUT' | 'POST' | 'DELETE'
+type Statement = {
+    pk: number;
+    question: string;
+    answer: string;
+    difficulty: number;
+    created_at: string;
+}
 
 /**
  * A wrapper for `fetch` that passes along auth credentials.
@@ -36,4 +43,18 @@ export const getStatements = async function(difficulty: number) {
                     `(${response.status}) ${response.statusText}`;
             }
         });
+};
+
+export const checkQuestion = function(statement: Statement) {
+    const answer = statement.answer;
+    switch (answer) {
+    case 'T': {
+        return 'is a Tautology';
+    }
+    case 'F': {
+        return 'is a Fallacy';
+    }
+    default:
+        return 'is logically equivalent to';
+    }
 };
