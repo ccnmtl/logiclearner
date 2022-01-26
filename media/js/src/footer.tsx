@@ -1,4 +1,5 @@
 import React from 'react';
+import CTLLogo from '../../img/logo-ctl-color.png';
 
 export const Footer: React.FC = () => {
 
@@ -17,13 +18,15 @@ export const Footer: React.FC = () => {
                     </li>
                 </ul>
 
-                <div itemScope itemType="http://schema.org/EducationalOrganization"
-                    className='text-center'>
-                    <a href="http://ctl.columbia.edu" rel="noopener noreferrer"
-                        target="_blank" itemProp="url"
-                        className='d-inline-block'>
-                        <img src="media/img/logo-ctl-color.png"
-                            className="footer__logo" alt="" itemProp="logo" />
+                <div className='text-center'>
+                    <a href={'http://ctl.columbia.edu'}
+                        rel="noopener noreferrer"
+                        target="_blank" className='d-inline-block'>
+                        <img src={CTLLogo}
+                            className={'img-fluid'}
+                            alt={
+                                'Columbia University ' +
+                                'Center for Teaching and Learning'} />
                     </a>
                 </div>
             </footer>
