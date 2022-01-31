@@ -1,11 +1,4 @@
 type HTTPMethod = 'GET' | 'PUT' | 'POST' | 'DELETE'
-type Statement = {
-    pk: number;
-    question: string;
-    answer: string;
-    difficulty: number;
-    created_at: string;
-}
 
 /**
  * A wrapper for `fetch` that passes along auth credentials.
@@ -40,21 +33,21 @@ export const getStatements = async function(difficulty: number) {
                 return response.json();
             } else {
                 throw 'Error loading Statements: ' +
-                    `(${response.status}) ${response.statusText}`;
+                `(${response.status}) ${response.statusText}`;
             }
         });
 };
 
-export const checkQuestion = function(statement: Statement) {
-    const answer = statement.answer;
+export const checkQuestion = function(answer: string) {
+
     switch (answer) {
     case 'T': {
-        return 'is a Tautology';
+        return 'Tautology';
     }
     case 'F': {
-        return 'is a Fallacy';
+        return 'Fallacy';
     }
     default:
-        return 'is logically equivalent to';
+        return answer;
     }
 };

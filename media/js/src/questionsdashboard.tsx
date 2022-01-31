@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import {getStatements} from './utils';
+import { getStatements } from './utils';
 import { Nav } from './nav';
 import { Footer } from './footer';
 import { Question } from './question';
