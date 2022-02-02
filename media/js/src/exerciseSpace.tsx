@@ -3,9 +3,10 @@ import { Nav } from './nav';
 import { Footer } from './footer';
 
 interface ExerciseSpaceProps {
-    difficulty: number;
-    level: string;
-    question: string;
+    // difficulty: number;
+    // level: string;
+    // question: string;
+    data: any
 }
 
 const laws: Array<string> = ['identity', 'negation', 'domination',
@@ -14,7 +15,7 @@ const laws: Array<string> = ['identity', 'negation', 'domination',
     'implication to disjunction', 'iff to implication'];
 
 export const ExerciseSpace: React.FC<ExerciseSpaceProps> = (
-    {difficulty, level, question}: ExerciseSpaceProps) => {
+    { data }: ExerciseSpaceProps) => {
 
     // useEffect(() => {
 
