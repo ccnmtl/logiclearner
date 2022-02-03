@@ -38,6 +38,9 @@ export const getStatements = async function(difficulty: number) {
         });
 };
 
+/**
+ * Returns a string according to the type of question.
+ */
 export const checkQuestion = function(answer: string) {
 
     switch (answer) {
@@ -50,4 +53,32 @@ export const checkQuestion = function(answer: string) {
     default:
         return answer;
     }
+};
+
+/**
+ * Parses raw text to LaTeX
+ */
+export const raw2latex = function(quesText: string) {
+    let str = quesText;
+
+    str = str.replace('v', 'V');
+    str = str.replace('^', '∧');
+    str = str.replace('<->', '↔');
+    str = str.replace('->', '→');
+    str = str.replace('~', '¬');
+    return str;
+};
+
+/**
+ * Parses LaTeX to raw text.
+ */
+export const latex2raw = function(quesText: string) {
+    let str = quesText;
+
+    str = str.replace('¬', '~');
+    str = str.replace('→', '->');
+    str = str.replace('↔', '<->');
+    str = str.replace('∧', '^');
+    str = str.replace('v', 'V');
+    return str;
 };
