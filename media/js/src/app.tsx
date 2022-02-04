@@ -2,9 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Route, Routes  } from 'react-router-dom';
 import { LevelsDashboard } from './levelsdashboard';
 import { QuestionsDashboard } from './questionsdashboard';
-// import { ExerciseSpace } from './exerciseSpace';
-// <Route path="/exercise" element={<ExerciseSpace />} />
-
+import { ExerciseSpace } from './exerciseSpace';
 
 export const App: React.FC = () => {
     return (
@@ -25,6 +23,9 @@ export const App: React.FC = () => {
                     element={<QuestionsDashboard
                         difficulty={2}
                         level={'Apprentice'}/>} />
+
+                <Route path="/exercise/"
+                    element={<ExerciseSpace />} />
             </Routes>
         </Router>
     );
