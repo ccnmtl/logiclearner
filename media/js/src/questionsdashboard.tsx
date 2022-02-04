@@ -34,12 +34,6 @@ export const QuestionsDashboard: React.FC<QuestionsDashboardProps> = (
         void fetchStatements();
     }, []);
 
-    const questionList= statements.map((statement, idx) => {
-        return (<Question
-            statement={statement}
-            idx={idx}
-            key={statement.pk} />);
-    });
     return (
         <>
             <Nav />
@@ -49,7 +43,14 @@ export const QuestionsDashboard: React.FC<QuestionsDashboardProps> = (
                 <p className='h2'>{level}</p>
                 <p>One sentence description here</p>
 
-                {questionList}
+                {statements.map((statement, idx) => {
+                    return (<Question
+                        statement={statement}
+                        listNum={idx}
+                        id={statement.pk}
+                        key={idx}
+                        level={level} />);
+                })}
             </div>
             <Footer />
         </>

@@ -61,11 +61,12 @@ export const checkQuestion = function(answer: string) {
 export const raw2latex = function(quesText: string) {
     let str = quesText;
 
-    str = str.replace('v', 'V');
-    str = str.replace('^', '∧');
-    str = str.replace('<->', '↔');
-    str = str.replace('->', '→');
-    str = str.replace('~', '¬');
+    str = str.replace(new RegExp('~', 'g'), '¬');
+    str = str.replace(new RegExp('->', 'g'), '→');
+    str = str.replace(new RegExp('<->', 'g'), '↔');
+    str = str.replace(new RegExp('v', 'g'), 'V');
+    str = str.replace(/\^/g, '∧');
+
     return str;
 };
 
@@ -75,10 +76,11 @@ export const raw2latex = function(quesText: string) {
 export const latex2raw = function(quesText: string) {
     let str = quesText;
 
-    str = str.replace('¬', '~');
-    str = str.replace('→', '->');
-    str = str.replace('↔', '<->');
-    str = str.replace('∧', '^');
-    str = str.replace('v', 'V');
+    str = str.replace(new RegExp('∧', 'g'), '^');
+    str = str.replace(new RegExp('V', 'g'), 'v');
+    str = str.replace(new RegExp('↔', 'g'), '<->');
+    str = str.replace(new RegExp('→', 'g'), '->');
+    str = str.replace(new RegExp('¬', 'g'), '~');
+
     return str;
 };
