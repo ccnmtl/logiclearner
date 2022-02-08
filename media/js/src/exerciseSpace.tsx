@@ -1,6 +1,4 @@
 import React from 'react';
-import { Nav } from './nav';
-import { Footer } from './footer';
 import { checkQuestion } from './utils';
 
 type Statement = {
@@ -43,7 +41,6 @@ export const ExerciseSpace: React.FC = () => {
 
     return (
         <>
-            <Nav />
             <div className="d-flex flex-column min-vh-100 justify-content-center
                             align-items-center">
                 <div>LEVEL: {level}</div>
@@ -72,7 +69,6 @@ export const ExerciseSpace: React.FC = () => {
                     </button>
                 </form>
             </div>
-            <Footer />
         </>
     );
 };

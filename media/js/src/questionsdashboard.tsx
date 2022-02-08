@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { getStatements } from './utils';
-import { Nav } from './nav';
-import { Footer } from './footer';
 import { Question } from './question';
 
 interface QuestionsDashboardProps {
@@ -36,7 +34,6 @@ export const QuestionsDashboard: React.FC<QuestionsDashboardProps> = (
 
     return (
         <>
-            <Nav />
             <div className="d-flex flex-column min-vh-100 justify-content-center
                             align-items-center">
                 <p>Level {difficulty + 1}</p>
@@ -52,7 +49,6 @@ export const QuestionsDashboard: React.FC<QuestionsDashboardProps> = (
                         level={level} />);
                 })}
             </div>
-            <Footer />
         </>
     );
 };
