@@ -48,6 +48,7 @@ export const QuestionsDashboard: React.FC<QuestionsDashboardProps> = (
                         statement={statement}
                         listNum={idx}
                         id={statement.pk}
+                        idStr={statement.pk.toString()}
                         key={idx}
                         level={level} />);
                 })}

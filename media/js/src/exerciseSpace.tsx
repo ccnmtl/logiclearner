@@ -13,16 +13,17 @@ type Statement = {
 
 type ExerciseData = {
     statement: Statement;
-    idx: number;
-    key: number;
+    listNum: number;
+    id: number;
     level: string;
+    idStr: string;
 }
 
 
-const laws: Array<string> = ['identity', 'negation', 'domination',
-    'idempotence', 'commutativity', 'associativity', 'absorption', 'demorgan"s',
-    'literal negation', 'distributivity', 'double negation',
-    'implication to disjunction', 'iff to implication'];
+const laws: Array<string> = ['Identity', 'Negation', 'Domination',
+    'Idempotence', 'Commutativity', 'Associativity', 'Absorption', 'Demorgan"s',
+    'Literal Negation', 'Distributivity', 'Double Negation',
+    'Implication to Disjunction', 'Iff to Implication'];
 
 export const ExerciseSpace: React.FC = () => {
 

@@ -15,10 +15,11 @@ interface QuestionProps {
     listNum: number;
     id: number;
     level: string;
+    idStr: string;
 }
 
 export const Question: React.FC<QuestionProps> = (
-    { statement, listNum, id, level }: QuestionProps) => {
+    { statement, listNum, id, level, idStr }: QuestionProps) => {
 
     const navigate = useNavigate();
 
@@ -28,12 +29,13 @@ export const Question: React.FC<QuestionProps> = (
             listNum: listNum,
             id: id,
             level: level,
+            idStr: idStr
         };
         const qstate = [...new Array<QuestionProps>(initData)];
         window.localStorage.setItem('exerciseSpace',
             JSON.stringify(qstate));
 
-        navigate('/exercise/');
+        navigate('/exercise/' + idStr);
     };
 
     // eslint-disable-next-line max-len

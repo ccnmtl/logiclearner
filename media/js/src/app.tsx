@@ -24,7 +24,7 @@ export const App: React.FC = () => {
                         difficulty={2}
                         level={'Apprentice'}/>} />
 
-                <Route path="/exercise/"
+                <Route path="/exercise/:id"
                     element={<ExerciseSpace />} />
             </Routes>
         </Router>
