@@ -1,16 +1,10 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block topnavbar %}
-{% endblock %}
-
 {% block js %}
     <script src="{% static 'build/bundle.js' %}"></script>
 {% endblock %}
 
 {% block content %}
-<div class="main-app" id="react-root"></div>
-{% endblock %}
-
-{% block footer %}
+<main class="main-app" id="react-root"></main>
 {% endblock %}
