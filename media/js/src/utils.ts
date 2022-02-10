@@ -40,12 +40,11 @@ const authedFetch = function(url: string, method: HTTPMethod, data?: unknown) {
 };
 
 /**
- * Get statments according to difficulty
+ * Get statments according to difficulty.
  */
 export const getStatements = async function(difficulty: number) {
 
     const url = `/api/statements/${difficulty}/`;
-
 
     return authedFetch(url, 'GET')
         .then(function(response) {
@@ -53,6 +52,24 @@ export const getStatements = async function(difficulty: number) {
                 return response.json();
             } else {
                 throw 'Error loading Statements: ' +
+                `(${response.status}) ${response.statusText}`;
+            }
+        });
+};
+
+/**
+ * Get statments according to question pk.
+ */
+export const getStatement = async function(id: number) {
+
+    const url = `/api/statement/${id}/`;
+
+    return authedFetch(url, 'GET')
+        .then(function(response) {
+            if (response.status === 200) {
+                return response.json();
+            } else {
+                throw 'Error loading Statement: ' +
                 `(${response.status}) ${response.statusText}`;
             }
         });

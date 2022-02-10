@@ -61,3 +61,19 @@ class SolutionListAPIView(generics.ListAPIView):
             raise Http404()
 
         return Solution.objects.filter(statement__pk=statement_id)
+
+
+class StatementAPIView(generics.RetrieveAPIView):
+    serializer_class = StatementSerializer
+
+    def get_queryset(self):
+        """
+        This view should return a list of all the statements for
+        the difficulty level determined by the difficulty portion of the URL.
+        """
+        pk = self.kwargs.get('pk', None)
+
+        if not pk:
+            raise Http404()
+
+        return Statement.objects.filter(pk=pk)
