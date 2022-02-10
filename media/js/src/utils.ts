@@ -84,7 +84,7 @@ export const raw2latex = function(quesText: string) {
     str = str.replace(new RegExp('~', 'g'), '¬');
     str = str.replace(new RegExp('<->', 'g'), '↔');
     str = str.replace(new RegExp('->', 'g'), '→');
-    str = str.replace(new RegExp('v', 'g'), 'V');
+    str = str.replace(new RegExp('v', 'g'), '∨');
     str = str.replace(/\^/g, '∧');
 
     return str;
@@ -97,7 +97,7 @@ export const latex2raw = function(quesText: string) {
     let str = quesText;
 
     str = str.replace(new RegExp('∧', 'g'), '^');
-    str = str.replace(new RegExp('V', 'g'), 'v');
+    str = str.replace(new RegExp('∨', 'g'), 'v');
     str = str.replace(new RegExp('↔', 'g'), '<->');
     str = str.replace(new RegExp('→', 'g'), '->');
     str = str.replace(new RegExp('¬', 'g'), '~');
