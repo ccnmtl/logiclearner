@@ -12,7 +12,7 @@ export const App: React.FC = () => {
                 <Route path="/questions/0/"
                     element={<QuestionsDashboard
                         difficulty={0}
-                        level={'Beginner'}/>} />
+                        level={'Novice'}/>} />
 
                 <Route path="/questions/1/"
                     element={<QuestionsDashboard

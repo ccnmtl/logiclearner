@@ -1,22 +1,13 @@
-import React from 'react';
-import { checkQuestion } from './utils';
+import React, { useEffect } from 'react';
+import { checkQuestion, ExerciseData, Statement } from './utils';
 
-type Statement = {
-    pk: number;
-    question: string;
-    answer: string;
-    difficulty: number;
-    created_at: string;
-}
-
-type ExerciseData = {
+type QuestionData = {
     statement: Statement;
     listNum: number;
     id: number;
     level: string;
     idStr: string;
 }
-
 
 const laws: Array<string> = ['Identity', 'Negation', 'Domination',
     'Idempotence', 'Commutativity', 'Associativity', 'Absorption', 'Demorgan"s',
@@ -25,20 +16,42 @@ const laws: Array<string> = ['Identity', 'Negation', 'Domination',
 
 export const ExerciseSpace: React.FC = () => {
 
-    const getQuestion = (): ExerciseData[] => {
+    const getQuestionData = (): QuestionData[] => {
         // eslint-disable-next-line max-len
-        return JSON.parse(window.localStorage.getItem('exerciseSpace')) as ExerciseData[];
+        return JSON.parse(window.localStorage.getItem('questionData')) as QuestionData[];
     };
 
-    const data: ExerciseData[] = getQuestion();
+    const data: QuestionData[] = getQuestionData();
 
-    const exerciseInfo = data[0];
-    const statement = exerciseInfo.statement;
-    const level = exerciseInfo.level;
+    const questionInfo = data[0];
+    const statement = questionInfo.statement;
+    const level = questionInfo.level;
+    const idStr = questionInfo.idStr;
+    const id = questionInfo.id;
 
     // eslint-disable-next-line max-len
     const quesText: string = (statement.answer !== ('T' || 'F')) ? 'is logically equivalent to' : 'is a';
     const answer: string = checkQuestion(statement.answer);
+
+    const setExerciseData = () => {
+        const initData: ExerciseData = {
+            statement: statement,
+            id: id,
+            level: level,
+            status: 'none',
+            submittedData: [],
+            hintCount: 0,
+            hints: [],
+            idStr: idStr
+        };
+        const exerciseState = [...new Array<ExerciseData>(initData)];
+        window.localStorage.setItem('question-' + idStr,
+            JSON.stringify(exerciseState));
+    };
+
+    useEffect(() => {
+        void setExerciseData();
+    }, []);
 
     return (
         <>
@@ -65,8 +78,11 @@ export const ExerciseSpace: React.FC = () => {
                             );
                         })}
                     </select>
+                    <button type='button' className='btn btn-danger'>
+                        Delete
+                    </button>
                     <button type='submit' className='btn btn-primary'>
-                        Go
+                        Go!
                     </button>
                 </form>
             </div>

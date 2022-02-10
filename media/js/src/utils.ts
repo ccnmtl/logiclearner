@@ -1,5 +1,25 @@
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 type HTTPMethod = 'GET' | 'PUT' | 'POST' | 'DELETE'
 
+export type Statement = {
+    pk: number;
+    question: string;
+    answer: string;
+    difficulty: number;
+    created_at: string;
+}
+
+export type ExerciseData = {
+    statement: Statement;
+    id: number;
+    level: string;
+    status: string;
+    submittedData: Array<string>,
+    hintCount: number;
+    hints: Array<string>;
+    idStr: string;
+}
 /**
  * A wrapper for `fetch` that passes along auth credentials.
  */
@@ -83,4 +103,19 @@ export const latex2raw = function(quesText: string) {
     str = str.replace(new RegExp('¬', 'g'), '~');
 
     return str;
+};
+
+/**
+ * .
+ */
+export const completionCount = function(level, qList) {
+    let count = 0;
+
+    for (let i = 0; i < qList.length; i++) {
+        const data: ExerciseData = qList[i][0];
+        if(data.level === level && data.status === 'completed') {
+            count++;
+        }
+    }
+    return count;
 };

@@ -1,14 +1,6 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { checkQuestion, raw2latex } from './utils';
-
-type Statement = {
-    pk: number;
-    question: string;
-    answer: string;
-    difficulty: number;
-    created_at: string;
-}
+import { checkQuestion, raw2latex, ExerciseData, Statement } from './utils';
 
 interface QuestionProps {
     statement: Statement;
@@ -32,16 +24,37 @@ export const Question: React.FC<QuestionProps> = (
             idStr: idStr
         };
         const qstate = [...new Array<QuestionProps>(initData)];
-        window.localStorage.setItem('exerciseSpace',
+        window.localStorage.setItem('questionData',
             JSON.stringify(qstate));
 
         navigate('/exercise/' + idStr);
     };
 
+
+    const [questionStatus, setQuestionStatus] = useState('');
+    const getQuestionStatus = () => {
+        try {
+            const data = JSON.parse(
+                window.localStorage.getItem(
+                    'question-' + idStr)) as ExerciseData[];
+            const questStatus = data[0].status;
+            setQuestionStatus(questStatus);
+        } catch (error) {
+            console.log('error');
+        }
+
+    };
+
+
+    useEffect(() => {
+        void getQuestionStatus();
+    }, []);
+
     // eslint-disable-next-line max-len
     const quesText: string = (statement.answer !== ('T' || 'F')) ? 'is logically equivalent to' : 'is a';
     const answer: string = raw2latex(checkQuestion(statement.answer));
     const question = raw2latex(statement.question);
+
     return (
         <div className="p-3 mb-2 bg-light w-50 text-dark"
             onClick={exerciseSpaceHandler}>
@@ -50,7 +63,9 @@ export const Question: React.FC<QuestionProps> = (
             <span className="text-danger"> {question} </span>
             {quesText}
             <span className="text-primary"> {answer}</span>
-
+            <span>
+                {questionStatus}
+            </span>
         </div>
     );
 };
