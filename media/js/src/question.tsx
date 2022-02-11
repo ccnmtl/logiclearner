@@ -16,20 +16,8 @@ export const Question: React.FC<QuestionProps> = (
     const navigate = useNavigate();
 
     const exerciseSpaceHandler = () => {
-        const initData: QuestionProps = {
-            statement: statement,
-            listNum: listNum,
-            id: id,
-            level: level,
-            idStr: idStr
-        };
-        const qstate = [...new Array<QuestionProps>(initData)];
-        window.localStorage.setItem('questionData',
-            JSON.stringify(qstate));
-
         navigate('/exercise/' + idStr);
     };
-
 
     const [questionStatus, setQuestionStatus] = useState('');
     const getQuestionStatus = () => {
@@ -40,7 +28,7 @@ export const Question: React.FC<QuestionProps> = (
             const questStatus = data[0].status;
             setQuestionStatus(questStatus);
         } catch (error) {
-            console.log('error');
+            setQuestionStatus('none');
         }
 
     };
