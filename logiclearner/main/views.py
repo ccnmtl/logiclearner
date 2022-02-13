@@ -53,14 +53,15 @@ class SolutionListAPIView(generics.ListAPIView):
     def get_queryset(self):
         """
         This view should return a list of all the solution steps for a given
-        statement determined by the statement pk in the URL.
+        statement determined by the statement pk in the URL. In order.
         """
         statement_id = self.kwargs.get('statement', None)
 
         if not statement_id:
             raise Http404()
-
-        return Solution.objects.filter(statement__pk=statement_id)
+        solutions = Solution.objects.filter(
+            statement__pk=statement_id).order_by('ordinal')
+        return solutions
 
 
 class StatementAPIView(generics.RetrieveAPIView):
@@ -68,8 +69,7 @@ class StatementAPIView(generics.RetrieveAPIView):
 
     def get_queryset(self):
         """
-        This view should return a list of all the statements for
-        the difficulty level determined by the difficulty portion of the URL.
+        This view should return one statement for a given pk.
         """
         pk = self.kwargs.get('pk', None)
 

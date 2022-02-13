@@ -10,6 +10,15 @@ export type Statement = {
     created_at: string;
 }
 
+export type Solution = {
+    pk: number;
+    statement: number;
+    ordinal: number;
+    text: string;
+    created_at: string;
+    modified_at: string;
+}
+
 export type ExerciseData = {
     statement: Statement;
     id: number;
@@ -74,6 +83,26 @@ export const getStatement = async function(id: number) {
             }
         });
 };
+
+/**
+ * Get solutions according to question pk.
+ */
+export const getSolutions = async function(id: number) {
+
+    const url = `/api/solution/${id}/`;
+
+    return authedFetch(url, 'GET')
+        .then(function(response) {
+            if (response.status === 200) {
+                return response.json();
+            } else {
+                throw 'Error loading Solutions: ' +
+                `(${response.status}) ${response.statusText}`;
+            }
+        });
+};
+
+
 
 /**
  * Returns a string according to the type of question.
