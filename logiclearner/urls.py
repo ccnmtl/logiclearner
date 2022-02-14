@@ -27,6 +27,8 @@ urlpatterns = [
          serve, {'document_root': settings.MEDIA_ROOT}),
 
     # API paths
+    re_path('^api/statement/(?P<pk>.+)/$',
+            views.StatementAPIView.as_view()),
     re_path('^api/statements/(?P<difficulty>.+)/$',
             views.StatementListAPIView.as_view()),
     re_path('^api/solution/(?P<statement>.+)/$',

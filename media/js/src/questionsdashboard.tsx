@@ -1,20 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { getStatements } from './utils';
+import { getStatements, Statement } from './utils';
 import { Question } from './question';
 
 interface QuestionsDashboardProps {
     difficulty: number;
     level: string;
-}
-
-// also involed here would be questionProgress: boolean;
-// questionComplete: boolean;
-type Statement = {
-    pk: number;
-    question: string;
-    answer: string;
-    difficulty: number;
-    created_at: string;
 }
 
 export const QuestionsDashboard: React.FC<QuestionsDashboardProps> = (
@@ -45,6 +35,7 @@ export const QuestionsDashboard: React.FC<QuestionsDashboardProps> = (
                         statement={statement}
                         listNum={idx}
                         id={statement.pk}
+                        idStr={statement.pk.toString()}
                         key={idx}
                         level={level} />);
                 })}

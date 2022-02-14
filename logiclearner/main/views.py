@@ -8,7 +8,7 @@ from logiclearner.main.serializers import (
 )
 from rest_framework import generics
 from django.http.response import Http404
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 
 
 class IndexView(TemplateView):
@@ -53,11 +53,23 @@ class SolutionListAPIView(generics.ListAPIView):
     def get_queryset(self):
         """
         This view should return a list of all the solution steps for a given
-        statement determined by the statement pk in the URL.
+        statement determined by the statement pk in the URL. In order.
         """
-        statement_id = self.kwargs.get('statement', None)
+        statement = get_object_or_404(
+            Statement, pk=self.kwargs.get('statement'))
 
-        if not statement_id:
-            raise Http404()
+        return Solution.objects.filter(
+            statement=statement).order_by('ordinal')
 
-        return Solution.objects.filter(statement__pk=statement_id)
+
+class StatementAPIView(generics.RetrieveAPIView):
+    serializer_class = StatementSerializer
+
+    def get_queryset(self):
+        """
+        This view should return one statement for a given pk.
+        """
+        statement = get_object_or_404(
+            Statement, pk=self.kwargs.get('pk'))
+
+        return Statement.objects.filter(pk=statement.pk)

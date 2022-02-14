@@ -1,73 +1,112 @@
-import React from 'react';
-import { checkQuestion } from './utils';
+import React, { useEffect, useState } from 'react';
+import { getStatement, Statement, checkQuestion, Solution,
+    raw2latex, getSolutions } from './utils';
+import { useParams } from 'react-router-dom';
+import { Exercise } from './exercise';
 
-type Statement = {
-    pk: number;
-    question: string;
-    answer: string;
-    difficulty: number;
-    created_at: string;
-}
-
-type ExerciseData = {
-    statement: Statement;
-    idx: number;
-    key: number;
-    level: string;
-}
-
-
-const laws: Array<string> = ['identity', 'negation', 'domination',
-    'idempotence', 'commutativity', 'associativity', 'absorption', 'demorgan"s',
-    'literal negation', 'distributivity', 'double negation',
-    'implication to disjunction', 'iff to implication'];
 
 export const ExerciseSpace: React.FC = () => {
+    const { id } = useParams();
+    const [statement, setStatement] = useState<Statement>({
+        pk: null,
+        question: '',
+        answer: '',
+        difficulty: null,
+        created_at: ''
+    });
+    const [solutions, setSolutions] = useState<Solution[]>([]);
+    const [showSolutions, setShowSolutions] = useState<boolean>(false);
 
-    const getQuestion = (): ExerciseData[] => {
-        // eslint-disable-next-line max-len
-        return JSON.parse(window.localStorage.getItem('exerciseSpace')) as ExerciseData[];
+    async function fetchStatement() {
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+        const json: Statement = await getStatement(Number(id));
+        setStatement(json);
+    }
+
+    async function fetchSolutions() {
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+        const json: Array<Solution> = await getSolutions(Number(id));
+        setSolutions(json);
+    }
+
+    const quesText: string = (statement.answer !== ('T' || 'F')) ?
+        'is logically equivalent to' : 'is a';
+    const answer: string = raw2latex(checkQuestion(statement.answer));
+    const question = raw2latex(statement.question);
+    const level: string = statement.difficulty === 0 ? 'Novice'
+        : statement.difficulty === 1 ? 'Learner'
+            : statement.difficulty === 2 ? 'Apprentice' : '';
+
+    const handleShowSolutions = (
+        evt: React.MouseEvent<HTMLButtonElement>
+    ): void => {
+        evt.preventDefault();
+
+        setShowSolutions(solutions && !showSolutions);
     };
 
-    const data: ExerciseData[] = getQuestion();
-
-    const exerciseInfo = data[0];
-    const statement = exerciseInfo.statement;
-    const level = exerciseInfo.level;
-
-    // eslint-disable-next-line max-len
-    const quesText: string = (statement.answer !== ('T' || 'F')) ? 'is logically equivalent to' : 'is a';
-    const answer: string = checkQuestion(statement.answer);
+    useEffect(() => {
+        {void fetchStatement();}
+        {void fetchSolutions();}
+    }, []);
 
     return (
         <>
             <div className="d-flex flex-column min-vh-100 justify-content-center
-                            align-items-center">
-                <div>LEVEL: {level}</div>
-                <form>
-                    <div className='form-group'>
-                        <label htmlFor='statementInput'>
-                            Prove that
-                            {/* eslint-disable-next-line max-len */}
-                            <span className="text-danger"> {statement.question} </span>
-                            {quesText}
-                            <span className="text-primary"> {answer}</span>
-                        </label>
-                        <input type='text' className='form-control'
-                            id='statementInput' aria-describedby='statement'
-                            placeholder='Wizard like instructions' />
+                    align-items-center">
+                <div className="container">
+                    <div className="row">
+                        <div className="col">
+                            <div>LEVEL: {level}</div>
+                        </div>
+                        <div className="col">
+                            <div>Lawsheet</div>
+                        </div>
+                        <div className="col">
+                            <div>Keybindings</div>
+                        </div>
                     </div>
-                    <select name='laws' id='laws'>
-                        {laws.map((law, index) => {
-                            return (
-                                <option key={index} value={law}>{law}</option>
-                            );
-                        })}
-                    </select>
-                    <button type='submit' className='btn btn-primary'>
-                        Go
-                    </button>
-                </form>
+                    <div>
+                    Prove that
+                        <span className="text-danger"> {question} </span>
+                        {quesText}
+                        <span className="text-primary"> {answer}</span>
+                    </div>
+                    <Exercise
+                        statement={statement}
+                        id={id}
+                        level={level} />
+
+                    <div className="row">
+                        <div className="col">
+                            <button>I Need A Hint</button>
+                        </div>
+                        <div className="col">
+                            <button onClick={handleShowSolutions}>
+                                Show Solution
+                            </button>
+                        </div>
+                        <div className="col">
+                            <button>Reset Proof</button>
+                        </div>
+                    </div>
+                    {showSolutions && (
+                        <div className="row">
+                            <div className="col">
+                                <ul className="list-group">
+                                    {solutions.map((solution, idx) => {
+                                        return (
+                                            <li key={idx}
+                                                className="list-group-item">
+                                                {solution.text}
+                                            </li>
+                                        );
+                                    })}
+                                </ul>
+                            </div>
+                        </div>
+                    )}
+                </div>
             </div>
         </>
     );

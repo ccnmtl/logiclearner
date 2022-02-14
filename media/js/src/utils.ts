@@ -1,5 +1,34 @@
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 type HTTPMethod = 'GET' | 'PUT' | 'POST' | 'DELETE'
 
+export type Statement = {
+    pk: number;
+    question: string;
+    answer: string;
+    difficulty: number;
+    created_at: string;
+}
+
+export type Solution = {
+    pk: number;
+    statement: number;
+    ordinal: number;
+    text: string;
+    created_at: string;
+    modified_at: string;
+}
+
+export type ExerciseData = {
+    statement: Statement;
+    id: number;
+    level: string;
+    status: string;
+    submittedData: Array<string>,
+    hintCount: number;
+    hints: Array<string>;
+    idStr: string;
+}
 /**
  * A wrapper for `fetch` that passes along auth credentials.
  */
@@ -20,12 +49,11 @@ const authedFetch = function(url: string, method: HTTPMethod, data?: unknown) {
 };
 
 /**
- * Get statments according to difficulty
+ * Get statments according to difficulty.
  */
 export const getStatements = async function(difficulty: number) {
 
     const url = `/api/statements/${difficulty}/`;
-
 
     return authedFetch(url, 'GET')
         .then(function(response) {
@@ -37,6 +65,44 @@ export const getStatements = async function(difficulty: number) {
             }
         });
 };
+
+/**
+ * Get statments according to question pk.
+ */
+export const getStatement = async function(id: number) {
+
+    const url = `/api/statement/${id}/`;
+
+    return authedFetch(url, 'GET')
+        .then(function(response) {
+            if (response.status === 200) {
+                return response.json();
+            } else {
+                throw 'Error loading Statement: ' +
+                `(${response.status}) ${response.statusText}`;
+            }
+        });
+};
+
+/**
+ * Get solutions according to question pk.
+ */
+export const getSolutions = async function(id: number) {
+
+    const url = `/api/solution/${id}/`;
+
+    return authedFetch(url, 'GET')
+        .then(function(response) {
+            if (response.status === 200) {
+                return response.json();
+            } else {
+                throw 'Error loading Solutions: ' +
+                `(${response.status}) ${response.statusText}`;
+            }
+        });
+};
+
+
 
 /**
  * Returns a string according to the type of question.
@@ -62,9 +128,9 @@ export const raw2latex = function(quesText: string) {
     let str = quesText;
 
     str = str.replace(new RegExp('~', 'g'), '¬');
-    str = str.replace(new RegExp('->', 'g'), '→');
     str = str.replace(new RegExp('<->', 'g'), '↔');
-    str = str.replace(new RegExp('v', 'g'), 'V');
+    str = str.replace(new RegExp('->', 'g'), '→');
+    str = str.replace(new RegExp('v', 'g'), '∨');
     str = str.replace(/\^/g, '∧');
 
     return str;
@@ -77,10 +143,25 @@ export const latex2raw = function(quesText: string) {
     let str = quesText;
 
     str = str.replace(new RegExp('∧', 'g'), '^');
-    str = str.replace(new RegExp('V', 'g'), 'v');
+    str = str.replace(new RegExp('∨', 'g'), 'v');
     str = str.replace(new RegExp('↔', 'g'), '<->');
     str = str.replace(new RegExp('→', 'g'), '->');
     str = str.replace(new RegExp('¬', 'g'), '~');
 
     return str;
+};
+
+/**
+ * .
+ */
+export const completionCount = function(level, qList) {
+    let count = 0;
+
+    for (let i = 0; i < qList.length; i++) {
+        const data: ExerciseData = qList[i][0];
+        if(data.level === level && data.status === 'completed') {
+            count++;
+        }
+    }
+    return count;
 };
