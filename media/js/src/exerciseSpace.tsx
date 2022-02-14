@@ -29,8 +29,8 @@ export const ExerciseSpace: React.FC = () => {
         setSolutions(json);
     }
 
-    // eslint-disable-next-line max-len
-    const quesText: string = (statement.answer !== ('T' || 'F')) ? 'is logically equivalent to' : 'is a';
+    const quesText: string = (statement.answer !== ('T' || 'F')) ?
+        'is logically equivalent to' : 'is a';
     const answer: string = raw2latex(checkQuestion(statement.answer));
     const question = raw2latex(statement.question);
     const level: string = statement.difficulty === 0 ? 'Novice'
@@ -41,11 +41,8 @@ export const ExerciseSpace: React.FC = () => {
         evt: React.MouseEvent<HTMLButtonElement>
     ): void => {
         evt.preventDefault();
-        if(solutions && showSolutions === false){
-            setShowSolutions(true);
-        } else {
-            setShowSolutions(false);
-        }
+
+        setShowSolutions(solutions && !showSolutions);
     };
 
     useEffect(() => {

@@ -28,7 +28,7 @@ export const Question: React.FC<QuestionProps> = (
             const questStatus = data[0].status;
             setQuestionStatus(questStatus);
         } catch (error) {
-            setQuestionStatus('none');
+            setQuestionStatus(null);
         }
 
     };
@@ -38,8 +38,8 @@ export const Question: React.FC<QuestionProps> = (
         void getQuestionStatus();
     }, []);
 
-    // eslint-disable-next-line max-len
-    const quesText: string = (statement.answer !== ('T' || 'F')) ? 'is logically equivalent to' : 'is a';
+    const quesText: string = (statement.answer !== ('T' || 'F')) ?
+        'is logically equivalent to' : 'is a';
     const answer: string = raw2latex(checkQuestion(statement.answer));
     const question = raw2latex(statement.question);
 

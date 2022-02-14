@@ -19,7 +19,7 @@ export const Exercise: React.FC<ExerciseProps> = (
             statement: statement,
             id: Number(id),
             level: level,
-            status: 'none',
+            status: null,
             submittedData: [],
             hintCount: 0,
             hints: [],
