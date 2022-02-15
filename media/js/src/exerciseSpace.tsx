@@ -92,7 +92,7 @@ export const ExerciseSpace: React.FC = () => {
                     {showLawsheetModal && (
                         <Modal
                             title={'Laws'}
-                            bodyText={'These are lawz'}
+                            bodyText={'These are laws'}
                             cancelText={'Close'}
                             cancelFunc={modalCancel}/>
                     )}
