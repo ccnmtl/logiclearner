@@ -3,6 +3,7 @@ import { getStatement, Statement, checkQuestion, Solution,
     raw2latex, getSolutions } from './utils';
 import { useParams } from 'react-router-dom';
 import { Exercise } from './exercise';
+import { Modal } from './modal';
 
 
 export const ExerciseSpace: React.FC = () => {
@@ -16,6 +17,8 @@ export const ExerciseSpace: React.FC = () => {
     });
     const [solutions, setSolutions] = useState<Solution[]>([]);
     const [showSolutions, setShowSolutions] = useState<boolean>(false);
+    const [showLawsheetModal, setShowLawsheetModal] = useState<boolean>(false);
+    const [showBindingModal, setShowBindingModal] = useState<boolean>(false);
 
     async function fetchStatement() {
         // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
@@ -44,6 +47,20 @@ export const ExerciseSpace: React.FC = () => {
 
         setShowSolutions(solutions && !showSolutions);
     };
+    const handleLawsheetModal = (
+        evt: React.MouseEvent<HTMLButtonElement>): void => {
+        evt.preventDefault();
+        setShowLawsheetModal(true);
+    };
+    const handleBindingModal = (
+        evt: React.MouseEvent<HTMLButtonElement>): void => {
+        evt.preventDefault();
+        setShowBindingModal(true);
+    };
+    const modalCancel = () => {
+        setShowLawsheetModal(false);
+        setShowBindingModal(false);
+    };
 
     useEffect(() => {
         {void fetchStatement();}
@@ -60,12 +77,32 @@ export const ExerciseSpace: React.FC = () => {
                             <div>LEVEL: {level}</div>
                         </div>
                         <div className="col">
-                            <div>Lawsheet</div>
+                            <button className={'btn'}
+                                onClick={handleLawsheetModal}>
+                                Lawsheet
+                            </button>
                         </div>
                         <div className="col">
-                            <div>Keybindings</div>
+                            <button className={'btn'}
+                                onClick={handleBindingModal}>
+                                Keybindings
+                            </button>
                         </div>
                     </div>
+                    {showLawsheetModal && (
+                        <Modal
+                            title={'Laws'}
+                            bodyText={'These are lawz'}
+                            cancelText={'Close'}
+                            cancelFunc={modalCancel}/>
+                    )}
+                    {showBindingModal && (
+                        <Modal
+                            title={'Key Bindings'}
+                            bodyText={'Here are key bindings'}
+                            cancelText={'Close'}
+                            cancelFunc={modalCancel}/>
+                    )}
                     <div>
                     Prove that
                         <span className="text-danger"> {question} </span>
