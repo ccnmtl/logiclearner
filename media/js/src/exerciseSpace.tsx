@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { getStatement, Statement, checkQuestion, Solution,
-    raw2latex, getSolutions } from './utils';
+    raw2latex, getSolutions, ExerciseData, Status, Level } from './utils';
 import { useParams } from 'react-router-dom';
 import { Exercise } from './exercise';
 import { Modal } from './modal';
@@ -19,6 +19,7 @@ export const ExerciseSpace: React.FC = () => {
     const [showSolutions, setShowSolutions] = useState<boolean>(false);
     const [showLawsheetModal, setShowLawsheetModal] = useState<boolean>(false);
     const [showBindingModal, setShowBindingModal] = useState<boolean>(false);
+    const [questionStatus, setQuestionStatus] = useState('');
 
     async function fetchStatement() {
         // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
@@ -36,9 +37,13 @@ export const ExerciseSpace: React.FC = () => {
         'is logically equivalent to' : 'is a';
     const answer: string = raw2latex(checkQuestion(statement.answer));
     const question = raw2latex(statement.question);
-    const level: string = statement.difficulty === 0 ? 'Novice'
-        : statement.difficulty === 1 ? 'Learner'
-            : statement.difficulty === 2 ? 'Apprentice' : '';
+
+    const levels: Level = {
+        0: 'Novice',
+        1: 'Learner',
+        2: 'Apprentice'
+    };
+    const level: string = levels[statement.difficulty];
 
     const handleShowSolutions = (
         evt: React.MouseEvent<HTMLButtonElement>
@@ -62,9 +67,28 @@ export const ExerciseSpace: React.FC = () => {
         setShowBindingModal(false);
     };
 
+    const getQuestionStatus = () => {
+        try {
+            const data = JSON.parse(
+                window.localStorage.getItem(
+                    'question-' + id)) as ExerciseData[];
+            const questStatus = data[0].status;
+            setQuestionStatus(questStatus);
+        } catch (error) {
+            setQuestionStatus(null);
+        }
+    };
+
+    const status: Status = {
+        null: 'initial',
+        inprogress: 'inprogress',
+        complete: 'complete'
+    };
+
     useEffect(() => {
         {void fetchStatement();}
         {void fetchSolutions();}
+        {void getQuestionStatus();}
     }, []);
 
     return (
@@ -103,11 +127,21 @@ export const ExerciseSpace: React.FC = () => {
                             cancelText={'Close'}
                             cancelFunc={modalCancel}/>
                     )}
-                    <div>
-                    Prove that
-                        <span className="text-danger"> {question} </span>
-                        {quesText}
-                        <span className="text-primary"> {answer}</span>
+                    <div className='container'>
+                        <div className='row justify-content-between'>
+                            <div className='col-4 ps-0'>
+                                Prove that
+                                <span className="text-info"> {question} </span>
+                                {quesText}
+                                <span className="text-primary"> {answer}</span>
+                            </div>
+                            <div className="col-2">
+
+                                {/* Question status goes here */}
+                                <div className={status[questionStatus]}>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <Exercise
                         statement={statement}

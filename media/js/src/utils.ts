@@ -29,6 +29,15 @@ export type ExerciseData = {
     hints: Array<string>;
     idStr: string;
 }
+
+export type Status ={
+    [key: string]: string;
+}
+
+export type Level ={
+    [key: number]: string;
+}
+
 /**
  * A wrapper for `fetch` that passes along auth credentials.
  */
