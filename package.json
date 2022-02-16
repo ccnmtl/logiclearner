@@ -66,6 +66,7 @@
     "ts-loader": "^9.0.0",
     "webpack": "^5.52.1",
     "webpack-cli": "^4.8.0",
+    "whatwg-fetch":"3.6.2",
     "postcss-loader": "^6.1.0"
   }
 }

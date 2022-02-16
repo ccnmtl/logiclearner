@@ -1,6 +1,7 @@
 APP=logiclearner
 
-all: jenkins js-typecheck cypress-test
+all: jenkins js-typecheck cypress-test jstest
+
 .PHONY: all
 
 include *.mk

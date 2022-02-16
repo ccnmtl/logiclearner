@@ -45,7 +45,7 @@ export const Question: React.FC<QuestionProps> = (
 
     return (
         <div className="p-3 mb-2 bg-light w-50 text-dark"
-            onClick={exerciseSpaceHandler}>
+            onClick={exerciseSpaceHandler} data-testid={'question'}>
             <span className="h2">{listNum + 1} </span>
             Prove that
             <span className="text-danger"> {question} </span>
