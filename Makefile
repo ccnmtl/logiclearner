@@ -1,6 +1,7 @@
 APP=logiclearner
 
-all: jenkins js-typecheck cypress-test js-test
+all: jenkins js-typecheck cypress-test jstest
+
 .PHONY: all
 
 include *.mk
@@ -33,10 +34,6 @@ cypress-open: $(JS_SENTINAL)
 cypress-test: js-build
 	npm run cypress:test
 .PHONY: cypress-test
-
-js-test: $(JS_SENTINAL)
-	npm run test
-.PHONY: js-test
 
 dev:
 	trap 'kill 0' EXIT; make runserver & make webpack
