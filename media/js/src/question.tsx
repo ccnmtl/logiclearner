@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { checkQuestion, raw2latex, ExerciseData, Statement } from './utils';
+import { checkQuestion, raw2latex, ExerciseData, Statement,
+    Status } from './utils';
 
 interface QuestionProps {
     statement: Statement;
@@ -30,7 +31,12 @@ export const Question: React.FC<QuestionProps> = (
         } catch (error) {
             setQuestionStatus(null);
         }
+    };
 
+    const status: Status = {
+        null: 'initial',
+        inprogress: 'inprogress',
+        complete: 'complete'
     };
 
 
@@ -51,9 +57,10 @@ export const Question: React.FC<QuestionProps> = (
             <span className="text-danger"> {question} </span>
             {quesText}
             <span className="text-primary"> {answer}</span>
-            <span>
-                {questionStatus}
-            </span>
+
+            {/* Question status goes here */}
+            <div className={status[questionStatus]}>
+            </div>
         </div>
     );
 };
