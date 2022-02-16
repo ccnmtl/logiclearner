@@ -25,7 +25,8 @@ export const QuestionsDashboard: React.FC<QuestionsDashboardProps> = (
     return (
         <>
             <div className="d-flex flex-column min-vh-100 justify-content-center
-                            align-items-center">
+                            align-items-center"
+            data-testid={'QuestionDashboard'}>
                 <p>Level {difficulty + 1}</p>
                 <p className='h2'>{level}</p>
                 <p>One sentence description here</p>

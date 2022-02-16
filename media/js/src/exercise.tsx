@@ -37,7 +37,8 @@ export const Exercise: React.FC<ExerciseProps> = (
     return (
         <>
             <form>
-                <div className='form-group row'>
+                <div className='form-group row'
+                    data-testid={'exercise'}>
                     <div className='col'>
                         <label htmlFor='laws' className='form-label'>
                             If I apply this law...
