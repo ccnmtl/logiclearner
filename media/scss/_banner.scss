@@ -1,0 +1,106 @@
+.main-banner {
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    background-color: #efefef;
+    &__title {
+        display: block;
+    }
+    &__subhead {
+        display: block;
+        font-size: 1rem;
+    }
+    &__text {
+        display: block;
+        font-size: 1rem;
+    }
+    &__avatar {
+        width: 5rem;
+        height: 5rem;
+        margin: 0 1rem 0 0;
+        padding: 0.75rem;
+        border: 1px solid #222;
+        border-radius: 50%;
+        background-color: #adb5bd; /* $gray-500 */
+        flex-grow: 0;
+        flex-shrink: 0;
+    }
+}
+
+
+.banner-hero {
+    height: 12rem;
+    position: relative;
+    color: #333;
+    @include media-breakpoint-up(md) {
+        height: 16rem;
+    }
+    @include media-breakpoint-up(lg) {
+        height: 18rem;
+    }
+    @include media-breakpoint-up(xl) {
+        height: 20rem;
+    }
+    &__container {
+        margin-top: 2rem;
+        @include media-breakpoint-up(md) {
+            margin-top: 3.25rem;
+        }
+        @include media-breakpoint-up(lg) {
+            margin-top: 4rem;
+        }
+        @include media-breakpoint-up(xl) {
+            margin-top: 4rem;
+        }
+    }
+    &__title {
+        font-size: 2.5rem;
+        @include media-breakpoint-up(md) {
+            font-size: 3.125rem;
+        }
+        @include media-breakpoint-up(lg) {
+            font-size: 4rem;
+        }
+        @include media-breakpoint-up(xl) {
+            font-size: 5rem;
+        }
+    }
+    &__text {
+        font-size: 1.25rem;
+        @include media-breakpoint-up(md) {
+            font-size: 1.4rem;
+        }
+        @include media-breakpoint-up(lg) {
+            font-size: 1.75rem;
+        }
+        @include media-breakpoint-up(xl) {
+            font-size: 2rem;
+        }
+    }
+    &__avatar {
+        width: 6rem;
+        height: 6rem;
+        margin: 0 1rem 0 0;
+        padding: 0.75rem;
+        border: 1px solid #222;
+        border-radius: 50%;
+        background-color: #adb5bd; /* $gray-500 */
+        flex-grow: 0;
+        flex-shrink: 0;
+        @include media-breakpoint-up(md) {
+            width: 7rem;
+            height: 7rem;
+            margin: 0 1rem 0 0;
+            padding: 0.75rem;
+        }
+        @include media-breakpoint-up(lg) {
+            width: 8rem;
+            height: 8rem;
+            margin: 0 1rem 0 0;
+            padding: 0.75rem;
+        }
+        @include media-breakpoint-up(xl) {
+            width: 10rem;
+            height: 10rem;
+        }
+    }
+}
