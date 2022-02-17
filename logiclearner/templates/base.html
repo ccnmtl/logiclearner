@@ -64,40 +64,37 @@
 
 {% block topnavbar %}
 <header>
-    <!-- Skippy goes here, fix later -->
+    <!-- Skippy goes here, fix later
     <div class="skippy visually-hidden-focusable">
         <div class="container p-0">
             <a class=" d-inline-block p-2 m-1" href="#maincontent">Skip to main content</a>
         </div>
     </div>
-    <nav class="navbar navbar-expand-md navbar-dark bg-dark px-3 py-2 text-white" aria-label="Global site navigation">
-        <div class="container">
-            <a class="navbar-brand d-flex align-items-center my-0 me-auto text-white text-decoration-none" href="/">
-                <img class="gn-i me-2" src="{{STATIC_URL}}img/temp-icon-shapes.svg" style="width: 2.875rem; height: 2.875rem; filter: invert(98%) sepia(75%) saturate(128%) hue-rotate(275deg) brightness(112%) contrast(100%);">
-                <span>Logic Learner</span>
+     -->
+    <div class="navbar top-bar">
+        <div class="container top-bar__container">
+            <a href="levels-dashboard.html" class="navbar-brand d-flex align-items-center">
+            <img class="gn-i me-3 temp-icon" src="{{STATIC_URL}}img/temp-icon-sonobe.svg">
+            <span>Logic Learner</span>
             </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#globalNavLL" aria-controls="globalNavLL" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
 
-            <div class="collapse navbar-collapse" id="globalNavLL">
-                <ul class="nav col-auto my-2 justify-content-center my-md-0 text-small ms-auto">
-                    <li>
-                        <a href="/" class="nav-link text-white">
-                            <img class="gn-i d-block mx-auto mb-1" src="{{STATIC_URL}}img/temp-icon-home.svg" style="width: 1.5rem; height: 1.5rem; filter: invert(98%) sepia(75%) saturate(128%) hue-rotate(275deg) brightness(112%) contrast(100%);">
-                            Home
-                        </a>
-                    </li>
-                    <li>
-                        <a href="/" class="nav-link text-white">
-                            <img class="gn-i d-block mx-auto mb-1" src="{{STATIC_URL}}img/temp-icon-grid.svg" style="width: 1.5rem; height: 1.5rem; filter: invert(98%) sepia(75%) saturate(128%) hue-rotate(275deg) brightness(112%) contrast(100%);">
-                            Levels
-                        </a>
-                    </li>
+            <ul class="nav col-auto top-bar__nav">
+                <li>
+                  <a href="levels-dashboard.html" class="nav-link">
+                    <img class="gn-i d-block mx-auto mb-1 temp-icon" src="{{STATIC_URL}}img/temp-icon-home.svg">
+                    Home
+                  </a>
+                </li>
+                <li>
+                  <a href="levels-dashboard.html" class="nav-link">
+                    <img class="gn-i d-block mx-auto mb-1 temp-icon" src="{{STATIC_URL}}img/temp-icon-grid.svg">
+                    Levels
+                  </a>
+                </li>
                 </ul>
-            </div>
+            </ul>
         </div>
-    </nav>
+    </div>
 </header>
 {% endblock %}
 
@@ -107,7 +104,7 @@
 
 
 {% block footer %}
-<footer class="bg-light text-dark pt-2 pb-5">
+<footer class="bg-light">
     <ul class="nav d-flex justify-content-center">
         <li class="nav-item">
             <a class="nav-link" href="#" title="About">About</a>
