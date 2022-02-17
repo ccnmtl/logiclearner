@@ -32,7 +32,7 @@ export const LevelsDashboard: React.FC = () => {
         setapprenticeCount(apprenArr.length);
     }
 
-    const completedNovice = completionCount('Beginner', questionsList);
+    const completedNovice = completionCount('Novice', questionsList);
     const completedLearner = completionCount('Learner', questionsList);
     const completedApprentice = completionCount('Apprentice', questionsList);
 

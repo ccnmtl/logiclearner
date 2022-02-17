@@ -1,7 +1,7 @@
 from django.db import models
 
 DIFFICULTY = [
-    (0, 'Beginner'),
+    (0, 'Novice'),
     (1, 'Learner'),
     (2, 'Apprentice')
 ]
