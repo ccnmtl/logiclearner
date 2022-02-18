@@ -3,7 +3,7 @@ import React from 'react';
 export const HomeBanner: React.FC = () => {
 
     return (<>
-        <header className="main-banner banner-hero">
+        <header className="main-banner banner-hero" data-testid={'HomeBanner'}>
             <div className="container
                 d-flex justify-content-center
                 banner-hero__container">

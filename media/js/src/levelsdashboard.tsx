@@ -33,7 +33,7 @@ export const LevelsDashboard: React.FC = () => {
         setapprenticeCount(apprenArr.length);
     }
 
-    const completedNovice = completionCount('Beginner', questionsList);
+    const completedNovice = completionCount('Novice', questionsList);
     const completedLearner = completionCount('Learner', questionsList);
     const completedApprentice = completionCount('Apprentice', questionsList);
 
@@ -45,7 +45,9 @@ export const LevelsDashboard: React.FC = () => {
     return (
         <>
             <HomeBanner />
-            <section className="container content-body" id="maincontent">
+            <section className="container content-body"
+                id="maincontent"
+                data-testid={'LevelsDashboard'}>
                 <h2 id="cardset-label"
                     className="text-center">Choose a level</h2>
                 <ol className="cardset cardset-levels"
