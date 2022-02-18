@@ -85,7 +85,7 @@ export const QuestionsDashboard: React.FC<QuestionsDashboardProps> = (
                 id="maincontent"
                 data-testid={'QuestionDashboard'}>
                 <h2 id="cardset-label" className="visually-hidden">
-                    Proof questions list in Novice level
+                    Proof questions list in {level} level
                 </h2>
                 <ol className="cardset" aria-labelledby="cardset-label">
                     {statements.map((statement, idx) => {
