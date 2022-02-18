@@ -53,6 +53,14 @@
     }
     </script>
 
+    <!-- For image reference -->
+    <script>
+        window.LogicLearner = {
+            staticUrl: '{{ STATIC_URL }}',
+            baseUrl: '//{{ request.get_host }}',
+        }
+    </script>
+
     <!-- Favicons -->
 	<link rel="apple-touch-icon" href="{{STATIC_URL}}img/apple-touch-icon.png">
 	<link rel="shortcut icon" href="{{STATIC_URL}}img/favicon.ico">

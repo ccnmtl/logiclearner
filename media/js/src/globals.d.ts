@@ -1,3 +1,10 @@
+type InitialData = {
+    staticUrl: string;
+    baseUrl: string;
+}
+
+declare const LogicLearner: InitialData;
+
 declare module '*jpg' {
     const content: string;
     export default content;

@@ -1,5 +1,8 @@
 module.exports = {
   roots: ["media/js/src"],
+  globals: {
+        "LogicLearner": ''
+    },
   setupFilesAfterEnv: ["./jest.setup.ts"],
   moduleFileExtensions: ["ts", "tsx", "js"],
   testPathIgnorePatterns: ["node_modules/"],
