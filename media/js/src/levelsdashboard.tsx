@@ -55,12 +55,12 @@ export const LevelsDashboard: React.FC = () => {
                     aria-labelledby="cardset-label">
                     <li className="cardset-card">
                         <figure className="cardset-card__avatar">
-                            <img src={`${STATIC_URL}img/sonobe-i.svg`} />
+                            <img src={`${STATIC_URL}img/sonobe-1.svg`} />
                         </figure>
                         <div className="d-flex flex-column align-self-center
                             me-2 me-lg-0">
                             <div className="cardset-card__subhead">
-                                Level I
+                                Level 1
                             </div>
                             <div className="cardset-card__title level-name">
                                 <a href={'/questions/0'}>Novice</a>
@@ -80,12 +80,12 @@ export const LevelsDashboard: React.FC = () => {
                     </li>
                     <li className="cardset-card">
                         <figure className="cardset-card__avatar">
-                            <img src={`${STATIC_URL}img/sonobe-ii.svg`} />
+                            <img src={`${STATIC_URL}img/sonobe-2.svg`} />
                         </figure>
                         <div className="d-flex flex-column align-self-center
                             me-2 me-lg-0">
                             <div className="cardset-card__subhead">
-                                Level II
+                                Level 2
                             </div>
                             <div className="cardset-card__title level-name">
                                 <a href={'/questions/1'}>Learner</a>
@@ -105,12 +105,12 @@ export const LevelsDashboard: React.FC = () => {
                     </li>
                     <li className="cardset-card">
                         <figure className="cardset-card__avatar">
-                            <img src={`${STATIC_URL}img/sonobe-iii.svg`} />
+                            <img src={`${STATIC_URL}img/sonobe-3.svg`} />
                         </figure>
                         <div className="d-flex flex-column align-self-center
                             me-2 me-lg-0">
                             <div className="cardset-card__subhead">
-                                Level III
+                                Level 3
                             </div>
                             <div className="cardset-card__title level-name">
                                 <a href={'/questions/2'}>Apprentice</a>
