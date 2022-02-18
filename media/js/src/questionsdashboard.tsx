@@ -8,12 +8,20 @@ interface QuestionsDashboardProps {
     level: string;
 }
 
+export const STATIC_URL = LogicLearner.staticUrl;
+
 export const QuestionsDashboard: React.FC<QuestionsDashboardProps> = (
     {difficulty, level}: QuestionsDashboardProps) => {
 
     const [statements, setStatements] = useState<Statement[]>([]);
     const [questionsList, setquestionsList] = useState([]);
     const [levelCount, setLevelCount] = useState<number>(0);
+
+    const LevelDescription = {
+        0: 'Easy peasy, get a handle on things',
+        1: 'Next level up, time to grow!',
+        2: 'Onward, smarty pants!'
+    };
 
     async function fetchStatements() {
         // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
@@ -47,24 +55,35 @@ export const QuestionsDashboard: React.FC<QuestionsDashboardProps> = (
 
     return (
         <>
-            <div className="d-flex flex-column min-vh-100 justify-content-center
-                            align-items-center"
-            data-testid={'QuestionDashboard'}>
-                <div className='container'>
-                    <div className='row justify-content-center'>
-                        <div className='col-4'>
-                            <p>Level {difficulty + 1}
-                                <span className='float-end'>
-                                    {completedCount}/{levelCount}
-                                </span>
-                            </p>
-                            <p className='h2'>{level}</p>
-                            <p>One sentence description here</p>
-                        </div>
-                        <div className='col-4'>
-                        </div>
+            <header className="main-banner">
+                <div className="container d-flex justify-content-start">
+                    <figure className="main-banner__avatar align-self-center"
+                        aria-hidden="true">
+                        <img src={
+                            `${STATIC_URL}img/sonobe-${difficulty + 1}.svg`
+                        } />
+                    </figure>
+                    <h1 className="align-self-center">
+                        <span className="main-banner__subhead">
+                            LEVEL {difficulty + 1}
+                        </span>
+                        <span className="main-banner__title">
+                            {level}
+                        </span>
+                        <span className="main-banner__text">
+                            {LevelDescription[difficulty]}
+                        </span>
+                    </h1>
+                    <div className="ms-auto fs-4 q-completion align-self-center"
+                        aria-label="Questions completed">
+                        {completedCount}/{levelCount}
                     </div>
                 </div>
+            </header>
+
+            <div className="d-flex flex-column mt-5 justify-content-center
+                            align-items-center"
+            data-testid={'QuestionDashboard'}>
                 {statements.map((statement, idx) => {
                     return (<Question
                         statement={statement}
