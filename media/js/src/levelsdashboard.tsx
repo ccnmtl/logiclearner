@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { HomeBanner } from './homebanner';
 import {completionCount, getStatements, ExerciseData, Statement} from './utils';
 
+export const STATIC_URL = LogicLearner.staticUrl;
 
 export const LevelsDashboard: React.FC = () => {
     const [questionsList, setquestionsList] = useState([]);
@@ -54,7 +55,7 @@ export const LevelsDashboard: React.FC = () => {
                     aria-labelledby="cardset-label">
                     <li className="cardset-card">
                         <figure className="cardset-card__avatar">
-                            <img src="media/img/sonobe-i.svg" />
+                            <img src={`${STATIC_URL}img/sonobe-i.svg`} />
                         </figure>
                         <div className="d-flex flex-column align-self-center
                             me-2 me-lg-0">
@@ -79,7 +80,7 @@ export const LevelsDashboard: React.FC = () => {
                     </li>
                     <li className="cardset-card">
                         <figure className="cardset-card__avatar">
-                            <img src="media/img/sonobe-ii.svg" />
+                            <img src={`${STATIC_URL}img/sonobe-ii.svg`} />
                         </figure>
                         <div className="d-flex flex-column align-self-center
                             me-2 me-lg-0">
@@ -104,7 +105,7 @@ export const LevelsDashboard: React.FC = () => {
                     </li>
                     <li className="cardset-card">
                         <figure className="cardset-card__avatar">
-                            <img src="media/img/sonobe-iii.svg" />
+                            <img src={`${STATIC_URL}img/sonobe-iii.svg`} />
                         </figure>
                         <div className="d-flex flex-column align-self-center
                             me-2 me-lg-0">
