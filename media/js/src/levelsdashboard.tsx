@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { HomeBanner } from './homebanner';
 import {completionCount, getStatements, ExerciseData, Statement} from './utils';
 
 
@@ -43,53 +44,91 @@ export const LevelsDashboard: React.FC = () => {
 
     return (
         <>
-            <div className="d-flex flex-column min-vh-100 justify-content-center
-                            align-items-center" data-testid={'LevelsDashboard'}>
-                <div className="card" style={{width: '20rem', height: '10rem'}}>
-                    <div className="card-body">
-                        <div className="text-center">
-                            <p className="card-text">LEVEL I:</p>
-                            <p>NOVICE</p>
-                            <span className="float-end">
-                                {completedNovice} / {noviceCount}
-                            </span>
-                            <div><a className={'btn btn-primary'}
-                                href={'/questions/0'}>Level I</a>
+            <HomeBanner />
+            <section className="container content-body"
+                id="maincontent"
+                data-testid={'LevelsDashboard'}>
+                <h2 id="cardset-label"
+                    className="text-center">Choose a level</h2>
+                <ol className="cardset cardset-levels"
+                    aria-labelledby="cardset-label">
+                    <li className="cardset-card">
+                        <figure className="cardset-card__avatar">
+                            <img src="media/img/sonobe-i.svg" />
+                        </figure>
+                        <div className="d-flex flex-column align-self-center
+                            me-2 me-lg-0">
+                            <div className="cardset-card__subhead">
+                                Level I
                             </div>
+                            <div className="cardset-card__title level-name">
+                                <a href={'/questions/0'}>Novice</a>
+                            </div>
+                            <div className="cardset-card__text">
+                                Easy peasy, get a handle on things</div>
                         </div>
-                    </div>
-                </div>
-
-                <div className="card" style={{width: '20rem', height: '10rem'}}>
-                    <div className="card-body">
-                        <div className="text-center">
-                            <p className="card-text">LEVEL II:</p>
-                            <p>LEARNER</p>
-                            <span className="float-end">
+                        <div className="cardset-card__status-count"
+                            aria-label="Questions completed">
+                            <a href={'/questions/0'}>
+                                {completedNovice}/{noviceCount}
+                            </a>
+                        </div>
+                        <div className="cardset-card__prompt">
+                            <a href={'/questions/0'}>&rsaquo;</a>
+                        </div>
+                    </li>
+                    <li className="cardset-card">
+                        <figure className="cardset-card__avatar">
+                            <img src="media/img/sonobe-ii.svg" />
+                        </figure>
+                        <div className="d-flex flex-column align-self-center
+                            me-2 me-lg-0">
+                            <div className="cardset-card__subhead">
+                                Level II
+                            </div>
+                            <div className="cardset-card__title level-name">
+                                <a href={'/questions/1'}>Learner</a>
+                            </div>
+                            <div className="cardset-card__text">
+                                Next level up, time to grow!</div>
+                        </div>
+                        <div className="cardset-card__status-count"
+                            aria-label="Questions completed">
+                            <a href={'/questions/1'}>
                                 {completedLearner}/{learnerCount}
-                            </span>
-                            <div><a className={'btn btn-primary'}
-                                href={'/questions/1'}>Level II</a>
-                            </div>
+                            </a>
                         </div>
-                    </div>
-                </div>
-
-                <div className="card" style={{width: '20rem', height: '10rem'}}>
-                    <div className="card-body">
-                        <div className="text-center">
-                            <p className="card-text">LEVEL III:</p>
-                            <p>APPRENTICE</p>
-                            <span className="float-end">
+                        <div className="cardset-card__prompt">
+                            <a href={'/questions/1'}>&rsaquo;</a>
+                        </div>
+                    </li>
+                    <li className="cardset-card">
+                        <figure className="cardset-card__avatar">
+                            <img src="media/img/sonobe-iii.svg" />
+                        </figure>
+                        <div className="d-flex flex-column align-self-center
+                            me-2 me-lg-0">
+                            <div className="cardset-card__subhead">
+                                Level III
+                            </div>
+                            <div className="cardset-card__title level-name">
+                                <a href={'/questions/2'}>Apprentice</a>
+                            </div>
+                            <div className="cardset-card__text">
+                                Onward, smarty pants!</div>
+                        </div>
+                        <div className="cardset-card__status-count"
+                            aria-label="Questions completed">
+                            <a href={'/questions/2'}>
                                 {completedApprentice}/{apprenticeCount}
-                            </span>
-                            <div><a className={'btn btn-primary'}
-                                href={'/questions/2'}>Level III</a>
-                            </div>
+                            </a>
                         </div>
-                    </div>
-                </div>
-            </div>
+                        <div className="cardset-card__prompt">
+                            <a href={'/questions/2'}>&rsaquo;</a>
+                        </div>
+                    </li>
+                </ol>
+            </section>
         </>
     );
 };
