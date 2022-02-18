@@ -17,6 +17,12 @@ export const QuestionsDashboard: React.FC<QuestionsDashboardProps> = (
     const [questionsList, setquestionsList] = useState([]);
     const [levelCount, setLevelCount] = useState<number>(0);
 
+    const LevelDescription = {
+        0: 'Easy peasy, get a handle on things',
+        1: 'Next level up, time to grow!',
+        2: 'Onward, smarty pants!'
+    };
+
     async function fetchStatements() {
         // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
         const json: Array<Statement> = await getStatements(difficulty);
@@ -65,7 +71,7 @@ export const QuestionsDashboard: React.FC<QuestionsDashboardProps> = (
                             {level}
                         </span>
                         <span className="main-banner__text">
-                            Some descriptive text here
+                            {LevelDescription[difficulty]}
                         </span>
                     </h1>
                     <div className="ms-auto fs-4 q-completion align-self-center"
