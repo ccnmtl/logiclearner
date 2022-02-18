@@ -50,17 +50,21 @@ export const Question: React.FC<QuestionProps> = (
     const question = raw2latex(statement.question);
 
     return (
-        <div className="p-3 mb-2 bg-light w-50 text-dark"
+        <li className="cardset-card"
             onClick={exerciseSpaceHandler} data-testid={'question'}>
-            <span className="h2">{listNum + 1} </span>
-            Prove that
-            <span className="text-danger"> {question} </span>
-            {quesText}
-            <span className="text-primary"> {answer}</span>
-
-            {/* Question status goes here */}
-            <div className={status[questionStatus]}>
+            <div className="cardset-card__number">
+                {listNum + 1}
             </div>
-        </div>
+            <div className="cardset-card__title">
+                Prove that <span className="question-statement">
+                    {question}
+                </span> {quesText} <span className="question-statement">
+                    {answer}</span>.
+            </div>
+            <div className="cardset-card__status"
+                aria-label="Status: in progress">
+                {status[questionStatus]}
+            </div>
+        </li>
     );
 };

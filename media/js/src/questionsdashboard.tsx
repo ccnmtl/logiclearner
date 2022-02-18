@@ -81,19 +81,24 @@ export const QuestionsDashboard: React.FC<QuestionsDashboardProps> = (
                 </div>
             </header>
 
-            <div className="d-flex flex-column mt-5 justify-content-center
-                            align-items-center"
-            data-testid={'QuestionDashboard'}>
-                {statements.map((statement, idx) => {
-                    return (<Question
-                        statement={statement}
-                        listNum={idx}
-                        id={statement.pk}
-                        idStr={statement.pk.toString()}
-                        key={idx}
-                        level={level} />);
-                })}
-            </div>
+            <section className="container content-body"
+                id="maincontent"
+                data-testid={'QuestionDashboard'}>
+                <h2 id="cardset-label" className="visually-hidden">
+                    Proof questions list in Novice level
+                </h2>
+                <ol className="cardset" aria-labelledby="cardset-label">
+                    {statements.map((statement, idx) => {
+                        return (<Question
+                            statement={statement}
+                            listNum={idx}
+                            id={statement.pk}
+                            idStr={statement.pk.toString()}
+                            key={idx}
+                            level={level} />);
+                    })}
+                </ol>
+            </section>
         </>
     );
 };
