@@ -30,17 +30,46 @@
     text-decoration: none;
 }
 
+
+.cardset-listnum {
+    counter-reset: listNum-counter;
+}
+.cardset-listnum li {
+  counter-increment: listNum-counter;
+}
+.cardset-listnum li::before {
+    content: counter(listNum-counter) ".";
+    display: block;
+    width: 2.25rem;
+    font-size: 1.75rem;
+    font-weight: 600;
+    line-height: 1.25;
+    margin-right: 0.5rem;
+    flex-grow: 0;
+    flex-shrink: 0;
+    overflow: hidden;
+}
+@media (min-width: 768px) {
+    .cardset-listnum li::before {
+        width: 4rem;
+        font-size: 3rem;
+        line-height: 1;
+        margin-right: 1rem;
+    }
+}
+
+
 .cardset-card {
     display: flex;
     flex-direction: row;
-    padding: 1rem 0.5rem;
+    padding: 0.75rem;
     border: 1px dotted #999;
     border-radius: 0.25rem;
     margin-bottom: 1.5rem;
 }
 @media (min-width: 768px) {
     .cardset-card {
-        padding: 1rem;
+        padding: 1.5rem;
     }
 }
 
@@ -49,7 +78,7 @@
     display: block;
     width: 4rem;
     height: 4rem;
-    margin: 0 0.5rem 0 0;
+    margin: 0 0.75rem 0 0;
     padding: 0.5625rem;
     flex-grow: 0;
     flex-shrink: 0;
@@ -188,13 +217,13 @@
 
 .cardset-card__prompt {
     margin-top: -0.5rem;
-    margin-left: 0.5rem;
+    margin-left: 0.75rem;
     align-self: center;
     line-height: 1;
     flex-grow: 0;
     flex-shrink: 0;
-    font-size: 2rem;
-    font-weight: 600;
+    font-size: 2.5rem;
+    font-weight: 500;
 }
 @media (min-width: 768px) {
 .cardset-card__prompt {
@@ -227,3 +256,11 @@
     }
 }
 
+
+.question-statement {
+    /*font-style: italic;*/
+    background-color: #f3f3f3;
+    padding: 0 0.125rem 0.25rem 0.125rem;
+    border-radius: 0.25rem;
+    font-weight: 600;
+}
