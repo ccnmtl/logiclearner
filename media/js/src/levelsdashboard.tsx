@@ -50,7 +50,7 @@ export const LevelsDashboard: React.FC = () => {
                 id="maincontent"
                 data-testid={'LevelsDashboard'}>
                 <h2 id="cardset-label"
-                    className="text-center">Choose a level</h2>
+                    className="text-center mb-4">Choose a level</h2>
                 <ol className="cardset cardset-levels"
                     aria-labelledby="cardset-label">
                     <li className="cardset-card">
