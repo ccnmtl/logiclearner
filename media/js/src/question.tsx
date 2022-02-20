@@ -3,6 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import { checkQuestion, raw2latex, ExerciseData, Statement,
     Status } from './utils';
 
+export const STATIC_URL = LogicLearner.staticUrl;
+
 interface QuestionProps {
     statement: Statement;
     id: number;
@@ -58,8 +60,11 @@ export const Question: React.FC<QuestionProps> = (
                     {answer}</span>.
             </div>
             <div className="cardset-card__status"
-                aria-label="Status: in progress">
-                {status[questionStatus]}
+                aria-label={`Status: ${status[questionStatus]}`} >
+                    <img src={`${STATIC_URL}img/icon-status-${status[questionStatus]}.svg`} title="{`Status: ${status[questionStatus]}`}" /> {/* eslint-disable-line max-len */}
+            </div>
+            <div className="cardset-card__prompt">
+                &rsaquo;
             </div>
         </li>
     );
