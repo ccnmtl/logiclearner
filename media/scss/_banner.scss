@@ -27,6 +27,22 @@
 }
 
 
+.q-completion {
+    width: 4rem;
+    height: 4rem;
+    border: 1px solid transparent;
+    border-radius: 50%;
+    margin: 0;
+    padding: 0.5rem;
+    vertical-align: middle;
+    text-align: center;
+    line-height: 190%;
+    background-color: #dee2e6;
+    flex-grow: 0;
+    flex-shrink: 0;
+}
+
+
 .banner-hero {
     height: 12rem;
     position: relative;
