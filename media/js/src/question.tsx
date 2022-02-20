@@ -51,7 +51,7 @@ export const Question: React.FC<QuestionProps> = (
     const question = raw2latex(statement.question);
 
     return (
-        <li className="cardset-card"
+        <li className="cardset-card cardset-card__button"
             onClick={exerciseSpaceHandler} data-testid={'question'}>
             <div className="cardset-card__title">
                 Prove that <span className="question-statement">
