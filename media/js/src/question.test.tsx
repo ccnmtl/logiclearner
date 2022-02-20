@@ -16,7 +16,6 @@ describe('Initial test', () => {
         <MemoryRouter>
             <Question
                 statement={statement}
-                listNum={1}
                 id={1}
                 idStr={'1'}
                 key={1}
