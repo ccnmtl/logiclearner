@@ -5,14 +5,13 @@ import { checkQuestion, raw2latex, ExerciseData, Statement,
 
 interface QuestionProps {
     statement: Statement;
-    listNum: number;
     id: number;
     level: string;
     idStr: string;
 }
 
 export const Question: React.FC<QuestionProps> = (
-    { statement, listNum, id, level, idStr }: QuestionProps) => {
+    { statement, id, level, idStr }: QuestionProps) => {
 
     const navigate = useNavigate();
 
@@ -52,9 +51,6 @@ export const Question: React.FC<QuestionProps> = (
     return (
         <li className="cardset-card"
             onClick={exerciseSpaceHandler} data-testid={'question'}>
-            <div className="cardset-card__number">
-                {listNum + 1}
-            </div>
             <div className="cardset-card__title">
                 Prove that <span className="question-statement">
                     {question}
