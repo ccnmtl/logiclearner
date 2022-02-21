@@ -5,6 +5,7 @@ import { useParams } from 'react-router-dom';
 import { Exercise } from './exercise';
 import { Modal } from './modal';
 
+export const STATIC_URL = LogicLearner.staticUrl;
 
 export const ExerciseSpace: React.FC = () => {
     const { id } = useParams();
@@ -93,26 +94,34 @@ export const ExerciseSpace: React.FC = () => {
 
     return (
         <>
+            <header className="main-banner exercise-space-banner sticky-top">
+                <div className="container d-flex justify-content-start">
+                    <figure className="main-banner__avatar align-self-center"
+                        aria-hidden="true">
+                        <img src={
+                            `${STATIC_URL}img/sonobe-1.svg`
+                        } />
+                    </figure>
+                    <h1 className="align-self-center">
+                        <span className="main-banner__subhead">
+                            LEVEL {statement.difficulty + 1}: </span>
+                        <span className="main-banner__title">{level}</span>
+                    </h1>
+                    <div className="ms-auto fs-4 align-self-center">
+                        <button className={'btn btn-outline-secondary'}
+                            onClick={handleLawsheetModal}>
+                            Law sheet
+                        </button>
+                        <button className={'btn btn-outline-secondary ms-3'}
+                            onClick={handleBindingModal}>
+                            Key bindings
+                        </button>
+                    </div>
+                </div>
+            </header>
             <div className="d-flex flex-column my-5 py-5 justify-content-center
                     align-items-center" data-testid={'exerciseSpace'}>
                 <div className="container">
-                    <div className="row">
-                        <div className="col">
-                            <div>LEVEL: {level}</div>
-                        </div>
-                        <div className="col">
-                            <button className={'btn'}
-                                onClick={handleLawsheetModal}>
-                                Lawsheet
-                            </button>
-                        </div>
-                        <div className="col">
-                            <button className={'btn'}
-                                onClick={handleBindingModal}>
-                                Keybindings
-                            </button>
-                        </div>
-                    </div>
                     {showLawsheetModal && (
                         <Modal
                             title={'Laws'}
