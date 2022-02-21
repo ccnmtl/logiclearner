@@ -120,3 +120,29 @@
         }
     }
 }
+
+
+.exercise-space-banner {
+    padding-top: 0.75rem;
+    padding-top: 0.75rem;
+}
+.exercise-space-banner .main-banner__avatar {
+    width: 4rem;
+    height: 4rem;
+    margin: 0 1rem 0 0;
+    padding: 0.25rem;
+    border: 1px solid #222;
+    border-radius: 50%;
+    background-color: #adb5bd; /* $gray-500 */
+    flex-grow: 0;
+    flex-shrink: 0;
+}
+.exercise-space-banner .main-banner__subhead {
+    display: inline-block;
+    font-size: 1.5rem;
+    margin-right: 0.5rem;
+}
+.exercise-space-banner .main-banner__title {
+    display: inline-block;
+    font-size: 1.5rem;
+}
