@@ -103,7 +103,8 @@ export const ExerciseSpace: React.FC = () => {
                         } />
                     </figure>
                     <h1 className="align-self-center">
-                        <span className="main-banner__subhead">LEVEL ?: </span>
+                        <span className="main-banner__subhead">
+                            LEVEL {statement.difficulty + 1}: </span>
                         <span className="main-banner__title">{level}</span>
                     </h1>
                     <div className="ms-auto fs-4 align-self-center">
