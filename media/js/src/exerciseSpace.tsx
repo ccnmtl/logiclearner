@@ -93,7 +93,7 @@ export const ExerciseSpace: React.FC = () => {
 
     return (
         <>
-            <div className="d-flex flex-column min-vh-100 justify-content-center
+            <div className="d-flex flex-column my-5 py-5 justify-content-center
                     align-items-center" data-testid={'exerciseSpace'}>
                 <div className="container">
                     <div className="row">

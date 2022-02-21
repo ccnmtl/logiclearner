@@ -84,14 +84,14 @@ export const QuestionsDashboard: React.FC<QuestionsDashboardProps> = (
             <section className="container content-body"
                 id="maincontent"
                 data-testid={'QuestionDashboard'}>
-                <h2 id="cardset-label" className="visually-hidden">
-                    Proof questions list in {level} level
+                <h2 id="cardset-label" className="text-center mb-4">
+                    Questions in {level} level
                 </h2>
-                <ol className="cardset" aria-labelledby="cardset-label">
+                <ol className="cardset cardset-listnum"
+                    aria-labelledby="cardset-label">
                     {statements.map((statement, idx) => {
                         return (<Question
                             statement={statement}
-                            listNum={idx}
                             id={statement.pk}
                             idStr={statement.pk.toString()}
                             key={idx}
