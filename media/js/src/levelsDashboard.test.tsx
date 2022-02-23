@@ -1,6 +1,6 @@
 import React from 'react';
 import { render } from '@testing-library/react';
-import { LevelsDashboard } from './levelsdashboard';
+import { LevelsDashboard } from './levelsDashboard';
 
 describe('Initial test', () => {
     const renderComponent = () => render(<LevelsDashboard />);

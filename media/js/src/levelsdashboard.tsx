@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { HomeBanner } from './homebanner';
+import { HomeBanner } from './homeBanner';
 import {completionCount, getStatements, ExerciseData, Statement} from './utils';
 
 export const STATIC_URL = LogicLearner.staticUrl;

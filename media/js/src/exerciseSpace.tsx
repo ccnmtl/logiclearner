@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { getStatement, Statement, checkQuestion, Solution,
     raw2latex, getSolutions, ExerciseData, Status, Level } from './utils';
 import { useParams } from 'react-router-dom';
-import { Exercise } from './exercise';
+import { SolutionStep } from './solutionStep';
 import { Modal } from './modal';
 
 export const STATIC_URL = LogicLearner.staticUrl;
@@ -152,7 +152,7 @@ export const ExerciseSpace: React.FC = () => {
                             </div>
                         </div>
                     </div>
-                    <Exercise
+                    <SolutionStep
                         statement={statement}
                         id={id}
                         level={level} />
