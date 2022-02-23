@@ -25,7 +25,7 @@ export const SolutionStep: React.FC<SolutionStepProps> = (
             id: Number(id),
             level: level,
             status: null,
-            stepList: [['', '']],
+            stepList: [],
             hintCount: 0,
             hints: [],
             idStr: id

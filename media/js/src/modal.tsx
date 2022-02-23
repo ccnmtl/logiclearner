@@ -5,10 +5,11 @@ interface ModalProps {
     bodyText: string;
     cancelText: string;
     cancelFunc(): void;
+    resetFunc(): void;
 }
 
 export const Modal: React.FC<ModalProps> = ({
-    title, bodyText, cancelText, cancelFunc
+    title, bodyText, cancelText, cancelFunc, resetFunc
 }: ModalProps) => {
     useEffect(() => {
         const body = document.getElementsByTagName('body')[0];
@@ -34,6 +35,8 @@ export const Modal: React.FC<ModalProps> = ({
         evt.preventDefault();
         cancelFunc();
     };
+
+    const isReset = title === 'Reset';
 
     return (
         <div className="modal fade show"
@@ -61,6 +64,12 @@ export const Modal: React.FC<ModalProps> = ({
                             type="button"
                             className="btn btn-secondary"
                             onClick={cancelHandler}>{cancelText}</button>
+                        {isReset && (
+                            <button
+                                type="button"
+                                className="btn btn-danger"
+                                onClick={resetFunc}>Reset</button>
+                        )}
                     </div>
                 </div>
             </div>
