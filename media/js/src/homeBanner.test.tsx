@@ -1,6 +1,6 @@
 import React from 'react';
 import { render } from '@testing-library/react';
-import { HomeBanner } from './homeBanner';
+import { HomeBanner } from './homebanner';
 
 describe('Initial test', () => {
     const renderComponent = () => render(<HomeBanner />);
