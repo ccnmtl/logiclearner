@@ -21,6 +21,7 @@ export const ExerciseSpace: React.FC = () => {
     const [showLawsheetModal, setShowLawsheetModal] = useState<boolean>(false);
     const [showBindingModal, setShowBindingModal] = useState<boolean>(false);
     const [questionStatus, setQuestionStatus] = useState('');
+    const [stepList, setStepList] = useState([]);
 
     async function fetchStatement() {
         // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
@@ -45,6 +46,7 @@ export const ExerciseSpace: React.FC = () => {
         2: 'Apprentice'
     };
     const level: string = levels[statement.difficulty];
+    const isPastSteps = stepList.length > 0;
 
     const handleShowSolutions = (
         evt: React.MouseEvent<HTMLButtonElement>
@@ -68,13 +70,15 @@ export const ExerciseSpace: React.FC = () => {
         setShowBindingModal(false);
     };
 
-    const getQuestionStatus = () => {
+    const getQuestionData = () => {
         try {
             const data = JSON.parse(
                 window.localStorage.getItem(
                     'question-' + id)) as ExerciseData[];
             const questStatus = data[0].status;
+            const stepList = data[0].stepList;
             setQuestionStatus(questStatus);
+            setStepList(stepList);
         } catch (error) {
             setQuestionStatus(null);
         }
@@ -85,11 +89,13 @@ export const ExerciseSpace: React.FC = () => {
         inprogress: 'inprogress',
         complete: 'complete'
     };
+    const isIncomplete = status[questionStatus] !== 'complete';
+    const showSolutionBtn = stepList.length >= 2;
 
     useEffect(() => {
         {void fetchStatement();}
         {void fetchSolutions();}
-        {void getQuestionStatus();}
+        {void getQuestionData();}
     }, []);
 
     return (
@@ -152,17 +158,33 @@ export const ExerciseSpace: React.FC = () => {
                             </div>
                         </div>
                     </div>
-                    <SolutionStep
-                        statement={statement}
-                        id={id}
-                        level={level} />
+                    {isPastSteps && stepList.map(
+                        (step: [string, string], idx) => {
+                            return (
+                                <SolutionStep
+                                    statement={statement}
+                                    id={id}
+                                    level={level}
+                                    step={step}
+                                    key={idx} />
+                            );
+                        }
+                    )}
+                    {isIncomplete && (
+                        <SolutionStep
+                            statement={statement}
+                            id={id}
+                            level={level}
+                            step={['', '']} />
+                    )}
 
                     <div className="row">
                         <div className="col">
                             <button>I Need A Hint</button>
                         </div>
                         <div className="col">
-                            <button onClick={handleShowSolutions}>
+                            <button disabled={!showSolutionBtn}
+                                onClick={handleShowSolutions}>
                                 Show Solution
                             </button>
                         </div>

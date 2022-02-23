@@ -16,7 +16,8 @@ describe('Initial test', () => {
         <MemoryRouter>
             <SolutionStep statement={statement}
                 id={'1'}
-                level={'Novice'}  />
+                level={'Novice'}
+                step={['Commutativity', '(pvq)v(pv~q)']}  />
         </MemoryRouter>);
     it('Should render the exercise component', () => {
         const { getByTestId } = renderComponent();

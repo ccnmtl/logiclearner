@@ -1,10 +1,11 @@
 import React, { useEffect } from 'react';
-import { ExerciseData, Statement } from './utils';
+import { ExerciseData, Statement, capitalize } from './utils';
 
 interface SolutionStepProps {
     statement: Statement;
     id: string;
     level: string;
+    step: [string, string],
 }
 const laws: Array<string> = ['Identity', 'Negation', 'Domination',
     'Idempotence', 'Commutativity', 'Associativity', 'Absorption', 'Demorgan"s',
@@ -12,7 +13,7 @@ const laws: Array<string> = ['Identity', 'Negation', 'Domination',
     'Implication to Disjunction', 'Iff to Implication'];
 
 export const SolutionStep: React.FC<SolutionStepProps> = (
-    {statement, id, level}: SolutionStepProps) => {
+    {statement, id, level, step}: SolutionStepProps) => {
 
     const setSolutionStepData = () => {
         const initData: ExerciseData = {
@@ -20,7 +21,7 @@ export const SolutionStep: React.FC<SolutionStepProps> = (
             id: Number(id),
             level: level,
             status: null,
-            submittedData: [],
+            stepList: [],
             hintCount: 0,
             hints: [],
             idStr: id
@@ -28,6 +29,13 @@ export const SolutionStep: React.FC<SolutionStepProps> = (
         const exerciseState = [...new Array<ExerciseData>(initData)];
         window.localStorage.setItem('question-' + id,
             JSON.stringify(exerciseState));
+    };
+
+    const changeHandler: React.ChangeEventHandler<HTMLInputElement> = (evt) => {
+        console.log('test');
+    };
+    const changeSelect: React.ChangeEventHandler<HTMLSelectElement> = (evt) => {
+        console.log('test');
     };
 
     useEffect(() => {
@@ -43,7 +51,9 @@ export const SolutionStep: React.FC<SolutionStepProps> = (
                         <label htmlFor='laws' className='form-label'>
                             If I apply this law...
                         </label>
-                        <select name='laws' id='laws' className='form-control'>
+                        <select name='laws' id='laws' className='form-control'
+                            value={capitalize(step[0])}
+                            onChange={changeSelect} >
                             {laws.map((law, index) => {
                                 return (
                                     <option key={index} value={law}>
@@ -60,7 +70,9 @@ export const SolutionStep: React.FC<SolutionStepProps> = (
                         </label>
                         <input type='text' className='form-control'
                             id='statementInput' aria-describedby='statement'
-                            placeholder='Wizard like instructions' />
+                            placeholder='Wizard like instructions'
+                            value={step[1]}
+                            onChange={changeHandler} />
 
                         <input className="btn btn-primary"
                             type="submit" value="Submit" />
