@@ -1,6 +1,6 @@
 import React from 'react';
 import { render } from '@testing-library/react';
-import { Exercise } from './exercise';
+import { SolutionStep } from './solutionStep';
 import { MemoryRouter } from 'react-router-dom';
 
 const statement = {
@@ -14,7 +14,7 @@ const statement = {
 describe('Initial test', () => {
     const renderComponent = () => render(
         <MemoryRouter>
-            <Exercise statement={statement}
+            <SolutionStep statement={statement}
                 id={'1'}
                 level={'Novice'}  />
         </MemoryRouter>);

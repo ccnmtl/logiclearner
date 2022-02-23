@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { ExerciseData, Statement } from './utils';
 
-interface ExerciseProps {
+interface SolutionStepProps {
     statement: Statement;
     id: string;
     level: string;
@@ -11,10 +11,10 @@ const laws: Array<string> = ['Identity', 'Negation', 'Domination',
     'Literal Negation', 'Distributivity', 'Double Negation',
     'Implication to Disjunction', 'Iff to Implication'];
 
-export const Exercise: React.FC<ExerciseProps> = (
-    {statement, id, level}: ExerciseProps) => {
+export const SolutionStep: React.FC<SolutionStepProps> = (
+    {statement, id, level}: SolutionStepProps) => {
 
-    const setExerciseData = () => {
+    const setSolutionStepData = () => {
         const initData: ExerciseData = {
             statement: statement,
             id: Number(id),
@@ -31,7 +31,7 @@ export const Exercise: React.FC<ExerciseProps> = (
     };
 
     useEffect(() => {
-        {void setExerciseData();}
+        {void setSolutionStepData();}
     }, []);
 
     return (
@@ -52,6 +52,7 @@ export const Exercise: React.FC<ExerciseProps> = (
                                 );
                             })}
                         </select>
+                        <div>Law hint here</div>
                     </div>
                     <div className='col'>
                         <label htmlFor='statementInput' className='form-label'>
@@ -65,6 +66,7 @@ export const Exercise: React.FC<ExerciseProps> = (
                             type="submit" value="Submit" />
                         <input className="btn btn-primary"
                             type="reset" value="Reset" />
+                        <div>Statement hint here</div>
                     </div>
                 </div>
             </form>
