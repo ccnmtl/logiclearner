@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes  } from 'react-router-dom';
-import { LevelsDashboard } from './levelsDashboard';
-import { QuestionsDashboard } from './questionsDashboard';
+import { LevelsDashboard } from './levelsdashboard';
+import { QuestionsDashboard } from './questionsdashboard';
 import { ExerciseSpace } from './exerciseSpace';
 
 export const App: React.FC = () => {
