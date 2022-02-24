@@ -24,7 +24,7 @@ export type ExerciseData = {
     id: number;
     level: string;
     status: string;
-    submittedData: Array<string>,
+    stepList: [string, string][],
     hintCount: number;
     hints: Array<string>;
     idStr: string;
@@ -111,8 +111,6 @@ export const getSolutions = async function(id: number) {
         });
 };
 
-
-
 /**
  * Returns a string according to the type of question.
  */
@@ -161,7 +159,7 @@ export const latex2raw = function(quesText: string) {
 };
 
 /**
- * .
+ * Counts the number of completed questions per level.
  */
 export const completionCount = function(level, qList) {
     let count = 0;
@@ -173,4 +171,8 @@ export const completionCount = function(level, qList) {
         }
     }
     return count;
+};
+
+export const capitalize = function(s: string) {
+    return s && s[0].toUpperCase() + s.slice(1);
 };

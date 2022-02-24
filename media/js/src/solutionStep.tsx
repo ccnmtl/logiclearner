@@ -1,26 +1,27 @@
 import React, { useEffect } from 'react';
-import { ExerciseData, Statement } from './utils';
+import { ExerciseData, Statement, capitalize } from './utils';
 
-interface ExerciseProps {
+interface SolutionStepProps {
     statement: Statement;
     id: string;
     level: string;
+    step: [string, string],
 }
 const laws: Array<string> = ['Identity', 'Negation', 'Domination',
     'Idempotence', 'Commutativity', 'Associativity', 'Absorption', 'Demorgan"s',
     'Literal Negation', 'Distributivity', 'Double Negation',
     'Implication to Disjunction', 'Iff to Implication'];
 
-export const Exercise: React.FC<ExerciseProps> = (
-    {statement, id, level}: ExerciseProps) => {
+export const SolutionStep: React.FC<SolutionStepProps> = (
+    {statement, id, level, step}: SolutionStepProps) => {
 
-    const setExerciseData = () => {
+    const setSolutionStepData = () => {
         const initData: ExerciseData = {
             statement: statement,
             id: Number(id),
             level: level,
             status: null,
-            submittedData: [],
+            stepList: [],
             hintCount: 0,
             hints: [],
             idStr: id
@@ -30,8 +31,17 @@ export const Exercise: React.FC<ExerciseProps> = (
             JSON.stringify(exerciseState));
     };
 
+    // eslint-disable-next-line @typescript-eslint/no-empty-function
+    const changeHandler: React.ChangeEventHandler<HTMLInputElement> = (evt) => {
+
+    };
+    // eslint-disable-next-line @typescript-eslint/no-empty-function
+    const changeSelect: React.ChangeEventHandler<HTMLSelectElement> = (evt) => {
+
+    };
+
     useEffect(() => {
-        {void setExerciseData();}
+        {void setSolutionStepData();}
     }, []);
 
     return (
@@ -43,7 +53,9 @@ export const Exercise: React.FC<ExerciseProps> = (
                         <label htmlFor='laws' className='form-label'>
                             If I apply this law...
                         </label>
-                        <select name='laws' id='laws' className='form-control'>
+                        <select name='laws' id='laws' className='form-control'
+                            value={capitalize(step[0])}
+                            onChange={changeSelect} >
                             {laws.map((law, index) => {
                                 return (
                                     <option key={index} value={law}>
@@ -52,6 +64,7 @@ export const Exercise: React.FC<ExerciseProps> = (
                                 );
                             })}
                         </select>
+                        <div>Law hint here</div>
                     </div>
                     <div className='col'>
                         <label htmlFor='statementInput' className='form-label'>
@@ -59,12 +72,15 @@ export const Exercise: React.FC<ExerciseProps> = (
                         </label>
                         <input type='text' className='form-control'
                             id='statementInput' aria-describedby='statement'
-                            placeholder='Wizard like instructions' />
+                            placeholder='Wizard like instructions'
+                            value={step[1]}
+                            onChange={changeHandler} />
 
                         <input className="btn btn-primary"
                             type="submit" value="Submit" />
                         <input className="btn btn-primary"
                             type="reset" value="Reset" />
+                        <div>Statement hint here</div>
                     </div>
                 </div>
             </form>
