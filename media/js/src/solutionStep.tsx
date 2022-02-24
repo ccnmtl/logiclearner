@@ -31,11 +31,13 @@ export const SolutionStep: React.FC<SolutionStepProps> = (
             JSON.stringify(exerciseState));
     };
 
+    // eslint-disable-next-line @typescript-eslint/no-empty-function
     const changeHandler: React.ChangeEventHandler<HTMLInputElement> = (evt) => {
-        console.log('test');
+
     };
+    // eslint-disable-next-line @typescript-eslint/no-empty-function
     const changeSelect: React.ChangeEventHandler<HTMLSelectElement> = (evt) => {
-        console.log('test');
+
     };
 
     useEffect(() => {
