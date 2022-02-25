@@ -173,6 +173,28 @@ export const completionCount = function(level, qList) {
     return count;
 };
 
+/**
+ * Capitalizes first letter of string.
+ */
 export const capitalize = function(s: string) {
     return s && s[0].toUpperCase() + s.slice(1);
+};
+
+
+/**
+ * Get hints.
+ */
+export const getHints = async function(data: unknown) {
+
+    const url = '/api/hint/';
+
+    return authedFetch(url, 'POST', data)
+        .then(function(response) {
+            if (response.status === 200) {
+                return response.json();
+            } else {
+                throw 'Error loading hint: ' +
+                `(${response.status}) ${response.statusText}`;
+            }
+        });
 };

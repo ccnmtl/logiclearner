@@ -117,3 +117,6 @@ django-s3sign==0.3.1
 
 python-cas==1.6.0
 requirements/src/django_cas_ng-4.2.2ctl-py2.py3-none-any.whl
+
+# logictools
+lark==1.0.0

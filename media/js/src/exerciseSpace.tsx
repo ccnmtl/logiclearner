@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { getStatement, Statement, checkQuestion, Solution,
-    raw2latex, getSolutions, ExerciseData, Status, Level } from './utils';
+    raw2latex, getSolutions, ExerciseData, Status, Level,
+    getHints } from './utils';
 import { useParams } from 'react-router-dom';
 import { SolutionStep } from './solutionStep';
 import { Modal } from './modal';
@@ -23,6 +24,7 @@ export const ExerciseSpace: React.FC = () => {
     const [showResetModal, setShowResetModal] = useState<boolean>(false);
     const [questionStatus, setQuestionStatus] = useState('');
     const [stepList, setStepList] = useState<[string, string][]>([]);
+    const [currentHint, setCurrentHint] = useState<[string, string]>();
 
     async function fetchStatement() {
         // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
@@ -72,6 +74,12 @@ export const ExerciseSpace: React.FC = () => {
         evt.preventDefault();
         setShowResetModal(true);
     };
+
+    const handleHints = (
+        evt: React.MouseEvent<HTMLButtonElement>): void => {
+        evt.preventDefault();
+        void fetchHints();
+    };
     const modalCancel = () => {
         setShowLawsheetModal(false);
         setShowBindingModal(false);
@@ -109,6 +117,31 @@ export const ExerciseSpace: React.FC = () => {
             'question-' + id);
         setStepList([]);
     };
+
+    async function fetchHints() {
+        const hintData = {};
+        const data = JSON.parse(
+            window.localStorage.getItem(
+                'question-' + id)) as ExerciseData[];
+
+        if(data[0].hints.length === 0) {
+            const stepList = data[0].stepList;
+            hintData['next_expr'] = '~pv~q';
+            hintData['rule'] = 'de morgan"s law';
+            hintData['step_list'] = ['~(p^q)'];
+            hintData['answer'] = '~pV~q';
+
+            console.log('this is the data', hintData);
+            // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+            const toolsData = await getHints(hintData);
+            // setCurrentHint([toolsData.hintRule, toolsData.hintExpression]);
+            console.log('we work', toolsData);
+        } else {
+            console.log('hey');
+        }
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+
+    }
 
     useEffect(() => {
         {void fetchStatement();}
@@ -224,7 +257,7 @@ export const ExerciseSpace: React.FC = () => {
                     )}
                     <div className="row">
                         <div className="col">
-                            <button>I Need A Hint</button>
+                            <button onClick={handleHints}>I Need A Hint</button>
                         </div>
                         <div className="col">
                             <button disabled={!showSolutionBtn}

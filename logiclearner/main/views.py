@@ -7,8 +7,10 @@ from logiclearner.main.serializers import (
     StatementSerializer, SolutionSerializer
 )
 from rest_framework import generics
+from rest_framework.response import Response
 from django.http.response import Http404
 from django.shortcuts import render, get_object_or_404
+from logictools.next_step import next_step
 
 
 class IndexView(TemplateView):
@@ -29,6 +31,17 @@ class HintApiView(APIView):
     @method_decorator(csrf_exempt)
     def dispatch(self, *args, **kwargs):
         return super(HintApiView, self).dispatch(*args, **kwargs)
+
+    def post(self, request):
+        next_expr = request.data.get('next_expr')
+        next_rule = request.data.get('rule')
+        step_list = request.data.get('step_list')
+        target = request.data.get('answer')
+
+        # data = next_step('~pv~q', 'de morgan"s law', ['Start'], '~pV~q')
+        data = next_step(next_expr, next_rule, step_list, target)
+
+        return Response(data, status=200)
 
 
 class StatementListAPIView(generics.ListAPIView):
