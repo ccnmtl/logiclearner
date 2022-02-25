@@ -21,7 +21,7 @@ export const ExerciseSpace: React.FC = () => {
     const [showLawsheetModal, setShowLawsheetModal] = useState<boolean>(false);
     const [showBindingModal, setShowBindingModal] = useState<boolean>(false);
     const [questionStatus, setQuestionStatus] = useState('');
-    const [stepList, setStepList] = useState([]);
+    const [stepList, setStepList] = useState<[string, string][]>([]);
 
     async function fetchStatement() {
         // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
@@ -54,7 +54,6 @@ export const ExerciseSpace: React.FC = () => {
         evt: React.MouseEvent<HTMLButtonElement>
     ): void => {
         evt.preventDefault();
-
         setShowSolutions(solutions && !showSolutions);
     };
     const handleLawsheetModal = (
@@ -70,6 +69,10 @@ export const ExerciseSpace: React.FC = () => {
     const modalCancel = () => {
         setShowLawsheetModal(false);
         setShowBindingModal(false);
+    };
+
+    const handleNextQuestion = () => {
+        //TBD
     };
 
     const getQuestionData = () => {
@@ -168,7 +171,10 @@ export const ExerciseSpace: React.FC = () => {
                                     id={id}
                                     level={level}
                                     step={step}
-                                    key={idx} />
+                                    stepList={stepList}
+                                    key={idx}
+                                    idx={idx}
+                                    setStepList={setStepList} />
                             );
                         }
                     )}
@@ -177,9 +183,21 @@ export const ExerciseSpace: React.FC = () => {
                             statement={statement}
                             id={id}
                             level={level}
-                            step={['', '']} />
+                            step={['', '']}
+                            stepList={stepList}
+                            setStepList={setStepList}
+                            idx={stepList.length + 1} />
                     )}
-
+                    {!isIncomplete && (
+                        <>
+                            <div>You&apos;ve completed this question!</div>
+                            <button onClick={handleNextQuestion}>Next</button>
+                            <a className={'btn'}
+                                href={`/questions/${statement.difficulty}`}>
+                                LEVEL {statement.difficulty + 1}: {level}
+                            </a>
+                        </>
+                    )}
                     <div className="row">
                         <div className="col">
                             <button>I Need A Hint</button>

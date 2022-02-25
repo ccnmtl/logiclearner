@@ -6,6 +6,9 @@ interface SolutionStepProps {
     id: string;
     level: string;
     step: [string, string],
+    stepList: [string, string][],
+    setStepList: React.Dispatch<React.SetStateAction<[string, string][]>>,
+    idx: number
 }
 const laws: Array<string> = ['Identity', 'Negation', 'Domination',
     'Idempotence', 'Commutativity', 'Associativity', 'Absorption', 'Demorgan"s',
@@ -13,7 +16,8 @@ const laws: Array<string> = ['Identity', 'Negation', 'Domination',
     'Implication to Disjunction', 'Iff to Implication'];
 
 export const SolutionStep: React.FC<SolutionStepProps> = (
-    {statement, id, level, step}: SolutionStepProps) => {
+    {statement, id, level, step, stepList, idx, setStepList
+    }: SolutionStepProps) => {
 
     const setSolutionStepData = () => {
         const initData: ExerciseData = {
@@ -21,7 +25,7 @@ export const SolutionStep: React.FC<SolutionStepProps> = (
             id: Number(id),
             level: level,
             status: null,
-            stepList: [],
+            stepList: [['', '']],
             hintCount: 0,
             hints: [],
             idStr: id
@@ -39,6 +43,20 @@ export const SolutionStep: React.FC<SolutionStepProps> = (
     const changeSelect: React.ChangeEventHandler<HTMLSelectElement> = (evt) => {
 
     };
+
+    const handleDeleteStep = (
+        evt: React.MouseEvent<HTMLButtonElement>): void => {
+        evt.preventDefault();
+        const data = JSON.parse(
+            window.localStorage.getItem(
+                'question-' + id)) as ExerciseData[];
+        data[0].stepList.pop();
+        window.localStorage.setItem('question-' + id,
+            JSON.stringify(data));
+        setStepList(data[0].stepList);
+    };
+
+    const isLast = idx === stepList.length + 1;
 
     useEffect(() => {
         {void setSolutionStepData();}
@@ -75,11 +93,15 @@ export const SolutionStep: React.FC<SolutionStepProps> = (
                             placeholder='Wizard like instructions'
                             value={step[1]}
                             onChange={changeHandler} />
-
-                        <input className="btn btn-primary"
-                            type="submit" value="Submit" />
-                        <input className="btn btn-primary"
-                            type="reset" value="Reset" />
+                        {isLast && (
+                            <>
+                                <input className="btn btn-primary"
+                                    type="submit" value="Submit" />
+                                <input className="btn btn-primary"
+                                    type="reset" value="Delete"
+                                    onClick={handleDeleteStep} />
+                            </>
+                        )}
                         <div>Statement hint here</div>
                     </div>
                 </div>

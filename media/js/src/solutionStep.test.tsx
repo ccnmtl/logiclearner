@@ -11,13 +11,18 @@ const statement = {
     created_at: 'date'
 };
 
+const setStepList = () => {console.log('test');};
+
 describe('Initial test', () => {
     const renderComponent = () => render(
         <MemoryRouter>
             <SolutionStep statement={statement}
                 id={'1'}
                 level={'Novice'}
-                step={['Commutativity', '(pvq)v(pv~q)']}  />
+                step={['Commutativity', '(pvq)v(pv~q)']}
+                stepList={[['test', 'test']]}
+                setStepList={setStepList}
+                idx={10}  />
         </MemoryRouter>);
     it('Should render the exercise component', () => {
         const { getByTestId } = renderComponent();
