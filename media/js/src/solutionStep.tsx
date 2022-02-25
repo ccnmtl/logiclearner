@@ -35,15 +35,6 @@ export const SolutionStep: React.FC<SolutionStepProps> = (
             JSON.stringify(exerciseState));
     };
 
-    // eslint-disable-next-line @typescript-eslint/no-empty-function
-    const changeHandler: React.ChangeEventHandler<HTMLInputElement> = (evt) => {
-
-    };
-    // eslint-disable-next-line @typescript-eslint/no-empty-function
-    const changeSelect: React.ChangeEventHandler<HTMLSelectElement> = (evt) => {
-
-    };
-
     const handleDeleteStep = (
         evt: React.MouseEvent<HTMLButtonElement>): void => {
         evt.preventDefault();
@@ -72,8 +63,7 @@ export const SolutionStep: React.FC<SolutionStepProps> = (
                             If I apply this law...
                         </label>
                         <select name='laws' id='laws' className='form-control'
-                            value={capitalize(step[0])}
-                            onChange={changeSelect} >
+                            defaultValue={capitalize(step[0])} >
                             {laws.map((law, index) => {
                                 return (
                                     <option key={index} value={law}>
@@ -91,8 +81,7 @@ export const SolutionStep: React.FC<SolutionStepProps> = (
                         <input type='text' className='form-control'
                             id='statementInput' aria-describedby='statement'
                             placeholder='Wizard like instructions'
-                            value={step[1]}
-                            onChange={changeHandler} />
+                            defaultValue={step[1]} />
                         {isLast && (
                             <>
                                 <input className="btn btn-primary"
