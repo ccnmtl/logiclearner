@@ -20,6 +20,7 @@ export const ExerciseSpace: React.FC = () => {
     const [showSolutions, setShowSolutions] = useState<boolean>(false);
     const [showLawsheetModal, setShowLawsheetModal] = useState<boolean>(false);
     const [showBindingModal, setShowBindingModal] = useState<boolean>(false);
+    const [showResetModal, setShowResetModal] = useState<boolean>(false);
     const [questionStatus, setQuestionStatus] = useState('');
     const [stepList, setStepList] = useState<[string, string][]>([]);
 
@@ -66,9 +67,15 @@ export const ExerciseSpace: React.FC = () => {
         evt.preventDefault();
         setShowBindingModal(true);
     };
+    const handleResetModal = (
+        evt: React.MouseEvent<HTMLButtonElement>): void => {
+        evt.preventDefault();
+        setShowResetModal(true);
+    };
     const modalCancel = () => {
         setShowLawsheetModal(false);
         setShowBindingModal(false);
+        setShowResetModal(false);
     };
 
     const handleNextQuestion = () => {
@@ -96,6 +103,12 @@ export const ExerciseSpace: React.FC = () => {
     };
     const isIncomplete = status[questionStatus] !== 'complete';
     const showSolutionBtn = stepList.length >= 2;
+
+    const resetFunc = () => {
+        window.localStorage.removeItem(
+            'question-' + id);
+        setStepList([]);
+    };
 
     useEffect(() => {
         {void fetchStatement();}
@@ -138,14 +151,25 @@ export const ExerciseSpace: React.FC = () => {
                             title={'Laws'}
                             bodyText={'These are laws'}
                             cancelText={'Close'}
-                            cancelFunc={modalCancel}/>
+                            cancelFunc={modalCancel}
+                            resetFunc={resetFunc}/>
                     )}
                     {showBindingModal && (
                         <Modal
                             title={'Key Bindings'}
                             bodyText={'Here are key bindings'}
                             cancelText={'Close'}
-                            cancelFunc={modalCancel}/>
+                            cancelFunc={modalCancel}
+                            resetFunc={resetFunc}/>
+                    )}
+                    {showResetModal && (
+                        <Modal
+                            title={'Reset'}
+                            // eslint-disable-next-line max-len
+                            bodyText={'Are you sure you want to reset? You will lose all work for this question.'}
+                            cancelText={'Close'}
+                            cancelFunc={modalCancel}
+                            resetFunc={resetFunc}/>
                     )}
                     <div className='container'>
                         <div className='row justify-content-between'>
@@ -183,7 +207,7 @@ export const ExerciseSpace: React.FC = () => {
                             statement={statement}
                             id={id}
                             level={level}
-                            step={['', '']}
+                            step={['','']}
                             stepList={stepList}
                             setStepList={setStepList}
                             idx={stepList.length + 1} />
@@ -209,7 +233,9 @@ export const ExerciseSpace: React.FC = () => {
                             </button>
                         </div>
                         <div className="col">
-                            <button>Reset Proof</button>
+                            <button onClick={handleResetModal}>
+                                Reset Proof
+                            </button>
                         </div>
                     </div>
                     {showSolutions && (
