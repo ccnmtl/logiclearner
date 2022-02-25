@@ -63,7 +63,8 @@ export const SolutionStep: React.FC<SolutionStepProps> = (
                             If I apply this law...
                         </label>
                         <select name='laws' id='laws' className='form-control'
-                            defaultValue={capitalize(step[0])} >
+                            defaultValue={capitalize(step[0])}
+                            disabled={step[0] === '' ? false : true} >
                             {laws.map((law, index) => {
                                 return (
                                     <option key={index} value={law}>
@@ -81,6 +82,7 @@ export const SolutionStep: React.FC<SolutionStepProps> = (
                         <input type='text' className='form-control'
                             id='statementInput' aria-describedby='statement'
                             placeholder='Wizard like instructions'
+                            disabled={step[0] === '' ? false : true}
                             defaultValue={step[1]} />
                         {isLast && (
                             <>
