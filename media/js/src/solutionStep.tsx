@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { ExerciseData, Statement, capitalize } from './utils';
 
 interface SolutionStepProps {
@@ -18,6 +18,10 @@ const laws: Array<string> = ['Identity', 'Negation', 'Domination',
 export const SolutionStep: React.FC<SolutionStepProps> = (
     {statement, id, level, step, stepList, idx, setStepList
     }: SolutionStepProps) => {
+
+    const [error, setError] = useState('');
+    const [selectedLaw, setSelectedLaw] = useState('');
+    const [statementInput, setStatementInput] = useState('');
 
     const setSolutionStepData = () => {
         const initData: ExerciseData = {
@@ -47,7 +51,28 @@ export const SolutionStep: React.FC<SolutionStepProps> = (
         setStepList(data[0].stepList);
     };
 
+    const handleStatementInput = (
+        evt: React.ChangeEvent<HTMLInputElement>): void => {
+        setStatementInput(evt.target.value);
+        setError('');
+    };
+
+    const handleLawSelect = (
+        evt: React.ChangeEvent<HTMLSelectElement>): void => {
+        setSelectedLaw(evt.target.value);
+    };
+
+    const handleSubmit = (
+        evt: React.MouseEvent<HTMLButtonElement>
+    ): void => {
+        evt.preventDefault();
+        if(!statementInput) {
+            setError('Please enter a statement.');
+        }
+    };
+
     const isLast = idx === stepList.length + 1;
+    const haveErrors = !error;
 
     useEffect(() => {
         {void setSolutionStepData();}
@@ -62,8 +87,9 @@ export const SolutionStep: React.FC<SolutionStepProps> = (
                         <label htmlFor='laws' className='form-label'>
                             If I apply this law...
                         </label>
-                        <select name='laws' id='laws' className='form-control'
+                        <select name='law' id='laws' className='form-control'
                             defaultValue={capitalize(step[0])}
+                            onChange={handleLawSelect}
                             disabled={step[0] === '' ? false : true} >
                             {laws.map((law, index) => {
                                 return (
@@ -82,12 +108,14 @@ export const SolutionStep: React.FC<SolutionStepProps> = (
                         <input type='text' className='form-control'
                             id='statementInput' aria-describedby='statement'
                             placeholder='Wizard like instructions'
-                            disabled={step[0] === '' ? false : true}
-                            defaultValue={step[1]} />
+                            name='statement' defaultValue={step[1]}
+                            onChange={handleStatementInput}
+                            disabled={step[0] === '' ? false : true} />
                         {isLast && (
                             <>
                                 <input className="btn btn-primary"
-                                    type="submit" value="Submit" />
+                                    type="submit" value="Submit"
+                                    onClick={handleSubmit} />
                                 <input className="btn btn-primary"
                                     type="reset" value="Delete"
                                     onClick={handleDeleteStep} />
@@ -96,6 +124,11 @@ export const SolutionStep: React.FC<SolutionStepProps> = (
                         <div>Statement hint here</div>
                     </div>
                 </div>
+                {!haveErrors && (
+                    <div className='row'>
+                        <span className='text-danger'> Errors</span>
+                    </div>
+                )}
             </form>
 
         </>
