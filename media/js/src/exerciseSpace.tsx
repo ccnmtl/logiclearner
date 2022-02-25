@@ -36,8 +36,10 @@ export const ExerciseSpace: React.FC = () => {
         setSolutions(json);
     }
 
-    const quesText: string = (statement.answer !== ('T' || 'F')) ?
-        'is logically equivalent to' : 'is a';
+    // eslint-disable-next-line max-len
+    const quesText: string = (statement.answer == 'F') || (statement.answer == 'T')
+        ? 'is a'
+        : 'is logically equivalent to';
     const answer: string = raw2latex(checkQuestion(statement.answer));
     const question = raw2latex(statement.question);
 
