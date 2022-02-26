@@ -120,6 +120,11 @@ export const ExerciseSpace: React.FC = () => {
         <>
             <header className="main-banner exercise-space-banner sticky-top">
                 <div className="container d-flex justify-content-start">
+                    <div className="main-banner__prompt">
+                        {/* This needs to link to the parent level
+                        question dashboard */}
+                        &lsaquo;
+                    </div>
                     <figure className="main-banner__avatar align-self-center"
                         aria-hidden="true">
                         <img src={
@@ -128,17 +133,33 @@ export const ExerciseSpace: React.FC = () => {
                     </figure>
                     <h1 className="align-self-center">
                         <span className="main-banner__subhead">
-                            LEVEL {statement.difficulty + 1}: </span>
+                            LEVEL {statement.difficulty + 1}:
+                        </span>
                         <span className="main-banner__title">{level}</span>
                     </h1>
-                    <div className="ms-auto fs-4 align-self-center">
-                        <button className={'btn btn-outline-secondary'}
+                    <div className="ms-auto align-self-center text-end">
+                        <button type="button"
+                            className="btn btn-light ll-button btn-shrink
+                                me-0 me-md-1 mb-2 mb-md-0"
                             onClick={handleLawsheetModal}>
-                            Law sheet
+                            <span className="ll-icons ll-button__icon">
+                                <img src={
+                                    `${STATIC_URL}img/icon-clipboard.svg`
+                                } />
+                            </span>
+                            <span className="ll-button__text">Law sheet</span>
                         </button>
-                        <button className={'btn btn-outline-secondary ms-3'}
+                        <button type="button"
+                            className="btn btn-light ll-button btn-shrink"
                             onClick={handleBindingModal}>
-                            Key bindings
+                            <span className="ll-icons ll-button__icon">
+                                <img src={
+                                    `${STATIC_URL}img/icon-keyboard.svg`
+                                } />
+                            </span>
+                            <span className="ll-button__text">
+                                Logic symbols
+                            </span>
                         </button>
                     </div>
                 </div>
