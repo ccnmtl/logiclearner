@@ -1,5 +1,32 @@
 footer {
-    margin-top: 2rem;
+    position: relative;
+    bottom: 0;
+    background-color: #efefef;
     padding-top: 2rem;
-    padding-bottom: 2rem;
+    padding-bottom: 3rem;
+    .footer__logo {
+        display: block;
+        width: 15rem;
+        margin: 2rem auto;
+        @include media-breakpoint-up(md) {
+            width: 25rem;
+            margin: 3rem auto;
+        }
+    }
+}
+
+
+.navlist--footer {
+    justify-content: center;
+    a {
+        color: #000;
+        text-decoration: none;
+        display: block;
+        padding: 0.5rem 1rem;
+    }
+    a:hover {
+        color: $black;
+        text-decoration: underline;
+        background-color: #eff6ff;
+    }
 }

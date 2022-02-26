@@ -1,5 +1,5 @@
 .top-bar {
-    background-color: #212529; /* $gray-900 */
+    background-color: $gray-900;
     padding: 0.4rem 0.5rem;
     color: #fff;
     @include media-breakpoint-up(md) {
@@ -72,7 +72,7 @@
 
 
 .gn-i {
-  vertical-align: -.125em;
-  fill: white;
+    vertical-align: -0.125em;
+    fill: white;
 }
 
