@@ -105,14 +105,10 @@
         @include media-breakpoint-up(md) {
             width: 7rem;
             height: 7rem;
-            margin: 0 1rem 0 0;
-            padding: 0.75rem;
         }
         @include media-breakpoint-up(lg) {
             width: 8rem;
             height: 8rem;
-            margin: 0 1rem 0 0;
-            padding: 0.75rem;
         }
         @include media-breakpoint-up(xl) {
             width: 10rem;
@@ -124,25 +120,69 @@
 
 .exercise-space-banner {
     padding-top: 0.75rem;
-    padding-top: 0.75rem;
-}
-.exercise-space-banner .main-banner__avatar {
-    width: 4rem;
-    height: 4rem;
-    margin: 0 1rem 0 0;
-    padding: 0.25rem;
-    border: 1px solid #222;
-    border-radius: 50%;
-    background-color: #adb5bd; /* $gray-500 */
-    flex-grow: 0;
-    flex-shrink: 0;
-}
-.exercise-space-banner .main-banner__subhead {
-    display: inline-block;
-    font-size: 1.5rem;
-    margin-right: 0.5rem;
-}
-.exercise-space-banner .main-banner__title {
-    display: inline-block;
-    font-size: 1.5rem;
+    padding-bottom: 0.75rem;
+    a {
+        text-decoration: none;
+    }
+    h1 {
+        margin-top: 0.5rem;
+        @include media-breakpoint-up(md) {
+            margin-top: 0;
+            flex-grow: 0;
+            flex-shrink: 0;
+            flex-basis: auto;
+            width: auto;
+        }
+    }
+    .main-banner__prompt {
+        margin-top: -0.75rem;
+        margin-right: 0.25rem;
+        align-self: center;
+        line-height: 1;
+        flex-grow: 0;
+        flex-shrink: 0;
+        font-size: 4rem;
+        font-weight: 400;
+        @include media-breakpoint-up(md) {
+            margin-right: 0.75rem;
+        }
+    }
+    .main-banner__avatar {
+        width: 2.875rem;
+        height: 2.875rem;
+        margin: 0 0.75rem 0 0;
+        padding: 0.25rem;
+        border: 1px solid #222;
+        border-radius: 50%;
+        background-color: #adb5bd; /* $gray-500 */
+        flex-grow: 0;
+        flex-shrink: 0;
+        @include media-breakpoint-up(md) {
+            width: 4rem;
+            height: 4rem;
+            margin: 0 1rem 0 0;
+        }
+        @include media-breakpoint-up(lg) {
+            width: 4rem;
+            height: 4rem;
+        }
+    }
+    .main-banner__subhead {
+        display: block;
+        font-size: 1rem;
+        margin-right: 0.5rem;
+        white-space: nowrap;
+        @include media-breakpoint-up(md) {
+            display: inline-block;
+            font-size: 1.5rem;
+        }
+    }
+    .main-banner__title {
+        display: block;
+        font-size: 1.275rem;
+        @include media-breakpoint-up(md) {
+            display: inline-block;
+            font-size: 1.5rem;
+        }
+    }
 }

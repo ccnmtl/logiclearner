@@ -2,3 +2,20 @@
     display: block;
     background: rgba(0, 0, 0, 0.5);
 }
+
+.law-definition {
+    border-bottom: 1px dotted #ccc;
+    padding: 2rem 1rem;
+}
+
+.modal-dialog-variable {
+    @include media-breakpoint-up(sm) {
+        max-width: 31rem;
+    }
+    @include media-breakpoint-up(md) {
+        max-width: 43rem;
+    }
+    @include media-breakpoint-up(lg) {
+        max-width: 50rem;
+    }
+}
