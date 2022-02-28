@@ -1,0 +1,62 @@
+.ll-button {
+    font-family: Quicksand;
+    font-size: 1rem;
+    font-weight: 500;
+    background-color: #efefef;
+    padding-right: 1rem;
+    padding-left: 1rem;
+    border: 1px solid transparent;
+}
+
+.ll-icons {
+    width: 20px;
+    height: 20px;
+    padding: 2px;
+    line-height: 1;
+}
+
+.ll-button__icon {
+    display: inline-block;
+    margin-right: 5px;
+}
+
+.ll-button__icon > * {
+    height: 100%;
+}
+
+.ll-button__text {
+    padding: 0;
+    margin: 0;
+}
+
+.cat-button {
+    margin-top: 4rem;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.btn-danger {
+    color: #fff;
+    background-color: #dc3545;
+    border-color: #dc3545;
+}
+
+.btn-success {
+    color: #fff;
+    background-color: #198754;
+    border-color: #198754;
+}
+
+.btn-lg {
+    padding: 0.5rem 1rem;
+    font-size: 1.25rem;
+    border-radius: 0.3rem;
+}
+
+.btn-shrink {
+    @include media-breakpoint-down(md) {
+        padding: 0.125rem 0.5rem;
+        display: block;
+        margin-left: auto;
+    }
+}

@@ -1,8 +1,37 @@
+body {
+    position: relative;
+    min-height: 100vh;
+}
+
+main,
 .main-app {
     padding-bottom: 1rem;
+    min-height: calc(100vh - 12rem);
 }
 
 .content-body {
     margin-top: 3rem !important;
     margin-bottom: 3rem !important;
+    font-size: 1.125rem;
+}
+
+.exercise-space {
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+    width: 100%;
+    @include media-breakpoint-up(md) {
+        padding: 0;
+        width: 100%;
+    }
+    @include media-breakpoint-up(lg) {
+        width: 48.74rem;
+    }
+    @include media-breakpoint-up(xl) {
+        width: 58.125rem;
+    }
+    @include media-breakpoint-up(xxl) {
+        width: 67.5rem;
+    }
 }
