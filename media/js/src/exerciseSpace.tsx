@@ -153,6 +153,11 @@ export const ExerciseSpace: React.FC = () => {
         <>
             <header className="main-banner exercise-space-banner sticky-top">
                 <div className="container d-flex justify-content-start">
+                    <div className="main-banner__prompt">
+                        <a href={`/questions/${statement.difficulty}`}>
+                        &lsaquo;
+                        </a>
+                    </div>
                     <figure className="main-banner__avatar align-self-center"
                         aria-hidden="true">
                         <img src={
@@ -160,25 +165,53 @@ export const ExerciseSpace: React.FC = () => {
                         } />
                     </figure>
                     <h1 className="align-self-center">
-                        <span className="main-banner__subhead">
-                            LEVEL {statement.difficulty + 1}: </span>
-                        <span className="main-banner__title">{level}</span>
+                        <a href={`/questions/${statement.difficulty}`}>
+                            <span className="main-banner__subhead">
+                                LEVEL {statement.difficulty + 1}:
+                            </span>
+                            <span className="main-banner__title">{level}</span>
+                        </a>
                     </h1>
-                    <div className="ms-auto fs-4 align-self-center">
-                        <button className={'btn btn-outline-secondary'}
+                    <div className="ms-auto align-self-center text-end">
+                        <button
+                            className="btn btn-light ll-button btn-shrink
+                                me-0 me-md-1 mb-2 mb-md-0"
                             onClick={handleLawsheetModal}>
-                            Law sheet
+                            <span className="ll-icons ll-button__icon">
+                                <img src={
+                                    `${STATIC_URL}img/icon-clipboard.svg`
+                                } />
+                            </span>
+                            <span className="ll-button__text">Law sheet</span>
                         </button>
-                        <button className={'btn btn-outline-secondary ms-3'}
+                        <button
+                            className="btn btn-light ll-button btn-shrink"
                             onClick={handleBindingModal}>
-                            Key bindings
+                            <span className="ll-icons ll-button__icon">
+                                <img src={
+                                    `${STATIC_URL}img/icon-keyboard.svg`
+                                } />
+                            </span>
+                            <span className="ll-button__text">
+                                Logic symbols
+                            </span>
                         </button>
                     </div>
                 </div>
             </header>
-            <div className="d-flex flex-column my-5 py-5 justify-content-center
-                    align-items-center" data-testid={'exerciseSpace'}>
-                <div className="container">
+            <section className="container content-body exercise-space"
+                id="maincontent" data-testid={'exerciseSpace'}>
+                <p className="question fs-2">
+                    Prove that <span className="question-statement">
+                        {question}
+                    </span> {quesText} <span className="question-statement">
+                        {answer}
+                    </span>.
+                </p>
+                <p className="text-secondary text-end">
+                    (Status: {status[questionStatus]})
+                </p>
+                <div className="exercise-solution">
                     {showLawsheetModal && (
                         <Modal
                             title={'Laws'}
@@ -204,22 +237,6 @@ export const ExerciseSpace: React.FC = () => {
                             cancelFunc={modalCancel}
                             resetFunc={resetFunc}/>
                     )}
-                    <div className='container'>
-                        <div className='row justify-content-between'>
-                            <div className='col-4 ps-0'>
-                                Prove that
-                                <span className="text-info"> {question} </span>
-                                {quesText}
-                                <span className="text-primary"> {answer}</span>
-                            </div>
-                            <div className="col-2">
-
-                                {/* Question status goes here */}
-                                <div className={status[questionStatus]}>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                     {isPastSteps && stepList.map(
                         (step: [string, string], idx) => {
                             return (
@@ -255,21 +272,29 @@ export const ExerciseSpace: React.FC = () => {
                             </a>
                         </>
                     )}
-                    <div className="row">
-                        <div className="col">
-                            <button onClick={handleHints}>I Need A Hint</button>
-                        </div>
-                        <div className="col">
-                            <button disabled={!showSolutionBtn}
-                                onClick={handleShowSolutions}>
-                                Show Solution
-                            </button>
-                        </div>
-                        <div className="col">
-                            <button onClick={handleResetModal}>
-                                Reset Proof
-                            </button>
-                        </div>
+                    <div className="solution-actions">
+                        <button className="btn btn-lg ll-button
+                            mx-3 my-2 my-md-0">
+                            <span className="ll-button__text">
+                                I need a hint
+                            </span>
+                        </button>
+                        <button
+                            disabled={!showSolutionBtn}
+                            onClick={handleShowSolutions}
+                            className="btn btn-lg ll-button
+                                mx-3 my-2 my-md-0">
+                            <span className="ll-button__text">
+                                Show solution
+                            </span>
+                        </button>
+                        <button
+                            onClick={handleResetModal}
+                            className="btn btn-lg ll-button mx-3 my-2 my-md-0">
+                            <span className="ll-button__text">
+                                Reset proof
+                            </span>
+                        </button>
                     </div>
                     {showSolutions && (
                         <div className="row">
@@ -288,7 +313,7 @@ export const ExerciseSpace: React.FC = () => {
                         </div>
                     )}
                 </div>
-            </div>
+            </section>
         </>
     );
 };
