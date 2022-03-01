@@ -38,7 +38,6 @@ class HintApiView(APIView):
         step_list = request.data.get('step_list')
         target = request.data.get('answer')
 
-        # data = next_step('~pv~q', 'de morgan"s law', ['Start'], '~pV~q')
         data = next_step(next_expr, next_rule, step_list, target)
 
         return Response(data, status=200)

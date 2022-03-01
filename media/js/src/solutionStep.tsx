@@ -8,7 +8,12 @@ interface SolutionStepProps {
     step: [string, string],
     stepList: [string, string][],
     setStepList: React.Dispatch<React.SetStateAction<[string, string][]>>,
-    idx: number
+    idx: number,
+    hint: [string, string],
+    setHint:  React.Dispatch<React.SetStateAction<[string, string]>>,
+    nextStep: string,
+    nextRule: string,
+    hintButtonCount: number;
 }
 const laws: Array<string> = ['Identity', 'Negation', 'Domination',
     'Idempotence', 'Commutativity', 'Associativity', 'Absorption', 'Demorgan"s',
@@ -16,7 +21,8 @@ const laws: Array<string> = ['Identity', 'Negation', 'Domination',
     'Implication to Disjunction', 'Iff to Implication'];
 
 export const SolutionStep: React.FC<SolutionStepProps> = (
-    {statement, id, level, step, stepList, idx, setStepList
+    {statement, id, level, step, stepList, idx, setStepList,
+        hint, hintButtonCount
     }: SolutionStepProps) => {
 
     const [error, setError] = useState('');
@@ -73,6 +79,8 @@ export const SolutionStep: React.FC<SolutionStepProps> = (
 
     const isLast = idx === stepList.length + 1;
     const haveErrors = !error;
+    const isLawHint = hintButtonCount > 0;
+    const isStatementHint = hintButtonCount === 2;
 
     useEffect(() => {
         {void setSolutionStepData();}
@@ -104,7 +112,9 @@ export const SolutionStep: React.FC<SolutionStepProps> = (
                                     );
                                 })}
                             </select>
-                            <div>Law hint here tbd</div>
+                            <div>{isLawHint && (
+                                <div>{hint[0]}</div>
+                            )}</div>
                         </div>
                         <div className='col-12 col-md-5 mb-4 mb-md-0'>
                             <label htmlFor='statementInput'
@@ -117,7 +127,9 @@ export const SolutionStep: React.FC<SolutionStepProps> = (
                                 name='statement' defaultValue={step[1]}
                                 onChange={handleStatementInput}
                                 disabled={step[0] === '' ? false : true} />
-                            <div>Statement hint here</div>
+                            <div>{isStatementHint && (
+                                <div>{hint[1]}</div>
+                            )}</div>
                         </div>
                         <div className="col-12 col-md-3 align-self-center
                             text-center text-md-left">
@@ -147,7 +159,7 @@ export const SolutionStep: React.FC<SolutionStepProps> = (
                     </div>
                     {!haveErrors && (
                         <div className='row'>
-                            <span className='text-danger'> Errors</span>
+                            <span className='text-danger'>{error}</span>
                         </div>
                     )}
                 </form>

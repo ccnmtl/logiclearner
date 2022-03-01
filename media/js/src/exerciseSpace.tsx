@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { getStatement, Statement, checkQuestion, Solution,
     raw2latex, getSolutions, ExerciseData, Status, Level,
-    getHints } from './utils';
+    getHints, Tools, HintData } from './utils';
 import { useParams } from 'react-router-dom';
 import { SolutionStep } from './solutionStep';
 import { Modal } from './modal';
@@ -24,7 +24,13 @@ export const ExerciseSpace: React.FC = () => {
     const [showResetModal, setShowResetModal] = useState<boolean>(false);
     const [questionStatus, setQuestionStatus] = useState('');
     const [stepList, setStepList] = useState<[string, string][]>([]);
-    const [currentHint, setCurrentHint] = useState<[string, string]>();
+    const [hint, setHint] = useState<[string, string]>(['','']);
+    // user's proposed next step
+    const [nextStep, setNextStep] = useState('');
+    // user's proposed rule
+    const [nextRule, setNextRule] = useState('');
+    const [toolsResp, setToolsResp] = useState<Tools[]>([]);
+    const [hintButtonCount, setHintButtonCount] = useState<number>(0);
 
     async function fetchStatement() {
         // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
@@ -78,6 +84,11 @@ export const ExerciseSpace: React.FC = () => {
     const handleHints = (
         evt: React.MouseEvent<HTMLButtonElement>): void => {
         evt.preventDefault();
+        if(hintButtonCount === 2){
+            setHintButtonCount(0);
+        } else {
+            setHintButtonCount(hintButtonCount + 1);
+        }
         void fetchHints();
     };
     const modalCancel = () => {
@@ -119,30 +130,34 @@ export const ExerciseSpace: React.FC = () => {
     };
 
     async function fetchHints() {
-        const hintData = {};
-        const data = JSON.parse(
-            window.localStorage.getItem(
-                'question-' + id)) as ExerciseData[];
+        const hintData: HintData = {
+            next_expr: '',
+            rule: '',
+            step_list: [''],
+            answer: ''
+        };
+        //Set up initial hints call with no entry.
+        if(hintButtonCount === 0) {
+            if(!nextStep && stepList.length === 0) {
 
-        if(data[0].hints.length === 0) {
-            const stepList = data[0].stepList;
-            hintData['next_expr'] = '~pv~q';
-            hintData['rule'] = 'de morgan"s law';
-            hintData['step_list'] = ['~(p^q)'];
-            hintData['answer'] = '~pV~q';
+                hintData['next_expr'] = statement.question;
+                hintData['rule'] = 'Start';
+                hintData['step_list'] = [statement.question];
+                hintData['answer'] = statement.answer;
 
-            console.log('this is the data', hintData);
-            // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-            const toolsData = await getHints(hintData);
-            // setCurrentHint([toolsData.hintRule, toolsData.hintExpression]);
-            console.log('we work', toolsData);
+                // eslint-disable-next-line max-len
+                // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+                const toolsData: Tools = await getHints(hintData);
+                setHint([toolsData.hintRule, toolsData.hintExpression]);
+            } else {
+                //WIP
+            }
         } else {
-            console.log('hey');
+            return;
         }
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
 
     }
-
+    const showHint = !hint;
     useEffect(() => {
         {void fetchStatement();}
         {void fetchSolutions();}
@@ -231,8 +246,8 @@ export const ExerciseSpace: React.FC = () => {
                     {showResetModal && (
                         <Modal
                             title={'Reset'}
-                            // eslint-disable-next-line max-len
-                            bodyText={'Are you sure you want to reset? You will lose all work for this question.'}
+                            bodyText={'Are you sure you want to reset?' +
+                            'You will lose all work for this question.'}
                             cancelText={'Close'}
                             cancelFunc={modalCancel}
                             resetFunc={resetFunc}/>
@@ -248,7 +263,12 @@ export const ExerciseSpace: React.FC = () => {
                                     stepList={stepList}
                                     key={idx}
                                     idx={idx}
-                                    setStepList={setStepList} />
+                                    setStepList={setStepList}
+                                    hint={hint}
+                                    setHint={setHint}
+                                    nextStep={nextStep}
+                                    nextRule={nextRule}
+                                    hintButtonCount={hintButtonCount} />
                             );
                         }
                     )}
@@ -260,7 +280,12 @@ export const ExerciseSpace: React.FC = () => {
                             step={['','']}
                             stepList={stepList}
                             setStepList={setStepList}
-                            idx={stepList.length + 1} />
+                            idx={stepList.length + 1}
+                            hint={hint}
+                            setHint={setHint}
+                            nextStep={nextStep}
+                            nextRule={nextRule}
+                            hintButtonCount={hintButtonCount} />
                     )}
                     {!isIncomplete && (
                         <>
@@ -273,7 +298,9 @@ export const ExerciseSpace: React.FC = () => {
                         </>
                     )}
                     <div className="solution-actions">
-                        <button className="btn btn-lg ll-button
+                        <button onClick={handleHints}
+                            disabled={hintButtonCount === 2}
+                            className="btn btn-lg ll-button
                             mx-3 my-2 my-md-0">
                             <span className="ll-button__text">
                                 I need a hint

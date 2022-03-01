@@ -1,4 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
+
+import { EnumType } from 'typescript';
+
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 type HTTPMethod = 'GET' | 'PUT' | 'POST' | 'DELETE'
 
@@ -8,6 +11,22 @@ export type Statement = {
     answer: string;
     difficulty: number;
     created_at: string;
+}
+export type Tools = {
+    isValud: boolean;
+    isSolution: boolean;
+    errrCode: EnumType;
+    errorMsg: string;
+    nextFrontier: Array<string>;
+    hintExpression: string;
+    hintRule: string;
+}
+
+export type HintData = {
+    next_expr: string;
+    rule: string;
+    step_list: [string];
+    answer: string;
 }
 
 export type Solution = {
@@ -184,7 +203,7 @@ export const capitalize = function(s: string) {
 /**
  * Get hints.
  */
-export const getHints = async function(data: unknown) {
+export const getHints = async function(data: HintData) {
 
     const url = '/api/hint/';
 
