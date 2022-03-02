@@ -5,6 +5,7 @@ from django.views.generic import TemplateView
 from django.views.static import serve
 from logiclearner.main import views
 from django_cas_ng import views as cas_views
+from django.contrib.flatpages import views as flatpage_views
 
 admin.autodiscover()
 
@@ -35,6 +36,9 @@ urlpatterns = [
             views.SolutionListAPIView.as_view()),
     re_path(r'^api/hint', views.HintApiView.as_view()),
     re_path(r'^api/solution', views.SolutionApiView.as_view()),
+
+    path('about/', flatpage_views.flatpage, {'url': '/about/'}, name='about'),
+    path('teaching/', flatpage_views.flatpage, {'url': '/teaching/'}, name='teaching'),
 
     re_path(r'^(?:.*)/?$', views.IndexView.as_view()),
     path('', views.IndexView.as_view()),
