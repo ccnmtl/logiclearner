@@ -13,7 +13,7 @@ interface QuestionProps {
 }
 
 export const Question: React.FC<QuestionProps> = (
-    { statement, id, level, idStr }: QuestionProps) => {
+    { statement, idStr }: QuestionProps) => {
 
     const navigate = useNavigate();
 

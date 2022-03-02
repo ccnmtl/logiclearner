@@ -13,7 +13,7 @@ export type Statement = {
     created_at: string;
 }
 export type Tools = {
-    isValud: boolean;
+    isValid: boolean;
     isSolution: boolean;
     errrCode: EnumType;
     errorMsg: string;
@@ -199,7 +199,6 @@ export const capitalize = function(s: string) {
     return s && s[0].toUpperCase() + s.slice(1);
 };
 
-
 /**
  * Get hints.
  */
@@ -216,4 +215,38 @@ export const getHints = async function(data: HintData) {
                 `(${response.status}) ${response.statusText}`;
             }
         });
+};
+
+/**
+ * Update Question Data
+ */
+
+export const updateLocalStepList = (
+    id: string,
+    step: [string, string]): [string, string][] => {
+    const data = JSON.parse(
+        window.localStorage.getItem(
+            'question-' + id)) as ExerciseData[];
+    data[0].stepList.push(step);
+    window.localStorage.setItem('question-' + id,
+        JSON.stringify(data));
+
+    return data[0].stepList;
+};
+
+/**
+ * Update Question Status
+ */
+
+export const updateLocalQuestionStatus = (
+    id: string,
+    status: string
+): string =>{
+    const data = JSON.parse(
+        window.localStorage.getItem(
+            'question-' + id)) as ExerciseData[];
+    data[0].status = status;
+    window.localStorage.setItem('question-' + id,
+        JSON.stringify(data));
+    return data[0].status;
 };
