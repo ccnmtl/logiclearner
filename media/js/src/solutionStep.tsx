@@ -21,9 +21,9 @@ interface SolutionStepProps {
     setHintButtonCount: React.Dispatch<React.SetStateAction<number>>,
 }
 const laws: Array<string> = ['Identity', 'Negation', 'Domination',
-    'Idempotence', 'Commutativity', 'Associativity', 'Absorption', 'Demorgan"s',
-    'Literal Negation', 'Distributivity', 'Double Negation',
-    'Implication as Disjunction', 'Iff to Implication'];
+    'Idempotence', 'Commutativity', 'Associativity', 'Absorption',
+    'De Morgan\'s Law', 'Literal Negation', 'Distributivity',
+    'Double Negation', 'Implication as Disjunction', 'Iff as Implication'];
 
 export const SolutionStep: React.FC<SolutionStepProps> = (
     {statement, id, level, step, stepList, idx, setStepList,
