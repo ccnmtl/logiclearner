@@ -112,19 +112,19 @@
 
 
 {% block footer %}
-<footer class="bg-light">
-    <ul class="nav d-flex justify-content-center">
+<footer>
+    <div class="container">
+     <ul class="nav navlist--footer">
         <li class="nav-item">
-            <a class="nav-link" href="#" title="About">About</a>
+            <a href="/about/">About Logic Learner</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="#" title="Help">Help</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" title="Contact page" href="/contact/">Contact</a>
+            <a href="/contact/" title="Contact us">Contact Us</a>
         </li>
     </ul>
-
+    <p class="ll-license text-center mt-3 fs-6">Logic Learner open-source code is on <a itemprop="license" rel="license noopener noreferrer" href="https://github.com/ccnmtl/logiclearner">Github</a> with <a itemprop="license" rel="license noopener noreferrer" href="https://www.gnu.org/licenses/gpl-3.0.en.html">GNU GPLv3</a> license.</p>
+    <div itemscope itemtype="http://schema.org/EducationalOrganization" class='text-center'><a href="http://ctl.columbia.edu" rel="noopener noreferrer" target="_blank" itemprop="url" class='d-inline-block'><img src="{{STATIC_URL}}img/logo-ctl.svg" class="footer__logo img-fluid" alt="" itemprop="logo" /><span class="visually-hidden" itemprop="name">Center for Teaching and Learning at Columbia University</span></a></div>
+    </div>
 </footer>
 {% endblock %}
 
