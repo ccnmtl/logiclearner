@@ -55,6 +55,25 @@ export const LevelsDashboard: React.FC = () => {
                     aria-labelledby="cardset-label">
                     <li className="cardset-card">
                         <figure className="cardset-card__avatar">
+                            <img src={`${STATIC_URL}img/tutorial.svg`} />
+                        </figure>
+                        <div className="d-flex flex-column align-self-center
+                            me-2 me-lg-0">
+                            <div className="cardset-card__subhead">
+                                Tutorial
+                            </div>
+                            <div className="cardset-card__title level-name">
+                                <a href={'/tutorial/'}>Using Logic Learner</a>
+                            </div>
+                            <div className="cardset-card__text">
+                                Learn how to use this application</div>
+                        </div>
+                        <div className="cardset-card__prompt">
+                            <a href={'/tutorial/'}>&rsaquo;</a>
+                        </div>
+                    </li>
+                    <li className="cardset-card">
+                        <figure className="cardset-card__avatar">
                             <img src={`${STATIC_URL}img/sonobe-1.svg`} />
                         </figure>
                         <div className="d-flex flex-column align-self-center
