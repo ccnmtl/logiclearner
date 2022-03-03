@@ -11,7 +11,8 @@ const statement = {
     created_at: 'date'
 };
 
-const setStepList = () => {console.log('test');};
+const setStepList = () => {return 'test';};
+const setHint = () => {return 'test';};
 
 describe('Initial test', () => {
     const renderComponent = () => render(
@@ -22,7 +23,12 @@ describe('Initial test', () => {
                 step={['Commutativity', '(pvq)v(pv~q)']}
                 stepList={[['test', 'test']]}
                 setStepList={setStepList}
-                idx={10}  />
+                idx={10}
+                hint={['', '']}
+                setHint={setHint}
+                nextStep={''}
+                nextRule={''}
+                hintButtonCount={0}  />
         </MemoryRouter>);
     it('Should render the exercise component', () => {
         const { getByTestId } = renderComponent();

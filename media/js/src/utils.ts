@@ -1,4 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
+
+import { EnumType } from 'typescript';
+
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 type HTTPMethod = 'GET' | 'PUT' | 'POST' | 'DELETE'
 
@@ -8,6 +11,22 @@ export type Statement = {
     answer: string;
     difficulty: number;
     created_at: string;
+}
+export type Tools = {
+    isValud: boolean;
+    isSolution: boolean;
+    errrCode: EnumType;
+    errorMsg: string;
+    nextFrontier: Array<string>;
+    hintExpression: string;
+    hintRule: string;
+}
+
+export type HintData = {
+    next_expr: string;
+    rule: string;
+    step_list: [string];
+    answer: string;
 }
 
 export type Solution = {
@@ -173,6 +192,28 @@ export const completionCount = function(level, qList) {
     return count;
 };
 
+/**
+ * Capitalizes first letter of string.
+ */
 export const capitalize = function(s: string) {
     return s && s[0].toUpperCase() + s.slice(1);
+};
+
+
+/**
+ * Get hints.
+ */
+export const getHints = async function(data: HintData) {
+
+    const url = '/api/hint/';
+
+    return authedFetch(url, 'POST', data)
+        .then(function(response) {
+            if (response.status === 200) {
+                return response.json();
+            } else {
+                throw 'Error loading hint: ' +
+                `(${response.status}) ${response.statusText}`;
+            }
+        });
 };
