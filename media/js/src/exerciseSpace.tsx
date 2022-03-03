@@ -250,7 +250,7 @@ export const ExerciseSpace: React.FC = () => {
                     {showResetModal && (
                         <Modal
                             title={'Reset'}
-                            bodyText={'Are you sure you want to reset?' +
+                            bodyText={'Are you sure you want to reset? ' +
                             'You will lose all work for this question.'}
                             cancelText={'Close'}
                             cancelFunc={modalCancel}
