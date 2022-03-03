@@ -28,7 +28,6 @@ export const App: React.FC = () => {
                 <Route path="/exercise/:id"
                     element={<ExerciseSpace />} />
 
-                <Route path="/tutorial/" element={<Tutorial />} />
             </Routes>
         </Router>
     );
