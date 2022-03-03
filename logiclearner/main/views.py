@@ -33,10 +33,10 @@ class HintApiView(APIView):
         return super(HintApiView, self).dispatch(*args, **kwargs)
 
     def post(self, request):
-        next_expr = request.data.get('next_expr')
-        next_rule = request.data.get('rule')
-        step_list = request.data.get('step_list')
-        target = request.data.get('answer')
+        next_expr = request.data.get('next_expr', None)
+        next_rule = request.data.get('rule', None)
+        step_list = request.data.get('step_list', None)
+        target = request.data.get('answer', None)
 
         data = next_step(next_expr, next_rule, step_list, target)
 
