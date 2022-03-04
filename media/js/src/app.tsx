@@ -3,7 +3,6 @@ import { BrowserRouter as Router, Route, Routes  } from 'react-router-dom';
 import { LevelsDashboard } from './levelsdashboard';
 import { QuestionsDashboard } from './questionsdashboard';
 import { ExerciseSpace } from './exerciseSpace';
-import { Tutorial } from './tutorial';
 
 export const App: React.FC = () => {
     return (
@@ -28,7 +27,6 @@ export const App: React.FC = () => {
                 <Route path="/exercise/:id"
                     element={<ExerciseSpace />} />
 
-                <Route path="/tutorial/" element={<Tutorial />} />
             </Routes>
         </Router>
     );

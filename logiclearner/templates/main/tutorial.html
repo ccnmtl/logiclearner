@@ -1,0 +1,144 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block js %}
+    <script src="{% static 'build/bundle.js' %}"></script>
+    <script src="{% static 'js/lib/jquery-3.6.0.min.js' %}"></script>
+{% endblock %}
+
+{% block content %}
+<main>
+    <div class="" id="tutorial-container">
+        <header class="main-banner exercise-space-banner sticky-top">
+            <div class="container d-flex justify-content-start">
+                <div class="main-banner__prompt">
+                    <a href="/">&lsaquo;</a>
+                </div>
+                <figure class="main-banner__avatar align-self-center" aria-hidden="true">
+                    <img src="{% static 'img/tutorial.svg' %}">
+                </figure>
+                <h1 class="align-self-center"><a href="/">
+                    <span class="main-banner__subhead">TUTORIAL:</span><span class="main-banner__title">Using Logic Learner</span>
+                </a></h1>
+                <div class="ms-auto align-self-center text-end" id="helper-modal">
+                    <button type="button" class="btn btn-light ll-button me-0 me-md-1 mb-2 mb-md-0 btn-shrink"
+                         data-bs-toggle="modal" data-bs-target="#lawSheetModal">
+                        <span class='ll-icons ll-button__icon'><img src="{% static 'img/icon-clipboard.svg' %}" /></span>
+                        <span class="ll-button__text">Law sheet</span>
+                    </button>
+                    <button type="button" class="btn btn-light ll-button btn-shrink"
+                         data-bs-toggle="modal" data-bs-target="#keyBindingModal">
+                        <span class='ll-icons ll-button__icon'><img src="{% static 'img/icon-keyboard.svg' %}" /></span>
+                        <span class="ll-button__text">Logic symbols</span>
+                    </button>
+                </div>
+            </div>
+        </header>
+        <section class="container content-body exercise-space tutorial-section">
+        Tutorial page is in development.
+        </section>
+
+    <!-- Modal -->
+    <div class="modal fade" id="lawSheetModal" tabindex="-1" aria-labelledby="lawSheetModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-scrollable modal-dialog-variable">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="lawSheetModalLabel">Laws of Propositional Logic</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <div class="row">
+                <section class="col-12 col-md-6 law-definition">
+                <h5>De Morgan’s laws:</h5>
+                ¬( p ∧ q ) ≡ ¬p ∨ ¬q<br />
+                ¬( p ∨ q ) ≡ ¬p ∧ ¬q
+                </section>
+
+                <section class="col-12 col-md-6 law-definition">
+                <h5>Idempotent laws:</h5>
+                p ∨ p ≡ p<br />
+                p ∧ p ≡ p
+                </section>
+
+                <section class="col-12 col-md-6 law-definition">
+                <h5>Associativity laws:</h5>
+                ( p ∧ q ) ∧ r ≡ p ∧ ( q ∧ r )<br />
+                ( p ∨ q ) ∨ r ≡ p ∨ ( q ∨ r )
+                </section>
+
+                <section class="col-12 col-md-6 law-definition">
+                <h5>Commutativity laws:</h5>
+                p ∧ q ≡ q ∧ p<br />
+                p ∨ q ≡ q ∨ p
+                </section>
+
+                <section class="col-12 col-md-6 law-definition">
+                <h5>Distributive laws:</h5>
+                p ∧ ( q ∨ r ) ≡ ( p ∧ q ) ∨ ( p ∧ r )<br />
+                p ∨ ( q ∧ r ) ≡ ( p ∨ q ) ∧ ( p ∨ r )<br />
+                p ∨ ( q ∨ r ) ≡ ( p ∨ q ) ∨ ( p ∨ r )<br />
+                p ∧ ( q ∧ r ) ≡ ( p ∧ q ) ∧ ( p ∧ r )
+                </section>
+
+                <section class="col-12 col-md-6 law-definition">
+                <h5>Identity laws:</h5>
+                p ∧ T ≡ p<br />
+                p ∨ F ≡ p
+                </section>
+
+                <section class="col-12 col-md-6 law-definition">
+                <h5>Domination laws:</h5>
+                p ∨ T ≡ T<br />
+                p ∧ F ≡ F
+                </section>
+
+                <section class="col-12 col-md-6 law-definition">
+                <h5>Double negation law:</h5>
+                ¬¬p ≡ p
+                </section>
+
+                <section class="col-12 col-md-6 law-definition">
+                <h5>Absorption laws:</h5>
+                p ∨ (p ∧ q) ≡ p<br />
+                p ∧ (p ∨ q) ≡ p
+                </section>
+
+                <section class="col-12 col-md-6 law-definition">
+                <h5>Implication to disjunction law:</h5>
+                p → q ≡ ¬p ∨ q
+                </section>
+
+                <section class="col-12 col-md-6 law-definition">
+                <h5>IFF to implication law:</h5>
+                p ↔ q ≡ ( p → q ) ∧ ( q → p )
+                </section>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="keyBindingModal" tabindex="-1" aria-labelledby="keyBindingModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="keyBindingModalLabel">How to type logic symbols</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            Key binding instructions
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    </div>
+</main>
+{% endblock %}
