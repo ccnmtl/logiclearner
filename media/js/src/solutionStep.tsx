@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { ExerciseData, Statement, capitalize, HintData,
+import { ExerciseData, Statement, HintData,
     getHints, Tools, latex2raw, updateLocalStepList,
-    updateLocalQuestionStatus } from './utils';
+    updateLocalQuestionStatus, capitalize } from './utils';
 
 interface SolutionStepProps {
     statement: Statement;
@@ -107,7 +107,8 @@ export const SolutionStep: React.FC<SolutionStepProps> = (
             //If the input is valid and not the solution, add to stepList
             //Change status to in progress.
             const step: [string, string] = [nextRule, nextStep];
-            const newStepList = updateLocalStepList(id, step);
+            const newStepList: [string, string][] = updateLocalStepList(
+                id, step);
             updateLocalQuestionStatus(id, 'inprogress');
             setStepList(newStepList);
             setHint(['', '']);
@@ -130,17 +131,22 @@ export const SolutionStep: React.FC<SolutionStepProps> = (
         evt: React.MouseEvent<HTMLButtonElement>
     ): void => {
         evt.preventDefault();
+        if(hintButtonCount === 2) {
+            setHintButtonCount(0);
+        }
         if(!nextStep) {
             setError('Please enter a statement.');
         } else {
+            setError('');
             void validateStep();
         }
     };
 
     const isLast = idx === stepList.length + 1;
     const haveErrors = !error;
-    const isLawHint = hintButtonCount > 0;
-    const isStatementHint = hintButtonCount === 2;
+    const isLawHint = isLast && hintButtonCount > 0;
+    const isStatementHint = isLast && hintButtonCount === 2;
+    const isFirst = idx === 0;
 
     useEffect(() => {
         const data = JSON.parse(
@@ -150,14 +156,14 @@ export const SolutionStep: React.FC<SolutionStepProps> = (
 
             {void setSolutionStepData();}
         }
-        setNextRule(laws[0]);
+        setNextRule('Start');
     }, []);
 
     return (
         <>
             <div className="solution-step">
                 <p className="solution-step__prompt">
-                    To begin this proof/Next,
+                    {isFirst ? 'To begin this proof,' : 'Next,'}
                 </p>
                 <form>
                     <div className='solution-step__form row'
@@ -168,8 +174,11 @@ export const SolutionStep: React.FC<SolutionStepProps> = (
                             </label>
                             <select name='law'
                                 id='laws' className='form-select'
-                                defaultValue={capitalize(step[0])}
                                 onChange={handleLawSelect}
+                                defaultValue={
+                                    capitalize(step[0])
+                                        ? capitalize(step[0])
+                                        : ''}
                                 disabled={step[0] === '' ? false : true} >
                                 {laws.map((law, index) => {
                                     return (

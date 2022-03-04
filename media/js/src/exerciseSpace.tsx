@@ -300,8 +300,10 @@ export const ExerciseSpace: React.FC = () => {
                     {!isIncomplete && (
                         <>
                             <div>You&apos;ve completed this question!</div>
-                            <button onClick={handleNextQuestion}>Next</button>
-                            <a className={'btn'}
+
+                            {/* eslint-disable-next-line max-len */}
+                            {/* <button onClick={handleNextQuestion}>Next</button> */}
+                            <a className={'btn btn-sm btn-primary'}
                                 href={`/questions/${statement.difficulty}`}>
                                 LEVEL {statement.difficulty + 1}: {level}
                             </a>
@@ -317,7 +319,7 @@ export const ExerciseSpace: React.FC = () => {
                             </span>
                         </button>
                         <button
-                            disabled={!showSolutionBtn}
+                            // disabled={!showSolutionBtn}
                             onClick={handleShowSolutions}
                             className="btn btn-lg ll-button
                                 mx-3 my-2 my-md-0">
