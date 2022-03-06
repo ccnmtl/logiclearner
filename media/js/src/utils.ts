@@ -185,7 +185,7 @@ export const completionCount = function(level, qList) {
 
     for (let i = 0; i < qList.length; i++) {
         const data: ExerciseData = qList[i][0];
-        if(data.level === level && data.status === 'completed') {
+        if (data.level === level && data.status === 'completed') {
             count++;
         }
     }

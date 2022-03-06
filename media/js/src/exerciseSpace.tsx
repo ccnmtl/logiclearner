@@ -61,9 +61,9 @@ export const ExerciseSpace: React.FC = () => {
             answer: ''
         };
         //Only if we don't already have hints
-        if(hintButtonCount === 0) {
+        if (hintButtonCount === 0) {
             //Set up initial hints call with no entry.
-            if(!nextStep && stepList.length === 0) {
+            if (!nextStep && stepList.length === 0) {
 
                 hintData['next_expr'] = statement.question;
                 hintData['rule'] = 'Start';
@@ -76,7 +76,7 @@ export const ExerciseSpace: React.FC = () => {
                 setHint([toolsData.hintRule, toolsData.hintExpression]);
             } else {
                 let lastCorrectStep = '';
-                if(stepList.length > 0){
+                if (stepList.length > 0){
                     lastCorrectStep = stepList[stepList.length - 1][1];
                 } else {
                     lastCorrectStep = statement.question;
@@ -90,8 +90,6 @@ export const ExerciseSpace: React.FC = () => {
                 const toolsData: Tools = await getHints(hintData);
                 setHint([toolsData.hintRule, toolsData.hintExpression]);
             }
-        } else {
-            return;
         }
     }
 
@@ -119,7 +117,7 @@ export const ExerciseSpace: React.FC = () => {
     const handleHints = (
         evt: React.MouseEvent<HTMLButtonElement>): void => {
         evt.preventDefault();
-        if(hintButtonCount === 2){
+        if (hintButtonCount === 2){
             setHintButtonCount(0);
         } else {
             setHintButtonCount(hintButtonCount + 1);
@@ -148,7 +146,7 @@ export const ExerciseSpace: React.FC = () => {
     const isIncomplete = status[questionStatus] !== 'complete';
     const showSolutionBtn = stepList.length >= 2;
     // eslint-disable-next-line max-len
-    const quesText: string = (statement.answer == 'F') || (statement.answer == 'T')
+    const quesText: string = (statement.answer === 'F') || (statement.answer === 'T')
         ? 'is a'
         : 'is logically equivalent to';
     const answer: string = raw2latex(checkQuestion(statement.answer));

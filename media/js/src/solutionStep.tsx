@@ -81,7 +81,7 @@ export const SolutionStep: React.FC<SolutionStepProps> = (
         };
         let lastCorrectStep = '';
 
-        if(stepList.length > 0) {
+        if (stepList.length > 0) {
             lastCorrectStep = stepList[stepList.length - 1][1];
         } else {
             lastCorrectStep = statement.question;
@@ -95,14 +95,14 @@ export const SolutionStep: React.FC<SolutionStepProps> = (
         // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
         const toolsData: Tools = await getHints(hintData);
 
-        void validation(toolsData);
+        validation(toolsData);
     }
 
     const validation = (respData: Tools) =>{
 
-        if(!respData.isValid) {
+        if (!respData.isValid) {
             setError(respData.errorMsg);
-        } else if(respData.isValid && !respData.isSolution) {
+        } else if (respData.isValid && !respData.isSolution) {
 
             //If the input is valid and not the solution, add to stepList
             //Change status to in progress.
@@ -114,7 +114,7 @@ export const SolutionStep: React.FC<SolutionStepProps> = (
             setHint(['', '']);
             setHintButtonCount(0);
 
-        } else if(respData.isValid && respData.isSolution) {
+        } else if (respData.isValid && respData.isSolution) {
 
             //If the input is valid add to stepList,
             //and if completed change status to complete
@@ -131,10 +131,10 @@ export const SolutionStep: React.FC<SolutionStepProps> = (
         evt: React.MouseEvent<HTMLButtonElement>
     ): void => {
         evt.preventDefault();
-        if(hintButtonCount === 2) {
+        if (hintButtonCount === 2) {
             setHintButtonCount(0);
         }
-        if(!nextStep) {
+        if (!nextStep) {
             setError('Please enter a statement.');
         } else {
             setError('');
@@ -152,7 +152,7 @@ export const SolutionStep: React.FC<SolutionStepProps> = (
         const data = JSON.parse(
             window.localStorage.getItem(
                 'question-' + id)) as ExerciseData[];
-        if(!data) {
+        if (!data) {
 
             {void setSolutionStepData();}
         }
