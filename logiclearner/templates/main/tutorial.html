@@ -4,6 +4,7 @@
 {% block js %}
     <script src="{% static 'build/bundle.js' %}"></script>
     <script src="{% static 'js/lib/jquery-3.6.0.min.js' %}"></script>
+    <script src="{% static 'js/lib/tutorial.js' %}"></script>
 {% endblock %}
 
 {% block content %}
@@ -20,13 +21,16 @@
                 <h1 class="align-self-center"><a href="/">
                     <span class="main-banner__subhead">TUTORIAL:</span><span class="main-banner__title">Using Logic Learner</span>
                 </a></h1>
-                <div class="ms-auto align-self-center text-end" id="helper-modal">
-                    <button type="button" class="btn btn-light ll-button me-0 me-md-1 mb-2 mb-md-0 btn-shrink"
+                    <button class="tutorial1-prompt ms-auto align-self-center" data-segment="modal">
+                        <div class="tutorial1-prompt__text">1</div>
+                    </button>
+                <div class="align-self-center text-end" id="helper-modal">
+                    <button type="button" class="btn btn-light ll-button me-0 me-md-1 mb-2 mb-md-0 text-nowrap btn-shrink"
                          data-bs-toggle="modal" data-bs-target="#lawSheetModal">
                         <span class='ll-icons ll-button__icon'><img src="{% static 'img/icon-clipboard.svg' %}" /></span>
                         <span class="ll-button__text">Law sheet</span>
                     </button>
-                    <button type="button" class="btn btn-light ll-button btn-shrink"
+                    <button type="button" class="btn btn-light ll-button text-nowrap btn-shrink"
                          data-bs-toggle="modal" data-bs-target="#keyBindingModal">
                         <span class='ll-icons ll-button__icon'><img src="{% static 'img/icon-keyboard.svg' %}" /></span>
                         <span class="ll-button__text">Logic symbols</span>
@@ -35,10 +39,135 @@
             </div>
         </header>
         <section class="container content-body exercise-space tutorial-section">
-        Tutorial page is in development.
+            <p>
+            Welcome to Logic Learner. Before you begin using this tool to learn propositional logic, here's a tour. In hac habitasse platea dictumst. Duis ac mi rhoncus, mattis ante nec, posuere augue. Suspendisse potenti. Donec leo massa, dictum ac rutrum aliquam, fringilla et urna.
+            </p>
+            <p>
+            Suspendisse consectetur justo et rhoncus tristique. Cras bibendum eros a suscipit ullamcorper. Nullam vitae neque quis dolor dapibus sollicitudin vitae sed elit. Vestibulum at.
+            </p>
+            
+            <div class="guide__box guide-text" id="guide-modal">
+                <button class="tutorial-close btn btn-warning" aria-label="Close"></button>
+                <h2>Law sheet</h2>
+                <p>Aliquam vel nisl sed leo cursus iaculis efficitur sed lectus. In vel felis vitae nisi feugiat euismod ut vel enim. Suspendisse accumsan a neque nec pharetra. Suspendisse massa est, rhoncus.</p>
+                <h2>Logic symbols</h2>
+                <p>Aliquam vel nisl sed leo cursus iaculis efficitur sed lectus. In vel felis vitae nisi feugiat euismod ut vel enim. Suspendisse accumsan a neque nec pharetra. Suspendisse massa est, rhoncus.</p>
+            </div>
+            
+            <section class="container border-top tutorial-section" id="maincontent">
+                <button class="tutorial1-prompt align-self-center mt-3" data-segment="question">
+                    <div class="tutorial1-prompt__text">2</div>
+                </button>
+                <p class="question fs-2 pt-0" id="helper-question">Prove that <span class="question-statement text-break">(p∨q)→r</span> is logically equivalent to <span class="question-statement text-break">(p→r)∧(q→r)</span>.</p>
+                <div class="guide__box guide-text" id="guide-question">
+                    <button class="tutorial-close btn btn-warning" aria-label="Close"></button>
+                    <h2>Logic proof question</h2>
+                    <p>Mauris eleifend felis non semper blandit. Aliquam luctus sed neque sagittis eleifend. Morbi ultrices, metus et euismod malesuada, mi sem auctor felis, quis rutrum nulla eros et augue. Integer facilisis.</p>
+                </div>
+                <div class="exercise-solution mt-0 pt-0">
+                    <div class="solution-step mt-0 pt-0">
+                        <p class="solution-step__prompt">To begin this proof,
+                        <button class="tutorial1-prompt align-self-center mt-0" data-segment="solution">
+                            <div class="tutorial1-prompt__text">3</div>
+                        </button>
+                        </p>
+                        <div class="solution-step__form row">
+                            <!-- form for law-stmnt -->
+                            <div class="col-12 col-md-9 m-0 p-1 row" id="helper-solution">
+                                <div class="col-12 col-md-5 mb-4 mb-md-0">
+                                    <label for="inputLaw" class="form-label">If I apply this law...</label>
+                                    <select id="inputLaw" class="form-select" tabindex="-1">
+                                    <option selected>Choose one</option>
+                                    <option>...</option>
+                                    <option>...</option>
+                                    </select>
+                                </div>
+                                <div class="col-12 col-md-7 mb-4 mb-md-0">
+                                    <label for="inputStatement" class="form-label">then I'll get this statement...</label>
+                                    <input type="text" class="form-control" id="inputStatement" placeholder="Logic statement" tabindex="-1">
+                                </div>
+                                <div class="col-12 p-0 m-0">
+                                    <div class="guide__box guide-text" id="guide-solution">
+                                        <button class="tutorial-close btn btn-warning" aria-label="Close"></button>
+                                        <h2>Solution step</h2>
+                                        <p>Mauris eleifend felis non semper blandit. Aliquam luctus sed neque sagittis eleifend. Morbi ultrices, metus et euismod malesuada, mi sem auctor felis, quis rutrum nulla eros et augue. Integer facilisis.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- go-delete -->
+                            <div class="col-12 col-md-3 align-self-end text-center p-md-0 row">
+                                <div class="col-3 col-md-12 p-0 m-0 stepaction-button">
+                                    <button class="tutorial1-prompt align-self-center mt-0" data-segment="stepactions">
+                                        <div class="tutorial1-prompt__text">4</div>
+                                    </button>
+                                </div>
+                                <div class="col-7 col-md-12 m-0 px-0 py-1" id="helper-stepactions">
+                                    <button type="button" class="btn ll-button btn-danger me-2" tabindex="-1">
+                                        <span class="ll-button__text">Delete</span>
+                                    </button>
+                                    <button type="button" class="btn ll-button btn-success me-2" tabindex="-1">
+                                        <span class="ll-button__text">Go!</span>
+                                    </button>
+                                </div>
+                                <div class="col-12 p-0 m-0">
+                                    <div class="guide__box guide-text" id="guide-stepactions">
+                                        <button class="tutorial-close btn btn-warning" aria-label="Close"></button>
+                                        <h2>Go, or Delete step</h2>
+                                        <p>Mauris eleifend felis non semper blandit. Aliquam luctus sed neque sagittis eleifend. Morbi ultrices, metus et euismod malesuada, mi sem auctor felis, quis rutrum nulla eros et augue. Integer facilisis.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                   </div>
+                    <div class="solution-actions">
+                        <div class="mt-0 mx-4 p-0 text-center">
+                            <button class="tutorial1-prompt align-self-center mt-0 mx-0" data-segment="hint">
+                            <div class="tutorial1-prompt__text">5</div>
+                            </button>
+                            <button tabindex="-1" class="btn btn-lg ll-button mx-0 my-2 my-md-0" id="helper-hint">
+                            <span class="ll-button__text">I need a hint</span>
+                            </button>
+                            <div class="guide__box guide-text" id="guide-hint">
+                            <button class="tutorial-close btn btn-warning" aria-label="Close"></button>
+                            <h2>Hints</h2>
+                            <p>Mauris eleifend felis non semper blandit. Aliquam luctus sed neque sagittis eleifend. Morbi ultrices, metus et euismod malesuada, mi sem auctor felis, quis rutrum nulla eros et augue. Integer facilisis.</p>
+                            </div>
+                        </div>
+                        <div class="mt-0 mx-4 p-0 text-center">
+                            <button class="tutorial1-prompt align-self-center mt-0" data-segment="solutionkey">
+                            <div class="tutorial1-prompt__text">6</div> 
+                            </button>
+                            <button tabindex="-1" class="btn btn-lg ll-button mx-0 my-2 my-md-0" id="helper-solutionkey">
+                            <span class="ll-button__text">Show solution</span>
+                            </button>
+                            <div class="guide__box guide-text" id="guide-solutionkey">
+                            <button class="tutorial-close btn btn-warning" aria-label="Close"></button>
+                            <h2>Solution key</h2>
+                            <p>Mauris eleifend felis non semper blandit. Aliquam luctus sed neque sagittis eleifend. Morbi ultrices, metus et euismod malesuada, mi sem auctor felis, quis rutrum nulla eros et augue. Integer facilisis.</p>
+                            </div>
+                        </div>
+                        <div class="mt-0 mx-4 p-0 text-center">
+                            <button class="tutorial1-prompt align-self-center mt-0" data-segment="reset">
+                            <div class="tutorial1-prompt__text">7</div>
+                            </button>
+                            <button tabindex="-1" class="btn btn-lg ll-button mx-0 my-2 my-md-0" id="helper-reset">
+                            <span class="ll-button__text">Reset proof</span>
+                            </button>
+                            <div class="guide__box guide-text" id="guide-reset">
+                            <button class="tutorial-close btn btn-warning" aria-label="Close"></button>
+                            <h2>Reset proof</h2>
+                            <p>Mauris eleifend felis non semper blandit. Aliquam luctus sed neque sagittis eleifend. Morbi ultrices, metus et euismod malesuada, mi sem auctor felis, quis rutrum nulla eros et augue. Integer facilisis.</p>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </section>
+
         </section>
 
-    <!-- Modal -->
+    <!-- Law Modal -->
     <div class="modal fade" id="lawSheetModal" tabindex="-1" aria-labelledby="lawSheetModalLabel" aria-hidden="true">
       <div class="modal-dialog modal-dialog-scrollable modal-dialog-variable">
         <div class="modal-content">
@@ -121,7 +250,7 @@
       </div>
     </div>
 
-    <!-- Modal -->
+    <!-- Key binding Modal -->
     <div class="modal fade" id="keyBindingModal" tabindex="-1" aria-labelledby="keyBindingModalLabel" aria-hidden="true">
       <div class="modal-dialog">
         <div class="modal-content">
