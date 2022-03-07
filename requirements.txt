@@ -63,7 +63,7 @@ django-compressor==3.1
 django-statsd-mozilla==0.4.0
 raven==6.10.0  # Remove from ccnmtlsettings, then here.
 sentry-sdk==1.5.0
-django-bootstrap4==21.1
+django-bootstrap4==22.1
 
 django-debug-toolbar==3.2.2
 
