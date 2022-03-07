@@ -10,6 +10,7 @@ export const STATIC_URL = LogicLearner.staticUrl;
 
 export const ExerciseSpace: React.FC = () => {
     const { id } = useParams();
+
     const [statement, setStatement] = useState<Statement>({
         pk: null,
         question: '',
@@ -25,11 +26,8 @@ export const ExerciseSpace: React.FC = () => {
     const [questionStatus, setQuestionStatus] = useState('');
     const [stepList, setStepList] = useState<[string, string][]>([]);
     const [hint, setHint] = useState<[string, string]>(['','']);
-    // user's proposed next step
-    const [nextStep, setNextStep] = useState('');
-    // user's proposed rule
-    const [nextRule, setNextRule] = useState('');
-    const [toolsResp, setToolsResp] = useState<Tools[]>([]);
+    const [nextStep, setNextStep] = useState('');  // user's proposed next step
+    const [nextRule, setNextRule] = useState('');  // user's proposed rule
     const [hintButtonCount, setHintButtonCount] = useState<number>(0);
 
     async function fetchStatement() {
@@ -37,27 +35,63 @@ export const ExerciseSpace: React.FC = () => {
         const json: Statement = await getStatement(Number(id));
         setStatement(json);
     }
-
     async function fetchSolutions() {
         // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
         const json: Array<Solution> = await getSolutions(Number(id));
         setSolutions(json);
     }
-
-    // eslint-disable-next-line max-len
-    const quesText: string = (statement.answer == 'F') || (statement.answer == 'T')
-        ? 'is a'
-        : 'is logically equivalent to';
-    const answer: string = raw2latex(checkQuestion(statement.answer));
-    const question = raw2latex(statement.question);
-
-    const levels: Level = {
-        0: 'Novice',
-        1: 'Learner',
-        2: 'Apprentice'
+    const getQuestionData = () => {
+        try {
+            const data = JSON.parse(
+                window.localStorage.getItem(
+                    'question-' + id)) as ExerciseData[];
+            const questStatus = data[0].status;
+            const stepList = data[0].stepList;
+            setQuestionStatus(questStatus);
+            setStepList(stepList);
+        } catch (error) {
+            setQuestionStatus(null);
+        }
     };
-    const level: string = levels[statement.difficulty];
-    const isPastSteps = stepList.length > 0;
+    async function fetchHints() {
+        const hintData: HintData = {
+            next_expr: '',
+            rule: '',
+            step_list: [''],
+            answer: ''
+        };
+        //Only if we don't already have hints
+        if (hintButtonCount === 0) {
+            //Set up initial hints call with no entry.
+            if (!nextStep && stepList.length === 0) {
+
+                hintData['next_expr'] = statement.question;
+                hintData['rule'] = 'Start';
+                hintData['step_list'] = [statement.question];
+                hintData['answer'] = statement.answer;
+
+                // eslint-disable-next-line max-len
+                // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+                const toolsData: Tools = await getHints(hintData);
+                setHint([toolsData.hintRule, toolsData.hintExpression]);
+            } else {
+                let lastCorrectStep = '';
+                if (stepList.length > 0){
+                    lastCorrectStep = stepList[stepList.length - 1][1];
+                } else {
+                    lastCorrectStep = statement.question;
+                }
+                hintData['next_expr'] = nextStep;
+                hintData['rule'] = nextRule;
+                hintData['step_list'] = [lastCorrectStep];
+                hintData['answer'] = statement.answer;
+                // eslint-disable-next-line max-len
+                // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+                const toolsData: Tools = await getHints(hintData);
+                setHint([toolsData.hintRule, toolsData.hintExpression]);
+            }
+        }
+    }
 
     const handleShowSolutions = (
         evt: React.MouseEvent<HTMLButtonElement>
@@ -80,39 +114,28 @@ export const ExerciseSpace: React.FC = () => {
         evt.preventDefault();
         setShowResetModal(true);
     };
-
     const handleHints = (
         evt: React.MouseEvent<HTMLButtonElement>): void => {
         evt.preventDefault();
-        if(hintButtonCount === 2){
+        if (hintButtonCount === 2){
             setHintButtonCount(0);
         } else {
             setHintButtonCount(hintButtonCount + 1);
         }
         void fetchHints();
     };
+    const handleNextQuestion = () => {
+        //TBD
+    };
     const modalCancel = () => {
         setShowLawsheetModal(false);
         setShowBindingModal(false);
         setShowResetModal(false);
     };
-
-    const handleNextQuestion = () => {
-        //TBD
-    };
-
-    const getQuestionData = () => {
-        try {
-            const data = JSON.parse(
-                window.localStorage.getItem(
-                    'question-' + id)) as ExerciseData[];
-            const questStatus = data[0].status;
-            const stepList = data[0].stepList;
-            setQuestionStatus(questStatus);
-            setStepList(stepList);
-        } catch (error) {
-            setQuestionStatus(null);
-        }
+    const resetFunc = () => {
+        window.localStorage.removeItem(
+            'question-' + id);
+        setStepList([]);
     };
 
     const status: Status = {
@@ -122,42 +145,21 @@ export const ExerciseSpace: React.FC = () => {
     };
     const isIncomplete = status[questionStatus] !== 'complete';
     const showSolutionBtn = stepList.length >= 2;
+    // eslint-disable-next-line max-len
+    const quesText: string = (statement.answer === 'F') || (statement.answer === 'T')
+        ? 'is a'
+        : 'is logically equivalent to';
+    const answer: string = raw2latex(checkQuestion(statement.answer));
+    const question = raw2latex(statement.question);
 
-    const resetFunc = () => {
-        window.localStorage.removeItem(
-            'question-' + id);
-        setStepList([]);
+    const levels: Level = {
+        0: 'Novice',
+        1: 'Learner',
+        2: 'Apprentice'
     };
+    const level: string = levels[statement.difficulty];
+    const isPastSteps = stepList.length > 0;
 
-    async function fetchHints() {
-        const hintData: HintData = {
-            next_expr: '',
-            rule: '',
-            step_list: [''],
-            answer: ''
-        };
-        //Set up initial hints call with no entry.
-        if(hintButtonCount === 0) {
-            if(!nextStep && stepList.length === 0) {
-
-                hintData['next_expr'] = statement.question;
-                hintData['rule'] = 'Start';
-                hintData['step_list'] = [statement.question];
-                hintData['answer'] = statement.answer;
-
-                // eslint-disable-next-line max-len
-                // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-                const toolsData: Tools = await getHints(hintData);
-                setHint([toolsData.hintRule, toolsData.hintExpression]);
-            } else {
-                //WIP
-            }
-        } else {
-            return;
-        }
-
-    }
-    const showHint = !hint;
     useEffect(() => {
         {void fetchStatement();}
         {void fetchSolutions();}
@@ -268,7 +270,10 @@ export const ExerciseSpace: React.FC = () => {
                                     setHint={setHint}
                                     nextStep={nextStep}
                                     nextRule={nextRule}
-                                    hintButtonCount={hintButtonCount} />
+                                    setNextStep={setNextStep}
+                                    setNextRule={setNextRule}
+                                    hintButtonCount={hintButtonCount}
+                                    setHintButtonCount={setHintButtonCount} />
                             );
                         }
                     )}
@@ -285,13 +290,18 @@ export const ExerciseSpace: React.FC = () => {
                             setHint={setHint}
                             nextStep={nextStep}
                             nextRule={nextRule}
-                            hintButtonCount={hintButtonCount} />
+                            setNextStep={setNextStep}
+                            setNextRule={setNextRule}
+                            hintButtonCount={hintButtonCount}
+                            setHintButtonCount={setHintButtonCount} />
                     )}
                     {!isIncomplete && (
                         <>
                             <div>You&apos;ve completed this question!</div>
-                            <button onClick={handleNextQuestion}>Next</button>
-                            <a className={'btn'}
+
+                            {/* eslint-disable-next-line max-len */}
+                            {/* <button onClick={handleNextQuestion}>Next</button> */}
+                            <a className={'btn btn-sm btn-primary'}
                                 href={`/questions/${statement.difficulty}`}>
                                 LEVEL {statement.difficulty + 1}: {level}
                             </a>
@@ -307,7 +317,7 @@ export const ExerciseSpace: React.FC = () => {
                             </span>
                         </button>
                         <button
-                            disabled={!showSolutionBtn}
+                            // disabled={!showSolutionBtn}
                             onClick={handleShowSolutions}
                             className="btn btn-lg ll-button
                                 mx-3 my-2 my-md-0">

@@ -13,7 +13,7 @@ interface QuestionProps {
 }
 
 export const Question: React.FC<QuestionProps> = (
-    { statement, id, level, idStr }: QuestionProps) => {
+    { statement, idStr }: QuestionProps) => {
 
     const navigate = useNavigate();
 
@@ -46,7 +46,7 @@ export const Question: React.FC<QuestionProps> = (
     }, []);
 
     // eslint-disable-next-line max-len
-    const quesText: string = (statement.answer == 'F') || (statement.answer == 'T')
+    const quesText: string = (statement.answer === 'F') || (statement.answer === 'T')
         ? 'is a'
         : 'is logically equivalent to';
     const answer: string = raw2latex(checkQuestion(statement.answer));

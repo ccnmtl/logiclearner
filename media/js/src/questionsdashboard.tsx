@@ -32,7 +32,7 @@ export const QuestionsDashboard: React.FC<QuestionsDashboardProps> = (
         const keys = Object.keys(localStorage);
         const arrQs = [];
         for (const key of keys) {
-            if(key.includes('question-')) {
+            if (key.includes('question-')) {
                 const item = JSON.parse(
                     window.localStorage.getItem(key)) as ExerciseData[];
                 arrQs.push(item);
