@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% block title %}Contact Us{% endblock %}
+{% block title %} - Contact Us{% endblock %}
 
 {% block css %}
     <style>
@@ -18,62 +18,119 @@
     </style>
 {% endblock %}
 
-{% block mainclasses %}mx-5 my-4{% endblock %}
-
-{% block pagetitle %}Contact Us{% endblock %}
-
-{% block pagedescription %}
-Please reach out for bugs, questions, or more information about the project.
-{% endblock %}
-
 {% block content %}
-    <div class="contact_us_form">
-        <form action="." method="post" name="feedback" class="form-horizontal">{% csrf_token %}
-            <div class="form-group {% if form.name.errors %}has-error{% endif %}">
-                <label for="name" class="col-sm-2 control-label">Name</label>
-                <div class="col-sm-6">
-                    <input type="text" name="name" class="form-control"
-                    value="{% if form.data.name %}{{form.data.name}}{% else %}{{form.initial.name}}{% endif %}" />
-                    <p class="help-block">Name is a required field</p>
+<main>
+    <div class="contactform-box row">
+        <div class="col-12 col-lg-7">
+            <h1 class="fs-2">Contact Us</h1>
+            <p>
+            If you’re interested in implementing this tool in your teaching practice, to learn more about Logic Learner, or to send feedback on this application, please reach out to the CTL Logic Learner team with the following form.
+            </p>
+            <form action="." method="post" name="feedback">
+            {% csrf_token %}
+            <div class="row mt-4">
+                <div class="col {% if form.name.errors %}has-error{% endif %}">
+                    <label for="id_name" class="form-label m-0">Your name *</label>
+                    {% if not form.name.errors %}
+                    <div class="ll-helper mb-1">
+                        <div class="ll-helper--line" id="helper-field__name">
+                            *Required
+                        </div>
+                    </div>
+                    {% else %}
+                    <div id="helper-field__name" class="errorlist">
+                        Please tell us your name.
+                    </div>
+                    {% endif %}
+                    <input
+                        type="text"
+                        class="form-control {% if form.name.errors %}is-invalid{% endif %}"
+                        id="id_name"
+                        name="name"
+                        aria-describedby="helper-field__name"
+                        value="{% if form.data.name %}{{form.data.name}}{% else %}{{form.initial.name}}{% endif %}">
                 </div>
             </div>
-            <div class="visualclear"></div>
-            <div class="form-group {% if form.email.errors %}has-error{% endif %}">
-                <label for="email" class="col-sm-2 control-label">E-mail Address</label>
-                <div class="col-sm-6">
-                    <input class="form-control" type="text" name="email"
-                     value="{% if form.data.email %}{{form.data.email}}{% else %}{{form.initial.email}}{% endif %}" />
-                    <div class="visualclear"></div>
-                    <p class="help-block">A valid e-mail address is required.</p>
+            <div class="row mt-4">
+                <div class="col {% if form.email.errors %}has-error{% endif %}">
+                    <label for="id_email" class="m-0">Email address *</label>
+                    {% if not form.email.errors %}
+                    <div class="ll-helper mb-1">
+                        <div class="ll-helper--line" id="helper-field__email">
+                            *Required
+                        </div>
+                    </div>
+                    {% else %}
+                    <div id="helper-field__email" class="errorlist">
+                        Please provide a valid email so we can respond.
+                    </div>
+                    {% endif %}
+                    <input
+                        type="email"
+                        class="form-control {% if form.email.errors %}is-invalid{% endif %}"
+                        id="id_email"
+                        name="email"
+                        aria-describedby="helper-field__email"
+                        value="{% if form.data.email %}{{form.data.email}}{% else %}{{form.initial.email}}{% endif %}">
                 </div>
             </div>
-            <br />
-            <div class="visualclear"></div>
-            <div class="form-group {% if form.subject.errors %}has-error{% endif %}">
-                <label for="subject"  class="col-sm-2 control-label">Subject</label>
-                <div class="col-sm-6">
+            <div class="row mt-4">
+                <div class="form-group {% if form.subject.errors %}has-error{% endif %}">
+                    <label for="subject" class="m-0">Subject (please select) *</label>
+                    {% if not form.subject.errors %}
+                    <div class="ll-helper mb-1">
+                        <div class="ll-helper--line" id="helper-field__subject">
+                            *Required
+                        </div>
+                    </div>
+                    {% else %}
+                    <div id="helper-field__subject" class="errorlist">
+                        Please select a subject for your email.
+                    </div>
+                    {% endif %}
                     {{form.subject}}
-                    <p class="help-block">Subject is a required field.</p>
                 </div>
             </div>
-            <br />
-            <div class="form-group {% if form.description.errors %}has-error{% endif %}">
-                <label for="description" class="col-sm-2 control-label">Description</label>
-                <div class="col-sm-6">
+            <div class="row mt-4">
+                <div class="form-group {% if form.description.errors %}has-error{% endif %}">
+                    <label for="description" class="m-0">Message *</label>
+                     {% if not form.description.errors %}
+                    <div class="ll-helper mb-1">
+                        <div class="ll-helper--line" id="helper-field__message">
+                            *Required
+                        </div>
+                    </div>
+                    {% else %}
+                    <div id="helper-field__message" class="errorlist">
+                        Please let us know your feedback.
+                    </div>
+                    {% endif %}
                     {{form.description}}
-                    <p class="help-block">Description is a required field.</p>
                 </div>
-            </div>
-            <div class="form-group {% if form.decoy.errors %}has-error{% endif %}">
-                <input type="text" name="decoy" value="" placeholder="Please leave blank" autofill="off" />
-                <p class="help-block decoy">If you can see the decoy field, please leave it blank.</p>
+                <div class="form-group {% if form.decoy.errors %}has-error{% endif %}">
+                    <input type="text" name="decoy" value="" placeholder="Please leave blank" autofill="off" />
+                    <p class="help-block decoy">If you can see the decoy field, please leave it blank.</p>
+                </div>
             </div>
 
-            <div class="row">
-                <div class="col-sm-8 m-3">
-                    <input class="btn btn-primary" type="submit" value="Send Feedback"/>
+            <div class="row mt-5">
+                <div class="col text-center">
+                    <button
+                        class="btn ll-button ll-button--priority"
+                        type="submit"
+                        value="">
+                        <span class='ll-button__label'>Send Message</span>
+                    </button>
                 </div>
             </div>
-        </form>
+            </form>
+        </div>
+        <div class="col-5 pt-5 d-none d-lg-block" aria-hidden="true">
+            <div class="contact-prompt__decor mt-5">
+                <img src="{{STATIC_URL}}img/prompt-contact-us.svg" alt="" />
+            </div>
+        </div>
     </div>
+
+</main>
 {% endblock %}
