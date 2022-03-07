@@ -34,9 +34,9 @@ export const LevelsDashboard: React.FC = () => {
         setapprenticeCount(apprenArr.length);
     }
 
-    const completedNovice = completionCount('Novice', questionsList);
-    const completedLearner = completionCount('Learner', questionsList);
-    const completedApprentice = completionCount('Apprentice', questionsList);
+    const completedNovice = completionCount(0, questionsList);
+    const completedLearner = completionCount(1, questionsList);
+    const completedApprentice = completionCount(2, questionsList);
 
     useEffect(() => {
         void getQuestionList();

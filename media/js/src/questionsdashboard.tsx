@@ -45,7 +45,7 @@ export const QuestionsDashboard: React.FC<QuestionsDashboardProps> = (
         const novArr: Array<Statement>  = await getStatements(difficulty);
         setLevelCount(novArr.length);
     }
-    const completedCount = completionCount(level, questionsList);
+    const completedCount = completionCount(difficulty, questionsList);
 
     useEffect(() => {
         void fetchStatements();
