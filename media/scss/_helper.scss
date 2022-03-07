@@ -1,3 +1,318 @@
 .tutorial-section {
     position: relative;
 }
+
+.tutorial1-prompt {
+    height: 4rem;
+    width: 4rem;
+    background-color: rgba(239, 112, 37, 1);
+    border-radius: 50%;
+    border: 0.25rem solid #ffcc66;
+    position: relative;
+    flex-grow: 0;
+    flex-shrink: 0;
+    margin: 0;
+    &:focus {
+        border-color: rgba(239, 112, 37, 1);
+        background-color: #ffab00 !important;
+    }
+}
+.tutorial1-prompt__text {
+    color: #fff;
+    font-weight: 700;
+    font-size: 2.25rem;
+    line-height: 1.5;
+    text-align: center;
+}
+
+.guide__box {
+	position: relative;
+	background: rgba(251, 219, 200, 1);
+    border: 1px solid rgba(239, 112, 37, 1);
+    border-radius: 0.25rem;
+    padding: 1rem;
+    font-size: 1rem;
+    z-index: 1000;
+}
+
+.guide__box:after, .guide__box:before {
+    position: absolute;
+    bottom: 100%;
+    border: solid transparent;
+    content: "";
+    height: 0;
+    width: 0;
+    pointer-events: none;
+}
+
+.guide__box:after {
+	border-color: rgba(136, 183, 213, 0);
+	border-bottom-color: rgba(251, 219, 200, 1);
+	border-width: 10px;
+	margin-left: -10px;
+}
+.guide__box:before {
+	border-color: rgba(194, 225, 245, 0);
+	border-bottom-color: rgba(239, 112, 37, 1);
+	border-width: 11px;
+	margin-left: -11px;
+}
+
+.tutorial-modal #helper-modal {
+    box-shadow: 0 0 5px rgba(239, 112, 37, 1);
+    border: 0.125rem solid rgba(239, 112, 37, 1);
+    border-radius: 0.25rem;
+    background-color: rgba(239, 112, 37, 0.25);
+    z-index: 1000;
+}
+.tutorial-modal #helper-modal > * {
+    background-color: rgba(239, 112, 37, 0.25);
+}
+.tutorial-modal #guide-modal {
+	position: absolute;
+	right: 1rem;
+	top: -2rem;    
+    width: 20rem;
+}
+.tutorial-modal #guide-modal.guide__box:after,
+.tutorial-modal #guide-modal.guide__box:before {
+    left: 80%;
+}
+
+
+#helper-question {
+    margin-top: 0;
+}
+.tutorial-question #helper-question {
+    box-shadow: 0 0 5px rgba(239, 112, 37, 1);
+    border: 0.125rem solid rgba(239, 112, 37, 1);
+    border-radius: 0.25rem;
+    background-color: rgba(239, 112, 37, 0.25);
+    z-index: 1000;
+    margin-top: -1rem;
+}
+.tutorial-question #guide-question {
+	position: absolute;
+	left: 1rem;
+    margin-top: -1rem;
+    width: 20rem !important;
+}
+.tutorial-question #guide-question.guide__box:after,
+.tutorial-question #guide-question.guide__box:before {
+    left: 50%;
+}
+
+.tutorial-solution #helper-solution {
+    box-shadow: 0 0 5px rgba(239, 112, 37, 1);
+    border: 0.125rem solid rgba(239, 112, 37, 1);
+    border-radius: 0.25rem;
+    background-color: rgba(239, 112, 37, 0.25);
+    z-index: 1000;
+}
+.tutorial-solution #guide-solution {
+	position: absolute;
+	left: 1rem;
+    margin-top: 1rem;
+    width: 20rem !important;
+}
+.tutorial-solution #guide-solution.guide__box:after,
+.tutorial-solution #guide-solution.guide__box:before {
+    left: 50%;
+}
+
+
+.tutorial-stepactions #helper-stepactions {
+    box-shadow: 0 0 5px rgba(239, 112, 37, 1);
+    border: 0.125rem solid rgba(239, 112, 37, 1);
+    border-radius: 0.25rem;
+    background-color: rgba(239, 112, 37, 0.25);
+    z-index: 1000;
+}
+.tutorial-stepactions #guide-stepactions {
+	position: absolute;
+	right: 1rem;
+    margin-top: 1rem;
+    width: 20rem !important;
+}
+.tutorial-stepactions #guide-stepactions.guide__box:after,
+.tutorial-stepactions #guide-stepactions.guide__box:before {
+    left: 50%;
+}
+
+
+.tutorial-hint #helper-hint {
+    box-shadow: 0 0 5px rgba(239, 112, 37, 1);
+    border: 0.125rem solid rgba(239, 112, 37, 1);
+    border-radius: 0.25rem;
+    background-color: rgba(239, 112, 37, 0.25);
+}
+.tutorial-hint #guide-hint {
+	margin-left: auto;
+	margin-right: auto;
+    margin-top: 0.5rem;
+    width: 20rem !important;
+    z-index: 1000;
+	position: absolute;
+}
+.tutorial-hint #guide-hint.guide__box:after,
+.tutorial-hint #guide-hint.guide__box:before {
+    left: 70%;
+}
+@media (min-width: 768px) {
+    .tutorial-hint #guide-hint {
+        left: 0;
+        margin-top: 1rem;
+    }
+    .tutorial-hint #guide-hint.guide__box:after,
+    .tutorial-hint #guide-hint.guide__box:before {
+        left: 50%;
+    }
+}
+@media (min-width: 1200px) {
+    .tutorial-hint #guide-hint.guide__box:after,
+    .tutorial-hint #guide-hint.guide__box:before {
+        left: 80%;
+    }
+}
+@media (min-width: 1400px) {
+    .tutorial-hint #guide-hint {
+        left: 3rem;
+        margin-top: 1rem;
+    }
+}
+
+
+.tutorial-solutionkey #helper-solutionkey {
+    box-shadow: 0 0 5px rgba(239, 112, 37, 1);
+    border: 0.125rem solid rgba(239, 112, 37, 1);
+    border-radius: 0.25rem;
+    background-color: rgba(239, 112, 37, 0.25);
+}
+.tutorial-solutionkey #guide-solutionkey {
+	margin-left: auto;
+	margin-right: auto;
+    margin-top: 0.5rem;
+    width: 20rem !important;
+    z-index: 1000;
+	position: absolute;
+}
+.tutorial-solutionkey #guide-solutionkey.guide__box:after,
+.tutorial-solutionkey #guide-solutionkey.guide__box:before {
+    left: 70%;
+}
+@media (min-width: 768px) {
+    .tutorial-solutionkey #guide-solutionkey {
+        margin-left: -4rem;
+        margin-top: 1rem;
+    }
+    .tutorial-solutionkey #guide-solutionkey.guide__box:after,
+    .tutorial-solutionkey #guide-solutionkey.guide__box:before {
+        left: 50%;
+    }
+}
+@media (min-width: 992px) {
+    .tutorial-solutionkey #guide-solutionkey {
+        margin-left: -3rem;
+    }
+}
+@media (min-width: 1200px) {
+    .tutorial-solutionkey #guide-solutionkey {
+        margin-left: 0;
+    }
+}
+@media (min-width: 1400px) {
+    .tutorial-solutionkey #guide-solutionkey {
+        margin-left: -1rem;
+    }
+}
+
+
+
+.tutorial-reset #helper-reset {
+    box-shadow: 0 0 5px rgba(239, 112, 37, 1);
+    border: 0.125rem solid rgba(239, 112, 37, 1);
+    border-radius: 0.25rem;
+    background-color: rgba(239, 112, 37, 0.25);
+    z-index: 1000;
+}
+.tutorial-reset #guide-reset {
+    z-index: 1000;
+	position: absolute;
+	margin-left: auto;
+	margin-right: auto;
+    margin-top: 0.5rem;
+    width: 20rem !important;
+}
+.tutorial-reset #guide-reset.guide__box:after,
+.tutorial-reset #guide-reset.guide__box:before {
+    left: 70%;
+}
+@media (min-width: 768px) {
+    .tutorial-reset #guide-reset {
+        right: 0rem;
+        margin-top: 1rem;
+    }
+    .tutorial-reset #guide-reset.guide__box:after,
+    .tutorial-reset #guide-reset.guide__box:before {
+        left: 60%;
+    }
+}
+@media (min-width: 1200px) {
+    .tutorial-reset #guide-reset.guide__box:after,
+    .tutorial-reset #guide-reset.guide__box:before {
+        left: 50%;
+    }
+}
+@media (min-width: 1400px) {
+    .tutorial-reset #guide-reset.guide__box:after,
+    .tutorial-reset #guide-reset.guide__box:before {
+        left: 30%;
+    }
+}
+
+
+
+
+.guide-text {
+    display: none;
+    text-align: left !important;
+}
+.guide-text h2 {
+    font-size: 1.25rem;
+    padding-bottom: 0.25rem;
+    font-weight: 600;
+    border-bottom: 1px solid rgba(239, 112, 37, 1)
+}
+
+.tutorial-close {
+    height: 2rem;
+    width: 2rem;
+    background-color: rgba(239, 112, 37, 1);
+    border-radius: 50%;
+    position: relative;
+    margin: -0.5rem -0.5rem 0 auto;
+    display: block;
+}
+
+.tutorial-close:after {
+    position: absolute;
+    top: -2px;
+    bottom: 0;
+    left: 1px;
+    right: 0;
+    content: "\00D7";
+    font-size: 2rem; 
+    color: #fff;
+    line-height: 1;
+    text-align: center;
+}
+
+.stepaction-button {
+    text-align: right;
+}
+@media (min-width: 768px) {
+.stepaction-button {
+    text-align: center;
+    margin-top: -3rem !important;
+    }
+}
