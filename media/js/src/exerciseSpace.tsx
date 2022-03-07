@@ -72,8 +72,12 @@ export const ExerciseSpace: React.FC = () => {
         };
         const data = isQuestionData(id);
         const exerciseState = [...new Array<ExerciseData>(initData)];
-        return data ? data : window.localStorage.setItem('question-' + id,
-            JSON.stringify(exerciseState));
+        if (data){
+            return data;
+        } else {
+            return window.localStorage.setItem('question-' + id,
+                JSON.stringify(exerciseState));
+        }
     };
     async function fetchHints() {
         const hintData: HintData = {
