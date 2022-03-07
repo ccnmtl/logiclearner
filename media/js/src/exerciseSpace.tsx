@@ -5,6 +5,7 @@ import { getStatement, Statement, checkQuestion, Solution,
 import { useParams } from 'react-router-dom';
 import { SolutionStep } from './solutionStep';
 import { Modal } from './modal';
+import { ModalLawsheet } from './modalLawsheet';
 
 export const STATIC_URL = LogicLearner.staticUrl;
 
@@ -20,7 +21,6 @@ export const ExerciseSpace: React.FC = () => {
     });
     const [solutions, setSolutions] = useState<Solution[]>([]);
     const [showSolutions, setShowSolutions] = useState<boolean>(false);
-    const [showLawsheetModal, setShowLawsheetModal] = useState<boolean>(false);
     const [showBindingModal, setShowBindingModal] = useState<boolean>(false);
     const [showResetModal, setShowResetModal] = useState<boolean>(false);
     const [questionStatus, setQuestionStatus] = useState('');
@@ -99,11 +99,6 @@ export const ExerciseSpace: React.FC = () => {
         evt.preventDefault();
         setShowSolutions(solutions && !showSolutions);
     };
-    const handleLawsheetModal = (
-        evt: React.MouseEvent<HTMLButtonElement>): void => {
-        evt.preventDefault();
-        setShowLawsheetModal(true);
-    };
     const handleBindingModal = (
         evt: React.MouseEvent<HTMLButtonElement>): void => {
         evt.preventDefault();
@@ -128,7 +123,6 @@ export const ExerciseSpace: React.FC = () => {
         //TBD
     };
     const modalCancel = () => {
-        setShowLawsheetModal(false);
         setShowBindingModal(false);
         setShowResetModal(false);
     };
@@ -193,7 +187,8 @@ export const ExerciseSpace: React.FC = () => {
                         <button
                             className="btn btn-light ll-button btn-shrink
                                 me-0 me-md-1 mb-2 mb-md-0"
-                            onClick={handleLawsheetModal}>
+                            data-bs-toggle="modal"
+                            data-bs-target="#lawSheetModal">
                             <span className="ll-icons ll-button__icon">
                                 <img src={
                                     `${STATIC_URL}img/icon-clipboard.svg`
@@ -229,14 +224,6 @@ export const ExerciseSpace: React.FC = () => {
                     (Status: {status[questionStatus]})
                 </p>
                 <div className="exercise-solution">
-                    {showLawsheetModal && (
-                        <Modal
-                            title={'Laws'}
-                            bodyText={'These are laws'}
-                            cancelText={'Close'}
-                            cancelFunc={modalCancel}
-                            resetFunc={resetFunc}/>
-                    )}
                     {showBindingModal && (
                         <Modal
                             title={'Key Bindings'}
@@ -351,6 +338,7 @@ export const ExerciseSpace: React.FC = () => {
                     )}
                 </div>
             </section>
+            <ModalLawsheet />
         </>
     );
 };
