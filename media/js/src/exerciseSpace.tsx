@@ -34,6 +34,7 @@ export const ExerciseSpace: React.FC = () => {
         // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
         const json: Statement = await getStatement(Number(id));
         setStatement(json);
+        return json;
     }
     async function fetchSolutions() {
         // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
@@ -51,6 +52,31 @@ export const ExerciseSpace: React.FC = () => {
             setStepList(stepList);
         } catch (error) {
             setQuestionStatus(null);
+        }
+    };
+    const isQuestionData = (id: string): ExerciseData[] => {
+        return JSON.parse(
+            window.localStorage.getItem('question-' + id)) as ExerciseData[];
+    };
+    const setSolutionStepData = (statement: Statement, level: string) => {
+
+        const initData: ExerciseData = {
+            statement: statement,
+            id: Number(id),
+            level: level,
+            status: null,
+            stepList: [],
+            hintCount: 0,
+            hints: [],
+            idStr: id
+        };
+        const data = isQuestionData(id);
+        const exerciseState = [...new Array<ExerciseData>(initData)];
+        if (data){
+            return data;
+        } else {
+            return window.localStorage.setItem('question-' + id,
+                JSON.stringify(exerciseState));
         }
     };
     async function fetchHints() {
@@ -149,9 +175,13 @@ export const ExerciseSpace: React.FC = () => {
     const isPastSteps = stepList.length > 0;
 
     useEffect(() => {
-        {void fetchStatement();}
+        void fetchStatement().then((statement: Statement) => {
+            const level: string = levels[statement.difficulty];
+            setSolutionStepData(statement, level);
+        });
         {void fetchSolutions();}
-        {void getQuestionData();}
+        {getQuestionData();}
+
     }, []);
 
     return (

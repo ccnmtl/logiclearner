@@ -3,6 +3,9 @@ import { HomeBanner } from './homebanner';
 import {completionCount, getStatements, ExerciseData, Statement} from './utils';
 
 export const STATIC_URL = LogicLearner.staticUrl;
+const novice = 0;
+const learner = 1;
+const apprentice = 2;
 
 export const LevelsDashboard: React.FC = () => {
     const [questionsList, setquestionsList] = useState([]);
@@ -34,9 +37,9 @@ export const LevelsDashboard: React.FC = () => {
         setapprenticeCount(apprenArr.length);
     }
 
-    const completedNovice = completionCount('Novice', questionsList);
-    const completedLearner = completionCount('Learner', questionsList);
-    const completedApprentice = completionCount('Apprentice', questionsList);
+    const completedNovice = completionCount(novice, questionsList);
+    const completedLearner = completionCount(learner, questionsList);
+    const completedApprentice = completionCount(apprentice, questionsList);
 
     useEffect(() => {
         void getQuestionList();

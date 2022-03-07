@@ -26,28 +26,12 @@ const laws: Array<string> = ['Identity', 'Negation', 'Domination',
     'Double Negation', 'Implication as Disjunction', 'Iff as Implication'];
 
 export const SolutionStep: React.FC<SolutionStepProps> = (
-    {statement, id, level, step, stepList, idx, setStepList,
+    {statement, id, step, stepList, idx, setStepList,
         hint, hintButtonCount, nextStep, setNextStep, setNextRule,
         nextRule, setHint, setHintButtonCount
     }: SolutionStepProps) => {
 
     const [error, setError] = useState('');
-
-    const setSolutionStepData = () => {
-        const initData: ExerciseData = {
-            statement: statement,
-            id: Number(id),
-            level: level,
-            status: null,
-            stepList: [],
-            hintCount: 0,
-            hints: [],
-            idStr: id
-        };
-        const exerciseState = [...new Array<ExerciseData>(initData)];
-        window.localStorage.setItem('question-' + id,
-            JSON.stringify(exerciseState));
-    };
 
     const handleDeleteStep = (
         evt: React.MouseEvent<HTMLButtonElement>): void => {
@@ -149,13 +133,6 @@ export const SolutionStep: React.FC<SolutionStepProps> = (
     const isFirst = idx === 0;
 
     useEffect(() => {
-        const data = JSON.parse(
-            window.localStorage.getItem(
-                'question-' + id)) as ExerciseData[];
-        if (!data) {
-
-            {void setSolutionStepData();}
-        }
         setNextRule('Start');
     }, []);
 

@@ -180,12 +180,13 @@ export const latex2raw = function(quesText: string) {
 /**
  * Counts the number of completed questions per level.
  */
-export const completionCount = function(level, qList) {
+export const completionCount = function(level:number, qList) {
     let count = 0;
 
     for (let i = 0; i < qList.length; i++) {
         const data: ExerciseData = qList[i][0];
-        if (data.level === level && data.status === 'completed') {
+        const statement = data.statement;
+        if (statement.difficulty === level && data.status === 'complete') {
             count++;
         }
     }
