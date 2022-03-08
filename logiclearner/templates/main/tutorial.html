@@ -252,14 +252,52 @@
 
     <!-- Key binding Modal -->
     <div class="modal fade" id="keyBindingModal" tabindex="-1" aria-labelledby="keyBindingModalLabel" aria-hidden="true">
-      <div class="modal-dialog">
+      <div class="modal-dialog modal-dialog-scrollable modal-dialog-variable">
         <div class="modal-content">
           <div class="modal-header">
             <h5 class="modal-title" id="keyBindingModalLabel">How to type logic symbols</h5>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
-            Key binding instructions
+                <p>
+                This is a guide on how to type logic symbols in your statements.
+                </p>
+               <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col" class="text-nowrap pe-3">Key binding</th>
+                            <th scope="col" class="text-nowrap pe-3">How to type</th>
+                            <th scope="col" class="text-nowrap pe-3">Logic symbol</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>^</td>
+                            <td>The caret symbol, <b>^</b></td>
+                            <td><b>∧</b> (and)</td>
+                        </tr>
+                        <tr>
+                            <td>v</td>
+                            <td>Lowercase <b>v</b>, as in victory</td>
+                            <td><b>∨</b> (or)</td>
+                        </tr>
+                        <tr>
+                            <td>~</td>
+                            <td>Tilde symbol, <b>~</b></td>
+                            <td><b>¬</b> (negation; not)</td>
+                        </tr>
+                        <tr>
+                            <td>-></td>
+                            <td>Hyphen and greater than symbols, <span class="text-nowrap"><b>-></b></span></td>
+                            <td><b>→</b> (implies; if &hellip; then)</td>
+                        </tr>
+                        <tr>
+                            <td><-></td>
+                            <td>less than, hyphen, and greater than symbols, <span class="text-nowrap"><b><-></b></span></td>
+                            <td><b>↔</b> (if and only if; iff; means the same as)</td>
+                        </tr>
+                    </tbody>
+                </table>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
