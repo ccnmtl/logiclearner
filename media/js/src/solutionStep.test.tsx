@@ -16,6 +16,8 @@ const setHint = () => {return 'test';};
 const setNextStep = () => {return 'test';};
 const setNextRule = () => {return 'test';};
 const setHintButtonCount = () => {return 'test';};
+const setIsIncomplete = () => {return 'test';};
+const setQuestionStatus = () => {return 'test';};
 
 describe('Initial test', () => {
     const renderComponent = () => render(
@@ -34,7 +36,9 @@ describe('Initial test', () => {
                 setNextStep={setNextStep}
                 setNextRule={setNextRule}
                 hintButtonCount={0}
-                setHintButtonCount={setHintButtonCount}  />
+                setHintButtonCount={setHintButtonCount}
+                setIsIncomplete={setIsIncomplete}
+                setQuestionStatus={setQuestionStatus}  />
         </MemoryRouter>);
     it('Should render the exercise component', () => {
         const { getByTestId } = renderComponent();

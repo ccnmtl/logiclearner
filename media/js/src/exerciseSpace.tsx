@@ -29,6 +29,7 @@ export const ExerciseSpace: React.FC = () => {
     const [nextStep, setNextStep] = useState('');  // user's proposed next step
     const [nextRule, setNextRule] = useState('');  // user's proposed rule
     const [hintButtonCount, setHintButtonCount] = useState<number>(0);
+    const [isIncomplete, setIsIncomplete] = useState<boolean>(true);
 
     async function fetchStatement() {
         // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
@@ -50,6 +51,7 @@ export const ExerciseSpace: React.FC = () => {
             const stepList = data[0].stepList;
             setQuestionStatus(questStatus);
             setStepList(stepList);
+            setIsIncomplete(data[0].status !== 'complete');
         } catch (error) {
             setQuestionStatus(null);
         }
@@ -146,6 +148,7 @@ export const ExerciseSpace: React.FC = () => {
         window.localStorage.removeItem(
             'question-' + id);
         setStepList([]);
+        setIsIncomplete(true);
     };
 
     const status: Status = {
@@ -153,7 +156,7 @@ export const ExerciseSpace: React.FC = () => {
         inprogress: 'inprogress',
         complete: 'complete'
     };
-    const isIncomplete = status[questionStatus] !== 'complete';
+
     const showSolutionBtn = stepList.length >= 2;
     // eslint-disable-next-line max-len
     const quesText: string = (statement.answer === 'F') || (statement.answer === 'T')
@@ -273,7 +276,9 @@ export const ExerciseSpace: React.FC = () => {
                                     setNextStep={setNextStep}
                                     setNextRule={setNextRule}
                                     hintButtonCount={hintButtonCount}
-                                    setHintButtonCount={setHintButtonCount} />
+                                    setHintButtonCount={setHintButtonCount}
+                                    setIsIncomplete={setIsIncomplete}
+                                    setQuestionStatus={setQuestionStatus} />
                             );
                         }
                     )}
@@ -293,7 +298,9 @@ export const ExerciseSpace: React.FC = () => {
                             setNextStep={setNextStep}
                             setNextRule={setNextRule}
                             hintButtonCount={hintButtonCount}
-                            setHintButtonCount={setHintButtonCount} />
+                            setHintButtonCount={setHintButtonCount}
+                            setIsIncomplete={setIsIncomplete}
+                            setQuestionStatus={setQuestionStatus} />
                     )}
                     {!isIncomplete && (
                         <>
