@@ -1,0 +1,20 @@
+.contactform-box {
+    width: 100%;
+    margin: 0 auto 3rem auto;
+    padding: 0;
+    border: 0;
+    background-color: transparent;
+    @include media-breakpoint-up(sm) {
+        margin: 1rem auto 3rem auto;
+    }
+    @include media-breakpoint-up(md) {
+        margin: 3rem auto 3rem auto;
+    }
+    @include media-breakpoint-up(lg) {
+        width: 55rem;
+    }
+}
+
+.contactform-box textarea {
+    height: 10rem;
+}
