@@ -1,0 +1,84 @@
+.ll-helper {
+    margin: 0 0 0.5rem 0;
+    padding: 0;
+    border: 0;
+    color: #757575;
+    font-style: italic;
+    &--line {
+        font-size: ($font-size-base * 0.8125);
+    }
+    &--block {
+        font-size: $font-size-base;
+    }
+}
+
+.ll-alert {
+    margin: auto;
+    padding: 0.875rem 1rem;
+    margin-bottom: 1rem;
+    border: 0;
+    border-radius: 0.25rem;
+//     @extend .elevation-1; 
+    &--top {
+        position: fixed;
+        background-color: #333333;
+        color: #efefef;
+        min-width: 25rem;
+        max-width: 30rem;
+        top: 5rem;
+        left: 50%;
+        transform: translate(-50%, 0);
+        z-index: 1040;
+        animation: opacity-fade-out 1s forwards;
+        animation-delay: 3s;
+    }
+    &--top.alert-dismissible .close {
+        position: absolute;
+        top: 0.5rem;
+        right: 0.5rem;
+        z-index: 2;
+        font-size: 1.875rem;
+        font-weight: normal;
+        line-height: 1;
+        color: #efefef;
+        text-shadow: none;
+        opacity: 0.87;
+        padding: 0;
+    }
+    &__text {
+        margin-right: 3rem;
+    }
+}
+
+.ll-license {
+    max-width: 30rem;
+    padding: 0 1rem;
+    margin: 1rem auto 2rem auto;
+    text-align: center;
+}
+
+.errorlist {
+    padding: 0;
+    margin: 0.25rem 0 0 0 !important;
+    font-size: 0.875rem !important;
+    color: #b00020 !important;
+    clear: both;
+    list-style-type: none;
+    display: block;
+}
+
+.has-error select {
+    border-color: #dc3545;
+}
+
+
+
+@keyframes opacity-fade-out {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    display: none !important;
+  }
+}

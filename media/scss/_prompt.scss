@@ -1,0 +1,70 @@
+.contact-prompt {
+    width: 100%;
+    position: relative;
+    border: none;
+    margin-top: 3rem;
+    &__decor {
+        margin: 0 auto;
+        height: auto;
+        width: 17rem;
+    }
+    &__content {
+        width: 100%;
+        text-align: center;
+    }
+    &__alert {
+        margin: 0 auto;
+        width: 35rem;
+        text-align: center;
+    }
+    &__instructions {
+        width: 100%;
+        text-align: center;
+        padding-top: 1rem;
+        padding-bottom: 1rem;
+    }
+}
+
+
+.http-error-prompt {
+    width: 100%;
+    position: relative;
+    border: none;
+    margin: 3rem auto 0 auto;
+    padding: 0;
+    border: 0;
+    @include media-breakpoint-up(sm) {
+        margin: 1rem auto 0 auto;
+    }
+    @include media-breakpoint-up(md) {
+        margin: 3rem auto 0 auto;
+    }
+    @include media-breakpoint-up(lg) {
+        width: 55rem;
+    }
+    &__decor {
+        margin: 1rem auto 0 auto;
+        height: auto;
+        max-width: 17rem;
+        padding-bottom: 3rem;
+        @include media-breakpoint-up(lg) {
+            width: 100%;
+            padding-bottom: 0;
+        }
+    }
+    &__content {
+        width: 100%;
+        text-align: center;
+    }
+    &__alert {
+        margin: 0 auto;
+        width: 35rem;
+        text-align: center;
+    }
+    &__instructions {
+        width: 100%;
+        text-align: center;
+        padding-top: 1rem;
+        padding-bottom: 1rem;
+    }
+}
