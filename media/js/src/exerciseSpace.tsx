@@ -320,14 +320,26 @@ export const ExerciseSpace: React.FC = () => {
                     )}
                     {!isIncomplete && (
                         <>
-                            <div>You&apos;ve completed this question!</div>
-
-                            {/* eslint-disable-next-line max-len */}
-                            {/* <button onClick={handleNextQuestion}>Next</button> */}
-                            <a className={'btn btn-sm btn-primary'}
-                                href={`/questions/${statement.difficulty}`}>
-                                LEVEL {statement.difficulty + 1}: {level}
-                            </a>
+                            <div className='row'>
+                                <div className='col'>
+                                    <div className='fs-3 text'>
+                                        Congratulations!
+                                    </div>
+                                    <div>
+                                        You&apos;ve completed this question!
+                                    </div>
+                                </div>
+                                <div className='col'>
+                                    {/* <button onClick={handleNextQuestion}>
+                                        Next</button> */}
+                                    <a className={'btn btn-md btn-primary mt-3'}
+                                        href={
+                                            `/questions/${statement.difficulty}`
+                                        }>
+                                    LEVEL {statement.difficulty + 1}: {level}
+                                    </a>
+                                </div>
+                            </div>
                         </>
                     )}
                     <div className="solution-actions">
