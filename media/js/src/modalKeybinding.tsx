@@ -26,8 +26,69 @@ export const ModalKeybinding: React.FC = () => {
                     </div>
                     <div className='modal-body'>
                         <p>
-                            Key binding instructions TBD
+                            This is a guide on how to type logic symbols
+                            in your statements.
                         </p>
+                        <table className="table">
+                            <thead>
+                                <tr>
+                                    <th scope="col"
+                                        className="text-nowrap pe-3">
+                                        Key binding
+                                    </th>
+                                    <th scope="col"
+                                        className="text-nowrap pe-3">
+                                        How to type
+                                    </th>
+                                    <th scope="col"
+                                        className="text-nowrap pe-3">
+                                        Logic symbol
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>^</td>
+                                    <td>The caret symbol, <b>^</b></td>
+                                    <td><b>∧</b> (and)</td>
+                                </tr>
+                                <tr>
+                                    <td>v</td>
+                                    <td>Lowercase <b>v</b>, as in victory</td>
+                                    <td><b>∨</b> (or)</td>
+                                </tr>
+                                <tr>
+                                    <td>~</td>
+                                    <td>Tilde symbol, <b>~</b></td>
+                                    <td><b>¬</b> (negation; not)</td>
+                                </tr>
+                                <tr>
+                                    <td>-&gt;</td>
+                                    <td>Hyphen and greater than symbols, <span
+                                        className="text-nowrap">
+                                        <b>-&gt;</b>
+                                    </span>
+                                    </td>
+                                    <td>
+                                        <b>→</b> (implies; if &hellip; then)
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>&lt;-&gt;</td>
+                                    <td>
+                                        less than, hyphen, and greater
+                                        than symbols, <span
+                                            className="text-nowrap">
+                                            <b>&lt;-&gt;</b>
+                                        </span>
+                                    </td>
+                                    <td>
+                                        <b>↔</b> (if and only if; iff; means
+                                        the same as)
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
                     <div className='modal-footer'>
                         <button className='btn btn-secondary'
