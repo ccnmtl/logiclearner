@@ -46,6 +46,12 @@ export const SolutionStep: React.FC<SolutionStepProps> = (
         window.localStorage.setItem('question-' + id,
             JSON.stringify(data));
         setStepList(data[0].stepList);
+        if (data[0].stepList.length === 0){
+            setQuestionStatus(null);
+            data[0].status = null;
+            window.localStorage.setItem('question-' + id,
+                JSON.stringify(data));
+        }
     };
 
     const handleStatementInput = (
