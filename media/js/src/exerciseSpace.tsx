@@ -149,10 +149,22 @@ export const ExerciseSpace: React.FC = () => {
         setShowResetModal(false);
     };
     const resetFunc = () => {
-        window.localStorage.removeItem(
-            'question-' + id);
+        const initData: ExerciseData = {
+            statement: statement,
+            id: Number(id),
+            level: level,
+            status: null,
+            stepList: [],
+            hintCount: 0,
+            hints: [],
+            idStr: id
+        };
+        const exerciseState = [...new Array<ExerciseData>(initData)];
+        window.localStorage.setItem('question-' + id,
+            JSON.stringify(exerciseState));
         setStepList([]);
         setIsIncomplete(true);
+        setQuestionStatus(null);
     };
 
     const status: Status = {
