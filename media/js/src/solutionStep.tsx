@@ -19,6 +19,8 @@ interface SolutionStepProps {
     setNextRule: React.Dispatch<React.SetStateAction<string>>,
     hintButtonCount: number;
     setHintButtonCount: React.Dispatch<React.SetStateAction<number>>,
+    setIsIncomplete: React.Dispatch<React.SetStateAction<boolean>>,
+    setQuestionStatus: React.Dispatch<React.SetStateAction<string>>
 }
 const laws: Array<string> = ['Identity', 'Negation', 'Domination',
     'Idempotence', 'Commutativity', 'Associativity', 'Absorption',
@@ -28,7 +30,8 @@ const laws: Array<string> = ['Identity', 'Negation', 'Domination',
 export const SolutionStep: React.FC<SolutionStepProps> = (
     {statement, id, step, stepList, idx, setStepList,
         hint, hintButtonCount, nextStep, setNextStep, setNextRule,
-        nextRule, setHint, setHintButtonCount
+        nextRule, setHint, setHintButtonCount, setIsIncomplete,
+        setQuestionStatus
     }: SolutionStepProps) => {
 
     const [error, setError] = useState('');
@@ -94,6 +97,7 @@ export const SolutionStep: React.FC<SolutionStepProps> = (
             const newStepList: [string, string][] = updateLocalStepList(
                 id, step);
             updateLocalQuestionStatus(id, 'inprogress');
+            setQuestionStatus('inprogress');
             setStepList(newStepList);
             setHint(['', '']);
             setHintButtonCount(0);
@@ -105,9 +109,11 @@ export const SolutionStep: React.FC<SolutionStepProps> = (
             const step: [string, string] = [nextRule, nextStep];
             const newStepList = updateLocalStepList(id, step);
             updateLocalQuestionStatus(id, 'complete');
+            setQuestionStatus('complete');
             setStepList(newStepList);
             setHint(['', '']);
             setHintButtonCount(2);
+            setIsIncomplete(false);
         }
     };
 
