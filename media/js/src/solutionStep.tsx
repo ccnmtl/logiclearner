@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { ExerciseData, Statement, HintData,
     getHints, Tools, latex2raw, updateLocalStepList,
-    updateLocalQuestionStatus, capitalize } from './utils';
+    updateLocalQuestionStatus, capitalize, raw2latex } from './utils';
 
 interface SolutionStepProps {
     statement: Statement;
@@ -51,6 +51,7 @@ export const SolutionStep: React.FC<SolutionStepProps> = (
     const handleStatementInput = (
         evt: React.ChangeEvent<HTMLInputElement>): void => {
         setNextStep(evt.currentTarget.value);
+        evt.currentTarget.value = raw2latex(evt.currentTarget.value);
         setError('');
     };
 
@@ -183,7 +184,8 @@ export const SolutionStep: React.FC<SolutionStepProps> = (
                             <input type='text' className='form-control'
                                 id='statementInput' aria-describedby='statement'
                                 placeholder='Logic statement'
-                                name='statement' defaultValue={step[1]}
+                                name='statement'
+                                defaultValue={raw2latex(step[1])}
                                 onChange={handleStatementInput}
                                 disabled={step[0] === '' ? false : true} />
                             <div>{isStatementHint && (
