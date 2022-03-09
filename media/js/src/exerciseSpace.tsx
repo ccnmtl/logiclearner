@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { getStatement, Statement, checkQuestion, Solution,
     raw2latex, getSolutions, ExerciseData, Status, Level,
-    getHints, Tools, HintData } from './utils';
+    getHints, Tools, HintData, latex2raw } from './utils';
 import { useParams } from 'react-router-dom';
 import { SolutionStep } from './solutionStep';
 import { Modal } from './modal';
@@ -109,9 +109,9 @@ export const ExerciseSpace: React.FC = () => {
                 } else {
                     lastCorrectStep = statement.question;
                 }
-                hintData['next_expr'] = nextStep;
+                hintData['next_expr'] = latex2raw(nextStep);
                 hintData['rule'] = nextRule;
-                hintData['step_list'] = [lastCorrectStep];
+                hintData['step_list'] = [latex2raw(lastCorrectStep)];
                 hintData['answer'] = statement.answer;
                 // eslint-disable-next-line max-len
                 // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
