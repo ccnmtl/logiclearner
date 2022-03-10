@@ -29,6 +29,7 @@ describe('Initial test', () => {
                 stepList={[['test', 'test']]}
                 setStepList={setStepList}
                 idx={10}
+                blankSlate={'test'}
                 hint={['', '']}
                 setHint={setHint}
                 nextStep={''}

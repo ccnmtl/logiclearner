@@ -37,7 +37,8 @@ export const Question: React.FC<QuestionProps> = (
     const status: Status = {
         null: 'initial',
         inprogress: 'inprogress',
-        complete: 'complete'
+        complete: 'complete',
+        '': 'initial'
     };
 
 
