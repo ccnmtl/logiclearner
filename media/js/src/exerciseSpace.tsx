@@ -284,6 +284,7 @@ export const ExerciseSpace: React.FC = () => {
                                     stepList={stepList}
                                     key={idx}
                                     idx={idx}
+                                    blankSlate={'map'}
                                     setStepList={setStepList}
                                     hint={hint}
                                     setHint={setHint}
@@ -307,6 +308,7 @@ export const ExerciseSpace: React.FC = () => {
                             stepList={stepList}
                             setStepList={setStepList}
                             idx={stepList.length + 1}
+                            blankSlate={`blank${stepList.length + 1}`}
                             hint={hint}
                             setHint={setHint}
                             nextStep={nextStep}

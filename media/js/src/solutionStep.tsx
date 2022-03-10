@@ -20,7 +20,8 @@ interface SolutionStepProps {
     hintButtonCount: number;
     setHintButtonCount: React.Dispatch<React.SetStateAction<number>>,
     setIsIncomplete: React.Dispatch<React.SetStateAction<boolean>>,
-    setQuestionStatus: React.Dispatch<React.SetStateAction<string>>
+    setQuestionStatus: React.Dispatch<React.SetStateAction<string>>,
+    blankSlate: string;
 }
 const laws: Array<string> = ['Identity', 'Negation', 'Domination',
     'Idempotence', 'Commutativity', 'Associativity', 'Absorption',
@@ -31,7 +32,7 @@ export const SolutionStep: React.FC<SolutionStepProps> = (
     {statement, id, step, stepList, idx, setStepList,
         hint, hintButtonCount, nextStep, setNextStep, setNextRule,
         nextRule, setHint, setHintButtonCount, setIsIncomplete,
-        setQuestionStatus
+        setQuestionStatus, blankSlate
     }: SolutionStepProps) => {
 
     const [error, setError] = useState('');
@@ -143,7 +144,7 @@ export const SolutionStep: React.FC<SolutionStepProps> = (
     const haveErrors = !error;
     const isLawHint = isLast && hintButtonCount > 0;
     const isStatementHint = isLast && hintButtonCount === 2;
-    const isFirst = idx === 0;
+    const isFirst = idx === 0 || blankSlate === 'blank1';
 
     useEffect(() => {
         setNextRule('Start');
