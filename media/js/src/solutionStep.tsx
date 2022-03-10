@@ -163,13 +163,16 @@ export const SolutionStep: React.FC<SolutionStepProps> = (
                                 If I apply this law...
                             </label>
                             <select name='law'
-                                id='laws' className='form-select'
+                                id={`laws-${idx}`} className='form-select'
+                                key={`${step[0]}-${idx}`}
                                 onChange={handleLawSelect}
                                 defaultValue={
                                     capitalize(step[0])
-                                        ? capitalize(step[0])
-                                        : ''}
+                                }
                                 disabled={step[0] === '' ? false : true} >
+                                <option value={''}>
+                                    Choose One
+                                </option>
                                 {laws.map((law, index) => {
                                     return (
                                         <option key={index} value={law}>
@@ -188,9 +191,11 @@ export const SolutionStep: React.FC<SolutionStepProps> = (
                                     then I&apos;ll get this statement...
                             </label>
                             <input type='text' className='form-control'
-                                id='statementInput' aria-describedby='statement'
+                                id={`statementInput-${idx}`}
+                                aria-describedby='statement'
                                 placeholder='Logic statement'
-                                name='statement'
+                                key={`statement-${idx}`}
+                                name={`statement-${idx}`}
                                 defaultValue={raw2latex(step[1])}
                                 onChange={handleStatementInput}
                                 disabled={step[0] === '' ? false : true} />
