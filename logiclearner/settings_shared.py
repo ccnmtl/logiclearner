@@ -63,7 +63,8 @@ TEMPLATES = [
 ]
 
 CONTACT_US_EMAIL = 'ctl-logiclearner@columbia.edu'
-SERVER_EMAIL = 'automated@mail.ctl.columbia.edu'
+SERVER_EMAIL = 'logiclearner-noreply@mail.ctl.columbia.edu'
+EMAIL_SUBJECT_PREFIX = 'Logic Learner Contact Request'
 
 THUMBNAIL_SUBDIR = "thumbs"
 LOGIN_REDIRECT_URL = "/"
