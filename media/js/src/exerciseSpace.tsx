@@ -196,7 +196,7 @@ export const ExerciseSpace: React.FC = () => {
         });
         {void fetchSolutions();}
         {getQuestionData();}
-
+        window.scrollTo(0, 0);
     }, []);
 
     return (
