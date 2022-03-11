@@ -2,6 +2,14 @@
     padding-top: 1rem;
     padding-bottom: 1rem;
     background-color: #efefef;
+    background: url('/media/img/bg-banner.jpg');
+    background-repeat: no-repeat;
+    background-size: 150%;
+    background-position: bottom -5rem left 0;
+    @include media-breakpoint-up(md) {
+        background-size: cover;
+        background-position: bottom;
+    }
     &__title {
         display: block;
     }
@@ -46,7 +54,7 @@
 .banner-hero {
     height: 12rem;
     position: relative;
-    color: #333;
+    color: #fff;
     @include media-breakpoint-up(md) {
         height: 16rem;
     }
@@ -70,6 +78,8 @@
     }
     &__title {
         font-size: 2.5rem;
+        font-weight: 700;
+        text-shadow: 0 2px 5px rgba(0,0,0,.14), 0 1px 5px rgba(0,0,0,.12), 0 2px 4px rgba(0,0,0,.12);
         @include media-breakpoint-up(md) {
             font-size: 3.125rem;
         }
@@ -82,6 +92,8 @@
     }
     &__text {
         font-size: 1.25rem;
+        font-weight: 600;
+        text-shadow: 0 2px 5px rgba(0,0,0,.14), 0 1px 5px rgba(0,0,0,.12), 0 2px 4px rgba(0,0,0,.12);
         @include media-breakpoint-up(md) {
             font-size: 1.4rem;
         }

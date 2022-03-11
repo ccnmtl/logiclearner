@@ -18,8 +18,8 @@ export const HomeBanner: React.FC = () => {
                     <span className="main-banner__title
                         banner-hero__title">Logic Learner</span>
                     <span className="main-banner__text
-                        banner-hero__text">Logic is the beginning of wisdom,
-                        not the end of it</span>
+                        banner-hero__text">A practice tool for writing proofs in
+                        propositional logic</span>
                 </h1>
             </div>
         </header>
