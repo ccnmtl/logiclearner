@@ -35,7 +35,6 @@ urlpatterns = [
     re_path('^api/solution/(?P<statement>.+)/$',
             views.SolutionListAPIView.as_view()),
     re_path(r'^api/hint', views.HintApiView.as_view()),
-    re_path(r'^api/solution', views.SolutionApiView.as_view()),
 
     path('about/', flatpage_views.flatpage, {'url': '/about/'}, name='about'),
     path('teaching/', flatpage_views.flatpage, {'url': '/teaching/'},

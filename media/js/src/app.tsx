@@ -3,11 +3,13 @@ import { BrowserRouter as Router, Route, Routes  } from 'react-router-dom';
 import { LevelsDashboard } from './levelsdashboard';
 import { QuestionsDashboard } from './questionsdashboard';
 import { ExerciseSpace } from './exerciseSpace';
+import { NotFound } from './notFound';
 
 export const App: React.FC = () => {
     return (
         <Router>
             <Routes>
+                <Route path='*' element={<NotFound />} />
                 <Route path="/" element={<LevelsDashboard />} />
                 <Route path="/questions/0/"
                     element={<QuestionsDashboard
