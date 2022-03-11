@@ -53,6 +53,7 @@ export const SolutionStep: React.FC<SolutionStepProps> = (
             window.localStorage.setItem('question-' + id,
                 JSON.stringify(data));
         }
+        setError('');
     };
 
     const handleStatementInput = (
