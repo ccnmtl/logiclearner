@@ -348,7 +348,8 @@ export const ExerciseSpace: React.FC = () => {
                         <button onClick={handleHints}
                             disabled={hintButtonCount === 2}
                             className="btn btn-lg ll-button
-                            mx-3 my-2 my-md-0">
+                            mx-3 my-2 my-md-0"
+                            style={{display: 'none'}}>
                             <span className="ll-button__text">
                                 I need a hint
                             </span>
