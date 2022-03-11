@@ -23,10 +23,10 @@ interface SolutionStepProps {
     setQuestionStatus: React.Dispatch<React.SetStateAction<string>>,
     blankSlate: string;
 }
-const laws: Array<string> = ['Identity', 'Negation', 'Domination',
-    'Idempotence', 'Commutativity', 'Associativity', 'Absorption',
-    'De Morgan\'s Law', 'Literal Negation', 'Distributivity',
-    'Double Negation', 'Implication as Disjunction', 'Iff as Implication'];
+const laws: Array<string> = ['Absorption', 'Associativity', 'Commutativity',
+    'De Morgan\'s Law', 'Distributivity', 'Domination', 'Double Negation',
+    'Idempotence', 'Identity', 'Iff as Implication',
+    'Implication as Disjunction', 'Literal Negation', 'Negation',];
 
 export const SolutionStep: React.FC<SolutionStepProps> = (
     {statement, id, step, stepList, idx, setStepList,
