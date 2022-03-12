@@ -322,23 +322,31 @@ export const ExerciseSpace: React.FC = () => {
                     )}
                     {!isIncomplete && (
                         <>
-                            <div className='row'>
-                                <div className='col'>
-                                    <div className='fs-3 text'>
-                                        Congratulations!
-                                    </div>
-                                    <div>
-                                        You&apos;ve completed this question!
-                                    </div>
+                            <div className='row medal-box'>
+                                <div className='col-12 medal-box__avatar'>
+                                    <img src={
+                                        `${STATIC_URL}img/avatar-medal.svg`
+                                    } />
                                 </div>
-                                <div className='col'>
+                                <div className='col-12'>
+                                    <p className='medal-box__cheer'>
+                                        Congratulations!
+                                    </p>
+                                    <p>
+                                        You&apos;ve completed the proof
+                                        for this question!
+                                    </p>
+                                </div>
+                                <div className='col-12'>
                                     {/* <button onClick={handleNextQuestion}>
                                         Next</button> */}
-                                    <a className={'btn btn-md btn-primary mt-3'}
-                                        href={
-                                            `/questions/${statement.difficulty}`
-                                        }>
-                                    LEVEL {statement.difficulty + 1}: {level}
+                                    <a href={
+                                        `/questions/${statement.difficulty}`}
+                                    className="btn btn-lg ll-button
+                                        mx-3 my-2 my-md-0">
+                                        <span className="ll-button__text">
+                                            LEVEL {statement.difficulty + 1}: {level} {/* eslint-disable-line max-len */}
+                                        </span>
                                     </a>
                                 </div>
                             </div>
