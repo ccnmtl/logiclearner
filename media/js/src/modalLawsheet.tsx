@@ -26,7 +26,7 @@ export const ModalLawsheet: React.FC = () => {
                     </div>
                     <div className='modal-body'>
                         <div className='row'>
-                           <section className='col-12 col-md-6 law-definition'>
+                            <section className='col-12 col-md-6 law-definition'>
                                 <h5>Absorption laws:</h5>
                                 p ∨ (p ∧ q) ≡ p<br />
                                 p ∧ (p ∨ q) ≡ p
