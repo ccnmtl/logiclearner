@@ -322,23 +322,31 @@ export const ExerciseSpace: React.FC = () => {
                     )}
                     {!isIncomplete && (
                         <>
-                            <div className='row'>
-                                <div className='col'>
-                                    <div className='fs-3 text'>
-                                        Congratulations!
-                                    </div>
-                                    <div>
-                                        You&apos;ve completed this question!
-                                    </div>
+                            <div className='row medal-box'>
+                                <div className='col-12 medal-box__avatar'>
+                                    <img src={
+                                        `${STATIC_URL}img/avatar-medal.svg`
+                                    } />
                                 </div>
-                                <div className='col'>
+                                <div className='col-12'>
+                                    <p className='medal-box__cheer'>
+                                        Congratulations!
+                                    </p>
+                                    <p>
+                                        You&apos;ve completed the proof
+                                        for this question!
+                                    </p>
+                                </div>
+                                <div className='col-12'>
                                     {/* <button onClick={handleNextQuestion}>
                                         Next</button> */}
-                                    <a className={'btn btn-md btn-primary mt-3'}
-                                        href={
-                                            `/questions/${statement.difficulty}`
-                                        }>
-                                    LEVEL {statement.difficulty + 1}: {level}
+                                    <a href={
+                                        `/questions/${statement.difficulty}`}
+                                    className="btn btn-lg ll-button
+                                        mx-3 my-2 my-md-0">
+                                        <span className="ll-button__text">
+                                            LEVEL {statement.difficulty + 1}: {level} {/* eslint-disable-line max-len */}
+                                        </span>
                                     </a>
                                 </div>
                             </div>
@@ -348,7 +356,7 @@ export const ExerciseSpace: React.FC = () => {
                         <button onClick={handleHints}
                             disabled={hintButtonCount === 2}
                             className="btn btn-lg ll-button
-                            mx-3 my-2 my-md-0"
+                            mx-3 my-2 my-md-0 order-1"
                             style={{display: 'none'}}>
                             <span className="ll-button__text">
                                 I need a hint
@@ -358,33 +366,45 @@ export const ExerciseSpace: React.FC = () => {
                             // disabled={!showSolutionBtn}
                             onClick={handleShowSolutions}
                             className="btn btn-lg ll-button
-                                mx-3 my-2 my-md-0">
+                                mx-3 my-2 my-md-0 order-3 order-md-2">
                             <span className="ll-button__text">
-                                Show solution
+                                {showSolutions ? 'Hide ': 'Show '} solution key
                             </span>
                         </button>
                         <button
                             onClick={handleResetModal}
-                            className="btn btn-lg ll-button mx-3 my-2 my-md-0">
+                            className="btn btn-lg ll-button
+                                mx-3 my-2 my-md-0 order-2 order-md-3">
                             <span className="ll-button__text">
                                 Reset proof
                             </span>
                         </button>
                     </div>
                     {showSolutions && (
-                        <div className="row">
-                            <div className="col">
-                                <ul className="list-group">
-                                    {solutions.map((solution, idx) => {
-                                        return (
-                                            <li key={idx}
-                                                className="list-group-item">
-                                                {solution.text}
-                                            </li>
-                                        );
-                                    })}
-                                </ul>
+                        <div className='modal-solutionkey'>
+                            <div className='modal-solutionkey__header'>
+                                <h2>Step-by-step solution key</h2>
+                                <button className='btn-close'
+                                    aria-label="Close"
+                                    onClick={handleShowSolutions}></button>
                             </div>
+                            <p>The following is just one of many possible
+                            solutions for this question:
+                            </p>
+                            <ul className='solutionkey'>
+                                {solutions.map((solution, idx) => {
+                                    return (
+                                        <li key={idx}>
+                                            <span className='solutionkey__step'>
+                                                {idx === 0 ?
+                                                    'Premise: '
+                                                    : `Step ${idx}: `}
+                                            </span>
+                                            {solution.text}
+                                        </li>
+                                    );
+                                })}
+                            </ul>
                         </div>
                     )}
                 </div>

@@ -1,0 +1,62 @@
+.medal-box {
+    margin-top: 4rem;
+    margin-left: 0;
+    margin-right: 0;
+    padding: 0.5rem 0.5rem 1rem 0.5rem;
+    border: 1px solid #A5D6A7;
+    border-radius: 0.25rem;
+    text-align: center;
+    justify-content: center !important;
+    @include media-breakpoint-up(md) {
+        padding: 1rem 1rem 2rem 1rem;
+        margin-left: 8rem;
+        margin-right: 8rem;
+    }
+    @include media-breakpoint-up(lg) {
+        margin-left: 10rem;
+        margin-right: 10rem;
+    }
+    @include media-breakpoint-up(xl) {
+        margin-left: 14rem;
+        margin-right: 14rem;
+    }
+    @include media-breakpoint-up(xxl) {
+        margin-left: 18rem;
+        margin-right: 18rem;
+    }
+    &__avatar {
+        margin-top: -3.5rem;
+        padding: 0;
+        width: 6rem;
+        height: 6rem;
+        border: 1px solid #A5D6A7;
+        border-radius: 50%;
+        background-color: #E8F5E9;
+        overflow: visible;
+        -webkit-animation: 0.5s linear 1s 2 alternate spin;
+        animation: 0.5s linear 1s 2 alternate spin;
+        @include media-breakpoint-up(md) {
+            margin-top: -4rem;
+        }
+        img {
+            width: 105%;
+        }
+    }
+    &__cheer {
+        margin: 1rem 0;
+        font-size: 1.75rem;
+        font-weight: 600;
+        color: #2E7D32;
+    }
+}
+
+/* Safari */
+@-webkit-keyframes spin {
+    0% { -webkit-transform: rotate(0deg); }
+    100% { -webkit-transform: rotate(-360deg); }
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(-360deg); }
+}

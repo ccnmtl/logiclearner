@@ -19,3 +19,51 @@
         max-width: 50rem;
     }
 }
+
+.modal-solutionkey {
+    border: 1px solid #ccc;
+    border-radius: 0.25rem;
+    padding: 1rem;
+    margin: 1rem 0;
+    @include media-breakpoint-up(md) {
+        margin-left: 2rem;
+        margin-right: 2rem;
+    }
+    @include media-breakpoint-up(lg) {
+        margin-left: 4rem;
+        margin-right: 4rem;
+    }
+    &__header {
+        padding: 0 1rem 1rem 1rem;
+        margin: 0 -1rem 1rem -1rem;
+        border-bottom: 1px solid #ccc;
+        display: flex;
+        flex-shrink: 0;
+        align-items: center;
+        justify-content: space-between;
+        .btn-close {
+            padding: 0.5rem 0.5rem;
+            margin: -0.5rem -0.5rem -0.5rem auto;
+        }
+    }
+    h2 {
+        font-size: 1.5rem;
+        font-weight: 600;
+        margin: 0;
+        padding: 0;
+    }
+    p {
+        padding: 0.5rem;
+    }
+}
+
+.solutionkey {
+    list-style: none;
+    li {
+        padding: 0.75rem 0;
+    }
+    &__step {
+        font-weight: 700;
+        margin-right: 0.5rem;
+    }
+}
