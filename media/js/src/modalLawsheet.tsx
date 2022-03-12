@@ -26,15 +26,10 @@ export const ModalLawsheet: React.FC = () => {
                     </div>
                     <div className='modal-body'>
                         <div className='row'>
-                            <section className='col-12 col-md-6 law-definition'>
-                                <h5>De Morgan’s laws:</h5>
-                                ¬( p ∧ q ) ≡ ¬p ∨ ¬q<br />
-                                ¬( p ∨ q ) ≡ ¬p ∧ ¬q
-                            </section>
-                            <section className='col-12 col-md-6 law-definition'>
-                                <h5>Idempotent laws:</h5>
-                                p ∨ p ≡ p<br />
-                                p ∧ p ≡ p
+                           <section className='col-12 col-md-6 law-definition'>
+                                <h5>Absorption laws:</h5>
+                                p ∨ (p ∧ q) ≡ p<br />
+                                p ∧ (p ∨ q) ≡ p
                             </section>
                             <section className='col-12 col-md-6 law-definition'>
                                 <h5>Associativity laws:</h5>
@@ -47,16 +42,16 @@ export const ModalLawsheet: React.FC = () => {
                                 p ∨ q ≡ q ∨ p
                             </section>
                             <section className='col-12 col-md-6 law-definition'>
+                                <h5>De Morgan’s laws:</h5>
+                                ¬( p ∧ q ) ≡ ¬p ∨ ¬q<br />
+                                ¬( p ∨ q ) ≡ ¬p ∧ ¬q
+                            </section>
+                            <section className='col-12 col-md-6 law-definition'>
                                 <h5>Distributive laws:</h5>
                                 p ∧ ( q ∨ r ) ≡ ( p ∧ q ) ∨ ( p ∧ r )<br />
                                 p ∨ ( q ∧ r ) ≡ ( p ∨ q ) ∧ ( p ∨ r )<br />
                                 p ∨ ( q ∨ r ) ≡ ( p ∨ q ) ∨ ( p ∨ r )<br />
                                 p ∧ ( q ∧ r ) ≡ ( p ∧ q ) ∧ ( p ∧ r )
-                            </section>
-                            <section className='col-12 col-md-6 law-definition'>
-                                <h5>Identity laws:</h5>
-                                p ∧ T ≡ p<br />
-                                p ∨ F ≡ p
                             </section>
                             <section className='col-12 col-md-6 law-definition'>
                                 <h5>Domination laws:</h5>
@@ -68,9 +63,14 @@ export const ModalLawsheet: React.FC = () => {
                                 ¬¬p ≡ p
                             </section>
                             <section className='col-12 col-md-6 law-definition'>
-                                <h5>Absorption laws:</h5>
-                                p ∨ (p ∧ q) ≡ p<br />
-                                p ∧ (p ∨ q) ≡ p
+                                <h5>Idempotent laws:</h5>
+                                p ∨ p ≡ p<br />
+                                p ∧ p ≡ p
+                            </section>
+                            <section className='col-12 col-md-6 law-definition'>
+                                <h5>Identity laws:</h5>
+                                p ∧ T ≡ p<br />
+                                p ∨ F ≡ p
                             </section>
                             <section className='col-12 col-md-6 law-definition'>
                                 <h5>Implication to disjunction law:</h5>
@@ -79,6 +79,11 @@ export const ModalLawsheet: React.FC = () => {
                             <section className='col-12 col-md-6 law-definition'>
                                 <h5>IFF to implication law:</h5>
                                 p ↔ q ≡ ( p → q ) ∧ ( q → p )
+                            </section>
+                            <section className='col-12 col-md-6 law-definition'>
+                                <h5>Negation laws:</h5>
+                                p ∧ ¬p ≡ F<br />
+                                p ∨ ¬p ≡ T
                             </section>
                         </div>
                     </div>
