@@ -348,7 +348,7 @@ export const ExerciseSpace: React.FC = () => {
                         <button onClick={handleHints}
                             disabled={hintButtonCount === 2}
                             className="btn btn-lg ll-button
-                            mx-3 my-2 my-md-0"
+                            mx-3 my-2 my-md-0 order-1"
                             style={{display: 'none'}}>
                             <span className="ll-button__text">
                                 I need a hint
@@ -358,33 +358,45 @@ export const ExerciseSpace: React.FC = () => {
                             // disabled={!showSolutionBtn}
                             onClick={handleShowSolutions}
                             className="btn btn-lg ll-button
-                                mx-3 my-2 my-md-0">
+                                mx-3 my-2 my-md-0 order-3 order-md-2">
                             <span className="ll-button__text">
-                                Show solution
+                                {showSolutions ? 'Hide ': 'Show '} solution key
                             </span>
                         </button>
                         <button
                             onClick={handleResetModal}
-                            className="btn btn-lg ll-button mx-3 my-2 my-md-0">
+                            className="btn btn-lg ll-button
+                                mx-3 my-2 my-md-0 order-2 order-md-3">
                             <span className="ll-button__text">
                                 Reset proof
                             </span>
                         </button>
                     </div>
                     {showSolutions && (
-                        <div className="row">
-                            <div className="col">
-                                <ul className="list-group">
-                                    {solutions.map((solution, idx) => {
-                                        return (
-                                            <li key={idx}
-                                                className="list-group-item">
-                                                {solution.text}
-                                            </li>
-                                        );
-                                    })}
-                                </ul>
+                        <div className='modal-solutionkey'>
+                            <div className='modal-solutionkey__header'>
+                                <h2>Step-by-step solution key</h2>
+                                <button className='btn-close'
+                                    aria-label="Close"
+                                    onClick={handleShowSolutions}></button>
                             </div>
+                            <p>The following is just one of many possible
+                            solutions for this question:
+                            </p>
+                            <ul className='solutionkey'>
+                                {solutions.map((solution, idx) => {
+                                    return (
+                                        <li key={idx}>
+                                            <span className='solutionkey__step'>
+                                                {idx === 0 ?
+                                                    'Premise: '
+                                                    : `Step ${idx}: `}
+                                            </span>
+                                            {solution.text}
+                                        </li>
+                                    );
+                                })}
+                            </ul>
                         </div>
                     )}
                 </div>
