@@ -52,7 +52,7 @@
 
 
 .banner-hero {
-    height: 12rem;
+    height: 10rem;
     position: relative;
     color: #fff;
     @include media-breakpoint-up(md) {
@@ -62,10 +62,10 @@
         height: 18rem;
     }
     @include media-breakpoint-up(xl) {
-        height: 20rem;
+        height: 24rem;
     }
     &__container {
-        margin-top: 2rem;
+        margin-top: 1rem;
         @include media-breakpoint-up(md) {
             margin-top: 3.25rem;
         }
@@ -73,11 +73,11 @@
             margin-top: 4rem;
         }
         @include media-breakpoint-up(xl) {
-            margin-top: 4rem;
+            margin-top: 6rem;
         }
     }
     &__title {
-        font-size: 2.5rem;
+        font-size: 2.125rem;
         font-weight: 700;
         text-shadow: 0 2px 5px rgba(0,0,0,.14), 0 1px 5px rgba(0,0,0,.12), 0 2px 4px rgba(0,0,0,.12);
         @include media-breakpoint-up(md) {
@@ -91,7 +91,7 @@
         }
     }
     &__text {
-        font-size: 1.25rem;
+        font-size: 1.125rem;
         font-weight: 600;
         text-shadow: 0 2px 5px rgba(0,0,0,.14), 0 1px 5px rgba(0,0,0,.12), 0 2px 4px rgba(0,0,0,.12);
         @include media-breakpoint-up(md) {

@@ -58,7 +58,7 @@ export const LevelsDashboard: React.FC = () => {
                     aria-labelledby="cardset-label">
                     <li className="cardset-card">
                         <figure className="cardset-card__avatar">
-                            <img src={`${STATIC_URL}img/tutorial.svg`} />
+                            <img src={`${STATIC_URL}img/avatar-tutorial.svg`} />
                         </figure>
                         <div className="d-flex flex-column align-self-center
                             me-2 me-lg-0">
@@ -69,15 +69,15 @@ export const LevelsDashboard: React.FC = () => {
                                 <a href={'/tutorial/'}>Using Logic Learner</a>
                             </div>
                             <div className="cardset-card__text">
-                                Learn how to use this application</div>
+                                Learn how to use Logic Learner.</div>
                         </div>
-                        <div className="cardset-card__prompt">
+                        <div className="cardset-card__prompt ms-auto">
                             <a href={'/tutorial/'}>&rsaquo;</a>
                         </div>
                     </li>
                     <li className="cardset-card">
                         <figure className="cardset-card__avatar">
-                            <img src={`${STATIC_URL}img/sonobe-1.svg`} />
+                            <img src={`${STATIC_URL}img/avatar-level-1.svg`} />
                         </figure>
                         <div className="d-flex flex-column align-self-center
                             me-2 me-lg-0">
@@ -88,7 +88,8 @@ export const LevelsDashboard: React.FC = () => {
                                 <a href={'/questions/0'}>Novice</a>
                             </div>
                             <div className="cardset-card__text">
-                                Easy peasy, get a handle on things</div>
+                                Let’s get a handle on the basics of
+                                propositional logic.</div>
                         </div>
                         <div className="cardset-card__status-count"
                             aria-label="Questions completed">
@@ -102,7 +103,7 @@ export const LevelsDashboard: React.FC = () => {
                     </li>
                     <li className="cardset-card">
                         <figure className="cardset-card__avatar">
-                            <img src={`${STATIC_URL}img/sonobe-2.svg`} />
+                            <img src={`${STATIC_URL}img/avatar-level-2.svg`} />
                         </figure>
                         <div className="d-flex flex-column align-self-center
                             me-2 me-lg-0">
@@ -113,7 +114,7 @@ export const LevelsDashboard: React.FC = () => {
                                 <a href={'/questions/1'}>Learner</a>
                             </div>
                             <div className="cardset-card__text">
-                                Next level up, time to grow!</div>
+                                Apply the basics, time to level up!</div>
                         </div>
                         <div className="cardset-card__status-count"
                             aria-label="Questions completed">
@@ -127,7 +128,7 @@ export const LevelsDashboard: React.FC = () => {
                     </li>
                     <li className="cardset-card">
                         <figure className="cardset-card__avatar">
-                            <img src={`${STATIC_URL}img/sonobe-3.svg`} />
+                            <img src={`${STATIC_URL}img/avatar-level-3.svg`} />
                         </figure>
                         <div className="d-flex flex-column align-self-center
                             me-2 me-lg-0">
@@ -138,7 +139,7 @@ export const LevelsDashboard: React.FC = () => {
                                 <a href={'/questions/2'}>Apprentice</a>
                             </div>
                             <div className="cardset-card__text">
-                                Onward, smarty pants!</div>
+                                Moving onward, challenge yourself.</div>
                         </div>
                         <div className="cardset-card__status-count"
                             aria-label="Questions completed">
