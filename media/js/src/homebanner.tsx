@@ -12,7 +12,7 @@ export const HomeBanner: React.FC = () => {
                 <figure className='main-banner__avatar
                     banner-hero__avatar align-self-center'
                 aria-hidden='true'>
-                    <img src={`${STATIC_URL}img/temp-icon-sonobe.svg`} />
+                    <img src={`${STATIC_URL}img/logo-logiclearner.svg`} />
                 </figure>
                 <h1 className='align-self-center'>
                     <span className='main-banner__title

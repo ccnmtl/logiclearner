@@ -61,12 +61,12 @@
 }
 
 #cardset-label {
-    font-size: 2rem;
+    font-size: 1.875rem;
     @include media-breakpoint-up(md) {
-        font-size: 2.5rem;
+        font-size: 2rem;
     }
     @include media-breakpoint-up(lg) {
-        font-size: 3rem;
+        font-size: 2.75rem;
     }
 }
 

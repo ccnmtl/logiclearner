@@ -82,7 +82,7 @@
     <div class="navbar top-bar">
         <div class="container top-bar__container">
             <a href="/" class="navbar-brand d-flex align-items-center">
-            <img class="gn-i me-3 temp-icon" src="{{STATIC_URL}}img/temp-icon-sonobe.svg">
+            <img class="gn-i me-3 temp-icon" src="{{STATIC_URL}}img/logo-logiclearner-bw.svg">
             <span>Logic Learner</span>
             </a>
 
@@ -122,8 +122,19 @@
             <a href="/contact/" title="Contact us">Contact Us</a>
         </li>
     </ul>
-    <p class="ll-license text-center mt-3 fs-6">Logic Learner open-source code is on <a itemprop="license" rel="license noopener noreferrer" href="https://github.com/ccnmtl/logiclearner">Github</a> with <a itemprop="license" rel="license noopener noreferrer" href="https://www.gnu.org/licenses/gpl-3.0.en.html">GNU GPLv3</a> license.</p>
-    <div itemscope itemtype="http://schema.org/EducationalOrganization" class='text-center'><a href="http://ctl.columbia.edu" rel="noopener noreferrer" target="_blank" itemprop="url" class='d-inline-block'><img src="{{STATIC_URL}}img/logo-ctl.svg" class="footer__logo img-fluid" alt="" itemprop="logo" /><span class="visually-hidden" itemprop="name">Center for Teaching and Learning at Columbia University</span></a></div>
+    <p class="ll-license text-center mt-3 fs-6">Logic Learner open-source code is on <a itemprop="license" rel="license noopener noreferrer" href="https://github.com/ccnmtl/logiclearner">Github</a> <span class="text-nowrap">with <a itemprop="license" rel="license noopener noreferrer" href="https://www.gnu.org/licenses/gpl-3.0.en.html">GNU GPLv3</a> license.</span></p>
+    <div class="row my-5">
+        <div itemscope itemtype="http://schema.org/EducationalOrganization" class='col-12 col-md-6 text-center text-md-end pe-md-5 py-3'>
+            <a href="https://ctl.columbia.edu" rel="noopener noreferrer" target="_blank" itemprop="url"><img src="{{STATIC_URL}}img/logo-ctl.svg" class="footer__logo img-fluid" alt="" itemprop="logo" /><span class="visually-hidden" itemprop="name">Center for Teaching and Learning at Columbia University</span></a>
+        </div>
+        <div itemscope itemtype="http://schema.org/EducationalOrganization" class='col-12 col-md-6 text-center text-md-start ps-md-5 py-3'>
+            <a href="https://cs.columbia.edu" rel="noopener noreferrer" target="_blank" itemprop="url"><img src="{{STATIC_URL}}img/logo-cs.svg" class="footer__logo img-fluid" alt="" itemprop="logo" /><span class="visually-hidden" itemprop="name">Computer Science Department at Columbia University</span></a>
+        </div>
+        <div itemscope itemtype="http://schema.org/EducationalOrganization" class='col-12 text-center py-3 py-md-5'>
+            <a href="https://www.engineering.columbia.edu/" rel="noopener noreferrer" target="_blank" itemprop="url"><img src="{{STATIC_URL}}img/logo-cuseas.svg" class="footer__logo img-fluid" alt="" itemprop="logo" /><span class="visually-hidden" itemprop="name"> The Fu Foundation School of Engineering and Applied Science at Columbia University</span></a>
+        </div>
+    </div>
+
     </div>
 </footer>
 {% endblock %}

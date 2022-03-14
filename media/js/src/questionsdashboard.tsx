@@ -18,9 +18,9 @@ export const QuestionsDashboard: React.FC<QuestionsDashboardProps> = (
     const [levelCount, setLevelCount] = useState<number>(0);
 
     const LevelDescription = {
-        0: 'Easy peasy, get a handle on things',
-        1: 'Next level up, time to grow!',
-        2: 'Onward, smarty pants!'
+        0: 'Let’s get a handle on the basics of propositional logic.',
+        1: 'Apply the basics, time to level up!',
+        2: 'Moving onward, challenge yourself.'
     };
 
     async function fetchStatements() {
@@ -59,11 +59,9 @@ export const QuestionsDashboard: React.FC<QuestionsDashboardProps> = (
                 <div className="container d-flex justify-content-start">
                     <figure className="main-banner__avatar align-self-center"
                         aria-hidden="true">
-                        <img src={
-                            `${STATIC_URL}img/sonobe-${difficulty + 1}.svg`
-                        } />
+                        <img src={`${STATIC_URL}img/avatar-level-${difficulty + 1}.svg`} /> {/* eslint-disable-line max-len */}
                     </figure>
-                    <h1 className="align-self-center">
+                    <h1 className="align-self-center pe-3">
                         <span className="main-banner__subhead">
                             LEVEL {difficulty + 1}
                         </span>
