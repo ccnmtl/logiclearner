@@ -210,9 +210,9 @@ export const ExerciseSpace: React.FC = () => {
                     </div>
                     <figure className="main-banner__avatar align-self-center"
                         aria-hidden="true">
-                        <img src={
-                            `${STATIC_URL}img/sonobe-1.svg`
-                        } />
+                        <a href={`/questions/${statement.difficulty}`}>
+                            <img src={`${STATIC_URL}img/avatar-level-${statement.difficulty + 1}.svg`} /> {/* eslint-disable-line max-len */}
+                        </a>
                     </figure>
                     <h1 className="align-self-center">
                         <a href={`/questions/${statement.difficulty}`}>
