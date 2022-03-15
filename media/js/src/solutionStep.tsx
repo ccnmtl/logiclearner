@@ -153,7 +153,8 @@ export const SolutionStep: React.FC<SolutionStepProps> = (
 
     return (
         <>
-            <div className="solution-step">
+            <div className={`solution-step
+                    ${step[0] === '' ? ' editable' : ' readonly'}`}>
                 <p className="solution-step__prompt">
                     {isFirst ? 'To begin this proof,' : 'Next,'}
                 </p>
@@ -221,7 +222,7 @@ export const SolutionStep: React.FC<SolutionStepProps> = (
                                         type="reset"
                                         onClick={handleDeleteStep}
                                         className="btn ll-button btn-danger
-                                            me-2">
+                                            me-3">
                                         <span className="ll-button__text">
                                             Delete
                                         </span>
@@ -230,7 +231,7 @@ export const SolutionStep: React.FC<SolutionStepProps> = (
                                         onClick={handleSubmit}
                                         type="submit"
                                         className="btn ll-button btn-success
-                                            me-2">
+                                            me-0">
                                         <span className="ll-button__text">
                                             Go!
                                         </span>
