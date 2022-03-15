@@ -1,10 +1,16 @@
 .solution-step {
-    padding-top: 1.5rem;
-    padding-bottom: 1.5rem;
-    border-bottom: 1px dashed #bbb;
+    padding: 1.5rem 0.5rem;
+    border: 0;
+    margin-bottom: 0.5rem;
     &__prompt {
         font-weight: 600;
         font-size: 1.25rem;
+    }
+    &.readonly {
+        background-color: rgba(232,245,233,0.5);
+    }
+    &.editable {
+        border-bottom: 1px dashed #bbb !important;
     }
 }
 
