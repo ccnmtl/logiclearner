@@ -19,7 +19,7 @@
 {% endblock %}
 
 {% block content %}
-<main>
+<main class="contact-page">
     <div class="contactform-box row">
         <div class="col-12 col-lg-7">
             <h1 class="fs-2">Contact Us</h1>
@@ -127,7 +127,20 @@
         </div>
         <div class="col-5 pt-5 d-none d-lg-block" aria-hidden="true">
             <div class="contact-prompt__decor mt-5">
-                <img src="{{STATIC_URL}}img/prompt-contact-us.svg" alt="" />
+                <div class="envelope">
+                    <div class="top-fold"></div>
+                    <div class="left-fold"></div>
+                    <div class="back-fold">
+                        <div class="letter">
+                            <div class="letter-border"></div>
+                            <span class="line one"></span>
+                            <span class="line two"></span>
+                            <span class="line three"></span>
+                        </div>
+                    </div>
+                    <div class="right-fold"></div>
+                    <div class="bottom-fold"></div>
+                </div>
             </div>
         </div>
     </div>
