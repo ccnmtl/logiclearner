@@ -165,6 +165,7 @@ export const ExerciseSpace: React.FC = () => {
         setStepList([]);
         setIsIncomplete(true);
         setQuestionStatus(null);
+        window.scrollTo(0, 0);
     };
 
     const status: Status = {
