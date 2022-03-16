@@ -1,25 +1,38 @@
 {% extends "base.html" %}
 
-{% block title %}Contact Us Success{% endblock %}
+{% block title %} - Contact Us Confirmation{% endblock %}
 
-{% block css %}
-<style>
-  p {
-    font-size: 1.15em;
-  }
-</style>
-{% endblock %}
 
 {% block content %}
-    <div class="pt-5 pb-2">
-        <h2>
-            Thanks!
-        </h2>
+<main>
+    <div class="envelope">
+        <div class="top-fold"></div>
+        <div class="left-fold"></div>
+        <div class="back-fold">
+            <div class="letter">
+                <div class="letter-border"></div>
+                <span class="line one"></span>
+                <span class="line two"></span>
+                <span class="line three"></span>
+            </div>
+        </div>
+        <div class="right-fold"></div>
+        <div class="bottom-fold"></div>
     </div>
-    <hr />
 
-    <p>We appreciate your feedback.<br />
-    Someone from the team will be in touch with you shortly.</p>
+    <h1 class="text-center">
+        Thank you!
+    </h1>
 
-    <div class="mb-5"><a href="/">Return to Home page</a></div>
+
+    <p class="text-center fs-4 mt-3 mb-0">We appreciate your feedback.</p>
+    <p class="text-center fs-4 m-0">We will be in touch with you shortly.</p>
+
+    <div class="text-center mt-5">
+    <a href="/"
+        class="btn btn-lg ll-button">
+        <span class='ll-button__label'>Return to Home page</span>
+    </a>
+    </div>
+</main>
 {% endblock %}
