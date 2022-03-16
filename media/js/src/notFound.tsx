@@ -26,21 +26,21 @@ export const NotFound: React.FC = () => {
                     </p>
 
                     <div className="text-center mt-5">
-                    <a href={'/contact/'}
-                        className="btn btn-lg ll-button">
-                        <span className='ll-button__label'>
-                            Report problem
-                        </span>
-                    </a>
+                        <a href={'/contact/'}
+                            className="btn btn-lg ll-button">
+                            <span className='ll-button__label'>
+                                Report problem
+                            </span>
+                        </a>
                     </div>
 
                     <div className="text-center mt-3">
-                    <a href={'/'}
-                        className="btn btn-lg ll-button">
-                        <span className='ll-button__label'>
-                            Return to Home page
-                        </span>
-                    </a>
+                        <a href={'/'}
+                            className="btn btn-lg ll-button">
+                            <span className='ll-button__label'>
+                                Return to Home page
+                            </span>
+                        </a>
                     </div>
 
                 </div>
