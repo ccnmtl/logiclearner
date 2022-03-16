@@ -249,12 +249,13 @@
 }
 @media (min-width: 768px) {
     .tutorial-reset #guide-reset {
-        right: 0rem;
+        /*right: 0rem;*/
         margin-top: 1rem;
     }
     .tutorial-reset #guide-reset.guide__box:after,
     .tutorial-reset #guide-reset.guide__box:before {
-        left: 60%;
+        /*left: 60%;*/
+        left:50%;
     }
 }
 @media (min-width: 1200px) {

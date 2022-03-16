@@ -16,7 +16,7 @@
                     <a href="/">&lsaquo;</a>
                 </div>
                 <figure class="main-banner__avatar align-self-center" aria-hidden="true">
-                    <img src="{% static 'img/tutorial.svg' %}">
+                    <img src="{% static 'img/avatar-tutorial.svg' %}">
                 </figure>
                 <h1 class="align-self-center"><a href="/">
                     <span class="main-banner__subhead">TUTORIAL:</span><span class="main-banner__title">Using Logic Learner</span>
@@ -40,20 +40,19 @@
         </header>
         <section class="container content-body exercise-space tutorial-section">
             <p>
-            Welcome to Logic Learner. Before you begin using this tool to learn propositional logic, here's a tour. In hac habitasse platea dictumst. Duis ac mi rhoncus, mattis ante nec, posuere augue. Suspendisse potenti. Donec leo massa, dictum ac rutrum aliquam, fringilla et urna.
+            <b>Welcome to Logic Learner,</b> practice tool to help students improve their fluency and problem solving process in writing proofs for propositional logic.
             </p>
             <p>
-            Suspendisse consectetur justo et rhoncus tristique. Cras bibendum eros a suscipit ullamcorper. Nullam vitae neque quis dolor dapibus sollicitudin vitae sed elit. Vestibulum at.
+            This tutorial helps you to become familiar with Logic Learner. Click on the numbers to explore the different parts of the tool’s interface.
             </p>
             
             <div class="guide__box guide-text" id="guide-modal">
                 <button class="tutorial-close btn btn-warning" aria-label="Close"></button>
                 <h2>Law sheet</h2>
-                <p>Aliquam vel nisl sed leo cursus iaculis efficitur sed lectus. In vel felis vitae nisi feugiat euismod ut vel enim. Suspendisse accumsan a neque nec pharetra. Suspendisse massa est, rhoncus.</p>
+                <p>The <b>Law sheet</b> lists the laws and their example statements. Refer to this when you need to review how the laws works. You can return to this sheet whenever needed. Tap on the <b>Law sheet</b> button to try it out.</p>
                 <h2>Logic symbols</h2>
-                <p>Aliquam vel nisl sed leo cursus iaculis efficitur sed lectus. In vel felis vitae nisi feugiat euismod ut vel enim. Suspendisse accumsan a neque nec pharetra. Suspendisse massa est, rhoncus.</p>
+                <p>In propositional logic, we use logical connectives to build compound statements. Refer to the <b>Logic symbols</b> sheet on how to type in these connectives. You can return to this sheet whenever needed.</p>
             </div>
-            
             <section class="container border-top tutorial-section" id="maincontent">
                 <button class="tutorial1-prompt align-self-center mt-3" data-segment="question">
                     <div class="tutorial1-prompt__text">2</div>
@@ -62,7 +61,7 @@
                 <div class="guide__box guide-text" id="guide-question">
                     <button class="tutorial-close btn btn-warning" aria-label="Close"></button>
                     <h2>Logic proof question</h2>
-                    <p>Mauris eleifend felis non semper blandit. Aliquam luctus sed neque sagittis eleifend. Morbi ultrices, metus et euismod malesuada, mi sem auctor felis, quis rutrum nulla eros et augue. Integer facilisis.</p>
+                    <p>This is an example of a question you will see in Logic Learner. The first propositional statement is the premise, and the second propositional statement is end point of the proof.</p>
                 </div>
                 <div class="exercise-solution mt-0 pt-0">
                     <div class="solution-step mt-0 pt-0">
@@ -90,7 +89,7 @@
                                     <div class="guide__box guide-text" id="guide-solution">
                                         <button class="tutorial-close btn btn-warning" aria-label="Close"></button>
                                         <h2>Solution step</h2>
-                                        <p>Mauris eleifend felis non semper blandit. Aliquam luctus sed neque sagittis eleifend. Morbi ultrices, metus et euismod malesuada, mi sem auctor felis, quis rutrum nulla eros et augue. Integer facilisis.</p>
+                                        <p>Here is where you type your proof step by step. For each line of proof, you choose a law and type the resulting propositional statement after applying the law. Remember, if you forgot a law or which symbols you can type in, you can refer back to the <span class="text-nowrap"><b><img src="{% static 'img/icon-clipboard.svg' %}" style="width:1rem;" />Law sheet</b></span> and <span class="text-nowrap"><b><img src="{% static 'img/icon-keyboard.svg' %}" style="width:1rem;" /> Logic symbols</b></span> guide.</p>
                                     </div>
                                 </div>
                             </div>
@@ -113,13 +112,14 @@
                                     <div class="guide__box guide-text" id="guide-stepactions">
                                         <button class="tutorial-close btn btn-warning" aria-label="Close"></button>
                                         <h2>Go, or Delete step</h2>
-                                        <p>Mauris eleifend felis non semper blandit. Aliquam luctus sed neque sagittis eleifend. Morbi ultrices, metus et euismod malesuada, mi sem auctor felis, quis rutrum nulla eros et augue. Integer facilisis.</p>
-                                    </div>
+                                        <p>When you are done with your proof step, click <b>“Go!”</b> button. You’ll move on to the next step if your statement is valid. If not, you’ll get a feedback, and send in your proof step after making corrections.</p>
+                                        <p>To remove the current step to return to the previous statement, use the <b>“Delete”</b> button </p>                                    </div>
                                 </div>
                             </div>
                         </div>
                    </div>
                     <div class="solution-actions">
+<!-- 
                         <div class="mt-0 mx-4 p-0 text-center">
                             <button class="tutorial1-prompt align-self-center mt-0 mx-0" data-segment="hint">
                             <div class="tutorial1-prompt__text">5</div>
@@ -130,12 +130,13 @@
                             <div class="guide__box guide-text" id="guide-hint">
                             <button class="tutorial-close btn btn-warning" aria-label="Close"></button>
                             <h2>Hints</h2>
-                            <p>Mauris eleifend felis non semper blandit. Aliquam luctus sed neque sagittis eleifend. Morbi ultrices, metus et euismod malesuada, mi sem auctor felis, quis rutrum nulla eros et augue. Integer facilisis.</p>
+                            <p>Use the hint button when you are stuck on a specific law or statement in the proof to get assistance with continuing with the proof. It is advised that you only use this option when you are completely stuck and have no other option to continue. You can use hints as often as needed throughout the proof.</p>
                             </div>
                         </div>
+ -->
                         <div class="mt-0 mx-4 p-0 text-center">
                             <button class="tutorial1-prompt align-self-center mt-0" data-segment="solutionkey">
-                            <div class="tutorial1-prompt__text">6</div> 
+                            <div class="tutorial1-prompt__text">5</div> 
                             </button>
                             <button tabindex="-1" class="btn btn-lg ll-button mx-0 my-2 my-md-0" id="helper-solutionkey">
                             <span class="ll-button__text">Show solution</span>
@@ -143,12 +144,12 @@
                             <div class="guide__box guide-text" id="guide-solutionkey">
                             <button class="tutorial-close btn btn-warning" aria-label="Close"></button>
                             <h2>Solution key</h2>
-                            <p>Mauris eleifend felis non semper blandit. Aliquam luctus sed neque sagittis eleifend. Morbi ultrices, metus et euismod malesuada, mi sem auctor felis, quis rutrum nulla eros et augue. Integer facilisis.</p>
+                             <p>This will reveal the solution key of the entire proof. The key is just one of many possible solutions for the question. It is meant to help you if you get stuck, or if you would like to compare the proof you have created with the optimized version. It is recommended that you use this as a guidance, only when needed.</p>
                             </div>
                         </div>
                         <div class="mt-0 mx-4 p-0 text-center">
                             <button class="tutorial1-prompt align-self-center mt-0" data-segment="reset">
-                            <div class="tutorial1-prompt__text">7</div>
+                            <div class="tutorial1-prompt__text">6</div>
                             </button>
                             <button tabindex="-1" class="btn btn-lg ll-button mx-0 my-2 my-md-0" id="helper-reset">
                             <span class="ll-button__text">Reset proof</span>
@@ -156,7 +157,7 @@
                             <div class="guide__box guide-text" id="guide-reset">
                             <button class="tutorial-close btn btn-warning" aria-label="Close"></button>
                             <h2>Reset proof</h2>
-                            <p>Mauris eleifend felis non semper blandit. Aliquam luctus sed neque sagittis eleifend. Morbi ultrices, metus et euismod malesuada, mi sem auctor felis, quis rutrum nulla eros et augue. Integer facilisis.</p>
+                            <p>When you tap the <b>Reset proof</b> button, it will clear your entire proof. You can use this to restart if you want to try solving the proof in a different way, or if you want to practice doing proof again. </p>
                             </div>
                         </div>
 
