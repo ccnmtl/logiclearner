@@ -18,40 +18,54 @@
     {% block css %}{% endblock %}
 
     <!-- Standard Meta Data -->
-    <meta name="description" content="Logic Learner" />
-    <meta name="keywords" content="logic, discrete mathematics, computer science" />
-    <meta name="author" content="Columbia University CTL" />
-    <meta name="copyright" content="Copyright (c) 2021 Center for Teaching and Learning at Columbia University - Code licensed GNU GPLv3">
+    <meta name="description" content="Logic Learner is a practice tool that help students improve their fluency and problem solving process in writing proofs for propositional logic." />
+    <meta name="keywords" content="propositional logic, logic, discrete mathematics, computer science, teaching, learning, education" />
+    <meta name="author" content="Computer Science Department and Center for Teaching and Learning at Columbia University" />
+    <meta name="copyright" content="Center for Teaching and Learning at Columbia University - Code licensed GNU GPLv3">
 
     <!-- Dublin Core Metadata -->
-    <meta name="DC.Title" content="Logic Learner" />
-    <meta name="DC.Description" content="" />
+    <meta name="DC.Title" content="Logic Learner: A practice tool for writing proofs in propositional logic" />
+    <meta name="DC.Description" content="Logic Learner is a practice tool that help students improve their fluency and problem solving process in writing proofs for propositional logic." />
+    <meta name="DC.Rights" content="Center for Teaching and Learning at Columbia University - Code licensed GNU GPLv3">
+    <meta name="DC.Publisher" content="Center for Teaching and Learning at Columbia University" />
+    <meta name="DC.Contributor" content="Computer Science Department and Center for Teaching and Learning at Columbia University" />
 
     <!-- Open Graph -->
-    <meta property="og:title" content="Logic Learner" />
-    <meta property="og:type" content="" />
-    <meta property="og:image" content="" />
-    <meta property="og:description" content="" />
-    <meta property="og:url" content="" />
+    <meta property="og:title" content="Logic Learner: A practice tool for writing proofs in propositional logic" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://logiclearner.ctl.columbia.edu" />
+    <meta property="og:image" content="{{STATIC_URL}}img/og-logiclearner.png" />
+    <meta property="og:image:alt" content="A poster image for Logic Learner, containing the app logo, its title, a brief description, and web address." />
+    <meta property="og:description" content="Logic Learner is a practice tool that help students improve their fluency and problem solving process in writing proofs for propositional logic." />
     <meta property="og:site_name" content="Logic Learner" />
 
     <!-- Twitter -->
-    <meta name="twitter:card" content="summary" />
-    <meta name="twitter:site" content="@ccnmtl" />
-    <meta name="twitter:title" content="Logic Learner" />
-    <meta name="twitter:description" content="" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:image" content="{{STATIC_URL}}img/og-logiclearner.png" />
+    <meta name="twitter:image:alt" content="A poster image for Logic Learner, containing the app logo, its title, a brief description, and web address." />
+    <meta name="twitter:site" content="@columbiactl" />
+    <meta name="twitter:title" content="Logic Learner: A practice tool for writing proofs in propositional logic" />
+    <meta name="twitter:description" content="Logic Learner is a practice tool that help students improve their fluency and problem solving process in writing proofs for propositional logic." />
 
     <!-- JSON Structured data -->
-    <script type="application/ld+json">
-    {
-        "@context": "http://schema.org",
-        "@type": "WebSite",
-        "url": "",
-        "name": "",
-        "about": "",
-        "keywords": ""
-    }
-    </script>
+        <script type="application/ld+json">
+            {
+                "@context": "http://schema.org",
+                "@type": "SoftwareApplication",
+                "url": "https://logiclearner.ctl.columbia.edu",
+                "name": "Logic Learner: A practice tool for writing proofs in propositional logic",
+                "about": "Logic Learner is a practice tool that help students improve their fluency and problem solving process in writing proofs for propositional logic.",
+                "keywords": "propositional logic, logic, discrete mathematics, computer science, teaching, learning, education",
+                "image": "{{STATIC_URL}}img/og-logiclearner.png"
+            }
+        </script>
+
+    <!-- Favicons -->
+	<link rel="apple-touch-icon" href="{{STATIC_URL}}img/apple-touch-icon.png">
+	<link rel="shortcut icon" href="{{STATIC_URL}}img/favicon.ico">
+	<link rel="icon" href="{{STATIC_URL}}img/favicon.ico">
+	<link rel="icon" type="image/png" href="{{STATIC_URL}}img/favicon.png">
+
 
     <!-- For image reference -->
     <script>
@@ -60,12 +74,6 @@
             baseUrl: '//{{ request.get_host }}',
         }
     </script>
-
-    <!-- Favicons -->
-	<link rel="apple-touch-icon" href="{{STATIC_URL}}img/apple-touch-icon.png">
-	<link rel="shortcut icon" href="{{STATIC_URL}}img/favicon.ico">
-	<link rel="icon" href="{{STATIC_URL}}img/favicon.ico">
-	<link rel="icon" type="image/png" href="{{STATIC_URL}}img/favicon.png">
 
 </head>
 <body>
