@@ -174,7 +174,10 @@ export const ExerciseSpace: React.FC = () => {
         complete: 'complete'
     };
 
-    const showSolutionBtn = stepList.length >= 2;
+    // const showSolutionBtn = stepList.length >= 2;
+    const showResetBtn =
+    questionStatus === 'inprogress' || questionStatus === 'completed';
+
     // eslint-disable-next-line max-len
     const quesText: string = (statement.answer === 'F') || (statement.answer === 'T')
         ? 'is a'
@@ -374,6 +377,7 @@ export const ExerciseSpace: React.FC = () => {
                         </button>
                         <button
                             onClick={handleResetModal}
+                            disabled={!showResetBtn}
                             className="btn btn-lg ll-button
                                 mx-3 my-2 my-md-0 order-2 order-md-3">
                             <span className="ll-button__text">
