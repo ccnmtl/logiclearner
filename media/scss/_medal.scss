@@ -40,8 +40,8 @@
             width: 110%;
             margin-top: -0.25rem;
             margin-left: -0.25rem;
-            -webkit-animation: 0.75s linear 1s 3 alternate spin;
-            animation: 0.75s linear 1s 3 alternate spin;
+            -webkit-animation: 0.75s linear 0.75s 4 alternate spin;
+            animation: 0.75s linear 0.75s 4 alternate spin;
         }
     }
     &__cheer {
@@ -54,11 +54,11 @@
 
 /* Safari */
 @-webkit-keyframes spin {
-    0% { -webkit-transform: rotate(0deg)  scale(0.5); }
-    100% { -webkit-transform: rotate(-360deg)  scale(1); }
+    0% { -webkit-transform: rotate(-360deg)  scale(1); }
+    100% { -webkit-transform: rotate(0deg)  scale(0.5); }
 }
 
 @keyframes spin {
-    0% { transform: rotate(0deg) scale(0.5); }
-    100% { transform: rotate(-360deg) scale(1); }
+    0% { transform: rotate(-360deg) scale(1); }
+    100% { transform: rotate(0deg) scale(0.5); }
 }
