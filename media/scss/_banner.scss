@@ -5,11 +5,17 @@
     background: url('/media/img/bg-banner.jpg');
     background-repeat: no-repeat;
     background-size: 150%;
-    background-position: bottom -5rem left 0;
+    background-position: bottom -6rem left 0;
     color: #fff;
     @include media-breakpoint-up(md) {
         background-size: cover;
-        background-position: bottom;
+        background-position: bottom -5rem left 0;
+    }
+    @include media-breakpoint-up(lg) {
+        background-position: bottom -10rem left 0;
+    }
+    @include media-breakpoint-up(xl) {
+        background-position: bottom -12rem left 0;
     }
     &__title {
         display: block;
@@ -83,14 +89,18 @@
     height: 10rem;
     position: relative;
     color: #fff;
+    background-position: bottom -5rem left 0;
     @include media-breakpoint-up(md) {
         height: 16rem;
+        background-position: bottom;
     }
     @include media-breakpoint-up(lg) {
         height: 18rem;
+        background-position: bottom;
     }
     @include media-breakpoint-up(xl) {
         height: 24rem;
+        background-position: bottom;
     }
     &__container {
         margin-top: 1rem;
@@ -178,6 +188,11 @@
                 margin-left: -1.25rem;
             }
         }
+    }
+}
+@media (max-width: 389px) {
+    .banner-hero__container {
+        margin-top: 0.25rem;
     }
 }
 
