@@ -68,6 +68,24 @@
             height: 2.875rem;
         }
     }
+    .outline-icon {
+        display: inline;
+    }
+    .color-icon {
+        display: none;
+    }
+    &:hover,
+    &:focus {
+        color: #C8E6C9;
+    }
+    &:hover .outline-icon,
+    &:focus .outline-icon {
+        display: none;
+    }
+    &:hover .color-icon,
+    &:focus .color-icon {
+        display: inline;
+    }
 }
 
 

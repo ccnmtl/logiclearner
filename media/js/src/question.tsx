@@ -62,8 +62,9 @@ export const Question: React.FC<QuestionProps> = (
                 </span> {quesText} <span className="question-statement">
                     {answer}</span>.
             </div>
-            <div className="cardset-card__status"
-                aria-label={`Status: ${status[questionStatus]}`} >
+            <div className={`cardset-card__status icon-status
+                    icon-status-${status[questionStatus]}`}
+            aria-label={`Status: ${status[questionStatus]}`} >
                 <img src={`${STATIC_URL}img/icon-status-${status[questionStatus]}.svg`} title="{`Status: ${status[questionStatus]}`}" /> {/* eslint-disable-line max-len */}
             </div>
             <div className="cardset-card__prompt">

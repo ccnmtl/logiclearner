@@ -1,1 +1,15 @@
-<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 335.81 325.91"><defs><style>.cls-1{fill:#fff;stroke:#000;stroke-miterlimit:10;stroke-width:14px;}</style></defs><rect class="cls-1" x="134.32" y="181.82" width="67.18" height="67.18" transform="translate(-103.14 181.82) rotate(-45)"/><polygon class="cls-1" points="215.41 215.41 215.41 120.4 167.91 167.91 215.41 215.41"/><polygon class="cls-1" points="120.4 215.41 18.2 317.61 120.4 310.42 167.91 262.91 120.4 215.41"/><polygon class="cls-1" points="215.41 215.41 167.91 262.91 215.41 310.42 317.61 208.21 215.41 215.41"/><polygon class="cls-1" points="215.41 120.4 113.2 18.2 120.4 120.4 167.91 167.91 215.41 120.4"/><polygon class="cls-1" points="120.4 310.42 215.41 310.42 167.91 262.91 120.4 310.42"/><polygon class="cls-1" points="120.4 120.4 120.4 215.41 167.91 167.91 120.4 120.4"/></svg>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 26.0.2, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 335.8 325.9" style="enable-background:new 0 0 335.8 325.9;" xml:space="preserve">
+<style type="text/css">
+	.st0{fill:none;stroke:#000000;stroke-width:14;stroke-miterlimit:10;}
+</style>
+<rect x="134.3" y="181.8" transform="matrix(0.7071 -0.7071 0.7071 0.7071 -103.137 181.8204)" class="st0" width="67.2" height="67.2"/>
+<polygon class="st0" points="215.4,215.4 215.4,120.4 167.9,167.9 "/>
+<polygon class="st0" points="120.4,215.4 18.2,317.6 120.4,310.4 167.9,262.9 "/>
+<polygon class="st0" points="215.4,215.4 167.9,262.9 215.4,310.4 317.6,208.2 "/>
+<polygon class="st0" points="215.4,120.4 113.2,18.2 120.4,120.4 167.9,167.9 "/>
+<polygon class="st0" points="120.4,310.4 215.4,310.4 167.9,262.9 "/>
+<polygon class="st0" points="120.4,120.4 120.4,215.4 167.9,167.9 "/>
+</svg>

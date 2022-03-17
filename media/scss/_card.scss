@@ -159,8 +159,8 @@
     &__status {
         margin-left: auto;
         align-self: center;
-        width: 2rem;
-        height: 2rem;
+        width: 1.75rem;
+        height: 1.75rem;
         flex-grow: 0;
         flex-shrink: 0;
         @include media-breakpoint-up(md) {
@@ -192,7 +192,9 @@
             display: none;
         }
     }
-
+    &__button {
+        cursor: pointer;
+    }
 }
 
 
