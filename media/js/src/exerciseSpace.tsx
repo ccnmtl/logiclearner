@@ -49,7 +49,9 @@ export const ExerciseSpace: React.FC = () => {
                     'question-' + id)) as ExerciseData[];
             const questStatus = data[0].status;
             const stepList = data[0].stepList;
-            stepList.push(['', '']);
+            if (questStatus !== 'complete'){
+                stepList.push(['', '']);
+            }
             setQuestionStatus(questStatus);
             setStepList(stepList);
             setIsIncomplete(data[0].status !== 'complete');
@@ -304,7 +306,6 @@ export const ExerciseSpace: React.FC = () => {
                                     stepList={stepList}
                                     key={idx}
                                     idx={idx}
-                                    blankSlate={'map'}
                                     setStepList={setStepList}
                                     hint={hint}
                                     setHint={setHint}
@@ -315,6 +316,7 @@ export const ExerciseSpace: React.FC = () => {
                                     hintButtonCount={hintButtonCount}
                                     setHintButtonCount={setHintButtonCount}
                                     setIsIncomplete={setIsIncomplete}
+                                    isIncomplete={isIncomplete}
                                     setQuestionStatus={setQuestionStatus} />
                             );
                         }

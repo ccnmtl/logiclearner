@@ -23,7 +23,7 @@ interface SolutionStepProps {
     setHintButtonCount: React.Dispatch<React.SetStateAction<number>>,
     setIsIncomplete: React.Dispatch<React.SetStateAction<boolean>>,
     setQuestionStatus: React.Dispatch<React.SetStateAction<string>>,
-    blankSlate: string;
+    isIncomplete: boolean
 }
 const laws: Array<string> = ['Absorption', 'Associativity', 'Commutativity',
     'De Morgan\'s Law', 'Distributivity', 'Domination', 'Double Negation',
@@ -34,7 +34,7 @@ export const SolutionStep: React.FC<SolutionStepProps> = (
     {statement, id, step, stepList, idx, setStepList,
         hint, hintButtonCount, nextStep, setNextStep, setNextRule,
         nextRule, setHint, setHintButtonCount, setIsIncomplete,
-        setQuestionStatus, blankSlate
+        setQuestionStatus, isIncomplete
     }: SolutionStepProps) => {
 
     const [error, setError] = useState('');
@@ -149,8 +149,8 @@ export const SolutionStep: React.FC<SolutionStepProps> = (
     const haveErrors = !error;
     const isLawHint = isLast && hintButtonCount > 0;
     const isStatementHint = isLast && hintButtonCount === 2;
-    const isFirst = idx === 0 || blankSlate === 'blank1';
-
+    const isFirst = idx === 0;
+    const showButtons = isLast && isIncomplete;
     useEffect(() => {
         setNextRule('Start');
     }, []);
@@ -197,7 +197,7 @@ export const SolutionStep: React.FC<SolutionStepProps> = (
                             </label>
                             <input type='text' className='form-control'
                                 id={`statementInput-${idx}`}
-                                aria-describedby='statement'
+                                aria-describedby={`statement-${idx}`}
                                 placeholder='Logic statement'
                                 key={`statement-${idx}`}
                                 name={`statement-${idx}`}
@@ -216,7 +216,7 @@ export const SolutionStep: React.FC<SolutionStepProps> = (
                                     <img src={`${STATIC_URL}img/icon-step-complete.svg`} alt="" /> {/* eslint-disable-line max-len */}
                                 </div>
                             )}
-                            {isLast && (
+                            {showButtons && (
                                 <>
                                     <button
                                         type="reset"
