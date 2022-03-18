@@ -6,13 +6,15 @@ export const NotFound: React.FC = () => {
     return (
         <>
             <div className="http-error-prompt row" data-testid='not-found'>
-                <div className="col-12 col-lg-6 pt-5">
+                <div className="col-12 col-lg-6 pt-0 pt-lg-5">
                     <div className="http-error-prompt__decor text-center">
                         <img alt="Banner for HTTP 404 Page not found"
                             src={`${STATIC_URL}img/eincorgi-404.svg`} />
                     </div>
                 </div>
-                <div className="col-12 col-lg-6 text-center text-lg-left">
+                <div className="col-12 col-lg-6
+                    text-center text-lg-left
+                    pb-5 pb-lp-0">
                     <h1>Page not found</h1>
 
                     <p className='fs-4 mt-5'>
