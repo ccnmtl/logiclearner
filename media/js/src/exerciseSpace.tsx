@@ -221,8 +221,7 @@ export const ExerciseSpace: React.FC = () => {
                         <a href={`/questions/${statement.difficulty}`}>
                             <img src={
                                 `${STATIC_URL}img/avatar-level-${
-                                    statement.difficulty + 1}.svg`
-                            } />
+                                    statement.difficulty + 1}.svg`} />
                         </a>
                     </figure>
                     <h1 className="align-self-center">
@@ -265,6 +264,14 @@ export const ExerciseSpace: React.FC = () => {
             <section className="container content-body exercise-space"
                 id="maincontent" data-testid={'exerciseSpace'}>
                 <div className='question__status'>
+                    <div className={`question__status__icon icon-status
+                            icon-status-${status[questionStatus]}`}
+                    aria-label={`Status: ${status[questionStatus]}`} >
+                        <img src={
+                            `${STATIC_URL}img/icon-status-${
+                                status[questionStatus]}.svg`}
+                        title={`Status: ${status[questionStatus]}`} />
+                    </div>
                     <div className='question__status__text'>
                         {status[questionStatus] === 'inprogress' ? 'In progress'
                             : status[questionStatus] === 'complete'

@@ -46,7 +46,6 @@ export const Question: React.FC<QuestionProps> = (
         void getQuestionStatus();
     }, []);
 
-
     const quesText: string =
     (statement.answer === 'F') || (statement.answer === 'T')
         ? 'is a'
