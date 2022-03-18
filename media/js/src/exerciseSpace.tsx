@@ -279,11 +279,6 @@ export const ExerciseSpace: React.FC = () => {
                                 : 'Haven’t started'
                         }
                     </div>
-                    <div className={`question__status__icon icon-status
-                            icon-status-${status[questionStatus]}`}
-                    aria-label={`Status: ${status[questionStatus]}`} >
-                        <img src={`${STATIC_URL}img/icon-status-${status[questionStatus]}.svg`} title={`Status: ${status[questionStatus]}`} /> {/* eslint-disable-line max-len */}
-                    </div>
                 </div>
                 <p className="question fs-2">
                     Prove that <span className="question-statement">
