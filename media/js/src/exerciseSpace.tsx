@@ -198,9 +198,9 @@ export const ExerciseSpace: React.FC = () => {
         void fetchStatement().then((statement: Statement) => {
             const level: string = levels[statement.difficulty];
             setSolutionStepData(statement, level);
+            getQuestionData();
         });
         {void fetchSolutions();}
-        {getQuestionData();}
         window.scrollTo(0, 0);
     }, []);
 
@@ -216,7 +216,10 @@ export const ExerciseSpace: React.FC = () => {
                     <figure className="main-banner__avatar align-self-center"
                         aria-hidden="true">
                         <a href={`/questions/${statement.difficulty}`}>
-                            <img src={`${STATIC_URL}img/avatar-level-${statement.difficulty + 1}.svg`} /> {/* eslint-disable-line max-len */}
+                            <img src={
+                                `${STATIC_URL}img/avatar-level-${
+                                    statement.difficulty + 1}.svg`
+                            } />
                         </a>
                     </figure>
                     <h1 className="align-self-center">
