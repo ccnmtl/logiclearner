@@ -50,7 +50,7 @@ export const SolutionStep: React.FC<SolutionStepProps> = (
                 'question-' + id)) as ExerciseData[];
         setStepList(stepList);
 
-        if (data[0].stepList.length === 1){
+        if (data[0].stepList[0] === ['', '']){
             setQuestionStatus(null);
             data[0].status = null;
             window.localStorage.setItem('question-' + id,

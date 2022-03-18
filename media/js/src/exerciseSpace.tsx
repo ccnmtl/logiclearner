@@ -172,7 +172,8 @@ export const ExerciseSpace: React.FC = () => {
     const status: Status = {
         null: 'initial',
         inprogress: 'inprogress',
-        complete: 'complete'
+        complete: 'complete',
+        '': 'initial'
     };
 
     // const showSolutionBtn = stepList.length >= 3;
@@ -272,7 +273,7 @@ export const ExerciseSpace: React.FC = () => {
                     <div className={`question__status__icon icon-status
                             icon-status-${status[questionStatus]}`}
                     aria-label={`Status: ${status[questionStatus]}`} >
-                        <img src={`${STATIC_URL}img/icon-status-${status[questionStatus]}.svg`} title="{`Status: ${status[questionStatus]}`}" /> {/* eslint-disable-line max-len */}
+                        <img src={`${STATIC_URL}img/icon-status-${status[questionStatus]}.svg`} title={`Status: ${status[questionStatus]}`} /> {/* eslint-disable-line max-len */}
                     </div>
                 </div>
                 <p className="question fs-2">
