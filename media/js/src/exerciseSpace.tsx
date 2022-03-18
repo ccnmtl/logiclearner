@@ -177,7 +177,7 @@ export const ExerciseSpace: React.FC = () => {
 
     // const showSolutionBtn = stepList.length >= 3;
     const showResetBtn =
-    questionStatus === 'inprogress' || questionStatus === 'completed';
+    questionStatus === 'inprogress' || questionStatus === 'complete';
 
     // eslint-disable-next-line max-len
     const quesText: string = (statement.answer === 'F') || (statement.answer === 'T')
@@ -258,15 +258,26 @@ export const ExerciseSpace: React.FC = () => {
             </header>
             <section className="container content-body exercise-space"
                 id="maincontent" data-testid={'exerciseSpace'}>
+                <div className='question__status'>
+                    <div className='question__status__text'>
+                        {status[questionStatus] === 'inprogress' ? 'In progress'
+                            : status[questionStatus] === 'complete'
+                                ? 'Completed'
+                                : 'Haven’t started'
+                        }
+                    </div>
+                    <div className={`question__status__icon icon-status
+                            icon-status-${status[questionStatus]}`}
+                    aria-label={`Status: ${status[questionStatus]}`} >
+                        <img src={`${STATIC_URL}img/icon-status-${status[questionStatus]}.svg`} title="{`Status: ${status[questionStatus]}`}" /> {/* eslint-disable-line max-len */}
+                    </div>
+                </div>
                 <p className="question fs-2">
                     Prove that <span className="question-statement">
                         {question}
                     </span> {quesText} <span className="question-statement">
                         {answer}
                     </span>.
-                </p>
-                <p className="text-secondary text-end">
-                    (Status: {status[questionStatus]})
                 </p>
                 <div className="exercise-solution">
                     {showResetModal && (

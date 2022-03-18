@@ -1,6 +1,32 @@
 .question {
-    margin-top: 3rem;
-    margin-bottom: 2rem;
+    margin-top: 2rem;
+    margin-bottom: 3rem;
+    &__status {
+        margin-left: 0;
+        width: 15rem;
+        display: flex;
+        flex-direction: row;
+        justify-content: start;
+        @include media-breakpoint-up(md) {
+            width: 15rem;
+        }
+        &__text {
+            color: #666666;
+            align-self: center;
+            font-size: 1rem;
+        }
+        &__icon {
+            margin-left: 0.5rem;
+            align-self: center;
+            width: 1.5rem;
+            height: 1.5rem;
+            flex-grow: 0;
+            flex-shrink: 0;
+            img {
+                vertical-align: top;
+            }
+        }
+    }
 }
 
 .question-statement {
