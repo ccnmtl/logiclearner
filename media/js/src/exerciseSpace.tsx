@@ -176,7 +176,7 @@ export const ExerciseSpace: React.FC = () => {
 
     // const showSolutionBtn = stepList.length >= 2;
     const showResetBtn =
-    questionStatus === 'inprogress' || questionStatus === 'completed';
+    questionStatus === 'inprogress' || questionStatus === 'complete';
 
     // eslint-disable-next-line max-len
     const quesText: string = (statement.answer === 'F') || (statement.answer === 'T')
