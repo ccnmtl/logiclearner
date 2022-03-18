@@ -77,11 +77,24 @@
     padding: 0.5rem;
     vertical-align: middle;
     text-align: center;
-    line-height: 190%;
+    font-size: 1.175rem;
+    line-height: 2.45;
     background-color: #e8f5e9;
     flex-grow: 0;
     flex-shrink: 0;
     color: #000;
+    @include media-breakpoint-up(md) {
+        width: 4.5rem;
+        height: 4.5rem;
+        line-height: 2.4;
+        font-size: 1.375rem;
+    }
+    @include media-breakpoint-up(lg) {
+        width: 4.75rem;
+        height: 4.75rem;
+        line-height: 2.45;
+        font-size: 1.5rem;
+    }
 }
 
 
