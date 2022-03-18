@@ -27,6 +27,7 @@ export const QuestionsDashboard: React.FC<QuestionsDashboardProps> = (
         // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
         const json: Array<Statement> = await getStatements(difficulty);
         setStatements(json);
+        setLevelCount(json.length);
     }
     const getQuestionList = () => {
         const keys = Object.keys(localStorage);
@@ -40,17 +41,12 @@ export const QuestionsDashboard: React.FC<QuestionsDashboardProps> = (
         }
         setquestionsList(arrQs);
     };
-    async function fetchCounts() {
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-        const novArr: Array<Statement>  = await getStatements(difficulty);
-        setLevelCount(novArr.length);
-    }
+
     const completedCount = completionCount(difficulty, questionsList);
 
     useEffect(() => {
         void fetchStatements();
         void getQuestionList();
-        void fetchCounts();
     }, []);
 
     return (
@@ -59,7 +55,10 @@ export const QuestionsDashboard: React.FC<QuestionsDashboardProps> = (
                 <div className="container d-flex justify-content-start">
                     <figure className="main-banner__avatar align-self-center"
                         aria-hidden="true">
-                        <img src={`${STATIC_URL}img/avatar-level-${difficulty + 1}.svg`} /> {/* eslint-disable-line max-len */}
+                        <img src={
+                            `${STATIC_URL}img/avatar-level-${
+                                difficulty + 1}.svg`
+                        } />
                     </figure>
                     <h1 className="align-self-center pe-3">
                         <span className="main-banner__subhead">
