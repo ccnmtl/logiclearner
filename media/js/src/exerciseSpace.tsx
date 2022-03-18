@@ -145,9 +145,7 @@ export const ExerciseSpace: React.FC = () => {
         }
         void fetchHints();
     };
-    const handleNextQuestion = () => {
-        //TBD
-    };
+
     const modalCancel = () => {
         setShowResetModal(false);
     };
@@ -168,6 +166,9 @@ export const ExerciseSpace: React.FC = () => {
         setStepList([['', '']]);
         setIsIncomplete(true);
         setQuestionStatus(null);
+        Array.from(document.querySelectorAll('input')).forEach(
+            input => (input.value = '')
+        );
         window.scrollTo(0, 0);
     };
 
