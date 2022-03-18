@@ -49,6 +49,7 @@ export const ExerciseSpace: React.FC = () => {
                     'question-' + id)) as ExerciseData[];
             const questStatus = data[0].status;
             const stepList = data[0].stepList;
+            stepList.push(['', '']);
             setQuestionStatus(questStatus);
             setStepList(stepList);
             setIsIncomplete(data[0].status !== 'complete');
@@ -91,7 +92,7 @@ export const ExerciseSpace: React.FC = () => {
         //Only if we don't already have hints
         if (hintButtonCount === 0) {
             //Set up initial hints call with no entry.
-            if (!nextStep && stepList.length === 0) {
+            if (!nextStep && stepList.length === 1) {
 
                 hintData['next_expr'] = statement.question;
                 hintData['rule'] = 'Start';
@@ -104,8 +105,8 @@ export const ExerciseSpace: React.FC = () => {
                 setHint([toolsData.hintRule, toolsData.hintExpression]);
             } else {
                 let lastCorrectStep = '';
-                if (stepList.length > 0){
-                    lastCorrectStep = stepList[stepList.length - 1][1];
+                if (stepList.length > 1){
+                    lastCorrectStep = stepList[stepList.length - 2][1];
                 } else {
                     lastCorrectStep = statement.question;
                 }
@@ -162,7 +163,7 @@ export const ExerciseSpace: React.FC = () => {
         const exerciseState = [...new Array<ExerciseData>(initData)];
         window.localStorage.setItem('question-' + id,
             JSON.stringify(exerciseState));
-        setStepList([]);
+        setStepList([['', '']]);
         setIsIncomplete(true);
         setQuestionStatus(null);
         window.scrollTo(0, 0);
@@ -174,7 +175,7 @@ export const ExerciseSpace: React.FC = () => {
         complete: 'complete'
     };
 
-    // const showSolutionBtn = stepList.length >= 2;
+    // const showSolutionBtn = stepList.length >= 3;
     const showResetBtn =
     questionStatus === 'inprogress' || questionStatus === 'completed';
 
@@ -191,7 +192,7 @@ export const ExerciseSpace: React.FC = () => {
         2: 'Apprentice'
     };
     const level: string = levels[statement.difficulty];
-    const isPastSteps = stepList.length > 0;
+    // const isPastSteps = stepList.length > 0;
 
     useEffect(() => {
         void fetchStatement().then((statement: Statement) => {
@@ -277,7 +278,7 @@ export const ExerciseSpace: React.FC = () => {
                             cancelFunc={modalCancel}
                             resetFunc={resetFunc}/>
                     )}
-                    {isPastSteps && stepList.map(
+                    {stepList.map(
                         (step: [string, string], idx) => {
                             return (
                                 <SolutionStep
@@ -302,27 +303,6 @@ export const ExerciseSpace: React.FC = () => {
                                     setQuestionStatus={setQuestionStatus} />
                             );
                         }
-                    )}
-                    {isIncomplete && (
-                        <SolutionStep
-                            statement={statement}
-                            id={id}
-                            level={level}
-                            step={['','']}
-                            stepList={stepList}
-                            setStepList={setStepList}
-                            idx={stepList.length + 1}
-                            blankSlate={`blank${stepList.length + 1}`}
-                            hint={hint}
-                            setHint={setHint}
-                            nextStep={nextStep}
-                            nextRule={nextRule}
-                            setNextStep={setNextStep}
-                            setNextRule={setNextRule}
-                            hintButtonCount={hintButtonCount}
-                            setHintButtonCount={setHintButtonCount}
-                            setIsIncomplete={setIsIncomplete}
-                            setQuestionStatus={setQuestionStatus} />
                     )}
                     {!isIncomplete && (
                         <>

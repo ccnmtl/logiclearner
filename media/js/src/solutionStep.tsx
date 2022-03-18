@@ -40,14 +40,15 @@ export const SolutionStep: React.FC<SolutionStepProps> = (
     const handleDeleteStep = (
         evt: React.MouseEvent<HTMLButtonElement>): void => {
         evt.preventDefault();
+
+        stepList.pop();
+
         const data = JSON.parse(
             window.localStorage.getItem(
                 'question-' + id)) as ExerciseData[];
-        data[0].stepList.pop();
-        window.localStorage.setItem('question-' + id,
-            JSON.stringify(data));
-        setStepList(data[0].stepList);
-        if (data[0].stepList.length === 0){
+        setStepList(stepList);
+
+        if (data[0].stepList.length === 1){
             setQuestionStatus(null);
             data[0].status = null;
             window.localStorage.setItem('question-' + id,
@@ -77,8 +78,8 @@ export const SolutionStep: React.FC<SolutionStepProps> = (
         };
         let lastCorrectStep = '';
 
-        if (stepList.length > 0) {
-            lastCorrectStep = stepList[stepList.length - 1][1];
+        if (stepList.length > 1) {
+            lastCorrectStep = stepList[stepList.length - 2][1];
         } else {
             lastCorrectStep = statement.question;
         }
@@ -107,6 +108,7 @@ export const SolutionStep: React.FC<SolutionStepProps> = (
                 id, step);
             updateLocalQuestionStatus(id, 'inprogress');
             setQuestionStatus('inprogress');
+            newStepList.push(['', '']);
             setStepList(newStepList);
             setHint(['', '']);
             setHintButtonCount(0);
@@ -141,7 +143,7 @@ export const SolutionStep: React.FC<SolutionStepProps> = (
         }
     };
 
-    const isLast = idx === stepList.length + 1;
+    const isLast = idx === stepList.length - 1;
     const haveErrors = !error;
     const isLawHint = isLast && hintButtonCount > 0;
     const isStatementHint = isLast && hintButtonCount === 2;
@@ -169,9 +171,7 @@ export const SolutionStep: React.FC<SolutionStepProps> = (
                                 id={`laws-${idx}`} className='form-select'
                                 key={`${step[0]}-${idx}`}
                                 onChange={handleLawSelect}
-                                defaultValue={
-                                    capitalize(step[0])
-                                }
+                                defaultValue={capitalize(step[0])}
                                 disabled={step[0] === '' ? false : true} >
                                 <option value={''}>
                                     Choose One
