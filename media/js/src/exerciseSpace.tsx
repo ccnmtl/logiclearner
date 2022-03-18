@@ -171,7 +171,8 @@ export const ExerciseSpace: React.FC = () => {
     const status: Status = {
         null: 'initial',
         inprogress: 'inprogress',
-        complete: 'complete'
+        complete: 'complete',
+        '': 'initial'
     };
 
     // const showSolutionBtn = stepList.length >= 2;
@@ -215,7 +216,9 @@ export const ExerciseSpace: React.FC = () => {
                     <figure className="main-banner__avatar align-self-center"
                         aria-hidden="true">
                         <a href={`/questions/${statement.difficulty}`}>
-                            <img src={`${STATIC_URL}img/avatar-level-${statement.difficulty + 1}.svg`} /> {/* eslint-disable-line max-len */}
+                            <img src={
+                                `${STATIC_URL}img/avatar-level-${
+                                    statement.difficulty + 1}.svg`} />
                         </a>
                     </figure>
                     <h1 className="align-self-center">
@@ -261,7 +264,10 @@ export const ExerciseSpace: React.FC = () => {
                     <div className={`question__status__icon icon-status
                             icon-status-${status[questionStatus]}`}
                     aria-label={`Status: ${status[questionStatus]}`} >
-                        <img src={`${STATIC_URL}img/icon-status-${status[questionStatus]}.svg`} title="{`Status: ${status[questionStatus]}`}" /> {/* eslint-disable-line max-len */}
+                        <img src={
+                            `${STATIC_URL}img/icon-status-${
+                                status[questionStatus]}.svg`}
+                        title={`Status: ${status[questionStatus]}`} />
                     </div>
                     <div className='question__status__text'>
                         {status[questionStatus] === 'inprogress' ? 'In progress'

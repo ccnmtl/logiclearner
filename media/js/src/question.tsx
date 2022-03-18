@@ -46,10 +46,11 @@ export const Question: React.FC<QuestionProps> = (
         void getQuestionStatus();
     }, []);
 
-    // eslint-disable-next-line max-len
-    const quesText: string = (statement.answer === 'F') || (statement.answer === 'T')
+    const quesText: string =
+    (statement.answer === 'F') || (statement.answer === 'T')
         ? 'is a'
         : 'is logically equivalent to';
+
     const answer: string = raw2latex(checkQuestion(statement.answer));
     const question = raw2latex(statement.question);
 
@@ -65,7 +66,10 @@ export const Question: React.FC<QuestionProps> = (
             <div className={`cardset-card__status icon-status
                     icon-status-${status[questionStatus]}`}
             aria-label={`Status: ${status[questionStatus]}`} >
-                <img src={`${STATIC_URL}img/icon-status-${status[questionStatus]}.svg`} title="{`Status: ${status[questionStatus]}`}" /> {/* eslint-disable-line max-len */}
+                <img src={
+                    `${STATIC_URL}img/icon-status-${status[questionStatus]}.svg`
+                }
+                title={`Status: ${status[questionStatus]}`} />
             </div>
             <div className="cardset-card__prompt">
                 &rsaquo;
