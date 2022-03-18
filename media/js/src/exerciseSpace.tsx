@@ -258,17 +258,17 @@ export const ExerciseSpace: React.FC = () => {
             <section className="container content-body exercise-space"
                 id="maincontent" data-testid={'exerciseSpace'}>
                 <div className='question__status'>
+                    <div className={`question__status__icon icon-status
+                            icon-status-${status[questionStatus]}`}
+                    aria-label={`Status: ${status[questionStatus]}`} >
+                        <img src={`${STATIC_URL}img/icon-status-${status[questionStatus]}.svg`} title="{`Status: ${status[questionStatus]}`}" /> {/* eslint-disable-line max-len */}
+                    </div>
                     <div className='question__status__text'>
                         {status[questionStatus] === 'inprogress' ? 'In progress'
                             : status[questionStatus] === 'complete'
                                 ? 'Completed'
                                 : 'Haven’t started'
                         }
-                    </div>
-                    <div className={`question__status__icon icon-status
-                            icon-status-${status[questionStatus]}`}
-                    aria-label={`Status: ${status[questionStatus]}`} >
-                        <img src={`${STATIC_URL}img/icon-status-${status[questionStatus]}.svg`} title="{`Status: ${status[questionStatus]}`}" /> {/* eslint-disable-line max-len */}
                     </div>
                 </div>
                 <p className="question fs-2">
