@@ -16,6 +16,9 @@ class Statement(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     modified_at = models.DateTimeField(auto_now=True)
 
+    class Meta:
+        ordering = ['pk']
+
 
 class Solution(models.Model):
     statement = models.ForeignKey(Statement, on_delete=models.CASCADE)
