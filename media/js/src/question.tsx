@@ -51,7 +51,12 @@ export const Question: React.FC<QuestionProps> = (
         ? 'is a'
         : 'is logically equivalent to';
 
-    const answer: string = raw2latex(checkQuestion(statement.answer));
+    const answer: string =
+        checkQuestion(statement.answer) === 'Tautology'
+        || checkQuestion(statement.answer) === 'Fallacy'
+            ? checkQuestion(statement.answer)
+            : raw2latex(checkQuestion(statement.answer));
+
     const question = raw2latex(statement.question);
 
     return (
