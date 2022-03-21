@@ -3,6 +3,11 @@
 
 Logic Learner is an online learning tool that helps computer science, engineering, and mathematics students improve their fluency and problem solving process in writing proofs for propositional logic.
 
+## Logic Learner Tools
+
+Logic Learner makes use of Logic Learner Tools for the feedback portion of the application. Logic Learner Tools provides detection of syntax errors, propositional laws errors, and statement errors.
+Logic Learner Tools is found here: https://pypi.org/project/logiclearnertools/
+
 ## Configuration
 
 1. Clone
