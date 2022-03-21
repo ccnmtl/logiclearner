@@ -43,12 +43,17 @@ export const SolutionStep: React.FC<SolutionStepProps> = (
         evt: React.MouseEvent<HTMLButtonElement>): void => {
         evt.preventDefault();
 
-        stepList.pop();
+        if (idx === 0) {
 
+        }
+        console.log('before', stepList)
+        stepList.pop()
+        console.log('after pop', stepList)
         const data = JSON.parse(
             window.localStorage.getItem(
                 'question-' + id)) as ExerciseData[];
         setStepList(stepList);
+        console.log('after set', stepList)
 
         if (data[0].stepList[0] === ['', '']){
             setQuestionStatus(null);
@@ -56,8 +61,28 @@ export const SolutionStep: React.FC<SolutionStepProps> = (
             window.localStorage.setItem('question-' + id,
                 JSON.stringify(data));
         }
+        console.log('local storage list', data[0].stepList)
         setError('');
     };
+
+    // const handleDeleteStep = (
+    //     evt: React.MouseEvent<HTMLButtonElement>): void => {
+    //     evt.preventDefault();
+    //     const data = JSON.parse(
+    //         window.localStorage.getItem(
+    //             'question-' + id)) as ExerciseData[];
+    //     data[0].stepList.pop();
+    //     window.localStorage.setItem('question-' + id,
+    //         JSON.stringify(data));
+    //     setStepList(data[0].stepList);
+    //     if (data[0].stepList.length === 0){
+    //         setQuestionStatus(null);
+    //         data[0].status = null;
+    //         window.localStorage.setItem('question-' + id,
+    //             JSON.stringify(data));
+    //     }
+    //     setError('');
+    // };
 
     const handleStatementInput = (
         evt: React.ChangeEvent<HTMLInputElement>): void => {
@@ -174,7 +199,11 @@ export const SolutionStep: React.FC<SolutionStepProps> = (
                                 key={`${step[0]}-${idx}`}
                                 onChange={handleLawSelect}
                                 defaultValue={capitalize(step[0])}
-                                disabled={step[0] === '' ? false : true} >
+                                disabled={
+                                    step[0] === '' || isIncomplete
+                                        ? false
+                                        : true
+                                } >
                                 <option value={''}>
                                     Choose One
                                 </option>
@@ -203,7 +232,11 @@ export const SolutionStep: React.FC<SolutionStepProps> = (
                                 name={`statement-${idx}`}
                                 defaultValue={raw2latex(step[1])}
                                 onChange={handleStatementInput}
-                                disabled={step[0] === '' ? false : true} />
+                                disabled={
+                                    step[0] === '' || isIncomplete
+                                        ? false
+                                        : true
+                                } />
                             <div>{isStatementHint && (
                                 <div>{hint[1]}</div>
                             )}</div>
