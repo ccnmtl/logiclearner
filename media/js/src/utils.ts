@@ -158,6 +158,12 @@ export const raw2latex = function(quesText: string) {
     str = str.replace(new RegExp('->', 'g'), '→');
     str = str.replace(new RegExp('v', 'g'), '∨');
     str = str.replace(/\^/g, '∧');
+    str = str.replace('t', 'T');
+    str = str.replace('f', 'F');
+    str = str.replace('P', 'p');
+    str = str.replace('Q', 'q');
+    str = str.replace('R', 'r');
+    str = str.replace('S', 's');
 
     return str;
 };
@@ -173,6 +179,12 @@ export const latex2raw = function(quesText: string) {
     str = str.replace(new RegExp('↔', 'g'), '<->');
     str = str.replace(new RegExp('→', 'g'), '->');
     str = str.replace(new RegExp('¬', 'g'), '~');
+    str = str.replace('t', 'T');
+    str = str.replace('f', 'F');
+    str = str.replace('P', 'p');
+    str = str.replace('Q', 'q');
+    str = str.replace('R', 'r');
+    str = str.replace('S', 's');
 
     return str;
 };
