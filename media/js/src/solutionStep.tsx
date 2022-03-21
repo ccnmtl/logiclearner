@@ -43,17 +43,14 @@ export const SolutionStep: React.FC<SolutionStepProps> = (
         evt: React.MouseEvent<HTMLButtonElement>): void => {
         evt.preventDefault();
 
-        if (idx === 0) {
+        stepList.pop();
+        const newStepList = [...stepList];
 
-        }
-        console.log('before', stepList)
-        stepList.pop()
-        console.log('after pop', stepList)
         const data = JSON.parse(
             window.localStorage.getItem(
                 'question-' + id)) as ExerciseData[];
-        setStepList(stepList);
-        console.log('after set', stepList)
+        setStepList(newStepList);
+
 
         if (data[0].stepList[0] === ['', '']){
             setQuestionStatus(null);
@@ -61,7 +58,7 @@ export const SolutionStep: React.FC<SolutionStepProps> = (
             window.localStorage.setItem('question-' + id,
                 JSON.stringify(data));
         }
-        console.log('local storage list', data[0].stepList)
+
         setError('');
     };
 
