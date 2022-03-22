@@ -54,7 +54,7 @@ export const ExerciseSpace: React.FC = () => {
             }
             setQuestionStatus(questStatus);
             setStepList(stepList);
-            setIsIncomplete(data[0].status !== 'complete');
+            setIsIncomplete(questStatus !== 'complete');
         } catch (error) {
             setQuestionStatus(null);
         }
@@ -183,8 +183,9 @@ export const ExerciseSpace: React.FC = () => {
     const showResetBtn =
     questionStatus === 'inprogress' || questionStatus === 'complete';
 
-    // eslint-disable-next-line max-len
-    const quesText: string = (statement.answer === 'F') || (statement.answer === 'T')
+
+    const quesText: string =
+    (statement.answer === 'F') || (statement.answer === 'T')
         ? 'is a'
         : 'is logically equivalent to';
     const answer: string = raw2latex(checkQuestion(statement.answer));
@@ -196,7 +197,6 @@ export const ExerciseSpace: React.FC = () => {
         2: 'Apprentice'
     };
     const level: string = levels[statement.difficulty];
-    // const isPastSteps = stepList.length > 0;
 
     useEffect(() => {
         void fetchStatement().then((statement: Statement) => {
@@ -342,8 +342,6 @@ export const ExerciseSpace: React.FC = () => {
                                     </p>
                                 </div>
                                 <div className='col-12'>
-                                    {/* <button onClick={handleNextQuestion}>
-                                        Next</button> */}
                                     <a href={
                                         `/questions/${statement.difficulty}`}
                                     className="btn btn-lg ll-button

@@ -43,43 +43,63 @@ export const SolutionStep: React.FC<SolutionStepProps> = (
         evt: React.MouseEvent<HTMLButtonElement>): void => {
         evt.preventDefault();
 
-        stepList.pop();
-        const newStepList = [...stepList];
 
+        if (idx === 0) {
+            console.log('herere');
+            stepList.push(['', '']);
+            setStepList(stepList);
+            Array.from(document.querySelectorAll('input')).forEach(
+                input => (input.value = '')
+            );
+
+        }
+        //If current step is empty
+        else if (step[0] === '') {
+            stepList.pop();
+            const newStepList = [...stepList];
+            setStepList(newStepList);
+            setNext();
+
+        }
+        //if current step is a step
+        else if (step[0] !== '') {
+            stepList.pop();
+            const newStepList = [...stepList];
+            setStepList(newStepList);
+            setNext();
+            const data = JSON.parse(
+                window.localStorage.getItem(
+                    'question-' + id)) as ExerciseData[];
+            data[0].stepList.pop();
+            window.localStorage.setItem('question-' + id,
+                JSON.stringify(data));
+
+
+        }
+
+        // stepList.pop();
+        // const newStepList = [...stepList];
         const data = JSON.parse(
             window.localStorage.getItem(
                 'question-' + id)) as ExerciseData[];
-        setStepList(newStepList);
+        // data[0].stepList = newStepList;
+        // window.localStorage.setItem('question-' + id,
+        //     JSON.stringify(data));
+        // setStepList(newStepList);
 
-
-        if (data[0].stepList[0] === ['', '']){
+        if (!data[0].stepList[0]) {
             setQuestionStatus(null);
             data[0].status = null;
             window.localStorage.setItem('question-' + id,
                 JSON.stringify(data));
         }
-
         setError('');
     };
 
-    // const handleDeleteStep = (
-    //     evt: React.MouseEvent<HTMLButtonElement>): void => {
-    //     evt.preventDefault();
-    //     const data = JSON.parse(
-    //         window.localStorage.getItem(
-    //             'question-' + id)) as ExerciseData[];
-    //     data[0].stepList.pop();
-    //     window.localStorage.setItem('question-' + id,
-    //         JSON.stringify(data));
-    //     setStepList(data[0].stepList);
-    //     if (data[0].stepList.length === 0){
-    //         setQuestionStatus(null);
-    //         data[0].status = null;
-    //         window.localStorage.setItem('question-' + id,
-    //             JSON.stringify(data));
-    //     }
-    //     setError('');
-    // };
+    const setNext = () => {
+        setNextRule(stepList[idx - 1][0]);
+        setNextStep(stepList[idx - 1][1]);
+    };
 
     const handleStatementInput = (
         evt: React.ChangeEvent<HTMLInputElement>): void => {
@@ -127,9 +147,17 @@ export const SolutionStep: React.FC<SolutionStepProps> = (
 
             //If the input is valid and not the solution, add to stepList
             //Change status to in progress.
-            const step: [string, string] = [nextRule, nextStep];
+            const newStep: [string, string] = [nextRule, nextStep];
+            if (step[0] !== newStep[0] || step[1] !== newStep[1]){
+                const data = JSON.parse(
+                    window.localStorage.getItem(
+                        'question-' + id)) as ExerciseData[];
+                data[0].stepList.pop();
+                window.localStorage.setItem('question-' + id,
+                    JSON.stringify(data));
+            }
             const newStepList: [string, string][] = updateLocalStepList(
-                id, step);
+                id, newStep);
             updateLocalQuestionStatus(id, 'inprogress');
             setQuestionStatus('inprogress');
             newStepList.push(['', '']);
@@ -173,6 +201,8 @@ export const SolutionStep: React.FC<SolutionStepProps> = (
     const isStatementHint = isLast && hintButtonCount === 2;
     const isFirst = idx === 0;
     const showButtons = isLast && isIncomplete;
+
+    const isEditable = idx === stepList.length - 1;
     useEffect(() => {
         setNextRule('Start');
     }, []);
@@ -196,11 +226,7 @@ export const SolutionStep: React.FC<SolutionStepProps> = (
                                 key={`${step[0]}-${idx}`}
                                 onChange={handleLawSelect}
                                 defaultValue={capitalize(step[0])}
-                                disabled={
-                                    step[0] === '' || isIncomplete
-                                        ? false
-                                        : true
-                                } >
+                                disabled={!isEditable} >
                                 <option value={''}>
                                     Choose One
                                 </option>
@@ -229,11 +255,7 @@ export const SolutionStep: React.FC<SolutionStepProps> = (
                                 name={`statement-${idx}`}
                                 defaultValue={raw2latex(step[1])}
                                 onChange={handleStatementInput}
-                                disabled={
-                                    step[0] === '' || isIncomplete
-                                        ? false
-                                        : true
-                                } />
+                                disabled={!isEditable} />
                             <div>{isStatementHint && (
                                 <div>{hint[1]}</div>
                             )}</div>
