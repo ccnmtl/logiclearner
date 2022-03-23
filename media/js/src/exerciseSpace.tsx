@@ -426,7 +426,7 @@ export const ExerciseSpace: React.FC = () => {
                                                     'Premise: '
                                                     : `Step ${idx}: `}
                                             </span>
-                                            {solution.text}
+                                            {raw2latex(solution.text)}
                                         </li>
                                     );
                                 })}
