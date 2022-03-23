@@ -18,6 +18,7 @@ const setNextRule = () => {return 'test';};
 const setHintButtonCount = () => {return 'test';};
 const setIsIncomplete = () => {return 'test';};
 const setQuestionStatus = () => {return 'test';};
+const resetFunc = () => {return 'test';};
 
 describe('Initial test', () => {
     const renderComponent = () => render(
@@ -33,6 +34,7 @@ describe('Initial test', () => {
                 hint={['', '']}
                 setHint={setHint}
                 nextStep={''}
+                resetFunc={resetFunc}
                 nextRule={''}
                 setNextStep={setNextStep}
                 setNextRule={setNextRule}

@@ -50,7 +50,9 @@ export const ExerciseSpace: React.FC = () => {
             const questStatus = data[0].status;
             const stepList = data[0].stepList;
             setQuestionStatus(questStatus);
-            stepList.push(['', '']);
+            if (questStatus !== 'complete'){
+                stepList.push(['', '']);
+            }
             setStepList(stepList);
             setIsIncomplete(data[0].status !== 'complete');
         } catch (error) {
@@ -321,6 +323,7 @@ export const ExerciseSpace: React.FC = () => {
                                     setHintButtonCount={setHintButtonCount}
                                     setIsIncomplete={setIsIncomplete}
                                     isIncomplete={isIncomplete}
+                                    resetFunc={resetFunc}
                                     setQuestionStatus={setQuestionStatus} />
                             );
                         }

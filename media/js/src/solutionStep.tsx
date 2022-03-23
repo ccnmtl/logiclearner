@@ -24,6 +24,7 @@ interface SolutionStepProps {
     setIsIncomplete: React.Dispatch<React.SetStateAction<boolean>>,
     setQuestionStatus: React.Dispatch<React.SetStateAction<string>>,
     isIncomplete: boolean;
+    resetFunc(): void;
 }
 const laws: Array<string> = ['Absorption', 'Associativity', 'Commutativity',
     'De Morgan\'s Law', 'Distributivity', 'Domination', 'Double Negation',
@@ -34,7 +35,7 @@ export const SolutionStep: React.FC<SolutionStepProps> = (
     {statement, id, step, stepList, idx, setStepList,
         hint, hintButtonCount, nextStep, setNextStep, setNextRule,
         nextRule, setHint, setHintButtonCount, setIsIncomplete,
-        setQuestionStatus, isIncomplete
+        setQuestionStatus, isIncomplete, resetFunc
     }: SolutionStepProps) => {
 
     const [error, setError] = useState('');
@@ -58,32 +59,23 @@ export const SolutionStep: React.FC<SolutionStepProps> = (
                 select => (select.value = '')
             );
             setQuestionStatus(null);
+            resetFunc();
+        } else {
             const data = JSON.parse(
                 window.localStorage.getItem(
                     'question-' + id)) as ExerciseData[];
-            data[0].status = null;
-            window.localStorage.setItem('question-' + id,
-                JSON.stringify(data));
-        } else {
-            stepList.pop();
+            if (stepList.length !== data[0].stepList.length) {
+                stepList.pop();
+            } else {
+                stepList.pop();
+                data[0].stepList.pop();
+                window.localStorage.setItem('question-' + id,
+                    JSON.stringify(data));
+            }
             const newStepList = [...stepList];
             setStepList(newStepList);
             setNext();
         }
-        // const data = JSON.parse(
-        //     window.localStorage.getItem(
-        //         'question-' + id)) as ExerciseData[];
-        // data[0].stepList.pop();
-        // window.localStorage.setItem('question-' + id,
-        //     JSON.stringify(data));
-        // setStepList(data[0].stepList);
-
-        // if (data[0].stepList.length === 0){
-        //     setQuestionStatus(null);
-        //     data[0].status = null;
-        //     window.localStorage.setItem('question-' + id,
-        //         JSON.stringify(data));
-        // }
         setError('');
     };
     const setNext = () => {
@@ -126,10 +118,10 @@ export const SolutionStep: React.FC<SolutionStepProps> = (
         // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
         const toolsData: Tools = await getHints(hintData);
 
-        validation(toolsData);
+        processResponse(toolsData);
     }
 
-    const validation = (respData: Tools) =>{
+    const processResponse = (respData: Tools) =>{
 
         if (!respData.isValid) {
             setError(respData.errorMsg);
