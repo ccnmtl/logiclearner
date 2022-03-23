@@ -26,7 +26,8 @@ export const ExerciseSpace: React.FC = () => {
     const [questionStatus, setQuestionStatus] = useState('');
     const [stepList, setStepList] = useState<[string, string][]>([]);
     const [hint, setHint] = useState<[string, string]>(['','']);
-    const [stateStep, setStateStep] = useState<[string, string]>(['','']);
+    const [nextStep, setNextStep] = useState('');  // user's proposed next step
+    const [nextRule, setNextRule] = useState('');  // user's proposed rule
     const [hintButtonCount, setHintButtonCount] = useState<number>(0);
     const [isIncomplete, setIsIncomplete] = useState<boolean>(true);
 
@@ -49,9 +50,7 @@ export const ExerciseSpace: React.FC = () => {
             const questStatus = data[0].status;
             const stepList = data[0].stepList;
             setQuestionStatus(questStatus);
-            if (questStatus !== 'complete'){
-                stepList.push(['', '']);
-            }
+            stepList.push(['', '']);
             setStepList(stepList);
             setIsIncomplete(data[0].status !== 'complete');
         } catch (error) {
@@ -93,7 +92,7 @@ export const ExerciseSpace: React.FC = () => {
         //Only if we don't already have hints
         if (hintButtonCount === 0) {
             //Set up initial hints call with no entry.
-            if (!stateStep[1] && stepList.length === 1) {
+            if (!nextStep && stepList.length === 1) {
 
                 hintData['next_expr'] = statement.question;
                 hintData['rule'] = 'Start';
@@ -111,8 +110,8 @@ export const ExerciseSpace: React.FC = () => {
                 } else {
                     lastCorrectStep = statement.question;
                 }
-                hintData['next_expr'] = latex2raw(stateStep[1]);
-                hintData['rule'] = stateStep[0];
+                hintData['next_expr'] = latex2raw(nextStep);
+                hintData['rule'] = nextRule;
                 hintData['step_list'] = [latex2raw(lastCorrectStep)];
                 hintData['answer'] = statement.answer;
                 // eslint-disable-next-line max-len
@@ -314,8 +313,10 @@ export const ExerciseSpace: React.FC = () => {
                                     setStepList={setStepList}
                                     hint={hint}
                                     setHint={setHint}
-                                    stateStep={stateStep}
-                                    setStateStep={setStateStep}
+                                    nextStep={nextStep}
+                                    nextRule={nextRule}
+                                    setNextStep={setNextStep}
+                                    setNextRule={setNextRule}
                                     hintButtonCount={hintButtonCount}
                                     setHintButtonCount={setHintButtonCount}
                                     setIsIncomplete={setIsIncomplete}

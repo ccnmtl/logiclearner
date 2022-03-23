@@ -13,7 +13,8 @@ const statement = {
 
 const setStepList = () => {return 'test';};
 const setHint = () => {return 'test';};
-const setStateStep = () => {return 'test';};
+const setNextStep = () => {return 'test';};
+const setNextRule = () => {return 'test';};
 const setHintButtonCount = () => {return 'test';};
 const setIsIncomplete = () => {return 'test';};
 const setQuestionStatus = () => {return 'test';};
@@ -31,8 +32,10 @@ describe('Initial test', () => {
                 isIncomplete={true}
                 hint={['', '']}
                 setHint={setHint}
-                stateStep={['', '']}
-                setStateStep={setStateStep}
+                nextStep={''}
+                nextRule={''}
+                setNextStep={setNextStep}
+                setNextRule={setNextRule}
                 hintButtonCount={0}
                 setHintButtonCount={setHintButtonCount}
                 setIsIncomplete={setIsIncomplete}

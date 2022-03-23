@@ -15,8 +15,10 @@ interface SolutionStepProps {
     idx: number,
     hint: [string, string],
     setHint:  React.Dispatch<React.SetStateAction<[string, string]>>,
-    stateStep: [string, string],
-    setStateStep: React.Dispatch<React.SetStateAction<[string, string]>>,
+    nextStep: string,
+    nextRule: string,
+    setNextStep: React.Dispatch<React.SetStateAction<string>>,
+    setNextRule: React.Dispatch<React.SetStateAction<string>>,
     hintButtonCount: number;
     setHintButtonCount: React.Dispatch<React.SetStateAction<number>>,
     setIsIncomplete: React.Dispatch<React.SetStateAction<boolean>>,
@@ -30,8 +32,9 @@ const laws: Array<string> = ['Absorption', 'Associativity', 'Commutativity',
 
 export const SolutionStep: React.FC<SolutionStepProps> = (
     {statement, id, step, stepList, idx, setStepList,
-        hint, hintButtonCount, stateStep, setStateStep, setHint,
-        setHintButtonCount, setIsIncomplete, setQuestionStatus, isIncomplete
+        hint, hintButtonCount, nextStep, setNextStep, setNextRule,
+        nextRule, setHint, setHintButtonCount, setIsIncomplete,
+        setQuestionStatus, isIncomplete
     }: SolutionStepProps) => {
 
     const [error, setError] = useState('');
@@ -48,7 +51,19 @@ export const SolutionStep: React.FC<SolutionStepProps> = (
         evt: React.MouseEvent<HTMLButtonElement>): void => {
         evt.preventDefault();
         if (idx === 0) {
-            setStateStep(['', '']);
+            Array.from(document.querySelectorAll('input')).forEach(
+                input => (input.value = '')
+            );
+            Array.from(document.querySelectorAll('select')).forEach(
+                select => (select.value = '')
+            );
+            setQuestionStatus(null);
+            const data = JSON.parse(
+                window.localStorage.getItem(
+                    'question-' + id)) as ExerciseData[];
+            data[0].status = null;
+            window.localStorage.setItem('question-' + id,
+                JSON.stringify(data));
         } else {
             stepList.pop();
             const newStepList = [...stepList];
@@ -72,19 +87,20 @@ export const SolutionStep: React.FC<SolutionStepProps> = (
         setError('');
     };
     const setNext = () => {
-        setStateStep([stepList[idx - 1][0], stepList[idx - 1][1]]);
+        setNextRule(stepList[idx - 1][0]);
+        setNextStep(stepList[idx - 1][1]);
     };
 
     const handleStatementInput = (
         evt: React.ChangeEvent<HTMLInputElement>): void => {
-        setStateStep([stateStep[0], evt.currentTarget.value]);
+        setNextStep(evt.currentTarget.value);
         evt.currentTarget.value = raw2latex(evt.currentTarget.value);
         setError('');
     };
 
     const handleLawSelect = (
         evt: React.ChangeEvent<HTMLSelectElement>): void => {
-        setStateStep([evt.target.value, stateStep[1]]);
+        setNextRule(evt.target.value);
     };
 
     async function validateStep() {
@@ -102,8 +118,8 @@ export const SolutionStep: React.FC<SolutionStepProps> = (
             lastCorrectStep = statement.question;
         }
 
-        hintData['next_expr'] = latex2raw(stateStep[1]);
-        hintData['rule'] = stateStep[0].toLocaleLowerCase();
+        hintData['next_expr'] = latex2raw(nextStep);
+        hintData['rule'] = nextRule.toLocaleLowerCase();
         hintData['step_list'] =[latex2raw(lastCorrectStep)];
         hintData['answer'] = statement.answer;
         // eslint-disable-next-line max-len
@@ -121,9 +137,9 @@ export const SolutionStep: React.FC<SolutionStepProps> = (
 
             //If the input is valid and not the solution, add to stepList
             //Change status to in progress.
-            // const step: [string, string] = [nextRule, nextStep];
+            const step: [string, string] = [nextRule, nextStep];
             const newStepList: [string, string][] = updateLocalStepList(
-                id, idx, stateStep);
+                id, idx, step);
             updateLocalQuestionStatus(id, 'inprogress');
             setQuestionStatus('inprogress');
             newStepList.push(['', '']);
@@ -135,8 +151,8 @@ export const SolutionStep: React.FC<SolutionStepProps> = (
 
             //If the input is valid add to stepList,
             //and if completed change status to complete
-            // const step: [string, string] = [nextRule, nextStep];
-            const newStepList = updateLocalStepList(id, idx, stateStep);
+            const step: [string, string] = [nextRule, nextStep];
+            const newStepList = updateLocalStepList(id, idx, step);
             updateLocalQuestionStatus(id, 'complete');
             setQuestionStatus('complete');
             setStepList(newStepList);
@@ -153,7 +169,7 @@ export const SolutionStep: React.FC<SolutionStepProps> = (
         if (hintButtonCount === 2) {
             setHintButtonCount(0);
         }
-        if (!stateStep[1]) {
+        if (!nextStep) {
             setError('Please enter a statement.');
         } else {
             setError('');
@@ -162,13 +178,7 @@ export const SolutionStep: React.FC<SolutionStepProps> = (
     };
 
     useEffect(() => {
-        setStateStep(step);
-        console.log('f', stateStep)
-        console.log('step', step)
-        if(!stateStep[0]) {
-            console.log('here')
-            setStateStep(['Start', stateStep[1]]);
-        }
+        setNextRule('Start');
     }, []);
 
     return (
@@ -187,9 +197,9 @@ export const SolutionStep: React.FC<SolutionStepProps> = (
                             </label>
                             <select name='law'
                                 id={`laws-${idx}`} className='form-select'
-                                key={`${stateStep[0]}-${idx}`}
+                                key={`${step[0]}-${idx}`}
                                 onChange={handleLawSelect}
-                                defaultValue={capitalize(stateStep[0])}
+                                defaultValue={capitalize(step[0])}
                                 disabled={!isEditable} >
                                 <option value={''}>
                                     Choose One
@@ -217,7 +227,7 @@ export const SolutionStep: React.FC<SolutionStepProps> = (
                                 placeholder='Logic statement'
                                 key={`statement-${idx}`}
                                 name={`statement-${idx}`}
-                                defaultValue={raw2latex(stateStep[1])}
+                                defaultValue={raw2latex(step[1])}
                                 onChange={handleStatementInput}
                                 disabled={!isEditable} />
                             <div>{isStatementHint && (
