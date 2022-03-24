@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { getStatements, Statement, ExerciseData,
     completionCount } from './utils';
 import { Question } from './question';
+import ReactGA from 'react-ga';
 
 interface QuestionsDashboardProps {
     difficulty: number;
@@ -12,6 +13,7 @@ export const STATIC_URL = LogicLearner.staticUrl;
 
 export const QuestionsDashboard: React.FC<QuestionsDashboardProps> = (
     {difficulty, level}: QuestionsDashboardProps) => {
+    ReactGA.pageview(window.location.pathname + window.location.search);
 
     const [statements, setStatements] = useState<Statement[]>([]);
     const [questionsList, setquestionsList] = useState([]);

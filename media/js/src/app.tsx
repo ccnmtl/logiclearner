@@ -4,8 +4,10 @@ import { LevelsDashboard } from './levelsdashboard';
 import { QuestionsDashboard } from './questionsdashboard';
 import { ExerciseSpace } from './exerciseSpace';
 import { NotFound } from './notFound';
+import ReactGA from 'react-ga';
 
 export const App: React.FC = () => {
+    ReactGA.initialize('UA-51144540-45');
     return (
         <Router>
             <Routes>

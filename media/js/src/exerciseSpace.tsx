@@ -7,10 +7,12 @@ import { SolutionStep } from './solutionStep';
 import { Modal } from './modal';
 import { ModalLawsheet } from './modalLawsheet';
 import { ModalKeybinding } from './modalKeybinding';
+import ReactGA from 'react-ga';
 
 export const STATIC_URL = LogicLearner.staticUrl;
 
 export const ExerciseSpace: React.FC = () => {
+    ReactGA.pageview(window.location.pathname + window.location.search);
     const { id } = useParams();
 
     const [statement, setStatement] = useState<Statement>({
