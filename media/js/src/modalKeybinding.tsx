@@ -87,6 +87,16 @@ export const ModalKeybinding: React.FC = () => {
                                         the same as)
                                     </td>
                                 </tr>
+                                <tr>
+                                    <td>T</td>
+                                    <td>Uppercase <b>T</b></td>
+                                    <td><b>T</b> (True)</td>
+                                </tr>
+                                <tr>
+                                    <td>F</td>
+                                    <td>Uppercase <b>F</b></td>
+                                    <td><b>F</b> (False)</td>
+                                </tr>
                             </tbody>
                         </table>
                     </div>
