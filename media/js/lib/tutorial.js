@@ -1,5 +1,5 @@
 jQuery(document).ready(function(){
-    jQuery('.tutorial1-prompt').click(function() {
+    jQuery('.tutorial-prompt').click(function() {
         var segment = jQuery(this).data('segment');
         var segmentClass = 'tutorial-' + segment;
         var segmentGuide = '#guide-' + segment;
