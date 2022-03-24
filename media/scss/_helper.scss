@@ -2,7 +2,7 @@
     position: relative;
 }
 
-.tutorial1-prompt {
+.tutorial-prompt {
     height: 4rem;
     width: 4rem;
     background-color: rgba(239, 112, 37, 1);
@@ -17,7 +17,9 @@
         background-color: #ffab00 !important;
     }
 }
-.tutorial1-prompt__text {
+.tutorial-prompt__instructions {
+}
+.tutorial-prompt__text {
     color: #fff;
     font-weight: 700;
     font-size: 2.25rem;

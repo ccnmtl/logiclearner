@@ -236,11 +236,12 @@ export const getHints = async function(data: HintData) {
 
 export const updateLocalStepList = (
     id: string,
+    idx: number,
     step: [string, string]): [string, string][] => {
     const data = JSON.parse(
         window.localStorage.getItem(
             'question-' + id)) as ExerciseData[];
-    data[0].stepList.push(step);
+    data[0].stepList[idx] = step;
     window.localStorage.setItem('question-' + id,
         JSON.stringify(data));
 

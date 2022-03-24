@@ -21,8 +21,8 @@
                 <h1 class="align-self-center"><a href="/">
                     <span class="main-banner__subhead">TUTORIAL:</span><span class="main-banner__title">Using Logic Learner</span>
                 </a></h1>
-                    <button class="tutorial1-prompt ms-auto align-self-center" data-segment="modal">
-                        <div class="tutorial1-prompt__text">1</div>
+                    <button class="tutorial-prompt ms-auto align-self-center" data-segment="modal">
+                        <div class="tutorial-prompt__text">1</div>
                     </button>
                 <div class="align-self-center text-end" id="helper-modal">
                     <button type="button" class="btn btn-light ll-button me-0 me-md-1 mb-2 mb-md-0 text-nowrap btn-shrink"
@@ -39,11 +39,8 @@
             </div>
         </header>
         <section class="container content-body exercise-space tutorial-section">
-            <p>
-            <b>Welcome to Logic Learner,</b> a practice tool to help students improve their fluency and problem solving process in writing proofs for propositional logic.
-            </p>
-            <p>
-            This tutorial helps you to become familiar with Logic Learner. Click on the numbers to explore the different parts of the tool’s interface.
+            <p class="tutorial-prompt__instructions question fs-2 pt-0">
+                <b>Welcome to Logic Learner!</b><br />Click on the numbers to explore the different parts of the tool’s interface.
             </p>
             
             <div class="guide__box guide-text" id="guide-modal">
@@ -54,8 +51,8 @@
                 <p>In propositional logic, we use logical connectives to build compound statements. Refer to the <b>Logic symbols</b> sheet on how to type in these connectives. You can return to this sheet whenever needed. Tap on the <b>Logic symbols</b> button to try it out.</p>
             </div>
             <section class="container border-top tutorial-section" id="maincontent">
-                <button class="tutorial1-prompt align-self-center mt-3" data-segment="question">
-                    <div class="tutorial1-prompt__text">2</div>
+                <button class="tutorial-prompt align-self-center mt-3" data-segment="question">
+                    <div class="tutorial-prompt__text">2</div>
                 </button>
                 <p class="question fs-2 pt-0" id="helper-question">Prove that <span class="question-statement text-break">(p∨q)→r</span> is logically equivalent to <span class="question-statement text-break">(p→r)∧(q→r)</span>.</p>
                 <div class="guide__box guide-text" id="guide-question">
@@ -66,8 +63,8 @@
                 <div class="exercise-solution mt-0 pt-0">
                     <div class="solution-step mt-0 pt-0">
                         <p class="solution-step__prompt">To begin this proof,
-                        <button class="tutorial1-prompt align-self-center mt-0" data-segment="solution">
-                            <div class="tutorial1-prompt__text">3</div>
+                        <button class="tutorial-prompt align-self-center mt-0" data-segment="solution">
+                            <div class="tutorial-prompt__text">3</div>
                         </button>
                         </p>
                         <div class="solution-step__form row">
@@ -76,9 +73,20 @@
                                 <div class="col-12 col-md-5 mb-4 mb-md-0">
                                     <label for="inputLaw" class="form-label">If I apply this law...</label>
                                     <select id="inputLaw" class="form-select" tabindex="-1">
-                                    <option selected>Choose one</option>
-                                    <option>...</option>
-                                    <option>...</option>
+                                        <option value="" selected="">Choose One</option>
+                                        <option value="Absorption">Absorption</option>
+                                        <option value="Associativity">Associativity</option>
+                                        <option value="Commutativity">Commutativity</option>
+                                        <option value="De Morgan's Law">De Morgan’s Law</option>
+                                        <option value="Distributivity">Distributivity</option>
+                                        <option value="Domination">Domination</option>
+                                        <option value="Double Negation">Double Negation</option>
+                                        <option value="Idempotence">Idempotence</option>
+                                        <option value="Identity">Identity</option>
+                                        <option value="Iff as Implication">Iff as Implication</option>
+                                        <option value="Implication as Disjunction">Implication as Disjunction</option>
+                                        <option value="Literal Negation">Literal Negation</option>
+                                        <option value="Negation">Negation</option>
                                     </select>
                                 </div>
                                 <div class="col-12 col-md-7 mb-4 mb-md-0">
@@ -96,8 +104,8 @@
                             <!-- go-delete -->
                             <div class="col-12 col-md-3 align-self-end text-center p-md-0 row">
                                 <div class="col-3 col-md-12 p-0 m-0 stepaction-button">
-                                    <button class="tutorial1-prompt align-self-center mt-0" data-segment="stepactions">
-                                        <div class="tutorial1-prompt__text">4</div>
+                                    <button class="tutorial-prompt align-self-center mt-0" data-segment="stepactions">
+                                        <div class="tutorial-prompt__text">4</div>
                                     </button>
                                 </div>
                                 <div class="col-7 col-md-12 m-0 px-0 py-1" id="helper-stepactions">
@@ -121,8 +129,8 @@
                     <div class="solution-actions">
 <!-- 
                         <div class="mt-0 mx-4 p-0 text-center">
-                            <button class="tutorial1-prompt align-self-center mt-0 mx-0" data-segment="hint">
-                            <div class="tutorial1-prompt__text">5</div>
+                            <button class="tutorial-prompt align-self-center mt-0 mx-0" data-segment="hint">
+                            <div class="tutorial-prompt__text">5</div>
                             </button>
                             <button tabindex="-1" class="btn btn-lg ll-button mx-0 my-2 my-md-0" id="helper-hint">
                             <span class="ll-button__text">I need a hint</span>
@@ -135,8 +143,8 @@
                         </div>
  -->
                         <div class="mt-0 mx-4 p-0 text-center">
-                            <button class="tutorial1-prompt align-self-center mt-0" data-segment="solutionkey">
-                            <div class="tutorial1-prompt__text">5</div> 
+                            <button class="tutorial-prompt align-self-center mt-0" data-segment="solutionkey">
+                            <div class="tutorial-prompt__text">5</div> 
                             </button>
                             <button tabindex="-1" class="btn btn-lg ll-button mx-0 my-2 my-md-0" id="helper-solutionkey">
                             <span class="ll-button__text">Show solution</span>
@@ -148,8 +156,8 @@
                             </div>
                         </div>
                         <div class="mt-0 mx-4 p-0 text-center">
-                            <button class="tutorial1-prompt align-self-center mt-0" data-segment="reset">
-                            <div class="tutorial1-prompt__text">6</div>
+                            <button class="tutorial-prompt align-self-center mt-0" data-segment="reset">
+                            <div class="tutorial-prompt__text">6</div>
                             </button>
                             <button tabindex="-1" class="btn btn-lg ll-button mx-0 my-2 my-md-0" id="helper-reset">
                             <span class="ll-button__text">Reset proof</span>
@@ -291,6 +299,16 @@
                             <td><-></td>
                             <td>less than, hyphen, and greater than symbols, <span class="text-nowrap"><b><-></b></span></td>
                             <td><b>↔</b> (if and only if; iff; means the same as)</td>
+                        </tr>
+                        <tr>
+                            <td>T</td>
+                            <td>Uppercase <b>T</b></td>
+                            <td><b>T</b> (True)</td>
+                        </tr>
+                        <tr>
+                            <td>F</td>
+                            <td>Uppercase <b>F</b></td>
+                            <td><b>F</b> (False)</td>
                         </tr>
                     </tbody>
                 </table>
