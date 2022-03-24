@@ -50,6 +50,9 @@ export const ExerciseSpace: React.FC = () => {
             const questStatus = data[0].status;
             const stepList = data[0].stepList;
             setQuestionStatus(questStatus);
+            if (questStatus !== 'complete'){
+                stepList.push(['', '']);
+            }
             setStepList(stepList);
             setIsIncomplete(data[0].status !== 'complete');
         } catch (error) {
@@ -91,7 +94,7 @@ export const ExerciseSpace: React.FC = () => {
         //Only if we don't already have hints
         if (hintButtonCount === 0) {
             //Set up initial hints call with no entry.
-            if (!nextStep && stepList.length === 0) {
+            if (!nextStep && stepList.length === 1) {
 
                 hintData['next_expr'] = statement.question;
                 hintData['rule'] = 'Start';
@@ -104,8 +107,8 @@ export const ExerciseSpace: React.FC = () => {
                 setHint([toolsData.hintRule, toolsData.hintExpression]);
             } else {
                 let lastCorrectStep = '';
-                if (stepList.length > 0){
-                    lastCorrectStep = stepList[stepList.length - 1][1];
+                if (stepList.length > 1){
+                    lastCorrectStep = stepList[stepList.length - 2][1];
                 } else {
                     lastCorrectStep = statement.question;
                 }
@@ -142,9 +145,6 @@ export const ExerciseSpace: React.FC = () => {
         }
         void fetchHints();
     };
-    const handleNextQuestion = () => {
-        //TBD
-    };
     const modalCancel = () => {
         setShowResetModal(false);
     };
@@ -162,9 +162,12 @@ export const ExerciseSpace: React.FC = () => {
         const exerciseState = [...new Array<ExerciseData>(initData)];
         window.localStorage.setItem('question-' + id,
             JSON.stringify(exerciseState));
-        setStepList([]);
+        setStepList([['', '']]);
         setIsIncomplete(true);
         setQuestionStatus(null);
+        Array.from(document.querySelectorAll('input')).forEach(
+            input => (input.value = '')
+        );
         window.scrollTo(0, 0);
     };
 
@@ -175,19 +178,20 @@ export const ExerciseSpace: React.FC = () => {
         '': 'initial'
     };
 
-    // const showSolutionBtn = stepList.length >= 2;
+    // const showSolutionBtn = stepList.length >= 3;
     const showResetBtn =
     questionStatus === 'inprogress' || questionStatus === 'complete';
 
-    // eslint-disable-next-line max-len
-    const quesText: string = (statement.answer === 'F') || (statement.answer === 'T')
+    const quesText: string =
+    (statement.answer === 'F') || (statement.answer === 'T')
         ? 'is a'
         : 'is logically equivalent to';
     const answer: string =
-    checkQuestion(statement.answer) === 'Tautology'
-    || checkQuestion(statement.answer) === 'Fallacy'
-        ? checkQuestion(statement.answer)
-        : raw2latex(checkQuestion(statement.answer));
+            checkQuestion(statement.answer) === 'Tautology'
+            || checkQuestion(statement.answer) === 'Fallacy'
+                ? checkQuestion(statement.answer)
+                : raw2latex(checkQuestion(statement.answer));
+
     const question = raw2latex(statement.question);
 
     const levels: Level = {
@@ -196,15 +200,14 @@ export const ExerciseSpace: React.FC = () => {
         2: 'Apprentice'
     };
     const level: string = levels[statement.difficulty];
-    const isPastSteps = stepList.length > 0;
 
     useEffect(() => {
         void fetchStatement().then((statement: Statement) => {
             const level: string = levels[statement.difficulty];
             setSolutionStepData(statement, level);
+            {getQuestionData();}
         });
         {void fetchSolutions();}
-        {getQuestionData();}
         window.scrollTo(0, 0);
     }, []);
 
@@ -298,7 +301,7 @@ export const ExerciseSpace: React.FC = () => {
                             cancelFunc={modalCancel}
                             resetFunc={resetFunc}/>
                     )}
-                    {isPastSteps && stepList.map(
+                    {stepList.map(
                         (step: [string, string], idx) => {
                             return (
                                 <SolutionStep
@@ -309,7 +312,6 @@ export const ExerciseSpace: React.FC = () => {
                                     stepList={stepList}
                                     key={idx}
                                     idx={idx}
-                                    blankSlate={'map'}
                                     setStepList={setStepList}
                                     hint={hint}
                                     setHint={setHint}
@@ -320,30 +322,11 @@ export const ExerciseSpace: React.FC = () => {
                                     hintButtonCount={hintButtonCount}
                                     setHintButtonCount={setHintButtonCount}
                                     setIsIncomplete={setIsIncomplete}
+                                    isIncomplete={isIncomplete}
+                                    resetFunc={resetFunc}
                                     setQuestionStatus={setQuestionStatus} />
                             );
                         }
-                    )}
-                    {isIncomplete && (
-                        <SolutionStep
-                            statement={statement}
-                            id={id}
-                            level={level}
-                            step={['','']}
-                            stepList={stepList}
-                            setStepList={setStepList}
-                            idx={stepList.length + 1}
-                            blankSlate={`blank${stepList.length + 1}`}
-                            hint={hint}
-                            setHint={setHint}
-                            nextStep={nextStep}
-                            nextRule={nextRule}
-                            setNextStep={setNextStep}
-                            setNextRule={setNextRule}
-                            hintButtonCount={hintButtonCount}
-                            setHintButtonCount={setHintButtonCount}
-                            setIsIncomplete={setIsIncomplete}
-                            setQuestionStatus={setQuestionStatus} />
                     )}
                     {!isIncomplete && (
                         <>
@@ -363,8 +346,6 @@ export const ExerciseSpace: React.FC = () => {
                                     </p>
                                 </div>
                                 <div className='col-12'>
-                                    {/* <button onClick={handleNextQuestion}>
-                                        Next</button> */}
                                     <a href={
                                         `/questions/${statement.difficulty}`}
                                     className="btn btn-lg ll-button
