@@ -13,7 +13,6 @@ export const STATIC_URL = LogicLearner.staticUrl;
 
 export const QuestionsDashboard: React.FC<QuestionsDashboardProps> = (
     {difficulty, level}: QuestionsDashboardProps) => {
-    ReactGA.pageview(window.location.pathname + window.location.search);
 
     const [statements, setStatements] = useState<Statement[]>([]);
     const [questionsList, setquestionsList] = useState([]);
@@ -49,6 +48,7 @@ export const QuestionsDashboard: React.FC<QuestionsDashboardProps> = (
     useEffect(() => {
         void fetchStatements();
         void getQuestionList();
+        ReactGA.pageview(window.location.pathname + window.location.search);
     }, []);
 
     return (

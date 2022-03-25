@@ -36,7 +36,7 @@ export const SolutionStep: React.FC<SolutionStepProps> = (
     {statement, id, step, stepList, idx, setStepList,
         hint, hintButtonCount, nextStep, setNextStep, setNextRule,
         nextRule, setHint, setHintButtonCount, setIsIncomplete,
-        setQuestionStatus, isIncomplete, resetFunc
+        setQuestionStatus, isIncomplete, resetFunc, level
     }: SolutionStepProps) => {
 
     const [error, setError] = useState('');
@@ -129,7 +129,8 @@ export const SolutionStep: React.FC<SolutionStepProps> = (
             ReactGA.event({
                 category: 'Statements',
                 action: 'Invalid',
-                label: `Made a mistake on question ${statement.pk}`
+                label: `Made a mistake on question ${statement.pk}` +
+                        `level: ${level}`
             });
         } else if (respData.isValid && !respData.isSolution) {
 
@@ -160,7 +161,7 @@ export const SolutionStep: React.FC<SolutionStepProps> = (
             ReactGA.event({
                 category: 'Statements',
                 action: 'Completed a question',
-                label: `Completed question ${statement.pk}`
+                label: `Completed question ${statement.pk} level: ${level}`
             });
         }
     };

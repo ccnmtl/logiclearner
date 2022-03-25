@@ -7,7 +7,7 @@ import { NotFound } from './notFound';
 import ReactGA from 'react-ga';
 
 export const App: React.FC = () => {
-    ReactGA.initialize('UA-51144540-45');
+    ReactGA.initialize('UA-51144540-42');
     return (
         <Router>
             <Routes>

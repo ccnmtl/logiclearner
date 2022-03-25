@@ -12,7 +12,6 @@ import ReactGA from 'react-ga';
 export const STATIC_URL = LogicLearner.staticUrl;
 
 export const ExerciseSpace: React.FC = () => {
-    ReactGA.pageview(window.location.pathname + window.location.search);
     const { id } = useParams();
 
     const [statement, setStatement] = useState<Statement>({
@@ -131,6 +130,12 @@ export const ExerciseSpace: React.FC = () => {
     ): void => {
         evt.preventDefault();
         setShowSolutions(solutions && !showSolutions);
+        ReactGA.event({
+            category: 'Statements',
+            action: 'Clicked show solutions',
+            label: 'Clicked show solutions for question' +
+                    `${statement.pk} level: ${level}`
+        });
     };
     const handleResetModal = (
         evt: React.MouseEvent<HTMLButtonElement>): void => {
@@ -211,6 +216,7 @@ export const ExerciseSpace: React.FC = () => {
         });
         {void fetchSolutions();}
         window.scrollTo(0, 0);
+        ReactGA.pageview(window.location.pathname + window.location.search);
     }, []);
 
     return (

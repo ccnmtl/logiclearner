@@ -9,7 +9,6 @@ const learner = 1;
 const apprentice = 2;
 
 export const LevelsDashboard: React.FC = () => {
-    ReactGA.pageview(window.location.pathname + window.location.search);
     const [questionsList, setquestionsList] = useState([]);
     const [noviceCount, setnoviceCount] = useState<number>(0);
     const [learnerCount, setlearnerCount] = useState<number>(0);
@@ -46,6 +45,7 @@ export const LevelsDashboard: React.FC = () => {
     useEffect(() => {
         void getQuestionList();
         void fetchCounts();
+        ReactGA.pageview(window.location.pathname + window.location.search);
     }, []);
 
     return (
