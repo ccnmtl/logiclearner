@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { getStatements, Statement, ExerciseData,
-    completionCount } from './utils';
+    completionCount, deleteLevelData } from './utils';
 import { Question } from './question';
+import { Modal } from './modal';
 
 interface QuestionsDashboardProps {
     difficulty: number;
@@ -16,6 +17,8 @@ export const QuestionsDashboard: React.FC<QuestionsDashboardProps> = (
     const [statements, setStatements] = useState<Statement[]>([]);
     const [questionsList, setquestionsList] = useState([]);
     const [levelCount, setLevelCount] = useState<number>(0);
+    const [showResetLevelModal, setShowResetLevelModal] =
+                                            useState<boolean>(false);
 
     const LevelDescription = {
         0: 'Let’s get a handle on the basics of propositional logic.',
@@ -41,8 +44,20 @@ export const QuestionsDashboard: React.FC<QuestionsDashboardProps> = (
         }
         setquestionsList(arrQs);
     };
-
     const completedCount = completionCount(difficulty, questionsList);
+
+    const modalCancel = () => {
+        setShowResetLevelModal(false);
+    };
+    const handleResetLevelModal = (
+        evt: React.MouseEvent<HTMLButtonElement>): void => {
+        evt.preventDefault();
+        setShowResetLevelModal(true);
+    };
+    const resetLevel = () => {
+        deleteLevelData(difficulty, questionsList);
+        void getQuestionList();
+    };
 
     useEffect(() => {
         void fetchStatements();
@@ -83,16 +98,40 @@ export const QuestionsDashboard: React.FC<QuestionsDashboardProps> = (
                 data-testid={'QuestionDashboard'}>
                 <h2 id="cardset-label" className="text-center mb-4">
                     Questions in {level} level
+                    <button type="button" className="btn btn-light"
+                        onClick={handleResetLevelModal}>Reset Level</button>
                 </h2>
                 <ol className="cardset cardset-listnum"
                     aria-labelledby="cardset-label">
+                    {showResetLevelModal && (
+                        <Modal
+                            title={'Reset'}
+                            bodyText={'Are you sure you want to reset? ' +
+                            'You will lose all work for this Level.'}
+                            cancelText={'Close'}
+                            cancelFunc={modalCancel}
+                            resetFunc={resetLevel}/>
+                    )}
                     {statements.map((statement, idx) => {
+                        let questionStatus = '';
+                        try {
+                            const data = JSON.parse(
+                                window.localStorage.getItem(
+                                    'question-' + statement.pk.toString()
+                                )) as ExerciseData[];
+                            questionStatus = data[0].status;
+                        } catch (error) {
+                            questionStatus = null;
+                        }
+
+
                         return (<Question
                             statement={statement}
                             id={statement.pk}
                             idStr={statement.pk.toString()}
                             key={idx}
-                            level={level} />);
+                            level={level}
+                            questionStatus={questionStatus} />);
                     })}
                 </ol>
             </section>
