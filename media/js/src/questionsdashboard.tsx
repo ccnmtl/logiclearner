@@ -98,9 +98,22 @@ export const QuestionsDashboard: React.FC<QuestionsDashboardProps> = (
                 data-testid={'QuestionDashboard'}>
                 <h2 id="cardset-label" className="text-center mb-4">
                     Questions in {level} level
-                    <button type="button" className="btn btn-light"
-                        onClick={handleResetLevelModal}>Reset Level</button>
                 </h2>
+                <div className='level-cards-reset'>
+                    <button
+                        className="btn btn-light ll-button
+                            level-cards-reset__btn"
+                        onClick={handleResetLevelModal}>
+                        <span className="ll-icons ll-button__icon">
+                            <img src={
+                                `${STATIC_URL}img/icon-reset.svg`
+                            } />
+                        </span>
+                        <span className="ll-button__text">
+                            Reset level
+                        </span>
+                    </button>
+                </div>
                 <ol className="cardset cardset-listnum"
                     aria-labelledby="cardset-label">
                     {showResetLevelModal && (
