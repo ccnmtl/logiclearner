@@ -2,3 +2,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400&display=swap');
 
 $font-family-sans-serif-primary: 'Quicksand', Arial, "Helvetica Neue", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol" !default;
+
+$gray-600-svg:  invert(50%) sepia(0%) saturate(0%) hue-rotate(32deg) brightness(90%) contrast(88%);
+$gray-500-svg:  invert(84%) sepia(0%) saturate(158%) hue-rotate(248deg) brightness(75%) contrast(94%);
+$gray-700-svg:  invert(41%) sepia(2%) saturate(0%) hue-rotate(172deg) brightness(91%) contrast(98%);
+$gray-800-svg:  invert(18%) sepia(36%) saturate(0%) hue-rotate(283deg) brightness(102%) contrast(79%);
+$orange-900-svg: invert(33%) sepia(56%) saturate(2351%) hue-rotate(6deg) brightness(97%) contrast(105%);

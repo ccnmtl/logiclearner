@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { checkQuestion, raw2latex, ExerciseData, Statement,
+import { checkQuestion, raw2latex, Statement,
     Status } from './utils';
 
 export const STATIC_URL = LogicLearner.staticUrl;
@@ -10,28 +10,16 @@ interface QuestionProps {
     id: number;
     level: string;
     idStr: string;
+    questionStatus: string;
 }
 
 export const Question: React.FC<QuestionProps> = (
-    { statement, idStr }: QuestionProps) => {
+    { statement, idStr, questionStatus }: QuestionProps) => {
 
     const navigate = useNavigate();
 
     const exerciseSpaceHandler = () => {
         navigate('/exercise/' + idStr);
-    };
-
-    const [questionStatus, setQuestionStatus] = useState('');
-    const getQuestionStatus = () => {
-        try {
-            const data = JSON.parse(
-                window.localStorage.getItem(
-                    'question-' + idStr)) as ExerciseData[];
-            const questStatus = data[0].status;
-            setQuestionStatus(questStatus);
-        } catch (error) {
-            setQuestionStatus(null);
-        }
     };
 
     const status: Status = {
@@ -40,11 +28,6 @@ export const Question: React.FC<QuestionProps> = (
         complete: 'complete',
         '': 'initial'
     };
-
-
-    useEffect(() => {
-        void getQuestionStatus();
-    }, []);
 
     const quesText: string =
     (statement.answer === 'F') || (statement.answer === 'T')

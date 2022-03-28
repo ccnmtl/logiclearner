@@ -211,3 +211,65 @@
         font-size: 2.5rem;
     }
 }
+
+.level-cards-reset {
+    padding: 0.5rem 0 0.5rem 0;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+    text-align: right;
+    @include media-breakpoint-up(md) {
+        padding: 1rem 0 1rem 0;
+        width: 36.25rem;
+    }
+    @include media-breakpoint-up(lg) {
+        width: 48.74rem;
+    }
+    @include media-breakpoint-up(xl) {
+        width: 58.125rem;
+    }
+    @include media-breakpoint-up(xxl) {
+        width: 67.5rem;
+    }
+    &__btn {
+        background: transparent !important;
+    }
+    &__btn .ll-button__text {
+        font-size: 1.25rem;
+        vertical-align: bottom;
+        color: #616161;
+        @include media-breakpoint-up(md) {
+            font-size: 1.275rem;
+        }
+        @include media-breakpoint-up(lg) {
+            font-size: 1.5rem;
+        }
+    }
+    &__btn .ll-button__icon {
+        width: 25px;
+        height: 25px;
+        padding-top: 0;
+        margin-right: 0.5rem;
+        @include media-breakpoint-up(md) {
+            width: 28px;
+            height: 28px;
+        }
+        @include media-breakpoint-up(lg) {
+            width: 30px;
+            height: 30px;
+        }
+    }
+    &__btn .ll-button__icon img {
+        filter: $gray-700-svg;
+    }
+    &__btn:hover,
+    &__btn:focus {
+        border-color: transparent;
+        .ll-button__text {
+            color: #e65100;
+        }
+        .ll-button__icon img {
+            filter: $orange-900-svg;
+        }
+    }
+}

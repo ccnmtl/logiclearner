@@ -206,6 +206,22 @@ export const completionCount = function(level:number, qList) {
 };
 
 /**
+ * Removes all question data in local storage according to level
+ */
+export const deleteLevelData = function(level:number, qList) {
+
+    for (let i = 0; i < qList.length; i++) {
+        const data: ExerciseData = qList[i][0];
+        const statement = data.statement;
+        const questionId = data.statement.pk.toString();
+        if (statement.difficulty === level) {
+            window.localStorage.removeItem(
+                'question-' + questionId);
+        }
+    }
+};
+
+/**
  * Capitalizes first letter of string.
  */
 export const capitalize = function(s: string) {

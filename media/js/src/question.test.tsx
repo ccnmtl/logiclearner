@@ -19,7 +19,8 @@ describe('Initial test', () => {
                 id={1}
                 idStr={'1'}
                 key={1}
-                level={'Novice'} />
+                level={'Novice'}
+                questionStatus={'inprogress'} />
         </MemoryRouter>);
     it('Should render the Question component', () => {
         const { getByTestId } = renderComponent();
