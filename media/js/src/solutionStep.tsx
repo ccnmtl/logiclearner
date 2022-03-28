@@ -29,7 +29,7 @@ interface SolutionStepProps {
 const laws: Array<string> = ['Absorption', 'Associativity', 'Commutativity',
     'De Morgan\'s Law', 'Distributivity', 'Domination', 'Double Negation',
     'Idempotence', 'Identity', 'Iff as Implication',
-    'Implication as Disjunction', 'Literal Negation', 'Negation',];
+    'Implication as Disjunction', 'Negation'];
 
 export const SolutionStep: React.FC<SolutionStepProps> = (
     {statement, id, step, stepList, idx, setStepList,
