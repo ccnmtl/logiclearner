@@ -120,8 +120,8 @@ export const QuestionsDashboard: React.FC<QuestionsDashboardProps> = (
                         <Modal
                             title={'Reset'}
                             bodyText={'Are you sure you want to reset? ' +
-                            'You will lose all work for this Level.'}
-                            cancelText={'Close'}
+                            'You will lose all work for this level.'}
+                            cancelText={'Cancel'}
                             cancelFunc={modalCancel}
                             resetFunc={resetLevel}/>
                     )}
