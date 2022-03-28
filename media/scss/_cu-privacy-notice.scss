@@ -1,0 +1,71 @@
+#cu-privacy-notice {
+    background: #218739 !important;
+    padding: 1rem 2rem !important;
+    z-index: 1200 !important;
+    border-radius: 0.25rem !important;
+    @include media-breakpoint-up(sm) {
+        width: 100% !important;
+        bottom: 0 !important;
+    }
+    @include media-breakpoint-up(md) {
+        width: 47rem !important;
+        bottom: 1rem !important;
+    }
+    @include media-breakpoint-up(lg) {
+        width: 60rem !important;
+        bottom: 1rem !important;
+    }
+    @include media-breakpoint-up(xl) {
+        width: 74rem !important;
+        bottom: 1rem !important;
+    }
+}
+
+#cu-privacy-notice-text {
+    align-self: center !important;
+    font-family: $font-family-sans-serif-primary !important;
+    font-weight: 400 !important;
+    font-size: 0.9375rem !important;
+}
+
+#cu-privacy-notice-button {
+    @extend .btn;
+    font-family: $font-family-sans-serif-primary !important;
+    font-weight: 500 !important;
+    font-size: 1.2rem !important;
+    background-color: transparent !important;
+    border: 1px solid transparent !important;
+    padding: 0.575rem 0.875rem !important;
+    border-radius: 0.25rem !important;
+    display: inline-flex !important;
+    position: relative !important;
+    align-items: center !important;
+    justify-content: center !important;
+    vertical-align: middle !important;
+    @include media-breakpoint-up(md) {
+        padding: 0.75rem 1rem !important;
+    }
+        color: #000 !important;
+    background-color: #FFA726 !important;
+    border: 2px solid #FFA726 !important;
+}
+
+.cu-privacy-notice-close {
+    &:hover {
+        opacity: 1 !important;
+    }
+    &:focus {
+        opacity: 1 !important;
+    }
+    &:hover #cu-privacy-notice-button {
+        color: #000 !important;
+        background-color: #FFB74D !important;
+        border: 2px solid #FFB74D !important;
+    }
+    &:focus #cu-privacy-notice-button {
+        color: $white !important;
+        background-color: #388e3c !important;
+        border: 2px solid #388e3c !important;
+        box-shadow: 0 0 0 0.1875rem rgba(#2979ff, 0.5) !important;
+    }
+}
