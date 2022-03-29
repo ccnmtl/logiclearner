@@ -33,7 +33,7 @@ requests==2.27.0
 typing_extensions==4.1.1
 
 astroid==2.11.0
-pylint==2.12.1
+pylint==2.13.0
 
 six==1.16.0
 ipaddress==1.0.23  # faker
@@ -96,8 +96,6 @@ django-cacheds3storage==0.2.2
 nameparser==1.1.0
 oauth2==1.9.0.post1
 oauthlib==3.2.0
-pylti==0.7.0
-django-lti-provider==0.4.7
 
 pyparsing==3.0.3
 edtf==4.0.1 # pyup: <4.0.0
