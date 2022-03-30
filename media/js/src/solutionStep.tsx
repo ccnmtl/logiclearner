@@ -129,8 +129,7 @@ export const SolutionStep: React.FC<SolutionStepProps> = (
             ReactGA.event({
                 category: 'Statements',
                 action: 'Invalid',
-                label: `Made a mistake on question ${statement.pk}` +
-                        `level: ${level}`
+                label: `${level},${statement.pk},${statement.question}`
             });
         } else if (respData.isValid && !respData.isSolution) {
 
@@ -161,7 +160,7 @@ export const SolutionStep: React.FC<SolutionStepProps> = (
             ReactGA.event({
                 category: 'Statements',
                 action: 'Completed a question',
-                label: `Completed question ${statement.pk} level: ${level}`
+                label: `${level},${statement.pk},${statement.question}`
             });
         }
     };

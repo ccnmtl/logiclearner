@@ -133,8 +133,7 @@ export const ExerciseSpace: React.FC = () => {
         ReactGA.event({
             category: 'Statements',
             action: 'Clicked show solutions',
-            label: 'Clicked show solutions for question' +
-                    `${statement.pk} level: ${level}`
+            label: `${level},${statement.pk},${statement.question}`
         });
     };
     const handleResetModal = (
