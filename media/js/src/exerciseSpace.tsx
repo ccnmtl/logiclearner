@@ -7,6 +7,7 @@ import { SolutionStep } from './solutionStep';
 import { Modal } from './modal';
 import { ModalLawsheet } from './modalLawsheet';
 import { ModalKeybinding } from './modalKeybinding';
+import ReactGA from 'react-ga';
 
 export const STATIC_URL = LogicLearner.staticUrl;
 
@@ -129,6 +130,11 @@ export const ExerciseSpace: React.FC = () => {
     ): void => {
         evt.preventDefault();
         setShowSolutions(solutions && !showSolutions);
+        ReactGA.event({
+            category: 'Statements',
+            action: 'Clicked show solutions',
+            label: `${level},${statement.pk},${statement.question}`
+        });
     };
     const handleResetModal = (
         evt: React.MouseEvent<HTMLButtonElement>): void => {
@@ -209,6 +215,7 @@ export const ExerciseSpace: React.FC = () => {
         });
         {void fetchSolutions();}
         window.scrollTo(0, 0);
+        ReactGA.pageview(window.location.pathname + window.location.search);
     }, []);
 
     return (

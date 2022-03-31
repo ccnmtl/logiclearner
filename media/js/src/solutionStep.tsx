@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { ExerciseData, Statement, HintData,
     getHints, Tools, latex2raw, updateLocalStepList,
     updateLocalQuestionStatus, capitalize, raw2latex } from './utils';
+import ReactGA from 'react-ga';
 
 export const STATIC_URL = LogicLearner.staticUrl;
 
@@ -35,7 +36,7 @@ export const SolutionStep: React.FC<SolutionStepProps> = (
     {statement, id, step, stepList, idx, setStepList,
         hint, hintButtonCount, nextStep, setNextStep, setNextRule,
         nextRule, setHint, setHintButtonCount, setIsIncomplete,
-        setQuestionStatus, isIncomplete, resetFunc
+        setQuestionStatus, isIncomplete, resetFunc, level
     }: SolutionStepProps) => {
 
     const [error, setError] = useState('');
@@ -125,6 +126,11 @@ export const SolutionStep: React.FC<SolutionStepProps> = (
 
         if (!respData.isValid) {
             setError(respData.errorMsg);
+            ReactGA.event({
+                category: 'Statements',
+                action: 'Invalid',
+                label: `${level},${statement.pk},${statement.question}`
+            });
         } else if (respData.isValid && !respData.isSolution) {
 
             //If the input is valid and not the solution, add to stepList
@@ -151,6 +157,11 @@ export const SolutionStep: React.FC<SolutionStepProps> = (
             setHint(['', '']);
             setHintButtonCount(2);
             setIsIncomplete(false);
+            ReactGA.event({
+                category: 'Statements',
+                action: 'Completed a question',
+                label: `${level},${statement.pk},${statement.question}`
+            });
         }
     };
 

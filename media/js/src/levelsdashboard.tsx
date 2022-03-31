@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { HomeBanner } from './homebanner';
+import ReactGA from 'react-ga';
 import {completionCount, getStatements, ExerciseData, Statement} from './utils';
 
 export const STATIC_URL = LogicLearner.staticUrl;
@@ -44,6 +45,7 @@ export const LevelsDashboard: React.FC = () => {
     useEffect(() => {
         void getQuestionList();
         void fetchCounts();
+        ReactGA.pageview(window.location.pathname + window.location.search);
     }, []);
 
     return (

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { getStatements, Statement, ExerciseData,
     completionCount, deleteLevelData } from './utils';
 import { Question } from './question';
+import ReactGA from 'react-ga';
 import { Modal } from './modal';
 
 interface QuestionsDashboardProps {
@@ -62,6 +63,7 @@ export const QuestionsDashboard: React.FC<QuestionsDashboardProps> = (
     useEffect(() => {
         void fetchStatements();
         void getQuestionList();
+        ReactGA.pageview(window.location.pathname + window.location.search);
     }, []);
 
     return (
