@@ -87,7 +87,7 @@ export const LevelsDashboard: React.FC = () => {
                                 Level 1
                             </div>
                             <div className="cardset-card__title level-name">
-                                <a href={'/questions/0'}>Novice</a>
+                                <a href={'/level/1'}>Novice</a>
                             </div>
                             <div className="cardset-card__text">
                                 Let’s get a handle on the basics of
@@ -95,12 +95,12 @@ export const LevelsDashboard: React.FC = () => {
                         </div>
                         <div className="cardset-card__status-count"
                             aria-label="Questions completed">
-                            <a href={'/questions/0'}>
+                            <a href={'/level/1'}>
                                 {completedNovice}/{noviceCount}
                             </a>
                         </div>
                         <div className="cardset-card__prompt">
-                            <a href={'/questions/0'}>&rsaquo;</a>
+                            <a href={'/level/1'}>&rsaquo;</a>
                         </div>
                     </li>
                     <li className="cardset-card">
@@ -113,19 +113,19 @@ export const LevelsDashboard: React.FC = () => {
                                 Level 2
                             </div>
                             <div className="cardset-card__title level-name">
-                                <a href={'/questions/1'}>Learner</a>
+                                <a href={'/level/2'}>Learner</a>
                             </div>
                             <div className="cardset-card__text">
                                 Apply the basics, time to level up!</div>
                         </div>
                         <div className="cardset-card__status-count"
                             aria-label="Questions completed">
-                            <a href={'/questions/1'}>
+                            <a href={'/level/2'}>
                                 {completedLearner}/{learnerCount}
                             </a>
                         </div>
                         <div className="cardset-card__prompt">
-                            <a href={'/questions/1'}>&rsaquo;</a>
+                            <a href={'/level/2'}>&rsaquo;</a>
                         </div>
                     </li>
                     <li className="cardset-card">
@@ -138,19 +138,19 @@ export const LevelsDashboard: React.FC = () => {
                                 Level 3
                             </div>
                             <div className="cardset-card__title level-name">
-                                <a href={'/questions/2'}>Apprentice</a>
+                                <a href={'/level/3'}>Apprentice</a>
                             </div>
                             <div className="cardset-card__text">
                                 Moving onward, challenge yourself.</div>
                         </div>
                         <div className="cardset-card__status-count"
                             aria-label="Questions completed">
-                            <a href={'/questions/2'}>
+                            <a href={'/level/3'}>
                                 {completedApprentice}/{apprenticeCount}
                             </a>
                         </div>
                         <div className="cardset-card__prompt">
-                            <a href={'/questions/2'}>&rsaquo;</a>
+                            <a href={'/level/3'}>&rsaquo;</a>
                         </div>
                     </li>
                 </ol>
