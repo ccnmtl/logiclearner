@@ -223,20 +223,20 @@ export const ExerciseSpace: React.FC = () => {
             <header className="main-banner exercise-space-banner sticky-top">
                 <div className="container d-flex justify-content-start">
                     <div className="main-banner__prompt">
-                        <a href={`/questions/${statement.difficulty + 1}`}>
+                        <a href={`/level/${statement.difficulty + 1}`}>
                         &lsaquo;
                         </a>
                     </div>
                     <figure className="main-banner__avatar align-self-center"
                         aria-hidden="true">
-                        <a href={`/questions/${statement.difficulty + 1}`}>
+                        <a href={`/level/${statement.difficulty + 1}`}>
                             <img src={
                                 `${STATIC_URL}img/avatar-level-${
                                     statement.difficulty + 1}.svg`} />
                         </a>
                     </figure>
                     <h1 className="align-self-center">
-                        <a href={`/questions/${statement.difficulty + 1}`}>
+                        <a href={`/level/${statement.difficulty + 1}`}>
                             <span className="main-banner__subhead">
                                 LEVEL {statement.difficulty + 1}:
                             </span>
@@ -354,7 +354,7 @@ export const ExerciseSpace: React.FC = () => {
                                 </div>
                                 <div className='col-12'>
                                     <a href={
-                                        `/questions/${statement.difficulty + 1}`
+                                        `/level/${statement.difficulty + 1}`
                                     }
                                     className="btn btn-lg ll-button
                                         mx-3 my-2 my-md-0">
