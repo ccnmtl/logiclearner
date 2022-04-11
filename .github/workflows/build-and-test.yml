@@ -2,11 +2,11 @@ name: build-and-test
 on: [push]
 jobs:
   build:
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-20.04
     strategy:
       matrix:
-          python-version: [3.7, 3.8]
-          node-version: [14.x]
+          python-version: [3.8]
+          node-version: [16.x]
     name: Node ${{ matrix.node }} run
     steps:
       - uses: actions/checkout@v2
