@@ -1,10 +1,37 @@
 .skippy {
     background-color: $gray-300;
-    overflow: hidden;
+    position: absolute!important;
+    width: 1px!important;
+    height: 1px!important;
+    padding: 0!important;
+    margin: -1px!important;
+    overflow: hidden!important;
+    clip: rect(0,0,0,0)!important;
+    white-space: nowrap!important;
+    border: 0!important;
 }
+
+.skippy:focus,
+.skippy:focus-within {
+    position: static!important;
+    width: auto!important;
+    height: auto!important;
+    padding: 0!important;
+    margin: -0!important;
+    overflow: hidden!important;
+    clip: rect(0,0,0,0)!important;
+    white-space: nowrap!important;
+    border: 0!important;
+}
+
 
 .skippy a {
     color: $black;
     border-radius: 0.25rem;
     font-weight: 500;
+}
+
+.maincontent-anchor {
+    width: 1px;
+    height: 0px;
 }

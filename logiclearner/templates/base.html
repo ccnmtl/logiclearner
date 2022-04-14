@@ -83,13 +83,11 @@
 
 {% block topnavbar %}
 <header>
-    <!-- Skippy goes here, fix later
-    <div class="skippy visually-hidden-focusable">
+    <div class="skippy">
         <div class="container p-0">
             <a class=" d-inline-block p-2 m-1" href="#maincontent">Skip to main content</a>
         </div>
     </div>
-     -->
     <div class="navbar top-bar">
         <div class="container top-bar__container">
             <a href="/" class="navbar-brand d-flex align-items-center">
@@ -120,6 +118,7 @@
 
 
 {% block pagetitle %}{% endblock %}
+<div class="maincontent-anchor" id="maincontent"></div>
 {% block content %}{% endblock %}
 
 
