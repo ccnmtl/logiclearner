@@ -52,7 +52,6 @@ export const LevelsDashboard: React.FC = () => {
         <>
             <HomeBanner />
             <section className="container content-body"
-                id="maincontent"
                 data-testid={'LevelsDashboard'}>
                 <h2 id="cardset-label"
                     className="text-center mb-4">Choose a level</h2>
@@ -60,7 +59,8 @@ export const LevelsDashboard: React.FC = () => {
                     aria-labelledby="cardset-label">
                     <li className="cardset-card">
                         <figure className="cardset-card__avatar">
-                            <img src={`${STATIC_URL}img/avatar-tutorial.svg`} />
+                            <img alt=""
+                                src={`${STATIC_URL}img/avatar-tutorial.svg`} />
                         </figure>
                         <div className="d-flex flex-column align-self-center
                             me-2 me-lg-0">
@@ -79,7 +79,8 @@ export const LevelsDashboard: React.FC = () => {
                     </li>
                     <li className="cardset-card">
                         <figure className="cardset-card__avatar">
-                            <img src={`${STATIC_URL}img/avatar-level-1.svg`} />
+                            <img alt=""
+                                src={`${STATIC_URL}img/avatar-level-1.svg`} />
                         </figure>
                         <div className="d-flex flex-column align-self-center
                             me-2 me-lg-0">
@@ -93,9 +94,10 @@ export const LevelsDashboard: React.FC = () => {
                                 Let’s get a handle on the basics of
                                 propositional logic.</div>
                         </div>
-                        <div className="cardset-card__status-count"
-                            aria-label="Questions completed">
+                        <div className="cardset-card__status-count">
                             <a href={'/level/1'}>
+                                <span className="visually-hidden">
+                                    Questions completed: </span>
                                 {completedNovice}/{noviceCount}
                             </a>
                         </div>
@@ -105,7 +107,8 @@ export const LevelsDashboard: React.FC = () => {
                     </li>
                     <li className="cardset-card">
                         <figure className="cardset-card__avatar">
-                            <img src={`${STATIC_URL}img/avatar-level-2.svg`} />
+                            <img alt=""
+                                src={`${STATIC_URL}img/avatar-level-2.svg`} />
                         </figure>
                         <div className="d-flex flex-column align-self-center
                             me-2 me-lg-0">
@@ -118,9 +121,10 @@ export const LevelsDashboard: React.FC = () => {
                             <div className="cardset-card__text">
                                 Apply the basics, time to level up!</div>
                         </div>
-                        <div className="cardset-card__status-count"
-                            aria-label="Questions completed">
+                        <div className="cardset-card__status-count">
                             <a href={'/level/2'}>
+                                <span className="visually-hidden">
+                                    Questions completed: </span>
                                 {completedLearner}/{learnerCount}
                             </a>
                         </div>
@@ -130,7 +134,8 @@ export const LevelsDashboard: React.FC = () => {
                     </li>
                     <li className="cardset-card">
                         <figure className="cardset-card__avatar">
-                            <img src={`${STATIC_URL}img/avatar-level-3.svg`} />
+                            <img alt=""
+                                src={`${STATIC_URL}img/avatar-level-3.svg`} />
                         </figure>
                         <div className="d-flex flex-column align-self-center
                             me-2 me-lg-0">
@@ -143,9 +148,10 @@ export const LevelsDashboard: React.FC = () => {
                             <div className="cardset-card__text">
                                 Moving onward, challenge yourself.</div>
                         </div>
-                        <div className="cardset-card__status-count"
-                            aria-label="Questions completed">
+                        <div className="cardset-card__status-count">
                             <a href={'/level/3'}>
+                                <span className="visually-hidden">
+                                    Questions completed: </span>
                                 {completedApprentice}/{apprenticeCount}
                             </a>
                         </div>
