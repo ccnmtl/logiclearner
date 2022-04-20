@@ -24,6 +24,7 @@ class Solution(models.Model):
     statement = models.ForeignKey(Statement, on_delete=models.CASCADE)
     ordinal = models.IntegerField()
     text = models.TextField()
+    law = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
     modified_at = models.DateTimeField(auto_now=True)
 
