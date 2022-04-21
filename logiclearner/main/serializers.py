@@ -14,4 +14,4 @@ class SolutionSerializer(serializers.ModelSerializer):
     class Meta:
         model = Solution
         fields = ['pk', 'statement', 'ordinal', 'text', 'created_at',
-                  'modified_at']
+                  'law', 'modified_at']

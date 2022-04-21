@@ -409,6 +409,7 @@ export const ExerciseSpace: React.FC = () => {
                             <ul className='solutionkey'>
                                 {solutions.map((solution, idx) => {
                                     return (
+
                                         <li key={idx}>
                                             <span className='solutionkey__step'>
                                                 {idx === 0 ?
@@ -416,7 +417,12 @@ export const ExerciseSpace: React.FC = () => {
                                                     : `Step ${idx}: `}
                                             </span>
                                             {raw2latex(solution.text)}
+                                            <span className='solutionkey__step'>
+                                                Law:
+                                            </span>
+                                            {solution.law}
                                         </li>
+
                                     );
                                 })}
                             </ul>
