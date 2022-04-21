@@ -409,20 +409,22 @@ export const ExerciseSpace: React.FC = () => {
                             <ul className='solutionkey'>
                                 {solutions.map((solution, idx) => {
                                     return (
-
                                         <li key={idx}>
                                             <span className='solutionkey__step'>
                                                 {idx === 0 ?
                                                     'Premise: '
                                                     : `Step ${idx}: `}
                                             </span>
-                                            {raw2latex(solution.text)}
-                                            <span className='solutionkey__step'>
-                                                Law:
+                                            {idx !== 0 && (<>
+                                                Apply {' '}
+                                                <span className="answerkey-highlight">{solution.law}</span> {/* eslint-disable-line max-len */}
+                                                {' '}to get{' '}
+                                            </>)}
+                                            <span
+                                                className="answerkey-highlight">
+                                                {raw2latex(solution.text)}
                                             </span>
-                                            {solution.law}
                                         </li>
-
                                     );
                                 })}
                             </ul>
