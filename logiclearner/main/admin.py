@@ -7,8 +7,8 @@ class SolutionInLine(admin.TabularInline):
 
 
 class StatementAdmin(admin.ModelAdmin):
-    list_display = ("question", "difficulty", "created_at")
-    list_filter = ("difficulty", "created_at")
+    list_display = ("question", "difficulty", "created_at", "modified_at")
+    list_filter = ("difficulty", "created_at", "modified_at")
     inlines = [
         SolutionInLine
     ]
