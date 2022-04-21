@@ -89,7 +89,7 @@ export const QuestionsDashboard: React.FC<QuestionsDashboardProps> = (
                         </span>
                     </h1>
                     <div className="ms-auto q-completion align-self-center"
-                        aria-label="Questions completed">
+                        aria-label="Questions completed" role="status">
                         {completedCount}/{levelCount}
                     </div>
                 </div>
@@ -107,26 +107,27 @@ export const QuestionsDashboard: React.FC<QuestionsDashboardProps> = (
                             level-cards-reset__btn"
                         onClick={handleResetLevelModal}>
                         <span className="ll-icons ll-button__icon">
-                            <img src={
-                                `${STATIC_URL}img/icon-reset.svg`
-                            } />
+                            <img alt=""
+                                src={
+                                    `${STATIC_URL}img/icon-reset.svg`
+                                } />
                         </span>
                         <span className="ll-button__text">
                             Reset level
                         </span>
                     </button>
                 </div>
+                {showResetLevelModal && (
+                    <Modal
+                        title={'Reset'}
+                        bodyText={'Are you sure you want to reset? ' +
+                        'You will lose all work for this level.'}
+                        cancelText={'Cancel'}
+                        cancelFunc={modalCancel}
+                        resetFunc={resetLevel}/>
+                )}
                 <ol className="cardset cardset-listnum"
                     aria-labelledby="cardset-label">
-                    {showResetLevelModal && (
-                        <Modal
-                            title={'Reset'}
-                            bodyText={'Are you sure you want to reset? ' +
-                            'You will lose all work for this level.'}
-                            cancelText={'Cancel'}
-                            cancelFunc={modalCancel}
-                            resetFunc={resetLevel}/>
-                    )}
                     {statements.map((statement, idx) => {
                         let questionStatus = '';
                         try {
@@ -138,7 +139,6 @@ export const QuestionsDashboard: React.FC<QuestionsDashboardProps> = (
                         } catch (error) {
                             questionStatus = null;
                         }
-
 
                         return (<Question
                             statement={statement}
