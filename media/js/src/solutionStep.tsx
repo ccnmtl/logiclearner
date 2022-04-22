@@ -195,7 +195,8 @@ export const SolutionStep: React.FC<SolutionStepProps> = (
                     <div className='solution-step__form row'
                         data-testid={'exercise'}>
                         <div className='col-12 col-md-4 mb-4 mb-md-0'>
-                            <label htmlFor='laws' className='form-label'>
+                            <label htmlFor={`laws-${idx}`}
+                                className='form-label'>
                                 If I apply this law...
                             </label>
                             <select name='law'
@@ -220,7 +221,7 @@ export const SolutionStep: React.FC<SolutionStepProps> = (
                             )}</div>
                         </div>
                         <div className='col-12 col-md-5 mb-4 mb-md-0'>
-                            <label htmlFor='statementInput'
+                            <label htmlFor={`statementInput-${idx}`}
                                 className='form-label'>
                                     then I&apos;ll get this statement...
                             </label>
