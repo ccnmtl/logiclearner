@@ -220,29 +220,31 @@ export const ExerciseSpace: React.FC = () => {
 
     return (
         <>
-            <header className="main-banner exercise-space-banner sticky-top">
-                <div className="container d-flex justify-content-start">
-                    <div className="main-banner__prompt">
-                        <a href={`/level/${statement.difficulty + 1}`}>
-                        &lsaquo;
-                        </a>
-                    </div>
-                    <figure className="main-banner__avatar align-self-center"
-                        aria-hidden="true">
-                        <a href={`/level/${statement.difficulty + 1}`}>
-                            <img src={
-                                `${STATIC_URL}img/avatar-level-${
-                                    statement.difficulty + 1}.svg`} />
-                        </a>
-                    </figure>
-                    <h1 className="align-self-center">
-                        <a href={`/level/${statement.difficulty + 1}`}>
+            <header className='main-banner exercise-space-banner sticky-top'>
+                <div className='container d-flex justify-content-start'>
+                    <a href={`/level/${statement.difficulty + 1}`}
+                        className='main-banner__nav
+                            d-flex justify-content-start'>
+                        <div className='main-banner__prompt'>
+                            &lsaquo;
+                        </div>
+                        <figure
+                            className='main-banner__avatar align-self-center'>
+                            <img
+                                alt='Go to Questions list for this level'
+                                src={
+                                    `${STATIC_URL}img/avatar-level-${
+                                        statement.difficulty + 1}.svg`} />
+                        </figure>
+                        <h1 className="align-self-center">
                             <span className="main-banner__subhead">
+                                <span className='visually-hidden'>
+                                    Go to questions list for </span>
                                 LEVEL {statement.difficulty + 1}:
                             </span>
                             <span className="main-banner__title">{level}</span>
-                        </a>
-                    </h1>
+                        </h1>
+                    </a>
                     <div className="ms-auto align-self-center text-end">
                         <button
                             className="btn btn-light ll-button btn-shrink
