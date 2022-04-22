@@ -21,6 +21,9 @@
         flex-grow: 0;
         flex-shrink: 0;
     }
+    &__form select {
+        font-weight: 500;
+    }
 }
 
 

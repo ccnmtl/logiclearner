@@ -252,7 +252,7 @@ export const ExerciseSpace: React.FC = () => {
                             data-bs-toggle="modal"
                             data-bs-target="#lawSheetModal">
                             <span className="ll-icons ll-button__icon">
-                                <img src={
+                                <img alt='' src={
                                     `${STATIC_URL}img/icon-clipboard.svg`
                                 } />
                             </span>
@@ -263,7 +263,7 @@ export const ExerciseSpace: React.FC = () => {
                             data-bs-toggle="modal"
                             data-bs-target="#keyBindingModal">
                             <span className="ll-icons ll-button__icon">
-                                <img src={
+                                <img alt='' src={
                                     `${STATIC_URL}img/icon-keyboard.svg`
                                 } />
                             </span>
@@ -278,12 +278,13 @@ export const ExerciseSpace: React.FC = () => {
                 id="maincontent" data-testid={'exerciseSpace'}>
                 <div className='question__status'>
                     <div className={`question__status__icon icon-status
-                            icon-status-${status[questionStatus]}`}
-                    aria-label={`Status: ${status[questionStatus]}`} >
-                        <img src={
+                            icon-status-${status[questionStatus]}`}>
+                        <img alt='' src={
                             `${STATIC_URL}img/icon-status-${
-                                status[questionStatus]}.svg`}
-                        title={`Status: ${status[questionStatus]}`} />
+                                status[questionStatus]}.svg`} />
+                        <span className='visually-hidden'>
+                            Proof status:
+                        </span>
                     </div>
                     <div className='question__status__text'>
                         {status[questionStatus] === 'inprogress' ? 'In progress'
@@ -341,11 +342,11 @@ export const ExerciseSpace: React.FC = () => {
                         <>
                             <div className='row medal-box'>
                                 <div className='col-12 medal-box__avatar'>
-                                    <img src={
+                                    <img alt='' src={
                                         `${STATIC_URL}img/avatar-medal.svg`
                                     } />
                                 </div>
-                                <div className='col-12'>
+                                <div className='col-12' role='status'>
                                     <p className='medal-box__cheer'>
                                         Congratulations!
                                     </p>
@@ -360,6 +361,8 @@ export const ExerciseSpace: React.FC = () => {
                                     }
                                     className="btn btn-lg ll-button
                                         mx-3 my-2 my-md-0">
+                                        <span className='visually-hidden'>
+                                            Go to questions list for </span>
                                         <span className="ll-button__text">
                                             LEVEL {statement.difficulty + 1}: {level} {/* eslint-disable-line max-len */}
                                         </span>
