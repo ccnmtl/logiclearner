@@ -415,7 +415,15 @@ export const ExerciseSpace: React.FC = () => {
                                                     'Premise: '
                                                     : `Step ${idx}: `}
                                             </span>
-                                            {raw2latex(solution.text)}
+                                            {idx !== 0 && (<>
+                                                Apply {' '}
+                                                <span className="answerkey-highlight">{solution.law}</span> {/* eslint-disable-line max-len */}
+                                                {' '}to get{' '}
+                                            </>)}
+                                            <span
+                                                className="answerkey-highlight">
+                                                {raw2latex(solution.text)}
+                                            </span>
                                         </li>
                                     );
                                 })}

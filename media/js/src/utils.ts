@@ -34,6 +34,7 @@ export type Solution = {
     statement: number;
     ordinal: number;
     text: string;
+    law: string;
     created_at: string;
     modified_at: string;
 }
