@@ -51,113 +51,127 @@ export const LevelsDashboard: React.FC = () => {
     return (
         <>
             <HomeBanner />
-            <section className="container content-body"
+            <section className="container content-body" id="maincontent"
                 data-testid={'LevelsDashboard'}>
                 <h2 id="cardset-label"
                     className="text-center mb-4">Choose a level</h2>
                 <ol className="cardset cardset-levels"
                     aria-labelledby="cardset-label">
                     <li className="cardset-card">
-                        <figure className="cardset-card__avatar">
-                            <img alt=""
-                                src={`${STATIC_URL}img/avatar-tutorial.svg`} />
-                        </figure>
-                        <div className="d-flex flex-column align-self-center
-                            me-2 me-lg-0">
-                            <div className="cardset-card__subhead">
-                                Tutorial
+                        <a className='cardset-card__button'
+                            href={'/tutorial/'}>
+                            <figure className="cardset-card__avatar">
+                                <img alt=""
+                                    src={
+                                        `${STATIC_URL}img/avatar-tutorial.svg`
+                                    } />
+                            </figure>
+                            <div className="d-flex flex-column align-self-center
+                                me-2 me-lg-0">
+                                <div className="cardset-card__subhead">
+                                    Tutorial
+                                </div>
+                                <div className="cardset-card__title level-name">
+                                    Using Logic Learner
+                                </div>
+                                <div className="cardset-card__text">
+                                    Learn how to use Logic Learner.</div>
                             </div>
-                            <div className="cardset-card__title level-name">
-                                <a href={'/tutorial/'}>Using Logic Learner</a>
+                            <div className="cardset-card__prompt ms-auto">
+                                &rsaquo;
                             </div>
-                            <div className="cardset-card__text">
-                                Learn how to use Logic Learner.</div>
-                        </div>
-                        <div className="cardset-card__prompt ms-auto">
-                            <a href={'/tutorial/'}>&rsaquo;</a>
-                        </div>
+                        </a>
                     </li>
                     <li className="cardset-card">
-                        <figure className="cardset-card__avatar">
-                            <img alt=""
-                                src={`${STATIC_URL}img/avatar-level-1.svg`} />
-                        </figure>
-                        <div className="d-flex flex-column align-self-center
-                            me-2 me-lg-0">
-                            <div className="cardset-card__subhead">
-                                Level 1
+                        <a className='cardset-card__button'
+                            href={'/level/1'}>
+                            <figure className="cardset-card__avatar">
+                                <img alt=""
+                                    src={
+                                        `${STATIC_URL}img/avatar-level-1.svg`
+                                    } />
+                            </figure>
+                            <div className="d-flex flex-column align-self-center
+                                me-2 me-lg-0">
+                                <div className="cardset-card__subhead">
+                                    Level 1
+                                </div>
+                                <div className="cardset-card__title level-name">
+                                    Novice
+                                </div>
+                                <div className="cardset-card__text">
+                                    Let’s get a handle on the basics of
+                                    propositional logic.</div>
                             </div>
-                            <div className="cardset-card__title level-name">
-                                <a href={'/level/1'}>Novice</a>
-                            </div>
-                            <div className="cardset-card__text">
-                                Let’s get a handle on the basics of
-                                propositional logic.</div>
-                        </div>
-                        <div className="cardset-card__status-count">
-                            <a href={'/level/1'}>
+                            <div className="cardset-card__status-count">
                                 <span className="visually-hidden">
                                     Questions completed: </span>
                                 {completedNovice}/{noviceCount}
-                            </a>
-                        </div>
-                        <div className="cardset-card__prompt">
-                            <a href={'/level/1'}>&rsaquo;</a>
-                        </div>
+                            </div>
+                            <div className="cardset-card__prompt">
+                                &rsaquo;
+                            </div>
+                        </a>
                     </li>
                     <li className="cardset-card">
-                        <figure className="cardset-card__avatar">
-                            <img alt=""
-                                src={`${STATIC_URL}img/avatar-level-2.svg`} />
-                        </figure>
-                        <div className="d-flex flex-column align-self-center
-                            me-2 me-lg-0">
-                            <div className="cardset-card__subhead">
-                                Level 2
+                        <a className='cardset-card__button'
+                            href={'/level/2'}>
+                            <figure className="cardset-card__avatar">
+                                <img alt=""
+                                    src={
+                                        `${STATIC_URL}img/avatar-level-2.svg`
+                                    } />
+                            </figure>
+                            <div className="d-flex flex-column align-self-center
+                                me-2 me-lg-0">
+                                <div className="cardset-card__subhead">
+                                    Level 2
+                                </div>
+                                <div className="cardset-card__title level-name">
+                                    Learner
+                                </div>
+                                <div className="cardset-card__text">
+                                    Apply the basics, time to level up!</div>
                             </div>
-                            <div className="cardset-card__title level-name">
-                                <a href={'/level/2'}>Learner</a>
-                            </div>
-                            <div className="cardset-card__text">
-                                Apply the basics, time to level up!</div>
-                        </div>
-                        <div className="cardset-card__status-count">
-                            <a href={'/level/2'}>
+                            <div className="cardset-card__status-count">
                                 <span className="visually-hidden">
                                     Questions completed: </span>
                                 {completedLearner}/{learnerCount}
-                            </a>
-                        </div>
-                        <div className="cardset-card__prompt">
-                            <a href={'/level/2'}>&rsaquo;</a>
-                        </div>
+                            </div>
+                            <div className="cardset-card__prompt">
+                                &rsaquo;
+                            </div>
+                        </a>
                     </li>
                     <li className="cardset-card">
-                        <figure className="cardset-card__avatar">
-                            <img alt=""
-                                src={`${STATIC_URL}img/avatar-level-3.svg`} />
-                        </figure>
-                        <div className="d-flex flex-column align-self-center
-                            me-2 me-lg-0">
-                            <div className="cardset-card__subhead">
-                                Level 3
+                        <a className='cardset-card__button'
+                            href={'/level/1'}>
+                            <figure className="cardset-card__avatar">
+                                <img alt=""
+                                    src={
+                                        `${STATIC_URL}img/avatar-level-3.svg`
+                                    } />
+                            </figure>
+                            <div className="d-flex flex-column align-self-center
+                                me-2 me-lg-0">
+                                <div className="cardset-card__subhead">
+                                    Level 3
+                                </div>
+                                <div className="cardset-card__title level-name">
+                                    Apprentice
+                                </div>
+                                <div className="cardset-card__text">
+                                    Moving onward, challenge yourself.</div>
                             </div>
-                            <div className="cardset-card__title level-name">
-                                <a href={'/level/3'}>Apprentice</a>
-                            </div>
-                            <div className="cardset-card__text">
-                                Moving onward, challenge yourself.</div>
-                        </div>
-                        <div className="cardset-card__status-count">
-                            <a href={'/level/3'}>
+                            <div className="cardset-card__status-count">
                                 <span className="visually-hidden">
                                     Questions completed: </span>
                                 {completedApprentice}/{apprenticeCount}
-                            </a>
-                        </div>
-                        <div className="cardset-card__prompt">
-                            <a href={'/level/3'}>&rsaquo;</a>
-                        </div>
+                            </div>
+                            <div className="cardset-card__prompt">
+                                &rsaquo;
+                            </div>
+                        </a>
                     </li>
                 </ol>
             </section>
