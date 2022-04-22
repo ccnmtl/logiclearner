@@ -145,7 +145,7 @@ export const LevelsDashboard: React.FC = () => {
                     </li>
                     <li className="cardset-card">
                         <a className='cardset-card__button'
-                            href={'/level/1'}>
+                            href={'/level/3'}>
                             <figure className="cardset-card__avatar">
                                 <img alt=""
                                     src={
