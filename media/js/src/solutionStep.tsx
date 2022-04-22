@@ -243,7 +243,7 @@ export const SolutionStep: React.FC<SolutionStepProps> = (
                             {!isEditable && (
                                 <div className='solution-step__status
                                     icon-status'
-                                    role='status'>
+                                role='status'>
                                     <span className='visually-hidden'>
                                         Your statement is correct!
                                     </span>
