@@ -195,7 +195,8 @@ export const SolutionStep: React.FC<SolutionStepProps> = (
                     <div className='solution-step__form row'
                         data-testid={'exercise'}>
                         <div className='col-12 col-md-4 mb-4 mb-md-0'>
-                            <label htmlFor='laws' className='form-label'>
+                            <label htmlFor={`laws-${idx}`}
+                                className='form-label'>
                                 If I apply this law...
                             </label>
                             <select name='law'
@@ -220,13 +221,12 @@ export const SolutionStep: React.FC<SolutionStepProps> = (
                             )}</div>
                         </div>
                         <div className='col-12 col-md-5 mb-4 mb-md-0'>
-                            <label htmlFor='statementInput'
+                            <label htmlFor={`statementInput-${idx}`}
                                 className='form-label'>
                                     then I&apos;ll get this statement...
                             </label>
                             <input type='text' className='form-control'
                                 id={`statementInput-${idx}`}
-                                aria-describedby={`statement-${idx}`}
                                 placeholder='Logic statement'
                                 key={`statement-${idx}`}
                                 name={`statement-${idx}`}
@@ -238,31 +238,36 @@ export const SolutionStep: React.FC<SolutionStepProps> = (
                             )}</div>
                         </div>
                         <div className="col-12 col-md-3 align-self-center
-                            text-center text-md-left">
+                            text-center text-md-left
+                            d-flex flex-row justify-content-center">
                             {!isEditable && (
                                 <div className='solution-step__status
-                                    icon-status' aria-label='Correct!'>
-                                    <img src={`${STATIC_URL}img/icon-step-complete.svg`} alt="" /> {/* eslint-disable-line max-len */}
+                                    icon-status'
+                                role='status'>
+                                    <span className='visually-hidden'>
+                                        Your statement is correct!
+                                    </span>
+                                    <img src={`${STATIC_URL}img/icon-step-complete.svg`} alt='' /> {/* eslint-disable-line max-len */}
                                 </div>
                             )}
                             {showButtons && (
                                 <>
                                     <button
-                                        type="reset"
-                                        onClick={handleDeleteStep}
-                                        className="btn ll-button btn-danger
-                                            me-3">
-                                        <span className="ll-button__text">
-                                            Delete
-                                        </span>
-                                    </button>
-                                    <button
                                         onClick={handleSubmit}
                                         type="submit"
                                         className="btn ll-button btn-success
-                                            me-0">
+                                            order-2 me-0">
                                         <span className="ll-button__text">
                                             Go!
+                                        </span>
+                                    </button>
+                                    <button
+                                        type="reset"
+                                        onClick={handleDeleteStep}
+                                        className="btn ll-button btn-danger
+                                            order-1 me-3">
+                                        <span className="ll-button__text">
+                                            Delete
                                         </span>
                                     </button>
                                 </>
@@ -270,7 +275,7 @@ export const SolutionStep: React.FC<SolutionStepProps> = (
                         </div>
                     </div>
                     {!haveErrors && (
-                        <div className='row'>
+                        <div className='row' role='alert'>
                             <span className='text-danger'>{error}</span>
                         </div>
                     )}
