@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { ExerciseData, Statement, HintData,
     getHints, Tools, latex2raw, updateLocalStepList,
-    updateLocalQuestionStatus, capitalize, raw2latex } from './utils';
+    updateLocalQuestionStatus, capitalize, raw2latex,
+    iffFunction } from './utils';
 import ReactGA from 'react-ga';
 
 export const STATIC_URL = LogicLearner.staticUrl;
@@ -114,7 +115,7 @@ export const SolutionStep: React.FC<SolutionStepProps> = (
         hintData['next_expr'] = latex2raw(nextStep);
         hintData['rule'] = nextRule.toLocaleLowerCase();
         hintData['step_list'] =[latex2raw(lastCorrectStep)];
-        hintData['answer'] = statement.answer;
+        hintData['answer'] = iffFunction(statement.answer);
         // eslint-disable-next-line max-len
         // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
         const toolsData: Tools = await getHints(hintData);

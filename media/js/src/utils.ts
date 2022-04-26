@@ -177,7 +177,7 @@ export const latex2raw = function(quesText: string) {
 
     str = str.replace(new RegExp('∧', 'g'), '^');
     str = str.replace(new RegExp('∨', 'g'), 'v');
-    str = str.replace(new RegExp('↔', 'g'), '<->');
+    str = str.replace(new RegExp('↔', 'g'), '<=>');
     str = str.replace(new RegExp('→', 'g'), '->');
     str = str.replace(new RegExp('¬', 'g'), '~');
     str = str.replace('t', 'T');
@@ -187,6 +187,12 @@ export const latex2raw = function(quesText: string) {
     str = str.replace('R', 'r');
     str = str.replace('S', 's');
 
+    return str;
+};
+
+export const iffFunction = function(text: string) {
+    let str = text;
+    str = str.replace(new RegExp('<->', 'g'), '<=>');
     return str;
 };
 
