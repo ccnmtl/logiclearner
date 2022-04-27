@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { BrowserRouter as Router, Route, Routes  } from 'react-router-dom';
 import { LevelsDashboard } from './levelsdashboard';
 import { QuestionsDashboard } from './questionsdashboard';
@@ -8,6 +8,10 @@ import ReactGA from 'react-ga';
 
 export const App: React.FC = () => {
     ReactGA.initialize('UA-51144540-42');
+
+    useEffect(() => {
+        ReactGA.pageview(window.location.pathname + window.location.search);
+    }, []);
     return (
         <Router>
             <Routes>
