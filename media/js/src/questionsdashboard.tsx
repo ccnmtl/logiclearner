@@ -63,7 +63,6 @@ export const QuestionsDashboard: React.FC<QuestionsDashboardProps> = (
     useEffect(() => {
         void fetchStatements();
         void getQuestionList();
-        ReactGA.pageview(window.location.pathname + window.location.search);
     }, []);
 
     return (
