@@ -158,6 +158,7 @@ export const raw2latex = function(quesText: string) {
     str = str.replace(new RegExp('<->', 'g'), '↔');
     str = str.replace(new RegExp('->', 'g'), '→');
     str = str.replace(new RegExp('v', 'g'), '∨');
+    str = str.replace(new RegExp('<=>', 'g'), '↔');
     str = str.replace(/\^/g, '∧');
     str = str.replace('t', 'T');
     str = str.replace('f', 'F');
