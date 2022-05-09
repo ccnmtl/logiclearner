@@ -1,6 +1,6 @@
 import React from 'react';
 import { render } from '@testing-library/react';
-import { Question } from './question';
+import { Question } from '../question';
 import { MemoryRouter } from 'react-router-dom';
 
 const statement = {

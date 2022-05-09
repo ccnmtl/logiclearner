@@ -1,6 +1,6 @@
 import React from 'react';
 import { render } from '@testing-library/react';
-import { ExerciseSpace } from './exerciseSpace';
+import { ExerciseSpace } from '../exerciseSpace';
 
 describe('Initial test', () => {
     const renderComponent = () => render(<ExerciseSpace />);

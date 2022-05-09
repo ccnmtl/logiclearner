@@ -1,6 +1,6 @@
 import React from 'react';
 import { render } from '@testing-library/react';
-import { NotFound } from './notFound';
+import { NotFound } from '../notFound';
 import { MemoryRouter } from 'react-router-dom';
 
 describe('Initial test', () => {
