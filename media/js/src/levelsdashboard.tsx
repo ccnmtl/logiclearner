@@ -45,7 +45,6 @@ export const LevelsDashboard: React.FC = () => {
     useEffect(() => {
         void getQuestionList();
         void fetchCounts();
-        ReactGA.pageview(window.location.pathname + window.location.search);
     }, []);
 
     return (

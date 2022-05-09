@@ -215,7 +215,6 @@ export const ExerciseSpace: React.FC = () => {
         });
         {void fetchSolutions();}
         window.scrollTo(0, 0);
-        ReactGA.pageview(window.location.pathname + window.location.search);
     }, []);
 
     return (
