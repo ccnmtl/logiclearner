@@ -8,7 +8,6 @@ from logiclearner.main.serializers import (
 )
 from rest_framework import generics
 from rest_framework.response import Response
-from rest_framework.permissions import AllowAny
 from django.http.response import Http404
 from django.shortcuts import render, get_object_or_404
 from logictools.next_step import next_step
