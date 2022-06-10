@@ -8,6 +8,7 @@ from logiclearner.main.serializers import (
 )
 from rest_framework import generics
 from rest_framework.response import Response
+from rest_framework.permissions import AllowAny
 from django.http.response import Http404
 from django.shortcuts import render, get_object_or_404
 from logictools.next_step import next_step
@@ -21,10 +22,9 @@ def handler404(request):
     return render(request, '404.html')
 
 
+@method_decorator(csrf_exempt, name='dispatch')
 class HintApiView(APIView):
-    @method_decorator(csrf_exempt)
-    def dispatch(self, *args, **kwargs):
-        return super(HintApiView, self).dispatch(*args, **kwargs)
+    authentication_classes = []
 
     def post(self, request):
         next_expr = request.data.get('next_expr', None)
