@@ -21,10 +21,9 @@ def handler404(request):
     return render(request, '404.html')
 
 
+@method_decorator(csrf_exempt, name='dispatch')
 class HintApiView(APIView):
-    @method_decorator(csrf_exempt)
-    def dispatch(self, *args, **kwargs):
-        return super(HintApiView, self).dispatch(*args, **kwargs)
+    authentication_classes = []
 
     def post(self, request):
         next_expr = request.data.get('next_expr', None)
