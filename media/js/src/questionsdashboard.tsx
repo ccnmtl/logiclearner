@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { getStatements, Statement, ExerciseData,
     completionCount, deleteLevelData } from './utils';
 import { Question } from './question';
-import ReactGA from 'react-ga';
 import { Modal } from './modal';
 
 interface QuestionsDashboardProps {
