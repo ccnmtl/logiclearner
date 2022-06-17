@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { getStatement, Statement, checkQuestion, Solution,
     raw2latex, getSolutions, ExerciseData, Status, Level,
-    getHints, Tools, HintData, latex2raw } from './utils';
+    ApiData, latex2raw, getHints, HintTools } from './utils';
 import { useParams } from 'react-router-dom';
 import { SolutionStep } from './solutionStep';
 import { Modal } from './modal';
@@ -31,6 +31,7 @@ export const ExerciseSpace: React.FC = () => {
     const [nextRule, setNextRule] = useState('');  // user's proposed rule
     const [hintButtonCount, setHintButtonCount] = useState<number>(0);
     const [isIncomplete, setIsIncomplete] = useState<boolean>(true);
+    const [hintCount, setHintCount] = useState<number>(0);
 
     async function fetchStatement() {
         // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
@@ -56,6 +57,7 @@ export const ExerciseSpace: React.FC = () => {
             }
             setStepList(stepList);
             setIsIncomplete(data[0].status !== 'complete');
+            setHintCount(data[0].hintCount);
         } catch (error) {
             setQuestionStatus(null);
         }
@@ -85,8 +87,9 @@ export const ExerciseSpace: React.FC = () => {
                 JSON.stringify(exerciseState));
         }
     };
+
     async function fetchHints() {
-        const hintData: HintData = {
+        const hintData: ApiData = {
             next_expr: '',
             rule: '',
             step_list: [''],
@@ -104,8 +107,9 @@ export const ExerciseSpace: React.FC = () => {
 
                 // eslint-disable-next-line max-len
                 // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-                const toolsData: Tools = await getHints(hintData);
-                setHint([toolsData.hintRule, toolsData.hintExpression]);
+                const toolsData: HintTools = await getHints(hintData);
+                setHint([toolsData['hint'].nextStep[1],
+                    toolsData['hint'].nextStep[0]]);
             } else {
                 let lastCorrectStep = '';
                 if (stepList.length > 1){
@@ -119,8 +123,9 @@ export const ExerciseSpace: React.FC = () => {
                 hintData['answer'] = statement.answer;
                 // eslint-disable-next-line max-len
                 // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-                const toolsData: Tools = await getHints(hintData);
-                setHint([toolsData.hintRule, toolsData.hintExpression]);
+                const toolsData: HintTools = await getHints(hintData);
+                setHint([toolsData['hint'].nextStep[1],
+                    toolsData['hint'].nextStep[0]]);
             }
         }
     }
@@ -150,6 +155,15 @@ export const ExerciseSpace: React.FC = () => {
             setHintButtonCount(hintButtonCount + 1);
         }
         void fetchHints();
+
+        //Log hint count.
+        const data = JSON.parse(
+            window.localStorage.getItem(
+                'question-' + id)) as ExerciseData[];
+        data[0].hintCount ++;
+        setHintCount(data[0].hintCount);
+        window.localStorage.setItem('question-' + id,
+            JSON.stringify(data));
     };
     const modalCancel = () => {
         setShowResetModal(false);
@@ -353,6 +367,9 @@ export const ExerciseSpace: React.FC = () => {
                                         You&apos;ve completed the proof
                                         for this question!
                                     </p>
+                                    <p>
+                                        You used {hintCount} hints
+                                    </p>
                                 </div>
                                 <div className='col-12'>
                                     <a href={
@@ -375,7 +392,7 @@ export const ExerciseSpace: React.FC = () => {
                             disabled={hintButtonCount === 2}
                             className="btn btn-lg ll-button
                             mx-3 my-2 my-md-0 order-1"
-                            style={{display: 'none'}}>
+                        >
                             <span className="ll-button__text">
                                 I need a hint
                             </span>

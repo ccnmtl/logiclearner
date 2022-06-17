@@ -10,7 +10,7 @@ from rest_framework import generics
 from rest_framework.response import Response
 from django.http.response import Http404
 from django.shortcuts import render, get_object_or_404
-from logictools.next_step import next_step
+from logictools.next_step import next_step, get_hint
 
 
 class IndexView(TemplateView):
@@ -19,6 +19,22 @@ class IndexView(TemplateView):
 
 def handler404(request):
     return render(request, '404.html')
+
+
+class ValidateApiView(APIView):
+    @method_decorator(csrf_exempt)
+    def dispatch(self, *args, **kwargs):
+        return super(ValidateApiView, self).dispatch(*args, **kwargs)
+
+    def post(self, request):
+        next_expr = request.data.get('next_expr', None)
+        next_rule = request.data.get('rule', None)
+        step_list = request.data.get('step_list', None)
+        target = request.data.get('answer', None)
+
+        data = next_step(next_expr, next_rule, step_list, target)
+
+        return Response(data, status=200)
 
 
 class HintApiView(APIView):
@@ -31,8 +47,7 @@ class HintApiView(APIView):
         next_rule = request.data.get('rule', None)
         step_list = request.data.get('step_list', None)
         target = request.data.get('answer', None)
-
-        data = next_step(next_expr, next_rule, step_list, target)
+        data = get_hint(next_expr, next_rule, step_list, target)
 
         return Response(data, status=200)
 

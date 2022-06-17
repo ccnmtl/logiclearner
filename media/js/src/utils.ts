@@ -22,7 +22,21 @@ export type Tools = {
     hintRule: string;
 }
 
-export type HintData = {
+export type HintRes = {
+    nextStep: [string, string];
+    solutionFound: boolean;
+    path: [string, string][]
+}
+
+export type HintTools = {
+    isValid: boolean;
+    isSolution: boolean;
+    errrCode: EnumType;
+    errorMsg: string;
+    hint: HintRes;
+}
+
+export type ApiData = {
     next_expr: string;
     rule: string;
     step_list: [string];
@@ -231,9 +245,27 @@ export const capitalize = function(s: string) {
 };
 
 /**
+ * Validate expression; check if solution is reached
+ */
+export const getValidation = async function(data: ApiData) {
+
+    const url = '/api/validate/';
+
+    return authedFetch(url, 'POST', data)
+        .then(function(response) {
+            if (response.status === 200) {
+                return response.json();
+            } else {
+                throw 'Error loading hint: ' +
+                `(${response.status}) ${response.statusText}`;
+            }
+        });
+};
+
+/**
  * Get hints.
  */
-export const getHints = async function(data: HintData) {
+export const getHints = async function(data: ApiData) {
 
     const url = '/api/hint/';
 

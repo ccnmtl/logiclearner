@@ -63,7 +63,7 @@ class StatementAPIViewTest(TestCase):
         self.assertEqual(response.status_code, 405)
 
 
-class SolutionListAPIView(TestCase):
+class SolutionListAPIViewTest(TestCase):
     def setUp(self):
         self.statement = StatementFactory()
         self.solution = SolutionFactory(statement=self.statement)
@@ -89,3 +89,58 @@ class SolutionListAPIView(TestCase):
                                    {'question': 'F->T', 'answer': 'T',
                                     'difficulty': 0})
         self.assertEqual(response.status_code, 405)
+
+
+class ValidateApiViewTest(TestCase):
+    def test_post(self):
+        res1 = self.client.post('/api/validate/',
+                                {'next_expr': 'pvqvpv~q',
+                                    'rule': 'absorption',
+                                    'step_list': ['F->T'],
+                                    'answer': 'T'},
+                                content_type='application/json')
+        self.assertEqual(res1.status_code, 200)
+        self.assertFalse(res1.data['isValid'])
+        self.assertFalse(res1.data['isSolution'])
+        self.assertEqual(res1.data['errorCode'], 'INVALID_NEW_EXPR')
+        self.assertEqual(res1.data['errorMsg'],
+                         'Invalid next step for current expression')
+
+        res2 = self.client.post('/api/validate/',
+                                {'next_expr': 'p',
+                                    'rule': 'double negation',
+                                    'step_list': ['~(~p)'],
+                                    'answer': 'p'},
+                                content_type='application/json')
+        self.assertEqual(res2.status_code, 200)
+        self.assertTrue(res2.data['isValid'])
+        self.assertTrue(res2.data['isSolution'])
+
+
+class HintApiViewTest(TestCase):
+    def test_post(self):
+        res1 = self.client.post('/api/hint/',
+                                {'next_expr': '~(~p)',
+                                    'rule': 'Start',
+                                    'step_list': ['~(~p)'],
+                                    'answer': 'p'},
+                                content_type='application/json')
+        hintData = res1.data['hint']
+        self.assertEqual(res1.status_code, 200)
+        self.assertFalse(res1.data['isValid'])
+        self.assertFalse(res1.data['isSolution'])
+        self.assertEqual(hintData['nextStep'][0], 'p')
+        self.assertEqual(hintData['nextStep'][1], 'Double Negation')
+
+        res2 = self.client.post('/api/hint/',
+                                {'next_expr': '(pvq)^(pv~q)',
+                                    'rule': 'Start',
+                                    'step_list': ['(pvq)^(pv~q)'],
+                                    'answer': 'p'},
+                                content_type='application/json')
+        hintData2 = res2.data['hint']
+        self.assertEqual(res2.status_code, 200)
+        self.assertFalse(res2.data['isValid'])
+        self.assertFalse(res2.data['isSolution'])
+        self.assertEqual(hintData2['nextStep'][0], 'pv(q^~q)')
+        self.assertEqual(hintData2['nextStep'][1], 'Distributivity')
