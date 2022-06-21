@@ -367,9 +367,9 @@ export const ExerciseSpace: React.FC = () => {
                                         You&apos;ve completed the proof
                                         for this question!
                                     </p>
-                                    <p>
+                                    {/* <p>
                                         You used {hintCount} hints
-                                    </p>
+                                    </p> */}
                                 </div>
                                 <div className='col-12'>
                                     <a href={
@@ -392,6 +392,7 @@ export const ExerciseSpace: React.FC = () => {
                             disabled={hintButtonCount === 2}
                             className="btn btn-lg ll-button
                             mx-3 my-2 my-md-0 order-1"
+                            style={{display: 'none'}}
                         >
                             <span className="ll-button__text">
                                 I need a hint
