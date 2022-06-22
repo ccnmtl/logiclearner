@@ -189,6 +189,7 @@ export const ExerciseSpace: React.FC = () => {
             input => (input.value = '')
         );
         window.scrollTo(0, 0);
+        setHint(['', '']);
     };
 
     const status: Status = {

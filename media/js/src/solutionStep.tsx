@@ -78,6 +78,8 @@ export const SolutionStep: React.FC<SolutionStepProps> = (
             setNext();
         }
         setError('');
+        setHint(['', '']);
+        setHintButtonCount(0);
     };
     const setNext = () => {
         setNextRule(stepList[idx - 1][0]);
