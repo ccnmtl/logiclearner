@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { ExerciseData, Statement, HintData,
-    getHints, Tools, latex2raw, updateLocalStepList,
+import { ExerciseData, Statement, ApiData,
+    getValidation, Tools, latex2raw, updateLocalStepList,
     updateLocalQuestionStatus, capitalize, raw2latex } from './utils';
 import ReactGA from 'react-ga';
 
@@ -10,20 +10,20 @@ interface SolutionStepProps {
     statement: Statement;
     id: string;
     level: string;
-    step: [string, string],
-    stepList: [string, string][],
-    setStepList: React.Dispatch<React.SetStateAction<[string, string][]>>,
-    idx: number,
-    hint: [string, string],
-    setHint:  React.Dispatch<React.SetStateAction<[string, string]>>,
-    nextStep: string,
-    nextRule: string,
-    setNextStep: React.Dispatch<React.SetStateAction<string>>,
-    setNextRule: React.Dispatch<React.SetStateAction<string>>,
+    step: [string, string];
+    stepList: [string, string][];
+    setStepList: React.Dispatch<React.SetStateAction<[string, string][]>>;
+    idx: number;
+    hint: [string, string];
+    setHint:  React.Dispatch<React.SetStateAction<[string, string]>>;
+    nextStep: string;
+    nextRule: string;
+    setNextStep: React.Dispatch<React.SetStateAction<string>>;
+    setNextRule: React.Dispatch<React.SetStateAction<string>>;
     hintButtonCount: number;
-    setHintButtonCount: React.Dispatch<React.SetStateAction<number>>,
-    setIsIncomplete: React.Dispatch<React.SetStateAction<boolean>>,
-    setQuestionStatus: React.Dispatch<React.SetStateAction<string>>,
+    setHintButtonCount: React.Dispatch<React.SetStateAction<number>>;
+    setIsIncomplete: React.Dispatch<React.SetStateAction<boolean>>;
+    setQuestionStatus: React.Dispatch<React.SetStateAction<string>>;
     isIncomplete: boolean;
     resetFunc(): void;
 }
@@ -97,7 +97,7 @@ export const SolutionStep: React.FC<SolutionStepProps> = (
     };
 
     async function validateStep() {
-        const hintData: HintData = {
+        const hintData: ApiData = {
             next_expr: '',
             rule: '',
             step_list: [''],
@@ -117,7 +117,7 @@ export const SolutionStep: React.FC<SolutionStepProps> = (
         hintData['answer'] = statement.answer;
         // eslint-disable-next-line max-len
         // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-        const toolsData: Tools = await getHints(hintData);
+        const toolsData: Tools = await getValidation(hintData);
 
         processResponse(toolsData);
     }

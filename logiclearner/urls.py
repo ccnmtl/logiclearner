@@ -36,6 +36,7 @@ urlpatterns = [
             views.StatementListAPIView.as_view()),
     re_path('^api/solution/(?P<statement>.+)/$',
             views.SolutionListAPIView.as_view()),
+    re_path(r'^api/validate', views.ValidateApiView.as_view()),
     re_path(r'^api/hint', views.HintApiView.as_view()),
 
     path('about/', flatpage_views.flatpage, {'url': '/about/'}, name='about'),
