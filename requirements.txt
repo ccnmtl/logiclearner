@@ -119,5 +119,5 @@ requirements/src/django_cas_ng-4.2.2ctl-py2.py3-none-any.whl
 lark==1.1.2
 logiclearnertools==0.1.6.2
 torch==1.11.0
-numpy<1.21
+numpy<1.24
 python-Levenshtein==0.12.2
