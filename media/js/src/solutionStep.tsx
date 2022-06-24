@@ -219,7 +219,7 @@ export const SolutionStep: React.FC<SolutionStepProps> = (
                                 })}
                             </select>
                             <div>{isLawHint && (
-                                <div>{hint[0]}</div>
+                                <div role='alert'>Hint: use {hint[0]}</div>
                             )}</div>
                         </div>
                         <div className='col-12 col-md-5 mb-4 mb-md-0'>
@@ -236,7 +236,11 @@ export const SolutionStep: React.FC<SolutionStepProps> = (
                                 onChange={handleStatementInput}
                                 disabled={!isEditable} />
                             <div>{isStatementHint && (
-                                <div>{hint[1]}</div>
+                                <div role='alert'>Hint: type 
+                                    <span className='text-highlight'>
+                                        {hint[1]}
+                                    </span>
+                                </div>
                             )}</div>
                         </div>
                         <div className="col-12 col-md-3 align-self-center
