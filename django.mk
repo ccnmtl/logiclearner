@@ -51,7 +51,7 @@ $(PY_SENTINAL): $(REQUIREMENTS)
 	$(PIP) install pip==$(PIP_VERSION)
 	$(PIP) install --upgrade setuptools
 	$(PIP) install wheel==$(WHEEL_VERSION)
-	$(PIP) install --no-deps --requirement $(REQUIREMENTS)
+	$(PIP) install --no-deps --no-cache-dir --requirement $(REQUIREMENTS)
 	touch $@
 
 test: $(PY_SENTINAL)
