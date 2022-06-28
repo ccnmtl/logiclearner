@@ -210,7 +210,7 @@ export const SolutionStep: React.FC<SolutionStepProps> = (
                                         } />
                                     </span>
                                     <span className="ll-button__text">
-                                        Apply {hint[0]}
+                                        Apply <b>{hint[0]}</b>
                                     </span>
                                 </div>
                             )}
@@ -233,7 +233,8 @@ export const SolutionStep: React.FC<SolutionStepProps> = (
                                 })}
                             </select>
                         </div>
-                        <div className='row col-12 col-md-5 mb-4 mb-md-0 mx-0 align-self-start'>
+                        <div className='row col-12 col-md-5 mb-4 mb-md-0 mx-0
+                            align-self-start'>
                             <label htmlFor={`statementInput-${idx}`}
                                 className='form-label col-12 px-0 order-1'>
                                     then I&apos;ll get this statement...
@@ -242,12 +243,12 @@ export const SolutionStep: React.FC<SolutionStepProps> = (
                                 <div role='alert'
                                     className='hint_box col-12 order-3'>
                                     <span className="ll-icons ll-button__icon">
-                                        <img alt='Law hint' src={
+                                        <img alt='Statement hint' src={
                                             `${STATIC_URL}img/icon-hint.svg`
                                         } />
                                     </span>
                                     <span className="ll-button__text">
-                                        Try {hint[1]}
+                                        Try <b>{hint[1]}</b>
                                     </span>
                                 </div>
                             )}

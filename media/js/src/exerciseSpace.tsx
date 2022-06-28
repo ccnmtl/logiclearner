@@ -365,7 +365,10 @@ export const ExerciseSpace: React.FC = () => {
                                     </p>
                                     <p>
                                         You&apos;ve completed the proof
-                                        for this question!
+                                        for this question<br />
+                                        {hintCount === 0 ?
+                                            'without hints! '
+                                            : 'with some hints!'}
                                     </p>
                                     {/* <p>
                                         You used {hintCount} hints
