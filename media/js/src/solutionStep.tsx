@@ -43,8 +43,8 @@ export const SolutionStep: React.FC<SolutionStepProps> = (
 
     const isLast = idx === stepList.length - 1;
     const haveErrors = !error;
-    const isLawHint = isLast && hintButtonCount > 0;
-    const isStatementHint = isLast && hintButtonCount === 2;
+    const isLawHint = (isLast && hintButtonCount > 0) && hint[0] !== '';
+    const isStatementHint = (isLast && hintButtonCount === 2) && hint[1] !== '';
     const isFirst = idx === 0;
     const showButtons = isLast && isIncomplete;
     const isEditable = isIncomplete && idx === stepList.length - 1;
