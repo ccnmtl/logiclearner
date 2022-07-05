@@ -6,7 +6,7 @@
         width: 15rem;
         display: flex;
         flex-direction: row;
-        justify-content: start;
+        justify-content: flex-start;
         @include media-breakpoint-up(md) {
             width: 15rem;
         }
@@ -39,6 +39,14 @@
 }
 
 .answerkey-highlight {
+    background-color: #ffe0b2;
+    padding: 0 0.125rem 0.25rem 0.125rem;
+    border-radius: 0.25rem;
+    word-wrap: break-word !important;
+    word-break: break-word !important;
+}
+
+.text-highlight {
     background-color: #ffe0b2;
     padding: 0 0.125rem 0.25rem 0.125rem;
     border-radius: 0.25rem;

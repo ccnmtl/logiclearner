@@ -366,7 +366,10 @@ export const ExerciseSpace: React.FC = () => {
                                     </p>
                                     <p>
                                         You&apos;ve completed the proof
-                                        for this question!
+                                        for this question<br />
+                                        {hintCount === 0 ?
+                                            'without hints! '
+                                            : 'with some hints!'}
                                     </p>
                                     {/* <p>
                                         You used {hintCount} hints
@@ -393,9 +396,7 @@ export const ExerciseSpace: React.FC = () => {
                         <button onClick={handleHints}
                             disabled={hintButtonCount === 2}
                             className="btn btn-lg ll-button
-                            mx-3 my-2 my-md-0 order-1"
-                            style={{display: 'none'}}
-                        >
+                            mx-3 my-2 my-md-0 order-1">
                             <span className="ll-button__text">
                                 I need a hint
                             </span>

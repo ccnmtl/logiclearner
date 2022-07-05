@@ -42,3 +42,27 @@
 }
 
 
+.hint_box {
+	position: relative;
+	background: rgba(232, 245, 233, 0.85);
+	border: 0;
+	border-radius: 0.25rem;
+	margin: 0.6875rem 0;
+	font-size: 0.9375rem;
+	line-height: 1;
+	padding: 0.5rem;
+	&:after {
+        bottom: 100%;
+        left: 0.875rem;
+        border: solid transparent;
+        content: "";
+        height: 0;
+        width: 0;
+        position: absolute;
+        pointer-events: none;
+        border-color: rgba(232, 245, 233, 0);
+        border-bottom-color: rgba(232, 245, 233, 0.85);
+        border-width: 8px;
+        margin-left: -8px;
+	}
+}

@@ -43,8 +43,8 @@ export const SolutionStep: React.FC<SolutionStepProps> = (
 
     const isLast = idx === stepList.length - 1;
     const haveErrors = !error;
-    const isLawHint = isLast && hintButtonCount > 0;
-    const isStatementHint = isLast && hintButtonCount === 2;
+    const isLawHint = (isLast && hintButtonCount > 0) && hint[0] !== '';
+    const isStatementHint = (isLast && hintButtonCount === 2) && hint[1] !== '';
     const isFirst = idx === 0;
     const showButtons = isLast && isIncomplete;
     const isEditable = isIncomplete && idx === stepList.length - 1;
@@ -194,15 +194,29 @@ export const SolutionStep: React.FC<SolutionStepProps> = (
                     {isFirst ? 'To begin this proof,' : 'Next,'}
                 </p>
                 <form>
-                    <div className='solution-step__form row'
+                    <div className='solution-step__form row align-self-start'
                         data-testid={'exercise'}>
-                        <div className='col-12 col-md-4 mb-4 mb-md-0'>
+                        <div className='row col-12 col-md-4 mb-4 mb-md-0 mx-0'>
                             <label htmlFor={`laws-${idx}`}
-                                className='form-label'>
+                                className='form-label col-12 px-0 order-1'>
                                 If I apply this law...
                             </label>
+                            {isLawHint && (
+                                <div role='alert'
+                                    className='hint_box col-12 order-3'>
+                                    <span className="ll-icons ll-button__icon">
+                                        <img alt='Law hint' src={
+                                            `${STATIC_URL}img/icon-hint.svg`
+                                        } />
+                                    </span>
+                                    <span className="ll-button__text">
+                                        Apply <b>{hint[0]}</b>
+                                    </span>
+                                </div>
+                            )}
                             <select name='law'
-                                id={`laws-${idx}`} className='form-select'
+                                id={`laws-${idx}`}
+                                className='form-select col-12 order-2'
                                 key={`${step[0]}-${idx}`}
                                 data-cy={`${step[0]}-${idx}`}
                                 onChange={handleLawSelect}
@@ -219,16 +233,28 @@ export const SolutionStep: React.FC<SolutionStepProps> = (
                                     );
                                 })}
                             </select>
-                            <div>{isLawHint && (
-                                <div>{hint[0]}</div>
-                            )}</div>
                         </div>
-                        <div className='col-12 col-md-5 mb-4 mb-md-0'>
+                        <div className='row col-12 col-md-5 mb-4 mb-md-0 mx-0
+                            align-self-start'>
                             <label htmlFor={`statementInput-${idx}`}
-                                className='form-label'>
+                                className='form-label col-12 px-0 order-1'>
                                     then I&apos;ll get this statement...
                             </label>
-                            <input type='text' className='form-control'
+                            {isStatementHint && (
+                                <div role='alert'
+                                    className='hint_box col-12 order-3'>
+                                    <span className="ll-icons ll-button__icon">
+                                        <img alt='Statement hint' src={
+                                            `${STATIC_URL}img/icon-hint.svg`
+                                        } />
+                                    </span>
+                                    <span className="ll-button__text">
+                                        Try <b>{hint[1]}</b>
+                                    </span>
+                                </div>
+                            )}
+                            <input type='text'
+                                className='form-control col-12 order-2'
                                 id={`statementInput-${idx}`}
                                 placeholder='Logic statement'
                                 key={`statement-${idx}`}
@@ -236,9 +262,6 @@ export const SolutionStep: React.FC<SolutionStepProps> = (
                                 defaultValue={raw2latex(step[1])}
                                 onChange={handleStatementInput}
                                 disabled={!isEditable} />
-                            <div>{isStatementHint && (
-                                <div>{hint[1]}</div>
-                            )}</div>
                         </div>
                         <div className="col-12 col-md-3 align-self-center
                             text-center text-md-left
