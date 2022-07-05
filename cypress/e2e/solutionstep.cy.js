@@ -61,4 +61,16 @@ describe('Exercise Space Interactions', function() {
         cy.get('[data-cy="Negation-1"]').should('not.be.disabled');
         cy.get('#statementInput-1').should('not.be.disabled');
     });
+    it('Should test hint functionality', function() {
+        cy.visit('http://localhost:8000/level/2');
+        cy.get('[data-cy="question3"]').click();
+        cy.wait(500);
+        cy.get('[data-cy="hint-button"]').click({force: true});
+        cy.get('[data-cy="law-hint"]').should('exist');
+        cy.get('[data-cy="law-hint"]').should('contain', 'Distributivity');
+        cy.get('[data-cy="hint-button"]').click({force: true});
+        cy.get('[data-cy="hint-button"]').should('be.disabled');
+        cy.get('[data-cy="expression-hint"]').should('exist');
+        cy.get('[data-cy="expression-hint"]').should('contain', 'pv(q^~q)');
+    });
 });

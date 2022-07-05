@@ -395,6 +395,7 @@ export const ExerciseSpace: React.FC = () => {
                     <div className="solution-actions">
                         <button onClick={handleHints}
                             disabled={hintButtonCount === 2}
+                            data-cy="hint-button"
                             className="btn btn-lg ll-button
                             mx-3 my-2 my-md-0 order-1">
                             <span className="ll-button__text">

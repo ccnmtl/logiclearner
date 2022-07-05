@@ -203,7 +203,8 @@ export const SolutionStep: React.FC<SolutionStepProps> = (
                             </label>
                             {isLawHint && (
                                 <div role='alert'
-                                    className='hint_box col-12 order-3'>
+                                    className='hint_box col-12 order-3'
+                                    data-cy="law-hint">
                                     <span className="ll-icons ll-button__icon">
                                         <img alt='Law hint' src={
                                             `${STATIC_URL}img/icon-hint.svg`
@@ -242,7 +243,8 @@ export const SolutionStep: React.FC<SolutionStepProps> = (
                             </label>
                             {isStatementHint && (
                                 <div role='alert'
-                                    className='hint_box col-12 order-3'>
+                                    className='hint_box col-12 order-3'
+                                    data-cy="expression-hint">
                                     <span className="ll-icons ll-button__icon">
                                         <img alt='Statement hint' src={
                                             `${STATIC_URL}img/icon-hint.svg`
