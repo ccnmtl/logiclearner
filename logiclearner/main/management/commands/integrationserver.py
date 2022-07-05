@@ -16,6 +16,8 @@ from django.core.management import call_command
 from django.core.management.base import BaseCommand
 from django.db import connection
 
+from logiclearner.factories import LogicLearnerTestMixin
+
 
 class Command(BaseCommand):
     help = 'Runs a development server with data created by factories.'
@@ -43,6 +45,11 @@ class Command(BaseCommand):
         # Create a test database.
         db_name = connection.creation.create_test_db(
             verbosity=verbosity, autoclobber=True, serialize=False)
+
+        ll = LogicLearnerTestMixin()
+        ll.create_level_one()
+        ll.create_level_two()
+        ll.create_level_three()
 
         shutdown_message = (
             '\nServer stopped.' +

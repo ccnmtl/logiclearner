@@ -380,6 +380,7 @@ export const ExerciseSpace: React.FC = () => {
                                     <a href={
                                         `/level/${statement.difficulty + 1}`
                                     }
+                                    data-cy="level-button"
                                     className="btn btn-lg ll-button
                                         mx-3 my-2 my-md-0">
                                         <span className='visually-hidden'>
@@ -395,6 +396,7 @@ export const ExerciseSpace: React.FC = () => {
                     <div className="solution-actions">
                         <button onClick={handleHints}
                             disabled={hintButtonCount === 2}
+                            data-cy="hint-button"
                             className="btn btn-lg ll-button
                             mx-3 my-2 my-md-0 order-1">
                             <span className="ll-button__text">
@@ -404,6 +406,7 @@ export const ExerciseSpace: React.FC = () => {
                         <button
                             // disabled={!showSolutionBtn}
                             onClick={handleShowSolutions}
+                            data-cy="solution-key"
                             className="btn btn-lg ll-button
                                 mx-3 my-2 my-md-0 order-3 order-md-2">
                             <span className="ll-button__text">
@@ -413,6 +416,7 @@ export const ExerciseSpace: React.FC = () => {
                         <button
                             onClick={handleResetModal}
                             disabled={!showResetBtn}
+                            data-cy="reset-proof"
                             className="btn btn-lg ll-button
                                 mx-3 my-2 my-md-0 order-2 order-md-3">
                             <span className="ll-button__text">
@@ -426,6 +430,7 @@ export const ExerciseSpace: React.FC = () => {
                                 <h2>Step-by-step solution key</h2>
                                 <button className='btn-close'
                                     aria-label="Close"
+                                    data-cy="show-solutions"
                                     onClick={handleShowSolutions}></button>
                             </div>
                             <p>The following is just one of many possible
@@ -434,7 +439,8 @@ export const ExerciseSpace: React.FC = () => {
                             <ul className='solutionkey'>
                                 {solutions.map((solution, idx) => {
                                     return (
-                                        <li key={idx}>
+                                        <li key={idx} data-cy={
+                                            `solution-step-${idx}`}>
                                             <span className='solutionkey__step'>
                                                 {idx === 0 ?
                                                     'Premise: '

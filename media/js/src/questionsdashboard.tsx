@@ -87,7 +87,8 @@ export const QuestionsDashboard: React.FC<QuestionsDashboardProps> = (
                         </span>
                     </h1>
                     <div className="ms-auto q-completion align-self-center"
-                        aria-label="Questions completed" role="status">
+                        aria-label="Questions completed" role="status"
+                        data-cy="questions-completed">
                         {completedCount}/{levelCount}
                     </div>
                 </div>

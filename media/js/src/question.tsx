@@ -37,7 +37,7 @@ export const Question: React.FC<QuestionProps> = (
 
     return (
         <li className="cardset-card"
-            data-testid={'question'}>
+            data-testid={'question'} data-cy={`question${idStr}`}>
             <a href={`/exercise/${idStr}/`}
                 className='cardset-card__button cardset-card__button-question'>
                 <div className="cardset-card__title">

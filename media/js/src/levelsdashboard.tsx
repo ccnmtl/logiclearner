@@ -57,7 +57,7 @@ export const LevelsDashboard: React.FC = () => {
                     aria-labelledby="cardset-label">
                     <li className="cardset-card">
                         <a className='cardset-card__button'
-                            href={'/tutorial/'}>
+                            href={'/tutorial/'} data-cy="tutorial-link">
                             <figure className="cardset-card__avatar">
                                 <img alt=""
                                     src={
@@ -82,7 +82,7 @@ export const LevelsDashboard: React.FC = () => {
                     </li>
                     <li className="cardset-card">
                         <a className='cardset-card__button'
-                            href={'/level/1'}>
+                            href={'/level/1'} data-cy="level-one">
                             <figure className="cardset-card__avatar">
                                 <img alt=""
                                     src={
@@ -113,7 +113,7 @@ export const LevelsDashboard: React.FC = () => {
                     </li>
                     <li className="cardset-card">
                         <a className='cardset-card__button'
-                            href={'/level/2'}>
+                            href={'/level/2'} data-cy="level-two">
                             <figure className="cardset-card__avatar">
                                 <img alt=""
                                     src={
@@ -143,7 +143,7 @@ export const LevelsDashboard: React.FC = () => {
                     </li>
                     <li className="cardset-card">
                         <a className='cardset-card__button'
-                            href={'/level/3'}>
+                            href={'/level/3'} data-cy="level-three">
                             <figure className="cardset-card__avatar">
                                 <img alt=""
                                     src={
