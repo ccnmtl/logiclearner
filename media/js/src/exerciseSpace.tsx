@@ -190,6 +190,7 @@ export const ExerciseSpace: React.FC = () => {
         );
         window.scrollTo(0, 0);
         setHint(['', '']);
+        setHintButtonCount(0);
     };
 
     const status: Status = {
