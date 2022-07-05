@@ -24,4 +24,14 @@ describe('Exercise Space Interactions', function() {
         cy.get('.question').should('contain',
             'Prove that (p∨q)∨(p∨¬q) is a Tautology.');
     });
+    it('Tests a11y on the exercise space', function() {
+        cy.get('[data-cy="level-one"]').click();
+        cy.get('[data-cy="question1"]').click();
+        cy.injectAxe();
+        cy.checkA11y('html', {
+            runOnly: {
+                type: 'tag',
+                values: ['wcag2a']
+            }});
+    });
 });

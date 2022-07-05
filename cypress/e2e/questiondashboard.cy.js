@@ -34,4 +34,13 @@ describe('Question Dashboard Interactions', function() {
             'Prove that ¬(¬r∧¬(¬(p∧(q∨q)))) is logically equivalent' +
             ' to (p∧q)→r.');
     });
+    it('Tests a11y on the questions dashboard', function() {
+        cy.get('[data-cy="level-one"]').click();
+        cy.injectAxe();
+        cy.checkA11y('html', {
+            runOnly: {
+                type: 'tag',
+                values: ['wcag2a']
+            }});
+    });
 });

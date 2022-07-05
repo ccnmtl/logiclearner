@@ -26,4 +26,12 @@ describe('Levels Dashboard Interactions', function() {
         cy.get('[data-cy="level-three"]').click();
         cy.url().should('eq', 'http://localhost:8000/level/3');
     });
+    it('Tests a11y on the levels dashboard', function() {
+        cy.injectAxe();
+        cy.checkA11y('html', {
+            runOnly: {
+                type: 'tag',
+                values: ['wcag2a']
+            }});
+    });
 });
