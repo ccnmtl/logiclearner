@@ -2,7 +2,6 @@
 {% load static %}
 
 {% block js %}
-    <script src="{% static 'build/bundle.js' %}"></script>
     <script src="{% static 'js/lib/jquery-3.6.0.min.js' %}"></script>
     <script src="{% static 'js/lib/tutorial.js' %}"></script>
 {% endblock %}
@@ -22,16 +21,16 @@
                     <span class="main-banner__subhead">TUTORIAL:</span><span class="main-banner__title">Using Logic Learner</span>
                 </a></h1>
                     <button class="tutorial-prompt ms-auto align-self-center" data-segment="modal">
-                        <div class="tutorial-prompt__text">1</div>
+                        <div class="tutorial-prompt__text" data-cy="tutorial-one">1</div>
                     </button>
                 <div class="align-self-center text-end" id="helper-modal">
                     <button type="button" class="btn btn-light ll-button me-0 me-md-1 mb-2 mb-md-0 text-nowrap btn-shrink"
-                         data-bs-toggle="modal" data-bs-target="#lawSheetModal">
+                         data-bs-toggle="modal" data-bs-target="#lawSheetModal" data-cy="lawSheetModal">
                         <span class='ll-icons ll-button__icon'><img src="{% static 'img/icon-clipboard.svg' %}" /></span>
                         <span class="ll-button__text">Law sheet</span>
                     </button>
                     <button type="button" class="btn btn-light ll-button text-nowrap btn-shrink"
-                         data-bs-toggle="modal" data-bs-target="#keyBindingModal">
+                         data-bs-toggle="modal" data-bs-target="#keyBindingModal" data-cy="keyBindingModal">
                         <span class='ll-icons ll-button__icon'><img src="{% static 'img/icon-keyboard.svg' %}" /></span>
                         <span class="ll-button__text">Logic symbols</span>
                     </button>
@@ -52,7 +51,7 @@
             </div>
             <section class="container border-top tutorial-section" id="maincontent">
                 <button class="tutorial-prompt align-self-center mt-3" data-segment="question">
-                    <div class="tutorial-prompt__text">2</div>
+                    <div class="tutorial-prompt__text" data-cy="tutorial-two">2</div>
                 </button>
                 <p class="question fs-2 pt-0" id="helper-question">Prove that <span class="question-statement text-break">(p∨q)→r</span> is logically equivalent to <span class="question-statement text-break">(p→r)∧(q→r)</span>.</p>
                 <div class="guide__box guide-text" id="guide-question">
@@ -64,7 +63,7 @@
                     <div class="solution-step mt-0 pt-0">
                         <p class="solution-step__prompt">To begin this proof,
                         <button class="tutorial-prompt align-self-center mt-0" data-segment="solution">
-                            <div class="tutorial-prompt__text">3</div>
+                            <div class="tutorial-prompt__text" data-cy="tutorial-three">3</div>
                         </button>
                         </p>
                         <div class="solution-step__form row">
@@ -104,7 +103,7 @@
                             <div class="col-12 col-md-3 align-self-end text-center p-md-0 row">
                                 <div class="col-3 col-md-12 p-0 m-0 stepaction-button">
                                     <button class="tutorial-prompt align-self-center mt-0" data-segment="stepactions">
-                                        <div class="tutorial-prompt__text">4</div>
+                                        <div class="tutorial-prompt__text" data-cy="tutorial-four">4</div>
                                     </button>
                                 </div>
                                 <div class="col-7 col-md-12 m-0 px-0 py-1" id="helper-stepactions">
@@ -143,7 +142,7 @@
  -->
                         <div class="mt-0 mx-4 p-0 text-center">
                             <button class="tutorial-prompt align-self-center mt-0" data-segment="solutionkey">
-                            <div class="tutorial-prompt__text">5</div>
+                            <div class="tutorial-prompt__text" data-cy="tutorial-five">5</div>
                             </button>
                             <button tabindex="-1" class="btn btn-lg ll-button mx-0 my-2 my-md-0" id="helper-solutionkey">
                             <span class="ll-button__text">Show solution</span>
@@ -156,7 +155,7 @@
                         </div>
                         <div class="mt-0 mx-4 p-0 text-center">
                             <button class="tutorial-prompt align-self-center mt-0" data-segment="reset">
-                            <div class="tutorial-prompt__text">6</div>
+                            <div class="tutorial-prompt__text" data-cy="tutorial-six">6</div>
                             </button>
                             <button tabindex="-1" class="btn btn-lg ll-button mx-0 my-2 my-md-0" id="helper-reset">
                             <span class="ll-button__text">Reset proof</span>

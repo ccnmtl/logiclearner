@@ -204,6 +204,7 @@ export const SolutionStep: React.FC<SolutionStepProps> = (
                             <select name='law'
                                 id={`laws-${idx}`} className='form-select'
                                 key={`${step[0]}-${idx}`}
+                                data-cy={`${step[0]}-${idx}`}
                                 onChange={handleLawSelect}
                                 defaultValue={capitalize(step[0])}
                                 disabled={!isEditable} >
