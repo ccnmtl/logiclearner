@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { ExerciseData, Statement, ApiData,
     getValidation, Tools, latex2raw, updateLocalStepList,
-    updateLocalQuestionStatus, capitalize, raw2latex } from './utils';
+    updateLocalQuestionStatus, capitalize, raw2latex, Solution } from './utils';
 import ReactGA from 'react-ga';
 
 export const STATIC_URL = LogicLearner.staticUrl;
@@ -26,6 +26,7 @@ interface SolutionStepProps {
     setQuestionStatus: React.Dispatch<React.SetStateAction<string>>;
     isIncomplete: boolean;
     resetFunc(): void;
+    solutions: Solution[];
 }
 const laws: Array<string> = ['Absorption', 'Associativity', 'Commutativity',
     'De Morgan\'s Law', 'Distributivity', 'Domination', 'Double Negation',
@@ -36,7 +37,7 @@ export const SolutionStep: React.FC<SolutionStepProps> = (
     {statement, id, step, stepList, idx, setStepList,
         hint, hintButtonCount, nextStep, setNextStep, setNextRule,
         nextRule, setHint, setHintButtonCount, setIsIncomplete,
-        setQuestionStatus, isIncomplete, resetFunc, level
+        setQuestionStatus, isIncomplete, resetFunc, level, solutions
     }: SolutionStepProps) => {
 
     const [error, setError] = useState('');
@@ -80,6 +81,11 @@ export const SolutionStep: React.FC<SolutionStepProps> = (
         setError('');
         setHint(['', '']);
         setHintButtonCount(0);
+        ReactGA.event({
+            category: `${statement.question}`,
+            action: 'Deleted Step',
+            label: `${level},${statement.pk}`
+        });
     };
     const setNext = () => {
         setNextRule(stepList[idx - 1][0]);
@@ -129,9 +135,9 @@ export const SolutionStep: React.FC<SolutionStepProps> = (
         if (!respData.isValid) {
             setError(respData.errorMsg);
             ReactGA.event({
-                category: 'Statements',
-                action: 'Invalid',
-                label: `${level},${statement.pk},${statement.question}`
+                category: `${statement.question}`,
+                action: `Error ${respData.errorMsg}`,
+                label: `${level},${statement.pk}`
             });
         } else if (respData.isValid && !respData.isSolution) {
 
@@ -146,6 +152,11 @@ export const SolutionStep: React.FC<SolutionStepProps> = (
             setStepList(newStepList);
             setHint(['', '']);
             setHintButtonCount(0);
+            ReactGA.event({
+                category: `${statement.question}`,
+                action: 'Question in progress',
+                label: `${level},${statement.pk}`
+            });
 
         } else if (respData.isValid && respData.isSolution) {
 
@@ -160,9 +171,15 @@ export const SolutionStep: React.FC<SolutionStepProps> = (
             setHintButtonCount(2);
             setIsIncomplete(false);
             ReactGA.event({
-                category: 'Statements',
-                action: 'Completed a question',
-                label: `${level},${statement.pk},${statement.question}`
+                category: `${statement.question}`,
+                action: 'Completed question',
+                label: `${level},${statement.pk}`
+            });
+            ReactGA.event({
+                category: `${statement.question}`,
+                action: 'Steps vs Optimal Steps',
+                label: `Steps: ${stepList.length - 1}` +
+                `FacultySteps: ${solutions.length - 1}`
             });
         }
     };
