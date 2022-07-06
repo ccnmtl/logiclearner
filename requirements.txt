@@ -14,7 +14,7 @@ importlib-metadata<4.13  # for flake8
 zipp==3.8.0
 flake8==4.0.1
 pycodestyle==2.8.0
-tornado==6.1
+tornado==6.2
 beautifulsoup4==4.11.0
 cssselect==1.1.0
 lxml==4.9.0
