@@ -41,7 +41,8 @@ describe('Initial test', () => {
                 hintButtonCount={0}
                 setHintButtonCount={setHintButtonCount}
                 setIsIncomplete={setIsIncomplete}
-                setQuestionStatus={setQuestionStatus}  />
+                setQuestionStatus={setQuestionStatus}
+                solutions={[]}  />
         </MemoryRouter>);
     it('Should render the exercise component', () => {
         const { getByTestId } = renderComponent();

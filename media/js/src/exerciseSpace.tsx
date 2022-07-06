@@ -136,15 +136,20 @@ export const ExerciseSpace: React.FC = () => {
         evt.preventDefault();
         setShowSolutions(solutions && !showSolutions);
         ReactGA.event({
-            category: 'Statements',
+            category: `${statement.question}`,
             action: 'Clicked show solutions',
-            label: `${level},${statement.pk},${statement.question}`
+            label: `${level},${statement.pk}`
         });
     };
     const handleResetModal = (
         evt: React.MouseEvent<HTMLButtonElement>): void => {
         evt.preventDefault();
         setShowResetModal(true);
+        ReactGA.event({
+            category: `${statement.question}`,
+            action: 'Reset proof',
+            label: `${level},${statement.pk}`
+        });
     };
     const handleHints = (
         evt: React.MouseEvent<HTMLButtonElement>): void => {
@@ -164,9 +169,21 @@ export const ExerciseSpace: React.FC = () => {
         setHintCount(data[0].hintCount);
         window.localStorage.setItem('question-' + id,
             JSON.stringify(data));
+        ReactGA.event({
+            category: `${statement.question}`,
+            action: 'Hit hint button',
+            label: `${level},${statement.pk}`
+        });
     };
     const modalCancel = () => {
         setShowResetModal(false);
+    };
+    const handleLawEvent = () => {
+        ReactGA.event({
+            category: `${statement.question}`,
+            action: 'Law sheet',
+            label: `${level},${statement.pk}`
+        });
     };
     const resetFunc = () => {
         const initData: ExerciseData = {
@@ -265,7 +282,8 @@ export const ExerciseSpace: React.FC = () => {
                             className="btn btn-light ll-button btn-shrink
                                 me-0 me-md-1 mb-2 mb-md-0"
                             data-bs-toggle="modal"
-                            data-bs-target="#lawSheetModal">
+                            data-bs-target="#lawSheetModal"
+                            onClick={handleLawEvent}>
                             <span className="ll-icons ll-button__icon">
                                 <img alt='' src={
                                     `${STATIC_URL}img/icon-clipboard.svg`
@@ -349,7 +367,8 @@ export const ExerciseSpace: React.FC = () => {
                                     setIsIncomplete={setIsIncomplete}
                                     isIncomplete={isIncomplete}
                                     resetFunc={resetFunc}
-                                    setQuestionStatus={setQuestionStatus} />
+                                    setQuestionStatus={setQuestionStatus}
+                                    solutions={solutions} />
                             );
                         }
                     )}
