@@ -101,7 +101,7 @@ edtf==4.0.1 # pyup: <4.0.0
 
 pbr==5.9.0 # bandit
 pyyaml==6.0 # bandit
-stevedore==3.5.0  # bandit
+stevedore==4.0.0  # bandit
 bandit==1.7.0
 
 django-smtp-ssl==1.0
