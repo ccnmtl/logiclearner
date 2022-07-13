@@ -48,7 +48,8 @@ class StatementAPIViewTest(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertEqual(len(response.data), 6)
         self.assertEqual(response.data['question'], 'F->T')
-        self.assertEqual(response.data['pk'], 1)
+        self.assertEqual(response.data['answer'], 'T')
+        self.assertEqual(response.data['difficulty'], 0)
 
     def test_post(self):
         response = self.client.post('/api/statement/',
