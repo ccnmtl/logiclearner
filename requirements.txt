@@ -67,7 +67,7 @@ django-bootstrap4==21.1
 
 django-debug-toolbar==3.5.0
 
-django-waffle==2.5.0
+django-waffle==2.6.0
 
 django-smoketest==1.2.0
 # For django-extensions
