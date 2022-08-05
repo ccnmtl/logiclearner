@@ -108,7 +108,6 @@ django-smtp-ssl==1.0
 django-contact-us==1.0.0
 asgiref==3.5.1
 entrypoints==0.4
-djangowind==1.2.4
 aiocontextvars==0.2.2
 django-s3sign<=0.2.1
 
