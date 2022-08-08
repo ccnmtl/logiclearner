@@ -24,6 +24,8 @@ INSTALLED_APPS += [  # noqa
     'contactus'
 ]
 
+INSTALLED_APPS.remove('djangowind') # noqa
+
 MIDDLEWARE += [ # noqa
     'django_cas_ng.middleware.CASMiddleware',
 ]
