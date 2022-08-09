@@ -15,7 +15,6 @@ PROJECT_APPS = [
 USE_TZ = True
 
 INSTALLED_APPS += [  # noqa
-    'bootstrap4',
     'infranil',
     'django_extensions',
     'django_cas_ng',
