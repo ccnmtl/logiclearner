@@ -66,7 +66,7 @@ sentry-sdk==1.9.0
 
 django-debug-toolbar==3.6.0
 
-django-waffle==2.7.0
+django-waffle==3.0.0
 
 django-smoketest==1.2.0
 # For django-extensions
