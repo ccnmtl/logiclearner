@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build:dev": "webpack --node-env development",
-    "build:prod": "webpack --node-env production",
+    "build:dev": "webpack --define-process-env-node-env development",
+    "build:prod": "webpack --define-process-env-node-env production",
     "cypress:run": "cypress run",
     "cypress:open": "cypress open",
     "cypress:test": "start-server-and-test 'make integrationserver' http-get://localhost:8000 cypress:run",
