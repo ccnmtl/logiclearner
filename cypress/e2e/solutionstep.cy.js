@@ -1,8 +1,7 @@
-describe('Exercise Space Interactions', function() {
+describe('Exercise Space Interactions', { testIsolation: false }, () => {
     before(() => {
         let baseUrl = 'http://localhost:8000/';
         cy.visit(baseUrl);
-        cy.get('#cu-privacy-notice-button').click();
     });
     it('Should go through level one question', function() {
         cy.get('[data-cy="level-one"]').click();
