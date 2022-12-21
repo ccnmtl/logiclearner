@@ -9,7 +9,7 @@
     "cypress:run": "cypress run",
     "cypress:open": "cypress open",
     "cypress:test": "start-server-and-test 'make integrationserver' http-get://localhost:8000 cypress:run",
-    "dev": "webpack --node-env development --watch",
+    "dev": "webpack --define-process-env-node-env development --watch",
     "test": "jest",
     "test:watch": "jest --watch",
     "typecheck": "tsc --noEmit -p tsconfig.json",
