@@ -1,5 +1,5 @@
 describe('Tutorial Interactions', function() {
-    before(() => {
+    beforeEach(() => {
         let baseUrl = 'http://localhost:8000/tutorial/';
         cy.visit(baseUrl);
         cy.get('#cu-privacy-notice-button').click();
