@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { ExerciseData, Statement, ApiData,
     getValidation, Tools, latex2raw, updateLocalStepList,
     updateLocalQuestionStatus, capitalize, raw2latex, Solution } from './utils';
-import ReactGA from 'react-ga';
+import ReactGA from 'react-ga4';
 
 export const STATIC_URL = LogicLearner.staticUrl;
 
