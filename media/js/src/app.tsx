@@ -4,13 +4,22 @@ import { LevelsDashboard } from './levelsdashboard';
 import { QuestionsDashboard } from './questionsdashboard';
 import { ExerciseSpace } from './exerciseSpace';
 import { NotFound } from './notFound';
-import ReactGA from 'react-ga';
+import ReactGA from 'react-ga4';
 
 export const App: React.FC = () => {
-    ReactGA.initialize('UA-51144540-42');
+    const options = {
+        gtagOptions: {anonymizeIp: true},
+        testMode: process.env.NODE_ENV === 'test'
+    };
+
+    ReactGA.initialize('G-C6YSGXSTYN', options);
 
     useEffect(() => {
-        ReactGA.pageview(window.location.pathname + window.location.search);
+        ReactGA.send({
+            hitType: 'pageview',
+            page: window.location.pathname + window.location.search
+        });
+
     }, []);
     return (
         <Router>

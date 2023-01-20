@@ -7,7 +7,7 @@ import { SolutionStep } from './solutionStep';
 import { Modal } from './modal';
 import { ModalLawsheet } from './modalLawsheet';
 import { ModalKeybinding } from './modalKeybinding';
-import ReactGA from 'react-ga';
+import ReactGA from 'react-ga4';
 
 export const STATIC_URL = LogicLearner.staticUrl;
 
