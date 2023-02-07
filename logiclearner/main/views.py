@@ -23,7 +23,6 @@ def handler404(request):
 
 @method_decorator(csrf_exempt, name='dispatch')
 class ValidateApiView(APIView):
-    authentication_classes = []
 
     def post(self, request):
         next_expr = request.data.get('next_expr', None)
@@ -38,7 +37,6 @@ class ValidateApiView(APIView):
 
 @method_decorator(csrf_exempt, name='dispatch')
 class HintApiView(APIView):
-    authentication_classes = []
 
     def post(self, request):
         next_expr = request.data.get('next_expr', None)
