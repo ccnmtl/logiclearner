@@ -105,7 +105,7 @@ export const SolutionStep: React.FC<SolutionStepProps> = (
     };
 
     async function validateStep() {
-        const hintData: ApiData = {
+        const validateData: ApiData = {
             next_expr: '',
             rule: '',
             step_list: [''],
@@ -119,13 +119,13 @@ export const SolutionStep: React.FC<SolutionStepProps> = (
             lastCorrectStep = statement.question;
         }
 
-        hintData['next_expr'] = latex2raw(nextStep);
-        hintData['rule'] = nextRule.toLocaleLowerCase();
-        hintData['step_list'] =[latex2raw(lastCorrectStep)];
-        hintData['answer'] = statement.answer;
+        validateData['next_expr'] = latex2raw(nextStep);
+        validateData['rule'] = nextRule.toLocaleLowerCase();
+        validateData['step_list'] =[latex2raw(lastCorrectStep)];
+        validateData['answer'] = statement.answer;
         // eslint-disable-next-line max-len
         // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-        const toolsData: Tools = await getValidation(hintData);
+        const toolsData: Tools = await getValidation(validateData);
 
         processResponse(toolsData);
     }
