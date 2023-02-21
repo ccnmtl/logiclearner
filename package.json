@@ -8,7 +8,7 @@
     "build:prod": "webpack --define-process-env-node-env production",
     "cypress:run": "cypress run",
     "cypress:open": "cypress open",
-    "cypress:test": "start-server-and-test 'make integrationserver' http-get://localhost:8000 cypress:run",
+    "cypress:test": "start-server-and-test 'make integrationserver' http://127.0.0.1:8000 cypress:run",
     "dev": "webpack --define-process-env-node-env development --watch",
     "test": "jest",
     "test:watch": "jest --watch",
