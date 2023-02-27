@@ -6,9 +6,9 @@ jobs:
     strategy:
       matrix:
           python-version: [3.8]
-          node-version: [16.x]
+          node-version: [18.x]
     name: Node ${{ matrix.node }} run
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - name: Build with Makefile
         run: make all
