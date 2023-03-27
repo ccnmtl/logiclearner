@@ -22,7 +22,8 @@ fuzzywuzzy==0.18.0
 sure==2.0.0
 coverage==7.2.0
 pyasn1==0.4.8
-cryptography==39.0.1  # pyOpenSSL
+cffi==1.15.1 # pyOpenSSL
+cryptography==40.0.1  # pyOpenSSL
 pyOpenSSL==23.1.0
 ndg-httpsclient==0.5.1
 urllib3==1.26.7  # requests, sentry-sdk
