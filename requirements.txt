@@ -1,5 +1,5 @@
 Django>=3.2.14,<4
-pytz==2023.2
+pytz==2023.3
 httplib2==0.22.0
 feedparser==6.0.8
 Markdown==3.4.1 # pyup: < 3
