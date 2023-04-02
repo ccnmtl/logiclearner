@@ -120,4 +120,4 @@ logiclearnertools==0.1.8
 torch==1.12.0
 numpy<1.25
 levenshtein==0.20.7
-rapidfuzz==2.14.0
+rapidfuzz==2.15.0
