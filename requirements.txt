@@ -83,14 +83,14 @@ django-flatblocks==1.0.0
 
 djangorestframework==3.14.0
 
-django-storages==1.13
+django-sages==1.13
 ccnmtlsettings==1.9.5
 
 text_unidecode==1.3
 
 django-taggit==4.0.0
 
-django-cacheds3storage==0.3.0
+django-cacheds3sage==0.3.0
 
 nameparser==1.1.0
 oauth2==1.9.0.post1
@@ -117,7 +117,7 @@ requirements/src/django_cas_ng-4.2.2ctl-py2.py3-none-any.whl
 # logictools
 lark==1.1.2
 logiclearnertools==0.1.9
-torch==1.13.1
+torch==2.0.1
 numpy<1.26
 levenshtein==0.21.0
 rapidfuzz==3.1.0
