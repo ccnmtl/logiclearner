@@ -31,7 +31,7 @@ chardet==5.2.0  # requests
 idna==3.4  # requests
 certifi==2023.7.22  # requests, sentry-sdk
 requests==2.31.0
-typing_extensions==4.7.0
+typing_extensions==4.8.0
 
 astroid==2.15.0
 pylint==2.17.0
