@@ -16,10 +16,6 @@ if [ "$1" == "collectstatic" ]; then
     exec /ve/bin/python manage.py collectstatic --noinput
 fi
 
-if [ "$1" == "compress" ]; then
-    exec /ve/bin/python manage.py compress
-fi
-
 if [ "$1" == "shell" ]; then
     exec /ve/bin/python manage.py shell
 fi
