@@ -119,4 +119,4 @@ torch==2.1.0
 
 numpy<1.27
 levenshtein==0.22.0
-rapidfuzz==3.3.0
+rapidfuzz==3.4.0
