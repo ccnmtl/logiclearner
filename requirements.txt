@@ -118,5 +118,5 @@ sympy==1.12  # torch
 torch==2.1.0
 
 numpy<1.27
-levenshtein==0.22.0
+levenshtein==0.23.0
 rapidfuzz==3.4.0
