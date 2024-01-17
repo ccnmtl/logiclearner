@@ -70,6 +70,6 @@
     "webpack": "^5.52.1",
     "webpack-cli": "^5.0.0",
     "whatwg-fetch":"3.6.2",
-    "postcss-loader": "^7.0.0"
+    "postcss-loader": "^8.0.0"
   }
 }
