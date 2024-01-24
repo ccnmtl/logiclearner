@@ -23,8 +23,8 @@ sure==2.0.0
 coverage==7.4.0
 pyasn1==0.5.0
 cffi==1.16.0 # pyOpenSSL
-cryptography==41.0.0  # pyOpenSSL
-pyOpenSSL==23.3.0
+cryptography==42.0.0  # pyOpenSSL
+pyOpenSSL==24.0.0
 ndg-httpsclient==0.5.1
 urllib3==2.1.0  # requests, sentry-sdk
 chardet==5.2.0  # requests
@@ -37,7 +37,7 @@ astroid==3.0.0
 pylint==3.0.0
 
 six==1.16.0
-faker==22.4.0  # factory_boy
+faker==22.5.0  # factory_boy
 factory_boy==3.3.0
 
 ldap3==2.9.1
