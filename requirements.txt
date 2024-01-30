@@ -37,7 +37,7 @@ astroid==3.0.0
 pylint==3.0.0
 
 six==1.16.0
-faker==22.5.0  # factory_boy
+faker==22.6.0  # factory_boy
 factory_boy==3.3.0
 
 ldap3==2.9.1
