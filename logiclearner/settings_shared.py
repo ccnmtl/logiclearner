@@ -15,7 +15,6 @@ PROJECT_APPS = [
 USE_TZ = True
 
 INSTALLED_APPS += [  # noqa
-    'infranil',
     'django_extensions',
     'rest_framework',
     'logiclearner.main',

@@ -23,7 +23,6 @@ urlpatterns = [
          name='cas_ng_logout'),
     path('stats/', TemplateView.as_view(template_name="stats.html")),
     path('smoketest/', include('smoketest.urls')),
-    path('infranil/', include('infranil.urls')),
     path('uploads/<str:path>',
          serve, {'document_root': settings.MEDIA_ROOT}),
     path('robots.txt', TemplateView.as_view(template_name="robots.txt",
