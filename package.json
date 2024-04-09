@@ -64,7 +64,7 @@
     "sass": "^1.27.0",
     "sass-loader": "^14.0.0",
     "start-server-and-test": "^2.0.0",
-    "style-loader": "^3.2.1",
+    "style-loader": "^4.0.0",
     "ts-jest": "^27.0.5",
     "ts-loader": "^9.0.0",
     "webpack": "^5.52.1",
