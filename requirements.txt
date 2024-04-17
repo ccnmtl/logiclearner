@@ -70,7 +70,7 @@ django-extensions==3.2.1
 django-stagingcontext==0.1.0
 django-ga-context==0.1.0
 django-impersonate==1.9.1
-gunicorn==21.2.0
+gunicorn==22.0.0
 django-infranil==1.1.0
 django-flatblocks==1.0.0
 
