@@ -117,7 +117,7 @@ torch==2.3.0+cpu
 
 numpy<1.27
 levenshtein==0.25.0
-rapidfuzz==3.8.1
+rapidfuzz==3.9.0
 
 backports.zoneinfo==0.2.1; python_version < '3.9'
 webencodings==0.5.1 # django-markdownify
