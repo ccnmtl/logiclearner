@@ -30,7 +30,7 @@ urllib3==2.2.1  # requests, sentry-sdk
 chardet==5.2.0  # requests
 idna==3.7  # requests
 certifi==2024.2.2  # requests, sentry-sdk
-requests==2.31.0
+requests==2.32.1
 typing_extensions==4.11.0
 
 astroid==3.2.0
