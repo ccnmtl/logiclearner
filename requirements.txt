@@ -59,7 +59,7 @@ django-annoying==0.10.6
 django-appconf==1.0.5
 django-statsd-mozilla==0.4.0
 raven==6.10.0  # Remove from ccnmtlsettings, then here.
-sentry-sdk==2.3.0
+sentry-sdk==2.4.0
 
 django-debug-toolbar==4.4.1
 
