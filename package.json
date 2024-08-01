@@ -49,7 +49,7 @@
     "@types/jest": "^29.5.12",
     "@types/react": "^18.2.28",
     "@types/react-dom": "^18.2.13",
-    "@typescript-eslint/eslint-plugin": "^7.18.0",
+    "@typescript-eslint/eslint-plugin": "^8.0.0",
     "@typescript-eslint/parser": "^7.18.0",
     "axe-core": "^4.1.4",
     "css-loader": "^7.0.0",
