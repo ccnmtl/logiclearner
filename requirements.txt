@@ -9,7 +9,7 @@ statsd==4.0.1
 pep8==1.7.1
 pyflakes==3.2.0
 mccabe==0.7.0
-configparser==7.0.0
+configparser==7.1.0
 importlib-metadata<8.3  # for flake8
 zipp==3.20.0
 flake8==7.1.0
