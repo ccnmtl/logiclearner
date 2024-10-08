@@ -1,8 +1,6 @@
 from logiclearner.settings_shared import *  # noqa: F403
-from ctlsettings.production import common
+from ctlsettings.production import common, init_sentry
 from django.conf import settings
-import sentry_sdk
-from sentry_sdk.integrations.django import DjangoIntegration
 
 locals().update(
     common(
@@ -32,9 +30,5 @@ try:
 except ImportError:
     pass
 
-# Define SENTRY_DSN in local_settings.py
 if hasattr(settings, 'SENTRY_DSN'):
-    sentry_sdk.init(
-        dsn=SENTRY_DSN,  # noqa: F405
-        integrations=[DjangoIntegration()],
-    )
+    init_sentry(SENTRY_DSN)  # noqa F405
