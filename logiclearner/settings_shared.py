@@ -18,7 +18,8 @@ INSTALLED_APPS += [  # noqa
     'django_extensions',
     'rest_framework',
     'logiclearner.main',
-    'contactus'
+    'contactus',
+    'ctlsettings',
 ]
 
 MIDDLEWARE += [ # noqa
@@ -53,6 +54,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.messages.context_processors.messages',
                 'stagingcontext.staging_processor',
+                'ctlsettings.context_processors.env',
                 'gacontext.ga_processor'
             ],
         },
