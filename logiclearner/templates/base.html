@@ -43,6 +43,8 @@
     <meta name="twitter:title" content="Logic Learner: A practice tool for writing proofs in propositional logic" />
     <meta name="twitter:description" content="Logic Learner is a practice tool that help students improve their fluency and problem solving process in writing proofs for propositional logic." />
 
+    {% include "ctlsettings/sentry_js.html" %}
+
     <!-- JSON Structured data -->
         <script type="application/ld+json">
             {
@@ -144,31 +146,6 @@
     </div>
 </footer>
 {% endblock %}
-
-{% if SENTRY_PUBLIC_DSN %}
-<script
-    src="https://browser.sentry-cdn.com/5.7.1/bundle.min.js"
-    integrity="sha384-KMv6bBTABABhv0NI+rVWly6PIRvdippFEgjpKyxUcpEmDWZTkDOiueL5xW+cztZZ"
-    crossorigin="anonymous"></script>
-
-<script>
-	Sentry.init({
-	    dsn: '{{ SENTRY_PUBLIC_DSN }}'
-	});
-
-	{% if user.is_anonymous %}
-	Sentry.setUser({
-	    email: 'none',
-	    id: 'anonymous'
-	});
-	{% else %}
-	Sentry.setUser({
-	    email: '{{ user.email }}',
-	    id: '{{ user.username }}'
-	});
-	{% endif %}
-</script>
-{% endif %}
 
 {% block js %}{% endblock %}
 
