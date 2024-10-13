@@ -19,7 +19,6 @@ INSTALLED_APPS += [  # noqa
     'rest_framework',
     'logiclearner.main',
     'contactus',
-    'ctlsettings',
 ]
 
 MIDDLEWARE += [ # noqa
