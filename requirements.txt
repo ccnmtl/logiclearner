@@ -116,7 +116,7 @@ sympy==1.13.0  # torch
 torch==2.4.0+cpu
 
 numpy<2.2
-levenshtein==0.25.0
+levenshtein==0.26.0
 rapidfuzz==3.10.0
 
 backports.zoneinfo==0.2.1; python_version < '3.9'
