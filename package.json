@@ -27,7 +27,7 @@
   "homepage": "https://github.com/ccnmtl/logiclearner#readme",
   "dependencies": {
     "@popperjs/core": "^2.11.2",
-    "babel-loader": "^9.0.1",
+    "babel-loader": "^10.0.0",
     "bootstrap": "^5.1.1",
     "postcss": "^8.1.2",
     "precss": "^4.0.0",
