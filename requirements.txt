@@ -113,10 +113,10 @@ mpmath==1.3.0  # sympy
 sympy==1.13.0  # torch
 
 --extra-index-url https://download.pytorch.org/whl/cpu
-torch==2.4.0+cpu
+torch==2.2.2
 
 numpy<2.2
-levenshtein==0.26.0
+levenshtein==0.23.0
 rapidfuzz==3.10.0
 
 backports.zoneinfo==0.2.1; python_version < '3.9'
