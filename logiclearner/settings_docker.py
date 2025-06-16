@@ -1,12 +1,21 @@
-# flake8: noqa
-from logiclearner.settings_shared import *
-from ctlsettings.docker import common
 import os
+from logiclearner.settings_shared import *  # noqa: F401,F403
 
-locals().update(
-    common(
-        project=project,
-        base=base,
-        STATIC_ROOT=STATIC_ROOT,
-        INSTALLED_APPS=INSTALLED_APPS,
-    ))
+
+# docker-compose db container
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': os.environ.get('POSTGRES_NAME'),
+        'USER': os.environ.get('POSTGRES_USER'),
+        'PASSWORD': os.environ.get('POSTGRES_PASSWORD'),
+        'HOST': 'db',
+        'PORT': 5432,
+    }
+}
+
+
+try:
+    from logiclearner.local_settings import *  # noqa: F401,F403
+except ImportError:
+    pass
