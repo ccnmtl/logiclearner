@@ -1,21 +1,25 @@
-db:
-  image: postgres
-elasticsearch:
-  image: elasticsearch:2
-rabbitmq:
-  image: rabbitmq
-web:
-  image: ccnmtl/logiclearner
-  environment:
-    - APP=plexus
-    - SECRET_KEY=dummy-secret-key
-    - SETTINGS=settings_compose
-  command: manage runserver 0.0.0.0:8000
-  volumes:
-    - .:/app/
-  ports:
-    - "8000:8000"
-  links:
-    - db
-    - elasticsearch
-    - rabbitmq
+services:
+  db:
+    image: postgres:15
+    volumes:
+      - ./data/db:/var/lib/postgresql/data
+      - ./data/init:/docker-entrypoint-initdb.d
+    environment:
+      - POSTGRES_DB=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+  web:
+    build: .
+    command: >
+      sh -c "python manage.py migrate --noinput --settings=logiclearner.settings_docker &&
+             python manage.py runserver --settings=logiclearner.settings_docker 0.0.0.0:8000"
+    volumes:
+      - .:/src
+    ports:
+      - "8000:8000"
+    environment:
+      - POSTGRES_NAME=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    depends_on:
+      - db
