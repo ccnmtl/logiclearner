@@ -60,7 +60,7 @@ TEMPLATES = [
     },
 ]
 
-CONTACT_US_EMAIL = 'ctl-logiclearner@columbia.edu'
+CONTACT_US_EMAIL = 'ctl-dev@columbia.edu'
 SERVER_EMAIL = 'logiclearner-noreply@mail.ctl.columbia.edu'
 EMAIL_SUBJECT_PREFIX = 'Logic Learner Contact Request'
 
