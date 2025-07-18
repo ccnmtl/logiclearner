@@ -5,6 +5,7 @@ import { QuestionsDashboard } from './questionsdashboard';
 import { ExerciseSpace } from './exerciseSpace';
 import { NotFound } from './notFound';
 import ReactGA from 'react-ga4';
+import { FirstOrderLogic } from './firstOrderLogic/firstOrderLogic';
 
 export const App: React.FC = () => {
     const options = {
@@ -43,6 +44,9 @@ export const App: React.FC = () => {
 
                 <Route path="/exercise/:id"
                     element={<ExerciseSpace />} />
+                
+                <Route path="/fol/"
+                    element={<FirstOrderLogic />} />
 
             </Routes>
         </Router>
