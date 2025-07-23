@@ -4,6 +4,7 @@ import { shuffleArray, getRandomElement, GridItem, GridStatement,
 import { getTemplatesByDifficulty } from './statementGenerator';
 import { Grid } from './grid';
 import { Options } from './options';
+import { StatementInput } from './statementInput';
 
 export const STATIC_URL = LogicLearner.staticUrl;
 
@@ -16,9 +17,10 @@ export const FirstOrderLogic: React.FC = () => {
     const [options, setOptions] = useState<GridStatement[]>([]);
     const [size, setSize] = useState<number>(5);
     const [templateBank, setTemplateBank] = useState<Object[]>(getTemplatesByDifficulty(difficulty));
-    const [value, setValue] = useState();
+    const [text, setText] = useState<string>('');
     const [isCorrect, setIsCorrect] = useState<boolean>(false);
     const [selected, setSelected] = useState<number|null>()
+    const [mode, setMode] = useState<number>(0);
 
     const [correctTemplate, setCorrectTemplate] =
         useState<GridTemplate>(getRandomElement(templateBank));
@@ -30,8 +32,8 @@ export const FirstOrderLogic: React.FC = () => {
     ];
 
     const inputOptions = [  // [value, innerText]
-        ['mc', 'Multiple Choice'],
-        ['text', 'Text Input']
+        [0, 'Multiple Choice'],
+        [1, 'Text Input']
     ];
     
     function generateIncorrectStatements(templateBank, correctTemplate) {
@@ -68,6 +70,10 @@ export const FirstOrderLogic: React.FC = () => {
         setDifficulty(e.target.value);
     };
 
+    const handleMode = (e) => {
+        setMode(Number(e.target.value));
+    }
+
     const handleNewGrid = () => {
         let newArr = getRandomElement(templateBank)
         while (newArr === correctTemplate) {
@@ -85,7 +91,7 @@ export const FirstOrderLogic: React.FC = () => {
 
     const settings = [
         mkSelect(diffOptions, handleDifficulty),
-        mkSelect(inputOptions, () => alert('Needs implementation.')),
+        mkSelect(inputOptions, handleMode),
         <button className='btn btn-primary mt-2' onClick={handleNewGrid}>
             Next Grid
         </button>
@@ -105,7 +111,7 @@ export const FirstOrderLogic: React.FC = () => {
             const generated = correctTemplate.generateGrid(true, statementData.details)
     
             setGrid(generated.grid);
-            setValue(generated.satisfies);
+            setText('');
             
             setCorrectStatement({
                 naturalLanguageStatement: statementData.naturalLanguageStatement,
@@ -135,6 +141,10 @@ export const FirstOrderLogic: React.FC = () => {
         setSelected(null);
     }, []);
 
+    useEffect(() => {
+        setIsCorrect(false);
+    }, [mode])
+
     return <section id='grid-game'
         className='container d-flex justify-content-center'
     >
@@ -148,9 +158,14 @@ export const FirstOrderLogic: React.FC = () => {
                         </li>)}
                 </ul>
             </div>
-            <Options options={options} correctIndex={correctIndex}
+            {mode === 0 && <Options options={options} correctIndex={correctIndex}
                 isCorrect={isCorrect} setIsCorrect={setIsCorrect}
-                selected={selected} setSelected={setSelected} />
+                selected={selected} setSelected={setSelected} />}
+            {mode === 1 && <StatementInput isCorrect={isCorrect}
+                correctStatement={correctStatement}
+                setIsCorrect={setIsCorrect}
+                text={text}
+                setText={setText} />}
         </div>
     </section>
 }

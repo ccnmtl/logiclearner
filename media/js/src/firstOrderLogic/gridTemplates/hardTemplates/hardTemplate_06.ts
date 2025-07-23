@@ -49,11 +49,11 @@ export const hardTemplate_06 = {
         );
 
         // FOL example:
-        // "∀x( (Shape(x)=s1 ∧ Color(x)=c1) → ∃y( Shape(y)=s2 ∧ Value(y)<threshold ∧ TopRightDiagonalOf(y,x) ) )"
+        // "∀x( (Shape(x)=s1 ∧ Color(x)=c1) → ∃y( Shape(y)=s2 ∧ Value(y)<threshold ∧ TopRightOf(y,x) ) )"
         const formalFOLStatement = `
         ∀x (
           (Shape(x, ${shape1}) ∧ Color(x, ${colorName}))
-          → ∃y (Shape(y, ${shape2}) ∧ Value(y) < ${threshold} ∧ TopRightDiagonalOf(y, x))
+          → ∃y (Shape(y, ${shape2}) ∧ Value(y) < ${threshold} ∧ TopRightOf(y, x))
         )
       `.trim();
 
