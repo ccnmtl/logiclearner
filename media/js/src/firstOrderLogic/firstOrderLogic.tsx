@@ -18,6 +18,7 @@ export const FirstOrderLogic: React.FC = () => {
     const [templateBank, setTemplateBank] = useState<Object[]>(getTemplatesByDifficulty(difficulty));
     const [value, setValue] = useState();
     const [isCorrect, setIsCorrect] = useState<boolean>(false);
+    const [selected, setSelected] = useState<number|null>()
 
     const [correctTemplate, setCorrectTemplate] =
         useState<GridTemplate>(getRandomElement(templateBank));
@@ -73,6 +74,7 @@ export const FirstOrderLogic: React.FC = () => {
             newArr = getRandomElement(templateBank)
         }
         setCorrectTemplate(newArr);
+        setSelected(null);
     }
 
     const mkSelect = (options, action) => <select className='form-select mt-2'
@@ -129,6 +131,10 @@ export const FirstOrderLogic: React.FC = () => {
         }
     }, [correctStatement]);
 
+    useEffect(() => {
+        setSelected(null);
+    }, []);
+
     return <section id='grid-game'
         className='container d-flex justify-content-center'
     >
@@ -143,7 +149,8 @@ export const FirstOrderLogic: React.FC = () => {
                 </ul>
             </div>
             <Options options={options} correctIndex={correctIndex}
-                isCorrect={isCorrect} setIsCorrect={setIsCorrect} />
+                isCorrect={isCorrect} setIsCorrect={setIsCorrect}
+                selected={selected} setSelected={setSelected} />
         </div>
     </section>
 }
