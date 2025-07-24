@@ -81,6 +81,7 @@ export const FirstOrderLogic: React.FC = () => {
         }
         setCorrectTemplate(newArr);
         setSelected(null);
+        setText('');
     }
 
     const mkSelect = (options, action) => <select className='form-select mt-2'

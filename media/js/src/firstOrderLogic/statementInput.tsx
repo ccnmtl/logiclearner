@@ -4,9 +4,9 @@ import { GridStatement } from './utils';
 interface StatementProps {
     correctStatement: GridStatement
     isCorrect: boolean
-    setIsCorrect: Function
+    setIsCorrect: React.Dispatch<React.SetStateAction<boolean>>
     text: string
-    setText: Function
+    setText: React.Dispatch<React.SetStateAction<string>>
 }
 
 export const StatementInput: React.FC<StatementProps> = ({
@@ -18,12 +18,48 @@ export const StatementInput: React.FC<StatementProps> = ({
 
     const buttonList = ['∀', '→', '∃', '∧', '≥'];
 
+    /**
+     * Build an object of the key-value pairs extracted from a given statement.
+     * 
+     * e.g: "Key1(x, value1) ∧ Key2(x, value2)" => {key: value, ..., key2: value2}
+     * @param text 
+     */
+    const pullData = (text:string):Object => {
+        const rules = {};
+        const found = text.match(/\w+\(\w+.[\w\s]+\)+?/g);
+        if (found) {
+                found.forEach((keyValue) => {
+                const key = keyValue.match(/\w+(?=\(\w+[^\)])/);
+                const value = keyValue.match(/\w[\w\s]*(?=\))/);
+                if (key != null && value != null) {
+                    rules[key.toString().toLowerCase()] =
+                        value.toString().toLowerCase();
+                }
+            });
+        }
+        return rules;
+    };
+
+    /**
+     * Splits the statement into a left and right object around the if
+     * statement.
+     * @param text
+     */
+    const parseStatement = (text:string):Object[] => {
+        const sides = text.split('→');
+        if (sides.length == 2) {
+            return [pullData(sides[0]), pullData(sides[1])]
+        }
+    };
+
     const directionalRelationships = ['Top(y,x)', 'TopLeftOf(y,x)',
         'TopRightOf(y,x)', 'LeftOf(y,x)', 'RightOf(y,x)', 'Below(y,x)',
         'BottomLeftOf(y,x)', 'BottomRightOf(y,x)'];
 
     const objectRelationships = ['Shape(x/y, Circle/Square/Triangle)',
-        'Color(x/y, Blue/Green/Red))', 'Value(x/y, 0 to 9))',]
+        'Color(x/y, Blue/Green/Red))', 'Value(x/y, 0 to 9))', 'Prime(Value(x/y))',
+        'Location(x/y, top/bottom/left/right [number of subsets] rows/columns',
+        'MultipleOf(Value(x/y))'];
 
     const mkList = (items:string[], uniqueClass='') => 
         <ul className={`list-group-flush ps-2 ${uniqueClass}`}>
@@ -52,16 +88,34 @@ export const StatementInput: React.FC<StatementProps> = ({
         el.focus();
     };
 
-    const generalize = (text:string) => {
-        return text.replace(/\s/g, '').toLowerCase();
+    const evaluate = (check:Object[], evalObj:Object[]) => {
+        if (check.length == evalObj.length) {
+            for (let i in evalObj) {
+                for (let [key, value] of Object.entries(evalObj[i])) {
+                    if (!check[i][key] || check[i][key] !== value) {
+                        return false;
+                    }
+                }
+            }
+            return true;
+        }
+        return false;
     };
 
     const handleCheck = (e) => {
         setSubmitted(true);
         const el =
             document.getElementById('statement-text') as HTMLInputElement;
-        setIsCorrect(generalize(el.value) ===
-            generalize(correctStatement.formalFOLStatement));
+        if (el.value.length > 0) {
+            const check = parseStatement(el.value);
+            if (el.value.match(/^\∀x\s*\(.*\)\s*$/)) {
+                setIsCorrect(evaluate(check,
+                    parseStatement(correctStatement.formalFOLStatement))
+                );
+            } else {
+                setIsCorrect(false);
+            }
+        }
     };
 
     const handleText = (e) => {
@@ -69,12 +123,16 @@ export const StatementInput: React.FC<StatementProps> = ({
     };
 
     useEffect(() => {
-        if (isCorrect) setFeedback('Good! XD');
-        else setFeedback('Ooops <:O');
+        if (isCorrect) {
+            setFeedback('Good! XD');
+        } else {
+            setFeedback('Ooops <:O');
+        }
     }, [isCorrect])
 
     useEffect(() => {
         setSubmitted(false);
+        console.log(correctStatement.formalFOLStatement);
     }, [])
 
     return <section className='col-4'>
