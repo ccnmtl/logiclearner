@@ -31,7 +31,8 @@ export const Options: React.FC<OptionProps> = ({
                     <button className={`btn btn-large w-100 my-1 btn-${showResult(i)}`}
                         onClick={() => setSelected(i)}
                     >
-                        <p>{option.naturalLanguageStatement}</p>
+                        {selected === i &&
+                            <p>{option.naturalLanguageStatement}</p>}
                         <strong>{option.formalFOLStatement}</strong>
                     </button>
                 </div>
