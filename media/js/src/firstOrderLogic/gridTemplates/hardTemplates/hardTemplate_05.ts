@@ -56,7 +56,7 @@ export const hardTemplate_05 = {
         const formalFOLStatement = `
         ∀x (
           (Shape(x, ${shape1}) ∧ Color(x, ${colorName}))
-          → ∃y (Shape(y, ${shape2}) ∧ Value(y) ≥ ${threshold} ∧ TopLeftDiagonalOf(y, x))
+          → ∃y (Shape(y, ${shape2}) ∧ Value(y) ≥ ${threshold} ∧ TopLeftOf(y, x))
         )
       `.trim();
 
