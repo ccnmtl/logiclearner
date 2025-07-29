@@ -6,14 +6,13 @@ interface OptionProps {
     correctIndex: number
     isCorrect: boolean
     setIsCorrect: Function
+    selected: number|null
+    setSelected: React.Dispatch<React.SetStateAction<number|null>>
 }
 
 export const Options: React.FC<OptionProps> = ({
-    options, correctIndex, isCorrect, setIsCorrect
+    options, correctIndex, isCorrect, setIsCorrect, selected, setSelected
 }:OptionProps) => {
-    
-    const [selected, setSelected] = useState<number|null>()
-
     const showResult = (i:number) => {
         if (selected != null && selected === i)
             if (isCorrect) return 'success'
