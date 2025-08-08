@@ -3,6 +3,7 @@ import { GridStatement } from './utils';
 
 interface StatementProps {
     correctStatement: GridStatement
+    difficulty: string
     isCorrect: boolean
     setIsCorrect: React.Dispatch<React.SetStateAction<boolean>>
     text: string
@@ -10,7 +11,7 @@ interface StatementProps {
 }
 
 export const StatementInput: React.FC<StatementProps> = ({
-    correctStatement, isCorrect, setIsCorrect, text, setText
+    correctStatement, difficulty, isCorrect, setIsCorrect, text, setText
 }:StatementProps) => {
     const [feedback, setFeedback] = useState<string>(
         'ERROR: This feedback should not be visible.')
@@ -52,12 +53,19 @@ export const StatementInput: React.FC<StatementProps> = ({
         }
     };
 
+    const regex = {
+        'easy': /^\∀x\s*\(.*\)\s*$/,
+        'medium': /^\∀x\s*\(.*\)\s*$/,
+        "hard": /^\∀x\s*\(.*\)\s*\→\s*\∃y\s*\(.*\)\s*$/
+    }
+
     const directionalRelationships = ['Top(y,x)', 'TopLeftOf(y,x)',
         'TopRightOf(y,x)', 'LeftOf(y,x)', 'RightOf(y,x)', 'Below(y,x)',
         'BottomLeftOf(y,x)', 'BottomRightOf(y,x)'];
 
     const objectRelationships = ['Shape(x/y, Circle/Square/Triangle)',
-        'Color(x/y, Blue/Green/Red))', 'Value(x/y, 0 to 9))', 'Prime(Value(x/y))',
+        'Color(x/y, Blue/Green/Red))', 'Value(x/y, 0 to 9))',
+        'Even(Value(x/y))', 'Odd(Value(x/y))', 'Prime(Value(x/y))',
         'Location(x/y, top/bottom/left/right [number of subsets] rows/columns',
         'MultipleOf(Value(x/y))'];
 
@@ -84,8 +92,11 @@ export const StatementInput: React.FC<StatementProps> = ({
     const mkAddChar = (char:string) => () => {
         const el =
             document.getElementById('statement-text') as HTMLInputElement;
-        el.value = el.value + char
+        const pos = el.selectionStart
+        el.value = el.value.substring(0, pos) + char +
+        el.value.substring(pos, el.value.length);
         el.focus();
+        el.selectionEnd = pos + 1;
     };
 
     const evaluate = (check:Object[], evalObj:Object[]) => {
@@ -108,7 +119,7 @@ export const StatementInput: React.FC<StatementProps> = ({
             document.getElementById('statement-text') as HTMLInputElement;
         if (el.value.length > 0) {
             const check = parseStatement(el.value);
-            if (el.value.match(/^\∀x\s*\(.*\)\s*$/)) {
+            if (el.value.match(regex[difficulty])) {
                 setIsCorrect(evaluate(check,
                     parseStatement(correctStatement.formalFOLStatement))
                 );
@@ -132,12 +143,11 @@ export const StatementInput: React.FC<StatementProps> = ({
 
     useEffect(() => {
         setSubmitted(false);
-        console.log(correctStatement.formalFOLStatement);
     }, [])
 
     return <section className='col-4'>
-        <p>Enter the statment that defines the relationship of</p>
-        <p>{correctStatement.naturalLanguageStatement}</p>
+        <p>Enter the statment that defines the following relationship:</p>
+        <strong className='mx-2'>{correctStatement.naturalLanguageStatement}</strong>
         {mkBtnList(buttonList)}
         <textarea id='statement-text' className='form-control mb-2' onChange={handleText}
             placeholder='Enter the value here' value={text}></textarea>
