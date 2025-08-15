@@ -21,6 +21,12 @@ export interface GridTemplate {
     checkIfViolates: Function
 }
 
+export interface Score {
+    easy: number[]
+    medium: number[]
+    hard: number[]
+}
+
 // Map hex color codes to color names for convenience
 const colorMap = {
     '#77dd77': 'Green',
