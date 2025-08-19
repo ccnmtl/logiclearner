@@ -17,7 +17,17 @@ export const StatementInput: React.FC<StatementProps> = ({
         'ERROR: This feedback should not be visible.')
     const [submitted, setSubmitted] = useState<boolean>(false);
 
-    const buttonList = ['∀', '→', '∃', '∧', '≥'];
+    const buttonList = ['∀', '→', '∧',  '∃', '≥'];
+
+    const LaTexConversion = {
+        '\\and': '∧',
+        '\\all': '∀',
+        '\\e': '∃',
+        '\\exists': '∃',
+        '\\forall': '∀',
+        '\\implies':'→',
+        '\\ge': '≥'
+    };
 
     /**
      * Build an object of the key-value pairs extracted from a given statement.
@@ -113,7 +123,7 @@ export const StatementInput: React.FC<StatementProps> = ({
         return false;
     };
 
-    const handleCheck = (e) => {
+    const handleCheck = () => {
         setSubmitted(true);
         const el =
             document.getElementById('statement-text') as HTMLInputElement;
@@ -130,7 +140,10 @@ export const StatementInput: React.FC<StatementProps> = ({
     };
 
     const handleText = (e) => {
-        setText(e.value);
+        let text = e.target.value.replaceAll('^', '∧');
+        text = text.replaceAll('->', '→');
+        setText(text.replace(/\\\w+/g, (word:string) =>
+            LaTexConversion[word] ?? word));
     };
 
     useEffect(() => {
