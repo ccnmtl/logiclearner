@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { shuffleArray, getRandomElement, GridItem, GridStatement,
-    GridTemplate } from './utils';
+    GridTemplate, Score } from './utils';
 import { getTemplatesByDifficulty } from './statementGenerator';
 import { Grid } from './grid';
 import { Options } from './options';
 import { StatementInput } from './statementInput';
+import { Progress } from './progress';
 
 export const STATIC_URL = LogicLearner.staticUrl;
 
@@ -21,6 +22,11 @@ export const FirstOrderLogic: React.FC = () => {
     const [isCorrect, setIsCorrect] = useState<boolean>(false);
     const [selected, setSelected] = useState<number|null>()
     const [mode, setMode] = useState<number>(0);
+    const [isDone, setIsDone] = useState<boolean>(false);
+    const [attempt, setAttempt] = useState<number>(4);
+
+    const scoreDefault = {easy:[], medium: [], hard: []}
+    const [score, setScore] = useState<Score>(scoreDefault);
 
     const [correctTemplate, setCorrectTemplate] =
         useState<GridTemplate>(getRandomElement(templateBank));
@@ -74,14 +80,31 @@ export const FirstOrderLogic: React.FC = () => {
         setMode(Number(e.target.value));
     }
 
+    const handleAttempt = (result:boolean) => {
+        if (!isDone) {
+            if (result) {
+                setIsDone(true);
+                setScore({...score, [difficulty]: [...(score[difficulty]), attempt]});
+            } else {
+                setAttempt(Math.max(attempt - 1, 1));
+            }
+        }
+    };
+
     const handleNewGrid = () => {
         let newArr = getRandomElement(templateBank)
         while (newArr === correctTemplate) {
             newArr = getRandomElement(templateBank)
         }
+        if (!isDone) {
+            setScore({...score,
+                [difficulty]: [...(score[difficulty]), -attempt]});
+        }
         setCorrectTemplate(newArr);
         setSelected(null);
         setText('');
+        setAttempt(4);
+        setIsDone(false);
     }
 
     const mkSelect = (options, action) => <select className='form-select mt-2'
@@ -139,7 +162,18 @@ export const FirstOrderLogic: React.FC = () => {
     }, [correctStatement]);
 
     useEffect(() => {
+        if (score != scoreDefault) {
+            localStorage.setItem('fol', JSON.stringify({score, attempt}));
+        }
+    }, [score, attempt]);
+
+    useEffect(() => {
         setSelected(null);
+        const store = JSON.parse(localStorage.getItem('fol'));
+        if (store) {
+            setAttempt(store.attempt ?? 4);
+            setScore(store.score ?? scoreDefault);
+        }
     }, []);
 
     useEffect(() => {
@@ -158,10 +192,13 @@ export const FirstOrderLogic: React.FC = () => {
                             {setting}
                         </li>)}
                 </ul>
+                {mode === 0 &&
+                    <Progress difficulty={difficulty} score={score} />}
             </div>
-            {mode === 0 && <Options options={options} correctIndex={correctIndex}
-                isCorrect={isCorrect} setIsCorrect={setIsCorrect}
-                selected={selected} setSelected={setSelected} />}
+            {mode === 0 && <Options options={options}
+                correctIndex={correctIndex} isCorrect={isCorrect}
+                setIsCorrect={setIsCorrect} selected={selected}
+                setSelected={setSelected} handleAttempt={handleAttempt}/>}
             {mode === 1 && <StatementInput isCorrect={isCorrect}
                 correctStatement={correctStatement} difficulty={difficulty}
                 setIsCorrect={setIsCorrect} text={text} setText={setText} />}
