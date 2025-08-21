@@ -1,5 +1,3 @@
-/* eslint-env mocha */
-
 var assert = require('assert');
 var requirejs = require('requirejs');
 
