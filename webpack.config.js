@@ -10,7 +10,23 @@ module.exports = {
         publicPath: '/media/build/'
     },
     resolve: {
-        extensions: ['*', '.ts', '.tsx', '.js']
+        extensions: ['.*', '.ts', '.tsx', '.js'],
+        fallback: {
+            'assert': false,
+            'child_process': false,
+            'crypto': false,
+            'dns': false,
+            'fs': false,
+            'net': false,
+            'os': false,
+            'path': false,
+            'stream': false,
+            'string_decoder': false,
+            'tls': false,
+            'url': false,
+            'util': false,
+            'zlib': false
+        }
     },
     module: {
         rules: [
@@ -79,6 +95,9 @@ module.exports = {
     plugins: [
         new webpack.DefinePlugin({
             __BUILD__: JSON.stringify(Date.now())
+        }),
+        new webpack.DefinePlugin({
+            'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV)
         })
     ].concat([new MiniCssExtractPlugin()]),
 
