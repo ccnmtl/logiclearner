@@ -6,6 +6,7 @@ import { Grid } from './grid';
 import { Options } from './options';
 import { StatementInput } from './statementInput';
 import { Progress } from './progress';
+import { rudderAnalytics } from '../../rudderstack/rudderstack';
 
 export const STATIC_URL = LogicLearner.staticUrl;
 
@@ -168,6 +169,8 @@ export const FirstOrderLogic: React.FC = () => {
     }, [score, attempt]);
 
     useEffect(() => {
+        // RudderStack page call
+        rudderAnalytics.page({userId: 0, name: location});
         setSelected(null);
         const store = JSON.parse(localStorage.getItem('fol'));
         if (store) {

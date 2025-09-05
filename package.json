@@ -27,6 +27,7 @@
   "homepage": "https://github.com/ccnmtl/logiclearner#readme",
   "dependencies": {
     "@popperjs/core": "^2.11.2",
+    "@rudderstack/rudder-sdk-node": "^2.1.8",
     "autoprefixer": "^10.4.21",
     "babel-loader": "^10.0.0",
     "bootstrap": "^5.1.1",
