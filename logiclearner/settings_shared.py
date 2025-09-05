@@ -54,7 +54,8 @@ TEMPLATES = [
                 'django.contrib.messages.context_processors.messages',
                 'stagingcontext.staging_processor',
                 'ctlsettings.context_processors.env',
-                'gacontext.ga_processor'
+                'gacontext.ga_processor',
+                'logiclearner.context_processors.rudderstack_settings',
             ],
         },
     },
