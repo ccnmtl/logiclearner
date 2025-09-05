@@ -6,6 +6,7 @@ import { ExerciseSpace } from './exerciseSpace';
 import { NotFound } from './notFound';
 import ReactGA from 'react-ga4';
 import { FirstOrderLogic } from './firstOrderLogic/firstOrderLogic';
+import '../rudderstack/rudderstack';
 
 export const App: React.FC = () => {
     const options = {

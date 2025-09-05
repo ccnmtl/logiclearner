@@ -2,6 +2,8 @@
 import os.path
 from ctlsettings.shared import common
 import sys
+from django.conf import settings
+import boto3
 
 project = 'logiclearner'
 base = os.path.dirname(__file__)
@@ -54,7 +56,8 @@ TEMPLATES = [
                 'django.contrib.messages.context_processors.messages',
                 'stagingcontext.staging_processor',
                 'ctlsettings.context_processors.env',
-                'gacontext.ga_processor'
+                'gacontext.ga_processor',
+                'logiclearner.context_processors.rudderstack_settings',
             ],
         },
     },
@@ -91,3 +94,17 @@ if 'integrationserver' in sys.argv:
             'ATOMIC_REQUESTS': True,
         }
     }
+
+if hasattr(settings, 'AWS_SECRET_KEY_ID'):
+    client = boto3.client('ssm', region_name='us-east-1',
+                          aws_access_key_id=AWS_SECRET_KEY_ID,   # noqa F405
+                          aws_secret_access_key=AWS_SECRET_ACCESS_KEY)   # noqa F405
+    response = client.get_parameters(
+        Names=[
+            '/staging/rudderstack/FOL/RUDDERSTACK_WRITE_KEY',
+            '/staging/rudderstack/backplane_url'
+        ],
+        WithDecryption=True
+    )
+    RUDDERSTACK_WRITE_KEY = response[0]['Value']
+    RUDDERSTACK_BACKPLANE_URL = response[1]['Value']
