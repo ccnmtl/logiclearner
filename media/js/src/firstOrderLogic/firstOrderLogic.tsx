@@ -6,6 +6,7 @@ import { Grid } from './grid';
 import { Options } from './options';
 import { StatementInput } from './statementInput';
 import { Progress } from './progress';
+import { useLocation } from 'react-router-dom';
 
 export const STATIC_URL = LogicLearner.staticUrl;
 
@@ -30,6 +31,8 @@ export const FirstOrderLogic: React.FC = () => {
 
     const [correctTemplate, setCorrectTemplate] =
         useState<GridTemplate>(getRandomElement(templateBank));
+
+    const location = useLocation();
 
     const diffOptions = [  // [value, innerText]
         ['easy', 'Easy'],
@@ -167,14 +170,26 @@ export const FirstOrderLogic: React.FC = () => {
         }
     }, [score, attempt]);
 
+    // useEffect(() => {
+    //     // RudderStack page call
+    //     rudderAnalytics.page({userId: 0, name: location});
+    //     setSelected(null);
+    //     const store = JSON.parse(localStorage.getItem('fol'));
+    //     if (store) {
+    //         setAttempt(store.attempt ?? 4);
+    //         setScore(store.score ?? scoreDefault);
+    //     }
+    // }, []);
+
     useEffect(() => {
-        setSelected(null);
-        const store = JSON.parse(localStorage.getItem('fol'));
-        if (store) {
-            setAttempt(store.attempt ?? 4);
-            setScore(store.score ?? scoreDefault);
+        if (window.rudderanalytics && typeof window.rudderanalytics.page === 'function') {
+            console.log('Sending page view to RudderStack:', location.pathname);
+            window.rudderanalytics.page({
+                path: location.pathname,
+                name: 'FirstOrderLogic',
+            });
         }
-    }, []);
+    }, [location.pathname]);
 
     useEffect(() => {
         setIsCorrect(false);
