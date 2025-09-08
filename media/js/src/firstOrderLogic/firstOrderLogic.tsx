@@ -126,7 +126,12 @@ export const FirstOrderLogic: React.FC = () => {
 
     useEffect(() => {
         setTemplateBank(getTemplatesByDifficulty(difficulty));
+        handleNewGrid();
     }, [difficulty]);
+
+    useEffect(() => {
+        handleNewGrid();
+    }, [mode]);
 
     useEffect(() => {
         setCorrectTemplate(getRandomElement(templateBank));
