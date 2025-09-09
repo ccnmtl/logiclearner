@@ -1,7 +1,6 @@
 import {
     getColorName,
     getRandomElement,
-    randomIntFromInterval,
     gridSize,
     shapes,
     colors,
@@ -26,10 +25,11 @@ export const easyTemplate_02 = {
 
         // Example statement: "All Red shapes are circle."
         const naturalLanguageStatement = replacePlaceholders(
-            "All {color1} shapes are {shape1}.",
+            'All {color1} shapes are {shape1}.',
             { ...details, color1: colorName }
         );
-        const formalFOLStatement = `∀x (Color(x, ${colorName}) → Shape(x, ${details.shape1}))`;
+        const formalFOLStatement =
+            `∀x (Color(x, ${colorName}) → Shape(x, ${details.shape1}))`;
 
         return { naturalLanguageStatement, formalFOLStatement, details };
     },
@@ -53,12 +53,14 @@ export const easyTemplate_02 = {
         });
 
         if (!satisfies) {
-            // Create 1 violation: find a cell that's color1 & shape1, and change shape
+            // Create 1 violation: find a cell that's color1 & shape1,
+            //  and change shape
             const violatingCell = grid.find(
                 c => c.color === details.color1 && c.shape === details.shape1
             );
             if (violatingCell) {
-                violatingCell.shape = getRandomElement(shapes.filter(s => s !== details.shape1));
+                violatingCell.shape = getRandomElement(
+                    shapes.filter(s => s !== details.shape1));
             }
         }
 

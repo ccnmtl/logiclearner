@@ -1,8 +1,8 @@
-/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+
 
 import { EnumType } from 'typescript';
 
-/* eslint-disable @typescript-eslint/no-unsafe-assignment */
+
 type HTTPMethod = 'GET' | 'PUT' | 'POST' | 'DELETE'
 
 export type Statement = {
@@ -151,14 +151,14 @@ export const getSolutions = async function(id: number) {
 export const checkQuestion = function(answer: string) {
 
     switch (answer) {
-    case 'T': {
-        return 'Tautology';
-    }
-    case 'F': {
-        return 'Fallacy';
-    }
-    default:
-        return answer;
+        case 'T': {
+            return 'Tautology';
+        }
+        case 'F': {
+            return 'Fallacy';
+        }
+        default:
+            return answer;
     }
 };
 

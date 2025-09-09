@@ -45,7 +45,7 @@ export const App: React.FC = () => {
 
                 <Route path="/exercise/:id"
                     element={<ExerciseSpace />} />
-                
+
                 <Route path="/fol/"
                     element={<FirstOrderLogic />} />
 

@@ -18,12 +18,13 @@ export const NotFound: React.FC = () => {
                     <h1>Page not found</h1>
 
                     <p className='fs-4 mt-5'>
-                      We’re sorry! The page you think is present does not exist.
+                        We’re sorry! The page you think is present
+                        does not exist.
                     </p>
 
                     <p className='fs-4'>
                         In fact, it is <span className="question-statement">
-                        p ∧ ¬p.</span> It’s a fallacy.
+                            p ∧ ¬p.</span> It’s a fallacy.
                     </p>
 
                     <div className="text-center mt-5">

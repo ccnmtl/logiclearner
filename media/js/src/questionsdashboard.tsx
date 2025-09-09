@@ -18,7 +18,7 @@ export const QuestionsDashboard: React.FC<QuestionsDashboardProps> = (
     const [questionsList, setquestionsList] = useState([]);
     const [levelCount, setLevelCount] = useState<number>(0);
     const [showResetLevelModal, setShowResetLevelModal] =
-                                            useState<boolean>(false);
+        useState<boolean>(false);
 
     const LevelDescription = {
         0: 'Let’s get a handle on the basics of propositional logic.',
@@ -27,7 +27,7 @@ export const QuestionsDashboard: React.FC<QuestionsDashboardProps> = (
     };
 
     async function fetchStatements() {
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+
         const json: Array<Statement> = await getStatements(difficulty);
         setStatements(json);
         setLevelCount(json.length);
@@ -135,7 +135,7 @@ export const QuestionsDashboard: React.FC<QuestionsDashboardProps> = (
                                     'question-' + statement.pk.toString()
                                 )) as ExerciseData[];
                             questionStatus = data[0].status;
-                        } catch (error) {
+                        } catch {
                             questionStatus = null;
                         }
 

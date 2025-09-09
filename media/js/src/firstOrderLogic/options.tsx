@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { GridStatement } from './utils';
 
 interface OptionProps {
     options: GridStatement[]
     correctIndex: number
     isCorrect: boolean
-    setIsCorrect: Function
+    setIsCorrect: React.Dispatch<React.SetStateAction<boolean>>;
     selected: number|null
     setSelected: React.Dispatch<React.SetStateAction<number|null>>
     handleAttempt: (isCorrect:boolean) => void
@@ -17,11 +17,11 @@ export const Options: React.FC<OptionProps> = ({
 }:OptionProps) => {
     const showResult = (i:number) => {
         if (selected != null && selected === i)
-            if (isCorrect) return 'success'
-            else return 'danger'
-        else return 'outline-primary'
+            if (isCorrect) return 'success';
+            else return 'danger';
+        else return 'outline-primary';
     };
-    
+
     useEffect(() => {
         const result = correctIndex === selected;
         setIsCorrect(result);
@@ -44,5 +44,5 @@ export const Options: React.FC<OptionProps> = ({
                 </div>
             )}
         </div>
-    </section>
-}
+    </section>;
+};
