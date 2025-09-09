@@ -123,8 +123,6 @@ export const SolutionStep: React.FC<SolutionStepProps> = (
         validateData['rule'] = nextRule.toLocaleLowerCase();
         validateData['step_list'] =[latex2raw(lastCorrectStep)];
         validateData['answer'] = statement.answer;
-        // eslint-disable-next-line max-len
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
         const toolsData: Tools = await getValidation(validateData);
 
         processResponse(toolsData);
@@ -256,7 +254,7 @@ export const SolutionStep: React.FC<SolutionStepProps> = (
                             align-self-start'>
                             <label htmlFor={`statementInput-${idx}`}
                                 className='form-label col-12 px-0 order-1'>
-                                    then I&apos;ll get this statement...
+                                then I&apos;ll get this statement...
                             </label>
                             {isStatementHint && (
                                 <div role='alert'

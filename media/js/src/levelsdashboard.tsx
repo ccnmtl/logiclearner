@@ -26,13 +26,10 @@ export const LevelsDashboard: React.FC = () => {
         setquestionsList(arrQs);
     };
     async function fetchCounts() {
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
         const novArr: Array<Statement>  = await getStatements(0);
         setnoviceCount(novArr.length);
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
         const learnArr: Array<Statement>  = await getStatements(1);
         setlearnerCount(learnArr.length);
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
         const apprenArr: Array<Statement>  = await getStatements(2);
         setapprenticeCount(apprenArr.length);
     }

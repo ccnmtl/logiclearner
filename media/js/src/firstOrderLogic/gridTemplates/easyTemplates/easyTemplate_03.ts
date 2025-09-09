@@ -1,7 +1,5 @@
 import {
-    getColorName,
     getRandomElement,
-    randomIntFromInterval,
     gridSize,
     shapes,
     colors,
@@ -21,10 +19,11 @@ export const easyTemplate_03 = {
             number1: getRandomElement(numbers)
         };
         const naturalLanguageStatement = replacePlaceholders(
-            "All {shape1}s have value {number1}.",
+            'All {shape1}s have value {number1}.',
             details
         );
-        const formalFOLStatement = `∀x (Shape(x, ${details.shape1}) → Value(x, ${details.number1}))`;
+        const formalFOLStatement =
+            `∀x (Shape(x, ${details.shape1}) → Value(x, ${details.number1}))`;
 
         return { naturalLanguageStatement, formalFOLStatement, details };
     },
@@ -48,12 +47,14 @@ export const easyTemplate_03 = {
         });
 
         if (!satisfies) {
-            // Violate it: find a cell that is shape1 & number1, then change number
+            // Violate it: find a cell that is shape1 & number1,
+            //  then change number
             const violatingCell = grid.find(
                 c => c.shape === details.shape1 && c.number === details.number1
             );
             if (violatingCell) {
-                violatingCell.number = getRandomElement(numbers.filter(n => n !== details.number1));
+                violatingCell.number = getRandomElement(
+                    numbers.filter(n => n !== details.number1));
             }
         }
 

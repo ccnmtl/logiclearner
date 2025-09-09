@@ -1,7 +1,6 @@
 import {
     getColorName,
     getRandomElement,
-    randomIntFromInterval,
     gridSize,
     shapes,
     colors,
@@ -9,7 +8,8 @@ import {
 } from '../../utils';
 
 /**
- * Replaces placeholders in a template string: {shape1}, {color1}, {number1}, etc.
+ * Replaces placeholders in a template string: {shape1}, {color1}, {number1},
+ * etc.
  */
 function replacePlaceholders(template, details) {
     return template
@@ -20,27 +20,31 @@ function replacePlaceholders(template, details) {
 
 export const easyTemplate_01 = {
     /**
-     * Generate the natural-language and FOL statements, plus details for grid logic.
+     * Generate the natural-language and FOL statements, plus details
+     * for grid logic.
      */
     generateStatements() {
         const details = {
             shape1: getRandomElement(shapes),
             color1: getRandomElement(colors),
-            number1: getRandomElement(numbers) // may not be used in statement text, but included if needed
+            number1: getRandomElement(numbers) // may not be used in statement
+            // text, but included if needed
         };
         const colorName = getColorName(details.color1);
 
         const naturalLanguageStatement = replacePlaceholders(
-            "All {shape1}s are {color1}.",
+            'All {shape1}s are {color1}.',
             { ...details, color1: colorName }
         );
-        const formalFOLStatement = `∀x (Shape(x, ${details.shape1}) → Color(x, ${colorName}))`;
+        const formalFOLStatement =
+            `∀x (Shape(x, ${details.shape1}) → Color(x, ${colorName}))`;
 
         return { naturalLanguageStatement, formalFOLStatement, details };
     },
 
     /**
-     * Create a 5x5 grid. If satisfies=true, enforce the statement; else introduce 1 violation.
+     * Create a 5x5 grid. If satisfies=true, enforce the statement; else
+     * introduce 1 violation.
      */
     generateGrid(satisfies, details) {
         const grid = Array.from({ length: gridSize * gridSize }, (_, idx) => ({
@@ -66,7 +70,8 @@ export const easyTemplate_01 = {
                 c => c.shape === details.shape1 && c.color === details.color1
             );
             if (violatingCell) {
-                violatingCell.color = getRandomElement(colors.filter(c => c !== details.color1));
+                violatingCell.color = getRandomElement(
+                    colors.filter(c => c !== details.color1));
             }
         }
 
