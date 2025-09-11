@@ -6,6 +6,7 @@ export interface GridItem {
     color:string
     number:number
     shape:string
+    [key: string]: unknown;
 }
 
 export interface GridStatement {
@@ -15,10 +16,13 @@ export interface GridStatement {
 }
 
 export interface GridTemplate {
-    generateStatements: Function
-    generateGrid: Function
-    verifyStatementWithGrid: Function
-    checkIfViolates: Function
+    generateStatements: () => GridStatement;
+    generateGrid: (satisfies: boolean, details: Record<string, unknown>) =>
+    { grid: GridItem[]; satisfies: boolean };
+    verifyStatementWithGrid: (grid: GridItem[],
+        details: Record<string, unknown>) => boolean;
+    checkIfViolates: (grid: GridItem[], details: Record<string, unknown>) =>
+    boolean;
 }
 
 export interface Score {

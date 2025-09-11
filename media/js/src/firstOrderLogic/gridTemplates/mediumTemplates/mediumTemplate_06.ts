@@ -19,7 +19,8 @@ function replacePlaceholders(template, details) {
 function generateRandomPosition() {
     const direction = getRandomElement(['left', 'right', 'top', 'bottom']);
     const numUnits = randomIntFromInterval(2, Math.floor(gridSize / 2) + 1);
-    const dimension = (direction === 'left' || direction === 'right') ? 'columns' : 'rows';
+    const dimension =
+        (direction === 'left' || direction === 'right') ? 'columns' : 'rows';
     const positionDescription = `${direction} ${numUnits} ${dimension}`;
     return { direction, numUnits, positionDescription };
 }
@@ -38,7 +39,8 @@ export const mediumTemplate_06 = {
         // pick factor in [2..3]
         const factor = randomIntFromInterval(2, 3);
 
-        const { direction, numUnits, positionDescription } = generateRandomPosition();
+        const { direction, numUnits,
+            positionDescription } = generateRandomPosition();
         const colorName = getColorName(color1);
 
         const details = {
@@ -50,14 +52,17 @@ export const mediumTemplate_06 = {
             positionDescription
         };
 
-        // e.g. "All squares with multiples of 2 are Red and located in the top 2 rows of the grid."
+        // e.g. "All squares with multiples of 2 are Red and located in the
+        //  top 2 rows of the grid."
         const naturalLanguageStatement = replacePlaceholders(
-            "All {shape1}s with values that are multiples of {factor} are {color1} and located in the {positionDescription} of the grid.",
+            'All {shape1}s with values that are multiples of {factor} are '
+            + '{color1} and located in the {positionDescription} of the grid.',
             { ...details, color1: colorName }
         );
 
         // FOL:
-        // "∀x ((Shape(x, shape1) ∧ (Value(x) mod factor = 0)) → (Color(x, colorName) ∧ Location(x, position)))"
+        // "∀x ((Shape(x, shape1) ∧ (Value(x) mod factor = 0)) →
+        //   (Color(x, colorName) ∧ Location(x, position)))"
         const formalFOLStatement = `
         ∀x (
           (Shape(x, ${shape1}) ∧ MultipleOf(Value(x), ${factor}))
@@ -102,19 +107,24 @@ export const mediumTemplate_06 = {
                     // must be color1 + in region
                     cell.color = color1;
                     if (!inRegion(cell)) {
-                        // break shape or number so it no longer meets shape1+multiple
-                        cell.shape = getRandomElement(shapes.filter(s => s !== shape1));
+                        // break shape or number so it no longer
+                        // meets shape1+multiple
+                        cell.shape = getRandomElement(
+                            shapes.filter(s => s !== shape1));
                     }
                 } else {
                     // if inside region, avoid accidental matching
                     if (inRegion(cell)) {
-                        if (cell.shape === shape1 && isMultiple(cell.number, factor)) {
+                        if (cell.shape === shape1 && isMultiple(
+                            cell.number, factor)) {
                             cell.color = color1;
                         }
                     } else {
                         // outside region => can't have shape1+multiple+color1
-                        if (cell.shape === shape1 && isMultiple(cell.number, factor) && cell.color === color1) {
-                            cell.color = getRandomElement(colors.filter(c => c !== color1));
+                        if (cell.shape === shape1 && isMultiple(
+                            cell.number, factor) && cell.color === color1) {
+                            cell.color = getRandomElement(
+                                colors.filter(c => c !== color1));
                         }
                     }
                 }
@@ -122,16 +132,19 @@ export const mediumTemplate_06 = {
         } else {
             // partially satisfy
             grid.forEach(cell => {
-                if (cell.shape === shape1 && isMultiple(cell.number, factor) && inRegion(cell)) {
+                if (cell.shape === shape1 && isMultiple(
+                    cell.number, factor) && inRegion(cell)) {
                     cell.color = color1;
                 }
             });
             // introduce violation
             const violatingCell = grid.find(
-                c => c.shape === shape1 && isMultiple(c.number, factor) && inRegion(c) && c.color === color1
+                c => c.shape === shape1 && isMultiple(
+                    c.number, factor) && inRegion(c) && c.color === color1
             );
             if (violatingCell) {
-                violatingCell.color = getRandomElement(colors.filter(cc => cc !== color1));
+                violatingCell.color = getRandomElement(
+                    colors.filter(cc => cc !== color1));
             }
         }
 

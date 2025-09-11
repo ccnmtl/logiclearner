@@ -20,7 +20,8 @@ function replacePlaceholders(template, details) {
 function generateRandomPosition() {
     const direction = getRandomElement(['left', 'right', 'top', 'bottom']);
     const numUnits = randomIntFromInterval(2, Math.floor(gridSize / 2) + 1);
-    const dimension = (direction === 'left' || direction === 'right') ? 'columns' : 'rows';
+    const dimension =
+        (direction === 'left' || direction === 'right') ? 'columns' : 'rows';
     const positionDescription = `${direction} ${numUnits} ${dimension}`;
     return { direction, numUnits, positionDescription };
 }
@@ -32,7 +33,8 @@ export const mediumTemplate_03 = {
         // pick range [3..5] up to [6..9]
         const minValue = randomIntFromInterval(3, 5);
         const maxValue = randomIntFromInterval(6, 9);
-        const { direction, numUnits, positionDescription } = generateRandomPosition();
+        const { direction, numUnits,
+            positionDescription } = generateRandomPosition();
 
         const colorName = getColorName(color1);
 
@@ -47,12 +49,14 @@ export const mediumTemplate_03 = {
         };
 
         const naturalLanguageStatement = replacePlaceholders(
-            "All {shape1}s with values between {minValue} and {maxValue} are {color1} and located in the {positionDescription} of the grid.",
+            'All {shape1}s with values between {minValue} and {maxValue} are '
+            + '{color1} and located in the {positionDescription} of the grid.',
             { ...details, color1: colorName }
         );
         const formalFOLStatement = `
         ∀x (
-          (Shape(x, ${shape1}) ∧ Value(x) ≥ ${minValue} ∧ Value(x) ≤ ${maxValue})
+          (Shape(x, ${shape1}) ∧ Value(x) ≥ ${minValue} ∧ 
+           Value(x) ≤ ${maxValue})
           → (Color(x, ${colorName}) ∧ Location(x, ${positionDescription}))
         )
       `.trim();
@@ -71,7 +75,8 @@ export const mediumTemplate_03 = {
             }
         }));
 
-        const { shape1, color1, minValue, maxValue, direction, numUnits } = details;
+        const { shape1, color1, minValue,
+            maxValue, direction, numUnits } = details;
 
         const inRegion = (cell) => {
             switch (direction) {
@@ -96,18 +101,23 @@ export const mediumTemplate_03 = {
                     cell.color = color1;
                     if (!inRegion(cell)) {
                         // break the condition so it's not shape1 + valueMatches
-                        cell.shape = getRandomElement(shapes.filter(s => s !== shape1));
+                        cell.shape = getRandomElement(
+                            shapes.filter(s => s !== shape1));
                     }
                 } else {
                     // if in region, ensure no accidental partial match
                     if (inRegion(cell)) {
-                        if (cell.shape === shape1 && valueMatches(cell.number)) {
+                        if (cell.shape === shape1
+                            && valueMatches(cell.number)) {
                             cell.color = color1;
                         }
                     } else {
-                        // outside region => can't have shape1 + valueMatches + color1
-                        if (cell.shape === shape1 && valueMatches(cell.number) && cell.color === color1) {
-                            cell.color = getRandomElement(colors.filter(c => c !== color1));
+                        // outside region => can't have shape1
+                        // + valueMatches + color1
+                        if (cell.shape === shape1 && valueMatches(cell.number)
+                            && cell.color === color1) {
+                            cell.color = getRandomElement(
+                                colors.filter(c => c !== color1));
                         }
                     }
                 }
@@ -115,16 +125,19 @@ export const mediumTemplate_03 = {
         } else {
             // partially satisfy
             grid.forEach(cell => {
-                if (cell.shape === shape1 && valueMatches(cell.number) && inRegion(cell)) {
+                if (cell.shape === shape1 && valueMatches(cell.number)
+                    && inRegion(cell)) {
                     cell.color = color1;
                 }
             });
             // introduce violation
             const violatingCell = grid.find(
-                c => c.shape === shape1 && valueMatches(c.number) && inRegion(c) && c.color === color1
+                c => c.shape === shape1 && valueMatches(c.number)
+                && inRegion(c) && c.color === color1
             );
             if (violatingCell) {
-                violatingCell.color = getRandomElement(colors.filter(cc => cc !== color1));
+                violatingCell.color = getRandomElement(
+                    colors.filter(cc => cc !== color1));
             }
         }
 
@@ -132,7 +145,8 @@ export const mediumTemplate_03 = {
     },
 
     verifyStatementWithGrid(grid, details) {
-        const { shape1, color1, minValue, maxValue, direction, numUnits } = details;
+        const { shape1, color1, minValue,
+            maxValue, direction, numUnits } = details;
 
         const inRegion = (cell) => {
             switch (direction) {
@@ -150,7 +164,8 @@ export const mediumTemplate_03 = {
         };
         const valueMatches = (n) => (n >= minValue && n <= maxValue);
 
-        // For all shape1 with value in [minValue..maxValue], must be color1 + inRegion
+        // For all shape1 with value in [minValue..maxValue],
+        // must be color1 + inRegion
         return grid.every(cell => {
             if (cell.shape === shape1 && valueMatches(cell.number)) {
                 if (cell.color !== color1) return false;

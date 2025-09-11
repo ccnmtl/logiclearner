@@ -19,7 +19,8 @@ function replacePlaceholders(template, details) {
 function generateRandomPosition() {
     const direction = getRandomElement(['left', 'right', 'top', 'bottom']);
     const numUnits = randomIntFromInterval(2, Math.floor(gridSize / 2) + 1);
-    const dimension = (direction === 'left' || direction === 'right') ? 'columns' : 'rows';
+    const dimension =
+        (direction === 'left' || direction === 'right') ? 'columns' : 'rows';
     const positionDescription = `${direction} ${numUnits} ${dimension}`;
     return { direction, numUnits, positionDescription };
 }
@@ -29,7 +30,8 @@ export const mediumTemplate_04 = {
         const shape1 = getRandomElement(shapes);
         const color1 = getRandomElement(colors);
         const parity = getRandomElement(['even', 'odd']);
-        const { direction, numUnits, positionDescription } = generateRandomPosition();
+        const { direction, numUnits,
+            positionDescription } = generateRandomPosition();
 
         const colorName = getColorName(color1);
 
@@ -43,13 +45,15 @@ export const mediumTemplate_04 = {
         };
 
         const naturalLanguageStatement = replacePlaceholders(
-            "All {shape1}s with {parity} values are {color1} and located in the {positionDescription} of the grid.",
+            'All {shape1}s with {parity} values are {color1} and located '
+            + 'in the {positionDescription} of the grid.',
             { ...details, color1: colorName }
         );
 
         const formalFOLStatement = `
         ∀x (
-          (Shape(x, ${shape1}) ∧ ${parity === 'even' ? 'Even' : 'Odd'}(Value(x)))
+          (Shape(x, ${shape1}) ∧ 
+           ${parity === 'even' ? 'Even' : 'Odd'}(Value(x)))
           → (Color(x, ${colorName}) ∧ Location(x, ${positionDescription}))
         )
       `.trim();
@@ -84,7 +88,8 @@ export const mediumTemplate_04 = {
                     return false;
             }
         };
-        const parityMatches = (val) => (parity === 'even') ? (val % 2 === 0) : (val % 2 !== 0);
+        const parityMatches =
+            (val) => (parity === 'even') ? (val % 2 === 0) : (val % 2 !== 0);
 
         if (satisfies) {
             grid.forEach(cell => {
@@ -92,17 +97,21 @@ export const mediumTemplate_04 = {
                     cell.color = color1;
                     if (!inRegion(cell)) {
                         // break the condition so it doesn't meet shape+parity
-                        cell.shape = getRandomElement(shapes.filter(s => s !== shape1));
+                        cell.shape = getRandomElement(
+                            shapes.filter(s => s !== shape1));
                     }
                 } else {
                     if (inRegion(cell)) {
-                        if (cell.shape === shape1 && parityMatches(cell.number)) {
+                        if (cell.shape === shape1
+                            && parityMatches(cell.number)) {
                             cell.color = color1;
                         }
                     } else {
                         // outside region => can't be shape1+parity+color1
-                        if (cell.shape === shape1 && parityMatches(cell.number) && cell.color === color1) {
-                            cell.color = getRandomElement(colors.filter(c => c !== color1));
+                        if (cell.shape === shape1 && parityMatches(cell.number)
+                            && cell.color === color1) {
+                            cell.color = getRandomElement(
+                                colors.filter(c => c !== color1));
                         }
                     }
                 }
@@ -110,16 +119,19 @@ export const mediumTemplate_04 = {
         } else {
             // partially satisfy
             grid.forEach(cell => {
-                if (cell.shape === shape1 && parityMatches(cell.number) && inRegion(cell)) {
+                if (cell.shape === shape1 && parityMatches(cell.number)
+                    && inRegion(cell)) {
                     cell.color = color1;
                 }
             });
             // introduce violation
             const violatingCell = grid.find(
-                c => c.shape === shape1 && parityMatches(c.number) && inRegion(c) && c.color === color1
+                c => c.shape === shape1 && parityMatches(c.number)
+                && inRegion(c) && c.color === color1
             );
             if (violatingCell) {
-                violatingCell.color = getRandomElement(colors.filter(cc => cc !== color1));
+                violatingCell.color = getRandomElement(
+                    colors.filter(cc => cc !== color1));
             }
         }
 
@@ -142,7 +154,8 @@ export const mediumTemplate_04 = {
                     return false;
             }
         };
-        const parityMatches = (val) => (parity === 'even') ? (val % 2 === 0) : (val % 2 !== 0);
+        const parityMatches =
+            (val) => (parity === 'even') ? (val % 2 === 0) : (val % 2 !== 0);
 
         return grid.every(cell => {
             if (cell.shape === shape1 && parityMatches(cell.number)) {
