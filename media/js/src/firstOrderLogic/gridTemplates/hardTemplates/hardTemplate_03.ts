@@ -13,7 +13,10 @@ function replacePlaceholders(template, details) {
         .replace(/{shape1}/g, details.shape1)
         .replace(/{shape2}/g, details.shape2)
         .replace(/{color1}/g, details.color1)
-        .replace(/{valueConditionDescription}/g, details.valueConditionDescription);
+        .replace(
+            /{valueConditionDescription}/g,
+            details.valueConditionDescription
+        );
 }
 
 function randomValueRange() {
@@ -29,7 +32,8 @@ export const hardTemplate_03 = {
         const color1 = getRandomElement(colors);
 
         const valueThreshold = randomValueRange();
-        const valueConditionDescription = `with a value greater than or equal to ${valueThreshold}`;
+        const valueConditionDescription =
+            `with a value greater than or equal to ${valueThreshold}`;
         const colorName = getColorName(color1);
 
         const details = {
@@ -41,15 +45,18 @@ export const hardTemplate_03 = {
         };
 
         // Natural language
-        // "For all shape1 that are color1, there exists shape2 with value>= threshold directly above it."
+        // "For all shape1 that are color1, there exists shape2 with
+        // value>= threshold directly above it."
         const naturalLanguageStatement = replacePlaceholders(
-            "For all {shape1}s that are {color1}, there exists a {shape2} {valueConditionDescription} directly above it.",
+            'For all {shape1}s that are {color1}, there exists a '
+            + '{shape2} {valueConditionDescription} directly above it.',
             { ...details, color1: colorName }
         );
         const formalFOLStatement = `
         ∀x (
           (Shape(x, ${shape1}) ∧ Color(x, ${colorName}))
-          → ∃y (Shape(y, ${shape2}) ∧ Value(y) ≥ ${valueThreshold} ∧ Above(y, x))
+          → ∃y (Shape(y, ${shape2}) ∧ Value(y) ≥ ${valueThreshold} ∧ 
+            Above(y, x))
         )
       `.trim();
 
@@ -72,22 +79,27 @@ export const hardTemplate_03 = {
         // cellAbove(x): the cell that is row-1, same col
         const cellAbove = (cellX) => {
             const { row, col } = cellX.position;
-            return grid.find(c => c.position.col === col && c.position.row === row - 1);
+            return grid.find(c => c.position.col === col
+                && c.position.row === row - 1);
         };
 
         if (satisfies) {
-            // for each X that is shape1+color1, ensure there's a Y above with shape2 + number>= threshold
+            // for each X that is shape1+color1, ensure there's a Y above
+            //  with shape2 + number>= threshold
             grid.forEach(cellX => {
                 if (cellX.shape === shape1 && cellX.color === color1) {
                     if (cellX.position.row === 0) {
                         // no cell above => must break X
-                        cellX.color = getRandomElement(colors.filter(c => c !== color1));
+                        cellX.color = getRandomElement(
+                            colors.filter(c => c !== color1));
                     } else {
                         const aboveCell = cellAbove(cellX);
                         if (aboveCell) {
-                            if (aboveCell.shape !== shape2 || aboveCell.number < valueThreshold) {
+                            if (aboveCell.shape !== shape2
+                                || aboveCell.number < valueThreshold) {
                                 aboveCell.shape = shape2;
-                                aboveCell.number = randomIntFromInterval(valueThreshold, 10);
+                                aboveCell.number = randomIntFromInterval(
+                                    valueThreshold, 10);
                             }
                         }
                     }
@@ -96,12 +108,14 @@ export const hardTemplate_03 = {
         } else {
             // partially satisfy
             grid.forEach(cellX => {
-                if (cellX.shape === shape1 && cellX.color === color1 && cellX.position.row > 0) {
+                if (cellX.shape === shape1 && cellX.color === color1
+                    && cellX.position.row > 0) {
                     const aCell = cellAbove(cellX);
                     if (aCell) {
                         aCell.shape = shape2;
                         if (aCell.number < valueThreshold) {
-                            aCell.number = randomIntFromInterval(valueThreshold, 10);
+                            aCell.number = randomIntFromInterval(
+                                valueThreshold, 10);
                         }
                     }
                 }
@@ -109,9 +123,11 @@ export const hardTemplate_03 = {
 
             // introduce violation
             const violatingX = grid.find(cellX => {
-                if (cellX.shape === shape1 && cellX.color === color1 && cellX.position.row > 0) {
+                if (cellX.shape === shape1 && cellX.color === color1
+                    && cellX.position.row > 0) {
                     const aCell = cellAbove(cellX);
-                    if (aCell && aCell.shape === shape2 && aCell.number >= valueThreshold) {
+                    if (aCell && aCell.shape === shape2
+                        && aCell.number >= valueThreshold) {
                         return true;
                     }
                 }
@@ -121,7 +137,8 @@ export const hardTemplate_03 = {
                 // break adjacency
                 const aCell = cellAbove(violatingX);
                 if (aCell) {
-                    aCell.shape = getRandomElement(shapes.filter(s => s !== shape2));
+                    aCell.shape = getRandomElement(
+                        shapes.filter(s => s !== shape2));
                 }
             } else {
                 // fallback: place an X in row=0 => no above cell => violation
@@ -152,7 +169,8 @@ export const hardTemplate_03 = {
             if (x.shape === shape1 && x.color === color1) {
                 // find a cell in row-1, same col
                 const asAbove = aboveCells(x);
-                const foundY = asAbove.some(y => y.shape === shape2 && y.number >= valueThreshold);
+                const foundY = asAbove.some(y => y.shape === shape2
+                    && y.number >= valueThreshold);
                 if (!foundY) return false;
             }
         }

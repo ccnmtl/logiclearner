@@ -13,7 +13,10 @@ function replacePlaceholders(template, details) {
         .replace(/{shape1}/g, details.shape1)
         .replace(/{shape2}/g, details.shape2)
         .replace(/{color1}/g, details.color1)
-        .replace(/{valueConditionDescription}/g, details.valueConditionDescription);
+        .replace(
+            /{valueConditionDescription}/g,
+            details.valueConditionDescription
+        );
 }
 
 function randomValueRange() {
@@ -29,7 +32,8 @@ export const hardTemplate_02 = {
         const color1 = getRandomElement(colors);
 
         const valueThreshold = randomValueRange(); // e.g. 8
-        const valueConditionDescription = `with a value less than ${valueThreshold}`;
+        const valueConditionDescription =
+            `with a value less than ${valueThreshold}`;
         const colorName = getColorName(color1);
 
         const details = {
@@ -40,16 +44,20 @@ export const hardTemplate_02 = {
             valueConditionDescription
         };
 
-        // "For all shape1s that are color1, there exists shape2 with value < threshold directly to the left of it."
+        // "For all shape1s that are color1, there exists shape2 with
+        // value < threshold directly to the left of it."
         const naturalLanguageStatement = replacePlaceholders(
-            "For all {shape1}s that are {color1}, there exists a {shape2} {valueConditionDescription} directly to the left of it.",
+            'For all {shape1}s that are {color1}, there exists a {shape2} ' +
+            '{valueConditionDescription} directly to the left of it.',
             { ...details, color1: colorName }
         );
 
         const formalFOLStatement = `
         ∀x (
           (Shape(x, ${shape1}) ∧ Color(x, ${colorName}))
-          → ∃y (Shape(y, ${shape2}) ∧ Value(y) < ${valueThreshold} ∧ LeftOf(y, x))
+          → ∃y (
+            Shape(y, ${shape2}) ∧ Value(y) < ${valueThreshold} ∧ LeftOf(y, x)
+          )
         )
       `.trim();
 
@@ -72,22 +80,27 @@ export const hardTemplate_02 = {
 
         const cellToLeft = (cellX) => {
             const { row, col } = cellX.position;
-            return grid.find(c => c.position.row === row && c.position.col === col - 1);
+            return grid.find(c => c.position.row === row
+                && c.position.col === col - 1);
         };
 
         if (satisfies) {
             grid.forEach(cellX => {
                 if (cellX.shape === shape1 && cellX.color === color1) {
-                    // If col=0, no left neighbor => must fix X to not be shape1+color1
+                    // If col=0, no left neighbor => must fix X
+                    // to not be shape1+color1
                     if (cellX.position.col === 0) {
-                        cellX.color = getRandomElement(colors.filter(c => c !== color1));
+                        cellX.color = getRandomElement(colors.filter(
+                            c => c !== color1));
                     } else {
                         // ensure left cell has shape2 + number< valueThreshold
                         const leftCell = cellToLeft(cellX);
                         if (!leftCell) return;
-                        if (leftCell.shape !== shape2 || leftCell.number >= valueThreshold) {
+                        if (leftCell.shape !== shape2
+                            || leftCell.number >= valueThreshold) {
                             leftCell.shape = shape2;
-                            leftCell.number = randomIntFromInterval(1, valueThreshold - 1);
+                            leftCell.number = randomIntFromInterval(
+                                1, valueThreshold - 1);
                             // color can be anything
                         }
                     }
@@ -96,21 +109,25 @@ export const hardTemplate_02 = {
         } else {
             // Partially satisfy
             grid.forEach(cellX => {
-                if (cellX.shape === shape1 && cellX.color === color1 && cellX.position.col > 0) {
+                if (cellX.shape === shape1 && cellX.color === color1
+                    && cellX.position.col > 0) {
                     const lCell = cellToLeft(cellX);
                     if (lCell) {
                         lCell.shape = shape2;
                         if (lCell.number >= valueThreshold) {
-                            lCell.number = randomIntFromInterval(1, valueThreshold - 1);
+                            lCell.number = randomIntFromInterval(
+                                1, valueThreshold - 1);
                         }
                     }
                 }
             });
             // Create violation
             const violatingX = grid.find(cellX => {
-                if (cellX.shape === shape1 && cellX.color === color1 && cellX.position.col > 0) {
+                if (cellX.shape === shape1 && cellX.color === color1
+                    && cellX.position.col > 0) {
                     const lCell = cellToLeft(cellX);
-                    if (lCell && lCell.shape === shape2 && lCell.number < valueThreshold) {
+                    if (lCell && lCell.shape === shape2
+                        && lCell.number < valueThreshold) {
                         return true;
                     }
                 }
@@ -122,7 +139,8 @@ export const hardTemplate_02 = {
                 const lCell = cellToLeft(violatingX);
                 if (lCell) {
                     // e.g. change shape
-                    lCell.shape = getRandomElement(shapes.filter(s => s !== shape2));
+                    lCell.shape = getRandomElement(
+                        shapes.filter(s => s !== shape2));
                 }
             } else {
                 // fallback: put an X in col=0 => guaranteed no left neighbor
@@ -142,15 +160,18 @@ export const hardTemplate_02 = {
 
         const cellToLeft = (cellX) => {
             const { row, col } = cellX.position;
-            return grid.filter(c => c.position.row === row && c.position.col === col - 1);
+            return grid.filter(c => c.position.row === row
+                && c.position.col === col - 1);
         };
 
-        // For each X with shape1+color1 => must have a Y to the left with shape2+ number< threshold
+        // For each X with shape1+color1 => must have a Y to the left with
+        //  shape2+ number< threshold
         for (const cellX of grid) {
             if (cellX.shape === shape1 && cellX.color === color1) {
                 const neighbors = cellToLeft(cellX);
                 // at least one neighbor meets shape2+ number< threshold
-                const foundY = neighbors.some(y => y.shape === shape2 && y.number < valueThreshold);
+                const foundY = neighbors.some(y => y.shape === shape2
+                    && y.number < valueThreshold);
                 if (!foundY) return false;
             }
         }
