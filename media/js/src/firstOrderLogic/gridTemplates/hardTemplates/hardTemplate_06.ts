@@ -13,7 +13,10 @@ function replacePlaceholders(template, details) {
         .replace(/{shape1}/g, details.shape1)
         .replace(/{shape2}/g, details.shape2)
         .replace(/{color1}/g, details.color1)
-        .replace(/{valueConditionDescription}/g, details.valueConditionDescription);
+        .replace(
+            /{valueConditionDescription}/g,
+            details.valueConditionDescription
+        );
 }
 
 /**
@@ -42,18 +45,22 @@ export const hardTemplate_06 = {
         };
 
         // Natural language:
-        // "For all shape1 that are color1, there exists shape2 with value<threshold diagonally top-right of it."
+        // "For all shape1 that are color1, there exists shape2 with
+        // value<threshold diagonally top-right of it."
         const naturalLanguageStatement = replacePlaceholders(
-            "For all {shape1}s that are {color1}, there exists a {shape2} {valueConditionDescription} diagonally top-right of it.",
+            'For all {shape1}s that are {color1}, there exists a {shape2} '
+            + '{valueConditionDescription} diagonally top-right of it.',
             { ...details, color1: colorName }
         );
 
         // FOL example:
-        // "∀x( (Shape(x)=s1 ∧ Color(x)=c1) → ∃y( Shape(y)=s2 ∧ Value(y)<threshold ∧ TopRightOf(y,x) ) )"
+        // "∀x( (Shape(x)=s1 ∧ Color(x)=c1) → ∃y( Shape(y)=s2 ∧
+        // Value(y)<threshold ∧ TopRightOf(y,x) ) )"
         const formalFOLStatement = `
         ∀x (
           (Shape(x, ${shape1}) ∧ Color(x, ${colorName}))
-          → ∃y (Shape(y, ${shape2}) ∧ Value(y) < ${threshold} ∧ TopRightOf(y, x))
+          → ∃y (Shape(y, ${shape2}) ∧ Value(y) < ${threshold} ∧
+            TopRightOf(y, x))
         )
       `.trim();
 
@@ -81,18 +88,23 @@ export const hardTemplate_06 = {
         }
 
         if (satisfies) {
-            // For each X= shape1+color1 => ensure top-right neighbor Y with shape2 & number<threshold
+            // For each X= shape1+color1 => ensure top-right neighbor
+            // Y with shape2 & number<threshold
             for (const cellX of grid) {
                 if (cellX.shape === shape1 && cellX.color === color1) {
                     // if col=4 (last col) or row=0 => no top-right => break X
-                    if (cellX.position.row === 0 || cellX.position.col === gridSize - 1) {
-                        cellX.color = getRandomElement(colors.filter(c => c !== color1));
+                    if (cellX.position.row === 0
+                        || cellX.position.col === gridSize - 1) {
+                        cellX.color = getRandomElement(
+                            colors.filter(c => c !== color1));
                     } else {
                         const diagTR = topRightNeighbor(cellX);
                         if (diagTR) {
-                            if (diagTR.shape !== shape2 || diagTR.number >= threshold) {
+                            if (diagTR.shape !== shape2
+                                || diagTR.number >= threshold) {
                                 diagTR.shape = shape2;
-                                diagTR.number = randomIntFromInterval(1, threshold - 1);
+                                diagTR.number = randomIntFromInterval(
+                                    1, threshold - 1);
                             }
                         }
                     }
@@ -103,12 +115,14 @@ export const hardTemplate_06 = {
             // Step 1: partially satisfy
             for (const cellX of grid) {
                 if (cellX.shape === shape1 && cellX.color === color1) {
-                    if (cellX.position.row > 0 && cellX.position.col < gridSize - 1) {
+                    if (cellX.position.row > 0
+                        && cellX.position.col < gridSize - 1) {
                         const trCell = topRightNeighbor(cellX);
                         if (trCell) {
                             trCell.shape = shape2;
                             if (trCell.number >= threshold) {
-                                trCell.number = randomIntFromInterval(1, threshold - 1);
+                                trCell.number = randomIntFromInterval(
+                                    1, threshold - 1);
                             }
                         }
                     }
@@ -117,9 +131,11 @@ export const hardTemplate_06 = {
 
             // Step 2: find one to break
             const violatingX = grid.find(x => {
-                if (x.shape === shape1 && x.color === color1 && x.position.row > 0 && x.position.col < gridSize - 1) {
+                if (x.shape === shape1 && x.color === color1
+                    && x.position.row > 0 && x.position.col < gridSize - 1) {
                     const trCell = topRightNeighbor(x);
-                    if (trCell && trCell.shape === shape2 && trCell.number < threshold) {
+                    if (trCell && trCell.shape === shape2
+                        && trCell.number < threshold) {
                         return true;
                     }
                 }
@@ -129,10 +145,12 @@ export const hardTemplate_06 = {
                 // break adjacency
                 const trCell = topRightNeighbor(violatingX);
                 if (trCell) {
-                    trCell.shape = getRandomElement(shapes.filter(s => s !== shape2));
+                    trCell.shape = getRandomElement(
+                        shapes.filter(s => s !== shape2));
                 }
             } else {
-                // fallback: place an X in top row or rightmost col => no diagonal top-right
+                // fallback: place an X in top row or rightmost
+                // col => no diagonal top-right
                 const fallbackCell = grid.find(
                     c => c.position.row === 0 || c.position.col === gridSize - 1
                 );
@@ -161,7 +179,8 @@ export const hardTemplate_06 = {
         for (const x of grid) {
             if (x.shape === shape1 && x.color === color1) {
                 const diagCells = topRightNeighbors(x);
-                const foundY = diagCells.some(y => y.shape === shape2 && y.number < threshold);
+                const foundY = diagCells.some(
+                    y => y.shape === shape2 && y.number < threshold);
                 if (!foundY) return false;
             }
         }

@@ -17,16 +17,18 @@ export const FirstOrderLogic: React.FC = () => {
     const [difficulty, setDifficulty] = useState<string>('easy');
     const [grid, setGrid] = useState<GridItem[]>([]);
     const [options, setOptions] = useState<GridStatement[]>([]);
-    const [size, setSize] = useState<number>(5);
-    const [templateBank, setTemplateBank] = useState<Object[]>(getTemplatesByDifficulty(difficulty));
+    const [size] = useState<number>(5);
+    const [templateBank, setTemplateBank] = useState<object[]>(
+        getTemplatesByDifficulty(difficulty)
+    );
     const [text, setText] = useState<string>('');
     const [isCorrect, setIsCorrect] = useState<boolean>(false);
-    const [selected, setSelected] = useState<number|null>()
+    const [selected, setSelected] = useState<number|null>();
     const [mode, setMode] = useState<number>(0);
     const [isDone, setIsDone] = useState<boolean>(false);
     const [attempt, setAttempt] = useState<number>(4);
 
-    const scoreDefault = {easy:[], medium: [], hard: []}
+    const scoreDefault = {easy: [], medium: [], hard: []};
     const [score, setScore] = useState<Score>(scoreDefault);
 
     const [correctTemplate, setCorrectTemplate] =
@@ -44,7 +46,7 @@ export const FirstOrderLogic: React.FC = () => {
         [0, 'Multiple Choice'],
         [1, 'Text Input']
     ];
-    
+
     function generateIncorrectStatements(templateBank, correctTemplate) {
         const incorrectStatements = [];
         const usedTemplates = new Set([correctTemplate]);
@@ -60,13 +62,19 @@ export const FirstOrderLogic: React.FC = () => {
             // Generate the statement
             const statementData = randomTemplate.generateStatements();
             // Check if it is satisfied by the *correct* grid
-            const isSatisfied = randomTemplate.verifyStatementWithGrid(grid, statementData.details);
+            const isSatisfied = randomTemplate.verifyStatementWithGrid(
+                grid,
+                statementData.details
+            );
 
             if (!isSatisfied) {
-                // Perfect: this statement does NOT match the current grid → an incorrect option
+                // Perfect: this statement does NOT match the current grid →
+                // an incorrect option
                 incorrectStatements.push({
-                    naturalLanguageStatement: statementData.naturalLanguageStatement,
-                    formalFOLStatement: statementData.formalFOLStatement,
+                    naturalLanguageStatement:
+                        statementData.naturalLanguageStatement,
+                    formalFOLStatement:
+                        statementData.formalFOLStatement,
                     details: statementData.details
                 });
                 usedTemplates.add(randomTemplate);
@@ -81,13 +89,16 @@ export const FirstOrderLogic: React.FC = () => {
 
     const handleMode = (e) => {
         setMode(Number(e.target.value));
-    }
+    };
 
     const handleAttempt = (result:boolean) => {
         if (!isDone) {
             if (result) {
                 setIsDone(true);
-                setScore({...score, [difficulty]: [...(score[difficulty]), attempt]});
+                setScore({
+                    ...score,
+                    [difficulty]: [...(score[difficulty]), attempt]
+                });
             } else {
                 setAttempt(Math.max(attempt - 1, 1));
             }
@@ -95,9 +106,9 @@ export const FirstOrderLogic: React.FC = () => {
     };
 
     const handleNewGrid = () => {
-        let newArr = getRandomElement(templateBank)
+        let newArr = getRandomElement(templateBank);
         while (newArr === correctTemplate) {
-            newArr = getRandomElement(templateBank)
+            newArr = getRandomElement(templateBank);
         }
         if (!isDone) {
             setScore({...score,
@@ -108,13 +119,13 @@ export const FirstOrderLogic: React.FC = () => {
         setText('');
         setAttempt(4);
         setIsDone(false);
-    }
+    };
 
     const mkSelect = (options, action) => <select className='form-select mt-2'
         onChange={action}>
-            {options.map((option, i) =>
-                <option key={i} value={option[0]}>{option[1]}</option>)}
-        </select>
+        {options.map((option, i) =>
+            <option key={i} value={option[0]}>{option[1]}</option>)}
+    </select>;
 
     const settings = [
         mkSelect(diffOptions, handleDifficulty),
@@ -122,7 +133,7 @@ export const FirstOrderLogic: React.FC = () => {
         <button className='btn btn-primary mt-2' onClick={handleNewGrid}>
             Next Grid
         </button>
-    ]
+    ];
 
     useEffect(() => {
         setTemplateBank(getTemplatesByDifficulty(difficulty));
@@ -140,13 +151,17 @@ export const FirstOrderLogic: React.FC = () => {
     useEffect(() => {
         if (correctTemplate) {
             const statementData = correctTemplate.generateStatements();
-            const generated = correctTemplate.generateGrid(true, statementData.details)
-    
+            const generated = correctTemplate.generateGrid(
+                true,
+                statementData.details
+            );
+
             setGrid(generated.grid);
             setText('');
-            
+
             setCorrectStatement({
-                naturalLanguageStatement: statementData.naturalLanguageStatement,
+                naturalLanguageStatement:
+                    statementData.naturalLanguageStatement,
                 formalFOLStatement: statementData.formalFOLStatement,
                 details: statementData.details
             });
@@ -157,15 +172,24 @@ export const FirstOrderLogic: React.FC = () => {
         if (correctStatement) {
             const incorrectOptions =
                 generateIncorrectStatements(templateBank, correctTemplate);
-    
+
             const newOptions = [correctStatement, ...incorrectOptions];
-            const uniqueOptions = newOptions.map(o => o.naturalLanguageStatement)
-                .map(nl => newOptions.find(o => o.naturalLanguageStatement === nl));
-                shuffleArray(uniqueOptions);
+            const uniqueOptions = newOptions
+                .map(o => o.naturalLanguageStatement)
+                .map(nl =>
+                    newOptions.find(
+                        o => o.naturalLanguageStatement === nl
+                    )
+                );
+            shuffleArray(uniqueOptions);
             setOptions(uniqueOptions);
-            setCorrectIndex(uniqueOptions.findIndex((opt) =>
-                opt.naturalLanguageStatement === correctStatement.naturalLanguageStatement
-            ));
+            setCorrectIndex(
+                uniqueOptions.findIndex(
+                    (opt) =>
+                        opt.naturalLanguageStatement ===
+                        correctStatement.naturalLanguageStatement
+                )
+            );
         }
     }, [correctStatement]);
 
@@ -187,7 +211,10 @@ export const FirstOrderLogic: React.FC = () => {
     // }, []);
 
     useEffect(() => {
-        if (window.rudderanalytics && typeof window.rudderanalytics.page === 'function') {
+        if (
+            window.rudderanalytics &&
+            typeof window.rudderanalytics.page === 'function'
+        ) {
             console.log('Sending page view to RudderStack:', location.pathname);
             window.rudderanalytics.page({
                 path: location.pathname,
@@ -198,7 +225,7 @@ export const FirstOrderLogic: React.FC = () => {
 
     useEffect(() => {
         setIsCorrect(false);
-    }, [mode])
+    }, [mode]);
 
     return <section id='grid-game'
         className='container d-flex justify-content-center'
@@ -223,5 +250,5 @@ export const FirstOrderLogic: React.FC = () => {
                 correctStatement={correctStatement} difficulty={difficulty}
                 setIsCorrect={setIsCorrect} text={text} setText={setText} />}
         </div>
-    </section>
-}
+    </section>;
+};

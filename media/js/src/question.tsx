@@ -23,9 +23,9 @@ export const Question: React.FC<QuestionProps> = (
     };
 
     const quesText: string =
-    (statement.answer === 'F') || (statement.answer === 'T')
-        ? 'is a'
-        : 'is logically equivalent to';
+        (statement.answer === 'F') || (statement.answer === 'T')
+            ? 'is a'
+            : 'is logically equivalent to';
 
     const answer: string =
         checkQuestion(statement.answer) === 'Tautology'

@@ -20,12 +20,14 @@ function replacePlaceholders(template, details) {
 }
 
 /**
- * Create a random "region" description like "left 2 columns" or "bottom 3 rows."
+ * Create a random "region" description like "left 2 columns"
+ * or "bottom 3 rows."
  */
 function generateRandomPosition() {
     const direction = getRandomElement(['left', 'right', 'top', 'bottom']);
     const numUnits = randomIntFromInterval(2, Math.floor(gridSize / 2) + 1);
-    const dimension = (direction === 'left' || direction === 'right') ? 'columns' : 'rows';
+    const dimension =
+        (direction === 'left' || direction === 'right') ? 'columns' : 'rows';
     const positionDescription = `${direction} ${numUnits} ${dimension}`;
     return { direction, numUnits, positionDescription };
 }
@@ -48,7 +50,8 @@ export const mediumTemplate_05 = {
     generateStatements() {
         const shape1 = getRandomElement(shapes);
         const color1 = getRandomElement(colors);
-        const { direction, numUnits, positionDescription } = generateRandomPosition();
+        const { direction, numUnits,
+            positionDescription } = generateRandomPosition();
 
         const colorName = getColorName(color1);
 
@@ -60,13 +63,16 @@ export const mediumTemplate_05 = {
             positionDescription
         };
 
-        // e.g. "All circles with prime values are Red and located in the left 2 columns of the grid."
+        // e.g. "All circles with prime values are Red and located in the
+        //  left 2 columns of the grid."
         const naturalLanguageStatement = replacePlaceholders(
-            "All {shape1}s with prime values are {color1} and located in the {positionDescription} of the grid.",
+            'All {shape1}s with prime values are {color1} and located in the '
+            + '{positionDescription} of the grid.',
             { ...details, color1: colorName }
         );
 
-        // FOL: "∀x ((Shape(x, shape1) ∧ Prime(Value(x))) → (Color(x, colorName) ∧ Location(x, region)))"
+        // FOL: "∀x ((Shape(x, shape1) ∧ Prime(Value(x))) →
+        //        (Color(x, colorName) ∧ Location(x, region)))"
         const formalFOLStatement = `
         ∀x (
           (Shape(x, ${shape1}) ∧ Prime(Value(x)))
@@ -113,7 +119,8 @@ export const mediumTemplate_05 = {
                     cell.color = color1;
                     if (!inRegion(cell)) {
                         // break the condition so it's not shape1+prime anymore
-                        cell.shape = getRandomElement(shapes.filter(s => s !== shape1));
+                        cell.shape = getRandomElement(
+                            shapes.filter(s => s !== shape1));
                     }
                 } else {
                     // if in region, ensure no accidental partial match
@@ -124,8 +131,10 @@ export const mediumTemplate_05 = {
                         }
                     } else {
                         // outside region => can't have shape1+prime+color1
-                        if (cell.shape === shape1 && isPrime(cell.number) && cell.color === color1) {
-                            cell.color = getRandomElement(colors.filter(c => c !== color1));
+                        if (cell.shape === shape1 && isPrime(cell.number)
+                            && cell.color === color1) {
+                            cell.color = getRandomElement(
+                                colors.filter(c => c !== color1));
                         }
                     }
                 }
@@ -133,16 +142,19 @@ export const mediumTemplate_05 = {
         } else {
             // partially satisfy
             grid.forEach(cell => {
-                if (cell.shape === shape1 && isPrime(cell.number) && inRegion(cell)) {
+                if (cell.shape === shape1 && isPrime(cell.number)
+                    && inRegion(cell)) {
                     cell.color = color1;
                 }
             });
             // then introduce violation
             const violatingCell = grid.find(
-                c => c.shape === shape1 && isPrime(c.number) && inRegion(c) && c.color === color1
+                c => c.shape === shape1 && isPrime(c.number)
+                && inRegion(c) && c.color === color1
             );
             if (violatingCell) {
-                violatingCell.color = getRandomElement(colors.filter(cc => cc !== color1));
+                violatingCell.color = getRandomElement(
+                    colors.filter(cc => cc !== color1));
             }
         }
 

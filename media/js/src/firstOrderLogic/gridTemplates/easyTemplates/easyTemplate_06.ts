@@ -1,7 +1,6 @@
 import {
     getColorName,
     getRandomElement,
-    randomIntFromInterval,
     gridSize,
     shapes,
     colors,
@@ -22,10 +21,11 @@ export const easyTemplate_06 = {
         };
         const colorName = getColorName(details.color1);
         const naturalLanguageStatement = replacePlaceholders(
-            "All {color1} shapes have value {number1}.",
+            'All {color1} shapes have value {number1}.',
             { ...details, color1: colorName }
         );
-        const formalFOLStatement = `∀x (Color(x, ${colorName}) → Value(x, ${details.number1}))`;
+        const formalFOLStatement =
+            `∀x (Color(x, ${colorName}) → Value(x, ${details.number1}))`;
 
         return { naturalLanguageStatement, formalFOLStatement, details };
     },
@@ -60,7 +60,8 @@ export const easyTemplate_06 = {
                 c => c.color === details.color1 && c.number === details.number1
             );
             if (violatingCell) {
-                violatingCell.number = getRandomElement(numbers.filter(n => n !== details.number1));
+                violatingCell.number = getRandomElement(
+                    numbers.filter(n => n !== details.number1));
             }
         }
 
