@@ -11,20 +11,22 @@ export const Progress: React.FC<ProgressProps> = ({
     score
 }:ProgressProps) => {
     /**
-     * EVAN'S NOTE: This was made for my own convenience I imagine you might want
-     * to be more explicit with your expression of the progress shapes.
+     * EVAN'S NOTE: This was made for my own convenience I imagine you might
+     * want to be more explicit with your expression of the progress shapes.
      * @returns An array of SVG text elements corresponding to the different
      * progress states
      */
-    const mkArr = (length: number, sign:1|-1) => Array.from({length}, (_, i) =>
-        <text color="black" x='50%' y='55%' dominantBaseline='middle'
-            textAnchor='middle' fontSize={10}
-        >
-            {sign * (i+1)}
-        </text>
-    );
-    const success = mkArr(4, 1);
-    const skip = mkArr(4, -1);
+    // const mkArr = (
+    //     length: number, sign: 1 | -1
+    // ) => Array.from({ length }, (_, i) =>
+    //     <text color="black" x='50%' y='55%' dominantBaseline='middle'
+    //         textAnchor='middle' fontSize={10}
+    //     >
+    //         {sign * (i+1)}
+    //     </text>
+    // );
+    // const success = mkArr(4, 1);
+    // const skip = mkArr(4, -1);
 
     return <svg
         viewBox={`0 0 120 ${10 * Math.ceil(score[difficulty].length/12)}`}
@@ -37,5 +39,5 @@ export const Progress: React.FC<ProgressProps> = ({
             {val > 0 ? success[val-1]: skip[-val-1]}
         </svg>
         )} */}
-    </svg>
-}
+    </svg>;
+};

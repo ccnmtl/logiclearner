@@ -6,6 +6,7 @@ export interface GridItem {
     color:string
     number:number
     shape:string
+    [key: string]: unknown;
 }
 
 export interface GridStatement {
@@ -15,10 +16,13 @@ export interface GridStatement {
 }
 
 export interface GridTemplate {
-    generateStatements: Function
-    generateGrid: Function
-    verifyStatementWithGrid: Function
-    checkIfViolates: Function
+    generateStatements: () => GridStatement;
+    generateGrid: (satisfies: boolean, details: Record<string, unknown>) =>
+    { grid: GridItem[]; satisfies: boolean };
+    verifyStatementWithGrid: (grid: GridItem[],
+        details: Record<string, unknown>) => boolean;
+    checkIfViolates: (grid: GridItem[], details: Record<string, unknown>) =>
+    boolean;
 }
 
 export interface Score {
@@ -39,7 +43,8 @@ const colorMap = {
 };
 
 /**
- * getColorName(colorHex): returns the English color name if known, else the raw hex
+ * getColorName(colorHex): returns the English color name if known,
+ * else the raw hex
  */
 export function getColorName(colorHex) {
     return colorMap[colorHex.toLowerCase()] || colorHex;
@@ -56,7 +61,12 @@ export const colorNames = {
 export const numbers = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
 
 // Some optional arrays if needed
-export const positions = ['top left corner', 'top right corner', 'bottom left corner', 'bottom right corner'];
+export const positions = [
+    'top left corner',
+    'top right corner',
+    'bottom left corner',
+    'bottom right corner'
+];
 export const equality = ['equal', 'greater than', 'less than'];
 export const directions = ['left', 'right', 'up', 'down'];
 export const orders = ['first', 'second', 'third'];

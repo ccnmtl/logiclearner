@@ -34,13 +34,13 @@ export const ExerciseSpace: React.FC = () => {
     const [hintCount, setHintCount] = useState<number>(0);
 
     async function fetchStatement() {
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+
         const json: Statement = await getStatement(Number(id));
         setStatement(json);
         return json;
     }
     async function fetchSolutions() {
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+
         const json: Array<Solution> = await getSolutions(Number(id));
         setSolutions(json);
     }
@@ -58,7 +58,7 @@ export const ExerciseSpace: React.FC = () => {
             setStepList(stepList);
             setIsIncomplete(data[0].status !== 'complete');
             setHintCount(data[0].hintCount);
-        } catch (error) {
+        } catch {
             setQuestionStatus(null);
         }
     };
@@ -105,8 +105,8 @@ export const ExerciseSpace: React.FC = () => {
                 hintData['step_list'] = [statement.question];
                 hintData['answer'] = statement.answer;
 
-                // eslint-disable-next-line max-len
-                // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+
+
                 const toolsData: HintTools = await getHints(hintData);
                 setHint([toolsData['hint'].nextStep[1],
                     toolsData['hint'].nextStep[0]]);
@@ -121,8 +121,8 @@ export const ExerciseSpace: React.FC = () => {
                 hintData['rule'] = nextRule;
                 hintData['step_list'] = [latex2raw(lastCorrectStep)];
                 hintData['answer'] = statement.answer;
-                // eslint-disable-next-line max-len
-                // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+
+
                 const toolsData: HintTools = await getHints(hintData);
                 setHint([toolsData['hint'].nextStep[1],
                     toolsData['hint'].nextStep[0]]);
@@ -219,17 +219,17 @@ export const ExerciseSpace: React.FC = () => {
 
     // const showSolutionBtn = stepList.length >= 3;
     const showResetBtn =
-    questionStatus === 'inprogress' || questionStatus === 'complete';
+        questionStatus === 'inprogress' || questionStatus === 'complete';
 
     const quesText: string =
-    (statement.answer === 'F') || (statement.answer === 'T')
-        ? 'is a'
-        : 'is logically equivalent to';
+        (statement.answer === 'F') || (statement.answer === 'T')
+            ? 'is a'
+            : 'is logically equivalent to';
     const answer: string =
-            checkQuestion(statement.answer) === 'Tautology'
+        checkQuestion(statement.answer) === 'Tautology'
             || checkQuestion(statement.answer) === 'Fallacy'
-                ? checkQuestion(statement.answer)
-                : raw2latex(checkQuestion(statement.answer));
+            ? checkQuestion(statement.answer)
+            : raw2latex(checkQuestion(statement.answer));
 
     const question = raw2latex(statement.question);
 
@@ -453,7 +453,7 @@ export const ExerciseSpace: React.FC = () => {
                                     onClick={handleShowSolutions}></button>
                             </div>
                             <p>The following is just one of many possible
-                            solutions for this question:
+                                solutions for this question:
                             </p>
                             <ul className='solutionkey'>
                                 {solutions.map((solution, idx) => {

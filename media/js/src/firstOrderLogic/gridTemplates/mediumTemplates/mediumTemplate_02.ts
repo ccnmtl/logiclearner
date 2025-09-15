@@ -20,7 +20,8 @@ function replacePlaceholders(template, details) {
 function generateRandomPosition() {
     const direction = getRandomElement(['left', 'right', 'top', 'bottom']);
     const numUnits = randomIntFromInterval(2, Math.floor(gridSize / 2) + 1);
-    const dimension = (direction === 'left' || direction === 'right') ? 'columns' : 'rows';
+    const dimension =
+        (direction === 'left' || direction === 'right') ? 'columns' : 'rows';
     const positionDescription = `${direction} ${numUnits} ${dimension}`;
 
     return { direction, numUnits, positionDescription };
@@ -31,7 +32,11 @@ export const mediumTemplate_02 = {
         const shape1 = getRandomElement(shapes);
         const color1 = getRandomElement(colors);
         const parity = getRandomElement(['odd', 'even']);
-        const { direction, numUnits, positionDescription } = generateRandomPosition();
+        const {
+            direction,
+            numUnits,
+            positionDescription
+        } = generateRandomPosition();
 
         const colorName = getColorName(color1);
 
@@ -44,14 +49,17 @@ export const mediumTemplate_02 = {
             positionDescription
         };
 
-        // "All circles with odd values are Red and located in the left 2 columns of the grid."
+        // "All circles with odd values are Red and located in the left 2
+        // columns of the grid."
         const naturalLanguageStatement = replacePlaceholders(
-            "All {shape1}s with {parity} values are {color1} and located in the {positionDescription} of the grid.",
+            'All {shape1}s with {parity} values are {color1} and ' +
+            'located in the {positionDescription} of the grid.',
             { ...details, color1: colorName }
         );
 
         // FOL
-        // "∀x ((Shape(x,circle) ∧ Odd(Value(x))) → (Color(x,Red) ∧ Location(x,left 2 columns)))"
+        // "∀x ((Shape(x,circle) ∧ Odd(Value(x))) →
+        //   (Color(x,Red) ∧ Location(x,left 2 columns)))"
         const formalFOLStatement = `
         ∀x (
           (Shape(x, ${shape1}) ∧ ${parity === 'odd' ? 'Odd' : 'Even'}(Value(x)))
@@ -89,28 +97,40 @@ export const mediumTemplate_02 = {
                     return false;
             }
         };
-        const parityMatches = (val) => parity === 'odd' ? (val % 2 !== 0) : (val % 2 === 0);
+        const parityMatches = (val) =>
+            parity === 'odd'
+                ? (val % 2 !== 0)
+                : (val % 2 === 0);
 
         if (satisfies) {
             // Enforce the statement
             grid.forEach(cell => {
-                if (cell.shape === shape1 && parityMatches(cell.number)) {
+                if (
+                    cell.shape === shape1 &&
+                    parityMatches(cell.number)
+                ) {
                     // must be color1, must be in region
                     cell.color = color1;
                     if (!inRegion(cell)) {
                         // break the condition so it's not shape1 + parity
-                        cell.shape = getRandomElement(shapes.filter(s => s !== shape1));
+                        cell.shape = getRandomElement(
+                            shapes.filter(s => s !== shape1));
                     }
                 } else {
-                    // If it's in region, ensure it doesn't accidentally fulfill shape1+parity => color1
+                    // If it's in region, ensure it doesn't accidentally fulfill
+                    // shape1+parity => color1
                     if (inRegion(cell)) {
-                        if (cell.shape === shape1 && parityMatches(cell.number)) {
+                        if (cell.shape === shape1 &&
+                            parityMatches(cell.number)) {
                             cell.color = color1;
                         }
                     } else {
                         // outside region => can't have shape1+parity+color1
-                        if (cell.shape === shape1 && parityMatches(cell.number) && cell.color === color1) {
-                            cell.color = getRandomElement(colors.filter(c => c !== color1));
+                        if (cell.shape === shape1
+                            && parityMatches(cell.number)
+                            && cell.color === color1) {
+                            cell.color = getRandomElement(
+                                colors.filter(c => c !== color1));
                         }
                     }
                 }
@@ -118,17 +138,20 @@ export const mediumTemplate_02 = {
         } else {
             // Partially satisfy, then create violation
             grid.forEach(cell => {
-                if (cell.shape === shape1 && parityMatches(cell.number) && inRegion(cell)) {
+                if (cell.shape === shape1 && parityMatches(cell.number)
+                    && inRegion(cell)) {
                     cell.color = color1;
                 }
             });
             // Introduce violation
             const violatingCell = grid.find(
-                c => c.shape === shape1 && parityMatches(c.number) && inRegion(c) && c.color === color1
+                c => c.shape === shape1 && parityMatches(c.number)
+                && inRegion(c) && c.color === color1
             );
             if (violatingCell) {
                 // break color
-                violatingCell.color = getRandomElement(colors.filter(c => c !== color1));
+                violatingCell.color = getRandomElement(
+                    colors.filter(c => c !== color1));
             }
         }
 
@@ -151,7 +174,10 @@ export const mediumTemplate_02 = {
                     return false;
             }
         };
-        const parityMatches = (val) => parity === 'odd' ? (val % 2 !== 0) : (val % 2 === 0);
+        const parityMatches = (val) =>
+            parity === 'odd'
+                ? (val % 2 !== 0)
+                : (val % 2 === 0);
 
         // For all shape1 + parityMatches => must be color1 + inRegion
         return grid.every(cell => {

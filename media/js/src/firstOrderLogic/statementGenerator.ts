@@ -1,6 +1,10 @@
 // scripts/statementGenerator
 
-import { easyTemplates, mediumTemplates, hardTemplates } from './gridTemplates/templates';
+import {
+    easyTemplates,
+    mediumTemplates,
+    hardTemplates
+} from './gridTemplates/templates';
 
 // Return an array of templates based on selected difficulty
 export function getTemplatesByDifficulty(difficulty) {

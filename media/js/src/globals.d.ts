@@ -28,8 +28,8 @@ declare module '*css' {
 declare const __BUILD__: string;
 
 interface Window {
-  rudderanalytics?: {
-    page?: (...args: any[]) => void;
-    [key: string]: any;
-  };
+    rudderanalytics?: {
+        page?: (...args: unknown[]) => void;
+        [key: string]: unknown;
+    };
 }
