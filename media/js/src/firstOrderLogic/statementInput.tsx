@@ -105,8 +105,10 @@ export const StatementInput: React.FC<StatementProps> = ({
         const el =
             document.getElementById('statement-text') as HTMLInputElement;
         const pos = el.selectionStart;
-        el.value = el.value.substring(0, pos) + char +
-        el.value.substring(pos, el.value.length);
+        const newText = el.value.substring(0, pos) + char +
+            el.value.substring(pos, el.value.length);
+        setText(newText);
+        el.value = newText;
         el.focus();
         el.selectionEnd = pos + 1;
     };
