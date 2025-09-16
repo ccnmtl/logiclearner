@@ -17,6 +17,7 @@ export const StatementInput: React.FC<StatementProps> = ({
     const [feedback, setFeedback] = useState<string>(
         'ERROR: This feedback should not be visible.');
     const [submitted, setSubmitted] = useState<boolean>(false);
+    const [evalObj, setEvalObj] = useState([{}, {}]);
 
     const buttonList = ['∀', '→', '∧',  '∃', '≥'];
 
@@ -26,6 +27,7 @@ export const StatementInput: React.FC<StatementProps> = ({
         '\\e': '∃',
         '\\exists': '∃',
         '\\forall': '∀',
+        '\\if': '→',
         '\\implies': '→',
         '\\ge': '≥'
     };
@@ -39,14 +41,14 @@ export const StatementInput: React.FC<StatementProps> = ({
      */
     const pullData = (text:string):object => {
         const rules = {};
-        const found = text.match(/\w+\(\w+.[\w\s]+\)+?/g);
+        const found = text.replace(/\s/, '').toLowerCase()
+            .match(/\w+\(\w+,[\w\s]+\)+?/g);
         if (found) {
             found.forEach((keyValue) => {
-                const key = keyValue.match(/\w+(?=\(\w+[^\)])/);
-                const value = keyValue.match(/\w[\w\s]*(?=\))/);
+                const key = keyValue.match(/[^xy]\w+(?=\(\w+[^\)])/);
+                const value = keyValue.match(/(?<=\(.*?)\w+|\d/g);
                 if (key != null && value != null) {
-                    rules[key.toString().toLowerCase()] =
-                        value.toString().toLowerCase();
+                    rules[key[0]] = value;
                 }
             });
         }
@@ -62,13 +64,15 @@ export const StatementInput: React.FC<StatementProps> = ({
         const sides = text.split('→');
         if (sides.length == 2) {
             return [pullData(sides[0]), pullData(sides[1])];
+        } else {
+            return [{}, {}];
         }
     };
 
     const regex = {
-        'easy': /^\∀x\s*\(.*\)\s*$/,
-        'medium': /^\∀x\s*\(.*\)\s*$/,
-        'hard': /^\∀x\s*\(.*\)\s*\→\s*\∃y\s*\(.*\)\s*$/
+        'easy': /^\∀x.*$/,
+        'medium': /^\∀x.*$/,
+        'hard': /^\∀x.*\→\∃y.*$/
     };
 
     const directionalRelationships = ['Top(y,x)', 'TopLeftOf(y,x)',
@@ -111,33 +115,47 @@ export const StatementInput: React.FC<StatementProps> = ({
         el.selectionEnd = pos + 1;
     };
 
-    const evaluate = (check:object[], evalObj:object[]) => {
-        if (check.length == evalObj.length) {
-            for (const i in evalObj) {
-                for (const [key, value] of Object.entries(evalObj[i])) {
-                    if (!check[i][key] || check[i][key] !== value) {
+    const evaluate = (check:object[]) => {
+        if (check.length === evalObj.length) {
+            for (let i = 0; i < evalObj.length; i++) {
+                for (const [key, value] of
+                    Object.entries<string[]>(evalObj[i]))
+                {
+                    const checkVal = check[i][key];
+                    if (checkVal && checkVal.length === value.length) {
+                        if (checkVal[0] !== value[0]) {
+                            // Check variable
+                            return false;
+                        }
+                        if (checkVal.length > 1) {
+                            // Check value(s)
+                            for (let j = 1; j < checkVal.length; j++) {
+                                if (checkVal[i] !== value[i]) {
+                                    return false;
+                                }
+                            }
+                        }
+                    } else {
                         return false;
                     }
                 }
             }
-            return true;
+        } else {
+
+            return false;
         }
-        return false;
+        return true;
     };
 
     const handleCheck = () => {
         setSubmitted(true);
         const el =
             document.getElementById('statement-text') as HTMLInputElement;
-        if (el.value.length > 0) {
-            const check = parseStatement(el.value);
-            if (el.value.match(regex[difficulty])) {
-                setIsCorrect(evaluate(check,
-                    parseStatement(correctStatement.formalFOLStatement))
-                );
-            } else {
-                setIsCorrect(false);
-            }
+        const check = parseStatement(el.value);
+        if (el.value.match(regex[difficulty])) {
+            setIsCorrect(evaluate(check));
+        } else {
+            setIsCorrect(false);
         }
     };
 
@@ -149,12 +167,22 @@ export const StatementInput: React.FC<StatementProps> = ({
     };
 
     useEffect(() => {
+        setSubmitted(false);
+        setFeedback('');
+    }, [difficulty]);
+
+    useEffect(() => {
+        setEvalObj(parseStatement(correctStatement.formalFOLStatement));
+    }, [correctStatement]);
+
+    useEffect(() => {
         if (isCorrect) {
-            setFeedback('Good! XD');
+            setFeedback('Success!');
         } else {
             setFeedback('Ooops <:O');
         }
     }, [isCorrect]);
+
 
     useEffect(() => {
         setSubmitted(false);
@@ -172,8 +200,10 @@ export const StatementInput: React.FC<StatementProps> = ({
             placeholder='Enter the value here' value={text}></textarea>
         <button type='submit' className='btn btn-primary my-2'
             onClick={handleCheck}>Check Statement</button>
-        {submitted && (isCorrect ? <p className='text-success'>{feedback}</p> :
-            <p className='text-danger'>{feedback}</p>)}
+        {submitted &&
+            <p className={`text-${isCorrect ? 'success' : 'danger'}`}>
+                {feedback}</p>
+        }
         <p className='col-12 fs-4 my-2'>Relationships</p>
         <div className="row">
             <div className="col-6">
