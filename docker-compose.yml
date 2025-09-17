@@ -12,8 +12,8 @@ services:
     build: .
     command: >
       sh -c "python manage.py migrate --noinput --settings=logiclearner.settings_docker &&
-             npm install && npm run build:dev &&
-             python manage.py runserver --settings=logiclearner.settings_docker 0.0.0.0:8000"
+               npm install &&
+               trap 'kill 0' EXIT; python manage.py runserver --settings=logiclearner.settings_docker 0.0.0.0:8000 & npm run dev"
     volumes:
       - .:/src
     ports:
