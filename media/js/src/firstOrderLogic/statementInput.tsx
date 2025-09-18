@@ -5,17 +5,16 @@ import { GridStatement } from './utils';
 interface StatementProps {
     correctStatement: GridStatement
     difficulty: string
-    isCorrect: boolean
     setIsCorrect: React.Dispatch<React.SetStateAction<boolean>>
     text: string
     setText: React.Dispatch<React.SetStateAction<string>>
 }
 
 export const StatementInput: React.FC<StatementProps> = ({
-    correctStatement, difficulty, isCorrect, setIsCorrect, text, setText
+    correctStatement, difficulty, setIsCorrect, text, setText
 }:StatementProps) => {
-    const [feedback, setFeedback] = useState<string>(
-        'ERROR: This feedback should not be visible.');
+    const [feedback, setFeedback] = useState<string[]>(
+        ['ERROR: This feedback should not be visible.']);
     const [submitted, setSubmitted] = useState<boolean>(false);
     const [evalObj, setEvalObj] = useState([{}, {}]);
 
@@ -30,6 +29,15 @@ export const StatementInput: React.FC<StatementProps> = ({
         '\\if': '→',
         '\\implies': '→',
         '\\ge': '≥'
+    };
+
+    const parenthesesMismatch = (text:string):boolean => {
+        let [left, right] = [0, 0];
+        for (const a of text) {
+            if (a === '(') left++;
+            if (a === ')') right++;
+        }
+        return left !== right;
     };
 
     /**
@@ -61,12 +69,17 @@ export const StatementInput: React.FC<StatementProps> = ({
      * @param text
      */
     const parseStatement = (text:string):object[] => {
+        const rules:object[] = [{'error': []}];
+        if (parenthesesMismatch(text)) {
+            rules[0]['error'].push('There is an unpaired parenthesis.');
+        }
         const sides = text.split('→');
         if (sides.length == 2) {
-            return [pullData(sides[0]), pullData(sides[1])];
+            rules.push(pullData(sides[0]), pullData(sides[1]));
         } else {
-            return [{}, {}];
+            rules.push({}, {});
         }
+        return rules;
     };
 
     const regex = {
@@ -118,8 +131,9 @@ export const StatementInput: React.FC<StatementProps> = ({
     };
 
     const evaluate = (check:object[]) => {
-        if (check.length === evalObj.length) {
-            for (let i = 0; i < evalObj.length; i++) {
+        const errors = check[0]['error'];
+        if (check.length == evalObj.length) {
+            for (let i = 1; i < evalObj.length; i++) {
                 for (const [key, value] of
                     Object.entries<string[]>(evalObj[i]))
                 {
@@ -127,26 +141,29 @@ export const StatementInput: React.FC<StatementProps> = ({
                     if (checkVal && checkVal.length === value.length) {
                         if (checkVal[0] !== value[0]) {
                             // Check variable
-                            return false;
+                            errors.push(`The ${key} from the 
+                                ${i === 0 ? 'left' : 'right'} side uses the
+                                wrong variable.`);
                         }
-                        if (checkVal.length > 1) {
+                        for (let j = 1; j < checkVal.length; j++) {
                             // Check value(s)
-                            for (let j = 1; j < checkVal.length; j++) {
-                                if (checkVal[i] !== value[i]) {
-                                    return false;
-                                }
+                            if (checkVal[i] !== value[i]) {
+                                errors.push(`The ${key} from the 
+                                    ${i === 0 ? 'left' : 'right'} side of the
+                                    statement is incorrect`);
                             }
                         }
                     } else {
-                        return false;
+                        errors.push(`Missing ${key} from the ${i === 0 ?
+                            'left' : 'right'} side of the statement`);
                     }
                 }
             }
         } else {
-
-            return false;
+            errors.push('The statement requires one implication (→) character');
         }
-        return true;
+        setFeedback(errors);
+        return errors.length === 0;
     };
 
     const handleCheck = () => {
@@ -157,6 +174,12 @@ export const StatementInput: React.FC<StatementProps> = ({
         if (el.value.match(regex[difficulty])) {
             setIsCorrect(evaluate(check));
         } else {
+            setFeedback([`The statement must begin with ∀x, independent and
+                dependent predicates separated by → ${
+                    difficulty === 'hard' ?
+                        ', and dependent predicates are preceded by ∃y':
+                        ''
+                }`]);
             setIsCorrect(false);
         }
     };
@@ -170,7 +193,7 @@ export const StatementInput: React.FC<StatementProps> = ({
 
     useEffect(() => {
         setSubmitted(false);
-        setFeedback('');
+        setFeedback([]);
     }, [difficulty]);
 
     useEffect(() => {
@@ -178,13 +201,13 @@ export const StatementInput: React.FC<StatementProps> = ({
     }, [correctStatement]);
 
     useEffect(() => {
-        if (isCorrect) {
-            setFeedback('Success!');
-        } else {
-            setFeedback('Ooops <:O');
-        }
-    }, [isCorrect]);
+        setSubmitted(false);
+        setFeedback([]);
+    }, [difficulty]);
 
+    useEffect(() => {
+        setEvalObj(parseStatement(correctStatement.formalFOLStatement));
+    }, [correctStatement]);
 
     useEffect(() => {
         setSubmitted(false);
@@ -202,10 +225,10 @@ export const StatementInput: React.FC<StatementProps> = ({
             placeholder='Enter the value here' value={text}></textarea>
         <button type='submit' className='btn btn-primary my-2'
             onClick={handleCheck}>Check Statement</button>
-        {submitted &&
-            <p className={`text-${isCorrect ? 'success' : 'danger'}`}>
-                {feedback}</p>
-        }
+        {submitted && (feedback.length > 0 ?
+            mkList(feedback, 'text-danger'):
+            <p className='text-success'>Success!</p>
+        )}
         <p className='col-12 fs-4 my-2'>Relationships</p>
         <div className="row">
             <div className="col-6">

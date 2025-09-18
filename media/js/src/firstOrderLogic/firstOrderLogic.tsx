@@ -246,9 +246,9 @@ export const FirstOrderLogic: React.FC = () => {
                 correctIndex={correctIndex} isCorrect={isCorrect}
                 setIsCorrect={setIsCorrect} selected={selected}
                 setSelected={setSelected} handleAttempt={handleAttempt}/>}
-            {mode === 1 && <StatementInput isCorrect={isCorrect}
-                correctStatement={correctStatement} difficulty={difficulty}
-                setIsCorrect={setIsCorrect} text={text} setText={setText} />}
+            {mode === 1 && <StatementInput correctStatement={correctStatement}
+                difficulty={difficulty} setIsCorrect={setIsCorrect} text={text}
+                setText={setText} />}
         </div>
     </section>;
 };
