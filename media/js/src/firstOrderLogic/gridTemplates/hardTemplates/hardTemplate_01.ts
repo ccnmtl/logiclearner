@@ -62,14 +62,9 @@ export const hardTemplate_01 = {
 
         // FOL: ∀x((shape(x)=shape1 ∧ color(x)=color1) → ∃y(shape(y)=shape2
         // ∧ value(y)>threshold ∧ RightOf(y,x)))
-        const formalFOLStatement = `
-        ∀x (
-          (Shape(x, ${shape1}) ∧ Color(x, ${colorName}))
-          → ∃y (
-            Shape(y, ${shape2}) ∧ Value(y) > ${valueThreshold} ∧ RightOf(y, x)
-          )
-        )
-      `.trim();
+        const formalFOLStatement = `∀x ((Shape(x, ${shape1}) ∧ 
+            Color(x, ${colorName})) → ∃y (Shape(y, ${shape2}) ∧ 
+            Value(y) > ${valueThreshold} ∧ Adjacency(y, RightOf, x)))`.trim();
 
         return { naturalLanguageStatement, formalFOLStatement, details };
     },
