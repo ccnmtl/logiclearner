@@ -18,7 +18,7 @@ export const StatementInput: React.FC<StatementProps> = ({
     const [submitted, setSubmitted] = useState<boolean>(false);
     const [evalObj, setEvalObj] = useState([{}, {}]);
 
-    const buttonList = ['∀', '→', '∧',  '∃', '≥'];
+    const buttonList = ['∀', '→', '∧', '≤', '≥', '∃'];
 
     const LaTexConversion = {
         '\\and': '∧',
@@ -26,9 +26,10 @@ export const StatementInput: React.FC<StatementProps> = ({
         '\\e': '∃',
         '\\exists': '∃',
         '\\forall': '∀',
+        '\\ge': '≥',
         '\\if': '→',
         '\\implies': '→',
-        '\\ge': '≥'
+        '\\le': '≤'
     };
 
     const parenthesesMismatch = (text:string):boolean => {
@@ -49,16 +50,21 @@ export const StatementInput: React.FC<StatementProps> = ({
      */
     const pullData = (text:string):object => {
         const rules = {};
-        const found = text.replace(/\s/, '').toLowerCase()
-            .match(/\w+\(\w+,[\w\s]+\)+?/g);
-        if (found) {
-            found.forEach((keyValue) => {
+        const miniText = text.replace(/\s/g, '').toLowerCase();
+        const predicates = miniText.match(/\w+\(\w+[,\w]+\)/g);
+        if (predicates) {
+            predicates.forEach((keyValue) => {
                 const key = keyValue.match(/[^xy]\w+(?=\(\w+[^\)])/);
                 const value = keyValue.match(/(?<=\(.*?)\w+|\d/g);
                 if (key != null && value != null) {
                     rules[key[0]] = value;
                 }
             });
+        }
+        const compKey = miniText.match(/(?<=value\(\w\))[<>≤≥]/);
+        if (compKey) {
+            const compVar = miniText.match(/(?<=value\()\w(?=\))/);
+            rules[compKey[0]] = compVar.concat(text.match(/(?<=\<|\>|\≤)\d/));
         }
         return rules;
     };
@@ -88,14 +94,14 @@ export const StatementInput: React.FC<StatementProps> = ({
         'hard': /^\∀x.*\→\∃y.*$/
     };
 
-    const directionalRelationships = ['Top(y,x)', 'TopLeftOf(y,x)',
-        'TopRightOf(y,x)', 'LeftOf(y,x)', 'RightOf(y,x)', 'Below(y,x)',
-        'BottomLeftOf(y,x)', 'BottomRightOf(y,x)'];
+    const directionalRelationships = ['Above', 'TopLeftOf',
+        'TopRightOf', 'LeftOf', 'RightOf', 'Below',
+        'BottomLeftOf', 'BottomRightOf'];
 
     const objectRelationships = ['Shape(x/y, Circle/Square/Triangle)',
         'Color(x/y, Blue/Green/Red))', 'Value(x/y, 0 to 9))',
         'Even(Value(x/y))', 'Odd(Value(x/y))', 'Prime(Value(x/y))',
-        'Location(x/y, top/bottom/left/right [number of subsets] rows/columns',
+        'Location(x/y, top/bottom/left/right rows/columns',
         'MultipleOf(Value(x/y))'];
 
     const mkList = (items:string[], uniqueClass='') =>
@@ -229,14 +235,14 @@ export const StatementInput: React.FC<StatementProps> = ({
             mkList(feedback, 'text-danger'):
             <p className='text-success'>Success!</p>
         )}
-        <p className='col-12 fs-4 my-2'>Relationships</p>
+        <p className='col-12 fs-4 my-2'>Predicates</p>
         <div className="row">
             <div className="col-6">
                 <strong>Object</strong>
                 {mkList(objectRelationships)}
             </div>
             <div className="col-6">
-                <strong>Directional</strong>
+                <strong>Adjacency(y, [direction], x)</strong>
                 {mkList(directionalRelationships)}
             </div>
         </div>

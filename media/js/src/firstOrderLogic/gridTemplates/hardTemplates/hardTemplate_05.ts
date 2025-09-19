@@ -61,12 +61,9 @@ export const hardTemplate_05 = {
         // Formal FOL example:
         // "∀x( (Shape(x)=shape1 ∧ Color(x)=color1) → ∃y( Shape(y)=shape2
         //  ∧ Value(y)>= threshold ∧ DiagTopLeft(y,x) ) )"
-        const formalFOLStatement = `
-        ∀x (
-          (Shape(x, ${shape1}) ∧ Color(x, ${colorName}))
-          → ∃y (Shape(y, ${shape2}) ∧ Value(y) ≥ ${threshold} ∧ TopLeftOf(y, x))
-        )
-      `.trim();
+        const formalFOLStatement = `∀x ((Shape(x, ${shape1}) ∧ 
+            Color(x, ${colorName})) → ∃y (Shape(y, ${shape2}) ∧ 
+            Value(y) ≥ ${threshold} ∧ Adjacency(y, TopLeftOf, x)))`.trim();
 
         return { naturalLanguageStatement, formalFOLStatement, details };
     },

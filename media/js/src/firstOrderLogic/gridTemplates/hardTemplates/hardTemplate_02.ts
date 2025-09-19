@@ -52,14 +52,9 @@ export const hardTemplate_02 = {
             { ...details, color1: colorName }
         );
 
-        const formalFOLStatement = `
-        ∀x (
-          (Shape(x, ${shape1}) ∧ Color(x, ${colorName}))
-          → ∃y (
-            Shape(y, ${shape2}) ∧ Value(y) < ${valueThreshold} ∧ LeftOf(y, x)
-          )
-        )
-      `.trim();
+        const formalFOLStatement = `∀x ((Shape(x, ${shape1}) ∧ 
+            Color(x, ${colorName})) → ∃y (Shape(y, ${shape2}) ∧ 
+            Value(y) < ${valueThreshold} ∧ Adjacency(y, LeftOf, x)))`.trim();
 
         return { naturalLanguageStatement, formalFOLStatement, details };
     },
