@@ -52,7 +52,7 @@ export function getColorName(colorHex) {
 
 // Available shapes, colors, etc.
 export const shapes = ['circle', 'square', 'triangle'];
-export const colors = ['#add8e6', '#77dd77', '#ff6961']; // Blue, Green, Red
+export const colors = ['#2962ff', '#2e7d32', '#d32f2f']; // Blue, Green, Red
 export const colorNames = {
     '#add8e6': 'Blue',
     '#77dd77': 'Green',
