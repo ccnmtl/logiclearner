@@ -121,15 +121,15 @@ export const FirstOrderLogic: React.FC = () => {
         setIsDone(false);
     };
 
-    const mkSelect = (options, action) => <select className='form-select mt-2'
-        onChange={action}>
-        {options.map((option, i) =>
-            <option key={i} value={option[0]}>{option[1]}</option>)}
-    </select>;
+    const mkSelect = (options, action, id='') =>
+        <select className='form-select mt-2' id={id} onChange={action}>
+            {options.map((option, i) =>
+                <option key={i} value={option[0]}>{option[1]}</option>)}
+        </select>;
 
     const settings = [
-        mkSelect(diffOptions, handleDifficulty),
-        mkSelect(inputOptions, handleMode),
+        mkSelect(diffOptions, handleDifficulty, 'difficulty'),
+        mkSelect(inputOptions, handleMode, 'mode'),
         <button className='btn btn-primary mt-2' onClick={handleNewGrid}>
             Next Grid
         </button>

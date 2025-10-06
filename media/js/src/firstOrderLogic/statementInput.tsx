@@ -147,21 +147,22 @@ export const StatementInput: React.FC<StatementProps> = ({
                     if (checkVal && checkVal.length === value.length) {
                         if (checkVal[0] !== value[0]) {
                             // Check variable
-                            errors.push(`The ${key} from the 
-                                ${i === 1 ? 'left' : 'right'} side uses the
-                                wrong variable.`);
+                            errors.push(`The ${key} from the ` +
+                                `${i === 1 ? 'left' : 'right'} side uses the ` +
+                                'wrong variable.');
                         }
                         for (let j = 1; j < checkVal.length; j++) {
                             // Check value(s)
                             if (checkVal[j] !== value[j]) {
-                                errors.push(`The ${key} from the 
-                                    ${i === 1 ? 'left' : 'right'} side of the
-                                    statement is incorrect`);
+                                errors.push(`The ${key} from the ` +
+                                    `${i === 1 ? 'left' : 'right'} side of ` +
+                                    'the statement is incorrect');
                             }
                         }
                     } else {
-                        errors.push(`Missing ${key} from the ${i === 1 ?
-                            'left' : 'right'} side of the statement`);
+                        errors.push(`Missing ${key} from the ` +
+                            `${i === 1 ? 'left' : 'right'} side of the ` +
+                            'statement');
                     }
                 }
             }
@@ -180,11 +181,11 @@ export const StatementInput: React.FC<StatementProps> = ({
         if (el.value.match(regex[difficulty])) {
             setIsCorrect(evaluate(check));
         } else {
-            setFeedback([`The statement must begin with ∀x, independent and
-                dependent predicates separated by → ${
-                    difficulty === 'hard' ?
-                        ', and dependent predicates are preceded by ∃y':
-                        ''
+            setFeedback(['The statement must begin with ∀x, independent and ' +
+                'dependent predicates separated by → ' +
+                `${difficulty === 'hard' ?
+                    ', and dependent predicates are preceded by ∃y':
+                    ''
                 }`]);
             setIsCorrect(false);
         }
@@ -219,22 +220,25 @@ export const StatementInput: React.FC<StatementProps> = ({
         setSubmitted(false);
     }, []);
 
-    return <section className='col-4'>
+    return <section data-testid='statement-input' className='col-4'>
         <p>Enter the statment that defines the following relationship:</p>
         <strong className='mx-2'>
             {correctStatement.naturalLanguageStatement}
         </strong>
         {mkBtnList(buttonList)}
-        <textarea id='statement-text'
+        <textarea id='statement-text' data-testid='statement-text'
             className='form-control mb-2'
             onChange={handleText}
             placeholder='Enter the value here' value={text}></textarea>
         <button type='submit' className='btn btn-primary my-2'
-            onClick={handleCheck}>Check Statement</button>
-        {submitted && (feedback.length > 0 ?
+            onClick={handleCheck} data-testid='submit-button'
+        >
+            Check Statement
+        </button>
+        {submitted && <div data-testid='feedback' >{feedback.length > 0 ?
             mkList(feedback, 'text-danger'):
             <p className='text-success'>Success!</p>
-        )}
+        }</div>}
         <p className='col-12 fs-4 my-2'>Predicates</p>
         <div className="row">
             <div className="col-6">
