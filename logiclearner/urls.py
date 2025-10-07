@@ -6,12 +6,12 @@ from django.views.static import serve
 from logiclearner.main import views
 from django_cas_ng import views as cas_views
 from django.contrib.flatpages import views as flatpage_views
+from logiclearner.FOLdesign import views as FOLdesign
 
 admin.autodiscover()
 
 
 urlpatterns = [
-
     path('contact/', include('contactus.urls')),
     path('admin/', admin.site.urls),
     path('accounts/login/', views.handler404),
@@ -43,6 +43,16 @@ urlpatterns = [
          name='teaching'),
     path('tutorial/', TemplateView.as_view(
         template_name="main/tutorial.html")),
+
+    re_path(r'^design/$', FOLdesign.Index.as_view(), name='design-folindex'),
+    re_path(r'^design/grid/$', FOLdesign.FOLGrid.as_view(),
+            name='design-folgrid'),
+    re_path(r'^design/selectinput/$', FOLdesign.FOLSelect.as_view(),
+            name='design-folselect'),
+    re_path(r'^design/textinput/$', FOLdesign.FOLText.as_view(),
+            name='design-foltext'),
+    re_path(r'^design/settings/$', FOLdesign.FOLSettings.as_view(),
+            name='design-folsettings'),
 
     re_path(r'^(?:.*)/?$', views.IndexView.as_view()),
     path('', views.IndexView.as_view()),

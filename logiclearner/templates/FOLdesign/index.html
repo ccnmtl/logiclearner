@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block title %}FOL Design{% endblock %}
+
+{% block content %}
+<section>
+    <p>Here's the First-Order Logic design page Zarina. Let me know if you'd like any changes.</p>
+    <ul>
+        <li><a href="{% url 'design-folgrid'%}">Grid</a></li>
+        <li><a href="{% url 'design-folselect'%}">Multiple Choice</a></li>
+        <li><a href="{% url 'design-foltext'%}">Statement Input</a></li>
+        <li><a href="{% url 'design-folsettings'%}">FOL Settings</a></li>
+    </ul>
+</section>
+{% endblock %}
