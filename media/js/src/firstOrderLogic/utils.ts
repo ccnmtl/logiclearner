@@ -33,9 +33,9 @@ export interface Score {
 
 // Map hex color codes to color names for convenience
 const colorMap = {
-    '#77dd77': 'Green',
-    '#ff6961': 'Red',
-    '#add8e6': 'Blue',
+    '#2e7d32': 'Green',
+    '#d32f2f': 'Red',
+    '#2962ff': 'Blue',
     '#fdfd96': 'Yellow',
     '#ffb347': 'Orange',
     '#ffb6c1': 'Pink'
@@ -53,11 +53,6 @@ export function getColorName(colorHex) {
 // Available shapes, colors, etc.
 export const shapes = ['circle', 'square', 'triangle'];
 export const colors = ['#2962ff', '#2e7d32', '#d32f2f']; // Blue, Green, Red
-export const colorNames = {
-    '#add8e6': 'Blue',
-    '#77dd77': 'Green',
-    '#ff6961': 'Red'
-};
 export const numbers = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
 
 // Some optional arrays if needed
