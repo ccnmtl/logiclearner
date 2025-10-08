@@ -148,19 +148,19 @@ export const StatementInput: React.FC<StatementProps> = ({
                         if (checkVal[0] !== value[0]) {
                             // Check variable
                             errors.push(`The ${key} from the 
-                                ${i === 0 ? 'left' : 'right'} side uses the
+                                ${i === 1 ? 'left' : 'right'} side uses the
                                 wrong variable.`);
                         }
                         for (let j = 1; j < checkVal.length; j++) {
                             // Check value(s)
-                            if (checkVal[i] !== value[i]) {
+                            if (checkVal[j] !== value[j]) {
                                 errors.push(`The ${key} from the 
-                                    ${i === 0 ? 'left' : 'right'} side of the
+                                    ${i === 1 ? 'left' : 'right'} side of the
                                     statement is incorrect`);
                             }
                         }
                     } else {
-                        errors.push(`Missing ${key} from the ${i === 0 ?
+                        errors.push(`Missing ${key} from the ${i === 1 ?
                             'left' : 'right'} side of the statement`);
                     }
                 }
