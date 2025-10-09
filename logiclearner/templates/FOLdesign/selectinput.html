@@ -5,6 +5,37 @@
 {% block pagetype %}--selctinput{% endblock %}
 
 {% block content %}
-<p>This is the FOL Multiple Choice template</p>
+<main class="main-app">
+    <!-- Header banner for FOL Matching game-->
+    <header class="main-banner exercise-space-banner sticky-top">
+        <div class="container d-flex justify-content-start">
+            <a href="#"
+                class="main-banner__nav
+                    d-flex justify-content-start">
+                <div class="main-banner__prompt">
+                    &lsaquo;
+                </div>
+                <figure
+                    class="main-banner__avatar align-self-center">
+                    <img alt="Go to Questions list for this level"
+                    src="{% static 'img/avatar-fol-temp.png' %}" />
+                </figure>
+                <h1 class="align-self-center">
+                    <span class="main-banner__subhead">
+                        <span class='visually-hidden'>
+                            Go to First Order Logic </span>
+                    </span>
+                    <span class="main-banner__title">FOL: Matching Game</span>
+                </h1>
+            </a>
+        </div>
+    </header>
+
+    <section class="container content-body exercise-space"
+        id="maincontent">
+        Hello
+    </section>
+</main>
+
 {% endblock %}
 {% block footer%}{% endblock %}
