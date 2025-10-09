@@ -6,10 +6,12 @@ import { StatementInput } from '../firstOrderLogic/statementInput';
 
 const naturalLanguageStatement = 'For all circles that are Green, there ' +
     'exists a square with a value less than 5 directly below it.';
-const extraParentheses = '∀x((shape(x,circle)∧color(x,green))→∃y(shape(y,' +
-    'square)∧value(y)<5∧adjacency(y,below,x)))';
 const formalFOLStatement = '∀xshape(x,circle)∧color(x,green)→∃yshape(y,' +
     'square)∧value(y)<5∧adjacency(y,below,x)';
+const extraParentheses = '∀x((shape(x,circle)∧color(x,green))→∃y(shape(y,' +
+    'square)∧value(y)<5∧adjacency(y,below,x)))';
+const withSpaces = '∀x shape(x, circle) ∧ color(x, green) → ∃y shape(y, ' +
+    'square) ∧ value(y) < 5 ∧ adjacency(y, below, x)';
 
 const checkForAllImpliesExists = 'The statement must begin with ∀x, ' +
     'independent and dependent predicates separated by → , and dependent ' +
@@ -83,6 +85,12 @@ describe('Feedback on a correct input', () => {
     it('Success message with extra parentheses', async() => {
         const textarea = screen.getByTestId('statement-text');
         textarea.textContent = extraParentheses;
+        const feedback = await checkFeedback();
+        expect(feedback.textContent).toContain('Success!');
+    });
+    it('Success message with spaces', async() => {
+        const textarea = screen.getByTestId('statement-text');
+        textarea.textContent = withSpaces;
         const feedback = await checkFeedback();
         expect(feedback.textContent).toContain('Success!');
     });

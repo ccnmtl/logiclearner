@@ -50,21 +50,20 @@ export const StatementInput: React.FC<StatementProps> = ({
      */
     const pullData = (text:string):object => {
         const rules = {};
-        const miniText = text.replace(/\s/g, '').toLowerCase();
-        const predicates = miniText.match(/\w+\(\w+[,\w]+\)/g);
+        const predicates = text.match(/\w+\(\w+[,\w]+\)/g);
         if (predicates) {
             predicates.forEach((keyValue) => {
-                const key = keyValue.match(/[^xy]\w+(?=\(\w+[^\)])/);
-                const value = keyValue.match(/(?<=\(.*?)\w+|\d/g);
+                const key = keyValue.match(/[^xy\W]\w+(?=\(\w)/);
+                const value = keyValue.match(/[\w\d]+?(?=[\),])/g);
                 if (key != null && value != null) {
                     rules[key[0]] = value;
                 }
             });
         }
-        const compKey = miniText.match(/(?<=value\(\w\))[<>≤≥]/);
+        const compKey = text.match(/[<>≤≥](?=\-?\d)/);
         if (compKey) {
-            const compVar = miniText.match(/(?<=value\()\w(?=\))/);
-            rules[compKey[0]] = compVar.concat(text.match(/(?<=\<|\>|\≤)\d/));
+            const compVar = text.match(/\w(?=\)[<>≤≥])/);
+            rules[compKey[0]] = compVar.concat(text.match(/-?\d(?=[$∧])/));
         }
         return rules;
     };
@@ -175,10 +174,11 @@ export const StatementInput: React.FC<StatementProps> = ({
 
     const handleCheck = () => {
         setSubmitted(true);
-        const el =
-            document.getElementById('statement-text') as HTMLInputElement;
-        const check = parseStatement(el.value);
-        if (el.value.match(regex[difficulty])) {
+        const value = (
+            document.getElementById('statement-text') as HTMLInputElement)
+            .value.replace(/\s/g, '').toLowerCase();
+        const check = parseStatement(value);
+        if (value.match(regex[difficulty])) {
             setIsCorrect(evaluate(check));
         } else {
             setFeedback(['The statement must begin with ∀x, independent and ' +
@@ -204,7 +204,8 @@ export const StatementInput: React.FC<StatementProps> = ({
     }, [difficulty]);
 
     useEffect(() => {
-        setEvalObj(parseStatement(correctStatement.formalFOLStatement));
+        setEvalObj(parseStatement(correctStatement.formalFOLStatement
+            .replace(/\s/g, '').toLowerCase()));
     }, [correctStatement]);
 
     useEffect(() => {
