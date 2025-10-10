@@ -98,6 +98,7 @@
             </a>
 
             <ul class="nav col-auto top-bar__nav">
+                {% if not request.path|slice:":4" == "/fol" and not request.path|slice:":7" == "/design" %}
                 <li>
                   <a href="/tutorial/" class="nav-link">
                     <img class="gn-i d-block mx-auto mb-1 outline-icon" alt="" src="{{STATIC_URL}}img/icon-tutorial.svg">
@@ -110,6 +111,7 @@
                     Levels
                   </a>
                 </li>
+                {% endif %}
             </ul>
         </div>
     </div>
