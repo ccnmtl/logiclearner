@@ -1,1 +1,0 @@
-import logiclearner.FOLdesign.views  # noqa

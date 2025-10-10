@@ -1,0 +1,22 @@
+{% extends '../main/index.html' %}
+
+{% block title %}Logic Learner - First Order Logic{% endblock %}
+
+{% block topnavbar %}
+<header>
+    <div class="skippy">
+        <div class="container p-0">
+            <a class=" d-inline-block p-2 m-1" href="#maincontent">Skip to main content</a>
+        </div>
+    </div>
+    <div class="navbar top-bar">
+        <div class="container top-bar__container">
+            <a href="/" class="navbar-brand d-flex align-items-center">
+                <img class="gn-i me-3 outline-icon" alt="" src="{{STATIC_URL}}img/logo-logiclearner-bw.svg">
+                <img class="gn-i me-3 color-icon" alt="" src="{{STATIC_URL}}img/logo-logiclearner.svg">
+                <span class="visually-hidden">Go to main page for</span><span>Logic Learner</span>
+            </a>
+        </div>
+    </div>
+</header>
+{% endblock %}
