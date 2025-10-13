@@ -5,6 +5,93 @@
 {% block pagetype %}--selctinput{% endblock %}
 
 {% block content %}
-<p>This is the FOL Multiple Choice template</p>
+<main class="main-app">
+    <!-- Header banner for FOL Matching game-->
+    <header class="main-banner exercise-space-banner sticky-top">
+        <div class="container d-flex justify-content-start">
+            <a href="#"
+                class="main-banner__nav
+                    d-flex justify-content-start">
+                <div class="main-banner__prompt">
+                    &lsaquo;
+                </div>
+                <figure
+                    class="main-banner__avatar align-self-center">
+                    <img alt="Go to Questions list for this level"
+                    src="{% static 'img/avatar-fol-temp.png' %}" />
+                </figure>
+                <h1 class="align-self-center">
+                    <span class="main-banner__subhead">
+                        <span class='visually-hidden'>
+                            Go to First Order Logic </span>
+                    </span>
+                    <span class="main-banner__title">FOL: Matching Game</span>
+                </h1>
+            </a>
+        </div>
+    </header>
+    <!-- Section for FOL Matching game content-->
+    <section class="container content-body exercise-space"
+        id="maincontent">
+        <div class="row">
+            <div class="col-xl-6 col-md-7">
+                <div class="container">
+                    <!-- Below is the placeholder for the grid -->
+                     <!-- Replace the content below with actual grid -->
+                    <div class="grid-container">
+                        <div class="grid-item">m</div>
+                        <div class="grid-item">m</div>
+                        <div class="grid-item">m</div>
+                        <div class="grid-item">m</div>
+                        <div class="grid-item">m</div>
+
+                        <div class="grid-item"></div>
+                        <div class="grid-item"></div>
+                        <div class="grid-item"></div>
+                        <div class="grid-item"></div>
+                        <div class="grid-item"></div>
+
+                        <div class="grid-item"></div>
+                        <div class="grid-item"></div>
+                        <div class="grid-item"></div>
+                        <div class="grid-item"></div>
+                        <div class="grid-item"></div>
+
+                        <div class="grid-item"></div>
+                        <div class="grid-item"></div>
+                        <div class="grid-item"></div>
+                        <div class="grid-item"></div>
+                        <div class="grid-item"></div>
+
+                        <div class="grid-item"></div>
+                        <div class="grid-item"></div>
+                        <div class="grid-item"></div>
+                        <div class="grid-item"></div>
+                        <div class="grid-item"></div>
+                    </div>
+                    <!-- Above is the placeholder for the grid -->
+                    <!-- Replace the content above with actual grid -->
+                </div>
+            </div>
+            <div class="col-xl-6 col-md-5
+                border-start border-top border-info-subtle
+                solution-step">
+                <p class="solution-step__prompt">Select the best matching statement</p>
+                <div class="viewport-test py-1-5 bg-info-subtle">
+                    <ul>
+                        <li class="d-none d-xxl-block pe-3">Giant monitor xxl</li>
+                        <li class="d-none d-xl-block d-xxl-none pe-3">Big monitor xl</li>
+                        <li class="d-none d-lg-block d-xl-none pe-3">Tablet L lg</li>
+                        <li class="d-none d-md-block d-lg-none pe-3">Tablet P md</li>
+                        <li class="d-none d-sm-block d-md-none pe-3">Smartphone sm</li>
+                        <li class="d-block d-sm-none pe-3">Tiny phone xs</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+    </section>
+</main>
+
 {% endblock %}
 {% block footer%}{% endblock %}
