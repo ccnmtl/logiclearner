@@ -54,12 +54,23 @@
 }
 
 .btn-matching {
-    border: none;
-    border-radius: 0.3rem;
     padding: 0.5rem 1rem;
-    font-size: 1rem;
-    background-color: $white;
     margin-bottom: 1rem;
+    width: 100%;
+    display: block;
+    border: 0.125rem solid #81d4fa;
+    border-radius: 0.3rem;
+    font-size: 1rem;
+    background-color: #e1f5fe;
+    color: $gray-900;
+    text-align: left;
+    line-height: 1.575;
+    &:hover {
+        background-color: #B3E5FC;
+        border: 0.125rem solid #4FC3F7;
+        color: $gray-900;
+        text-decoration: none;
+    }
 }
 
 .btn-shrink {
