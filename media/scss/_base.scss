@@ -35,3 +35,12 @@ main,
         width: 67.5rem;
     }
 }
+
+.grid-container {
+    padding: 0 3rem;
+    margin: 0 auto;
+    @include media-breakpoint-up(md) {
+        padding: 0 1.5rem;
+    }
+
+}
