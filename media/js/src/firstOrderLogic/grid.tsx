@@ -1,5 +1,5 @@
 import React from 'react';
-import { GridItem } from './utils';
+import { GridItem, getColorName } from './utils';
 
 interface GridProps {
     grid: GridItem[],
@@ -45,13 +45,25 @@ export const Grid: React.FC<GridProps> = ({grid, size}:GridProps) => {
 
     return <section id='grid'
         className='col-6 d-flex justify-content-center w-100'>
-        <svg viewBox='0 0 120 120' width='100%'>
+        <svg viewBox='0 0 150 160' width='100%'>
             {chunks(grid, size).map((row, i) =>
                 row.map((item, j) =>
-                    <svg x={24*j} y={24*i} width={24} height={24} key={i*10+j}
-                        viewBox='0 0 120 120'>
-                        {createShape(item.shape, item.color)}
-                        {placeText(item.number)}
+                    <svg x={30*j} y={32*i} width={30} height={32} key={i*10+j}
+                        viewBox='0 0 100 120'>
+                        <rect x={4} y={4} width={104} height={112}
+                            fill='#eceff1'>
+                        </rect>
+                        <svg x={14} y={-10} width={80} height={120}
+                            viewBox='0 0 120 120' >
+                            {createShape(item.shape, item.color)}
+                            {placeText(item.number)}
+                        </svg>
+                        <text x={52} y='100' dominantBaseline='middle'
+                            textAnchor='middle' fill={item.color}
+                            fontSize='1.2rem' fontWeight={600}
+                            className='grid-color-label'
+                        >
+                            {getColorName(item.color).toLowerCase()}</text>
                     </svg>
                 )
             )}
