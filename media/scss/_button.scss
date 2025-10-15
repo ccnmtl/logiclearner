@@ -53,15 +53,16 @@
     border-radius: 0.3rem;
 }
 
-.btn-matching {
+.btn-grid-selection {
     padding: 0.5rem 1rem;
     margin-bottom: 1rem;
     width: 100%;
     display: block;
+    background-color: #e1f5fe;
     border: 0.125rem solid #81d4fa;
     border-radius: 0.3rem;
     font-size: 1rem;
-    background-color: #e1f5fe;
+    font-weight: 500;
     color: $gray-900;
     text-align: left;
     line-height: 1.575;
@@ -70,6 +71,56 @@
         border: 0.125rem solid #4FC3F7;
         color: $gray-900;
         text-decoration: none;
+    }
+}
+
+.selection-correct {
+    background-color: $green-100;
+    border: 0.125rem solid $green;
+    &:hover {
+        background-color: $green-100;
+        border: 0.125rem solid $green;
+    }
+    & .selection-feedback-icon {
+        margin-right: 1rem;
+        display: inline-block;
+        width: 2rem;
+        height: 2rem;
+        background-color: $gray-100;
+        border: 0.125rem solid $green-300;
+        border-radius: 50%;
+        color: $green;
+        font-family: "Gentium Plus", serif;
+        font-weight: 700;
+        line-height: 2rem;
+        font-size: 2rem;
+        text-align: center;
+        align-self: center;
+    }
+}
+
+.selection-incorrect {
+    background-color: $red-100;
+    border: 0.125rem solid $red;
+    &:hover {
+        background-color: $red-100;
+        border: 0.125rem solid $red;
+    }
+    & .selection-feedback-icon {
+        margin-right: 1rem;
+        display: inline-block;
+        width: 2rem;
+        height: 2rem;
+        background-color: $gray-100;
+        border: 0.125rem solid $red-300;
+        border-radius: 50%;
+        color: $red;
+        font-family: "Gentium Plus", serif;
+        font-weight: 700;
+        line-height: 2rem;
+        font-size: 2rem;
+        text-align: center;
+        align-self: center;
     }
 }
 
