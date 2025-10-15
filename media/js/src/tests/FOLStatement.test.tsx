@@ -152,6 +152,14 @@ describe('Predicate Checks', () => {
             expect(feedback.textContent).toContain(
                 'Missing < from the right side of the statement');
         });
+        it('No Predicates', async() => {
+            screen.getByTestId('statement-text').textContent = '∀x→∃y';
+            const feedback = await checkFeedback();
+            expect(feedback.textContent).toContain(
+                'Missing shape from the left side of the statement');
+            expect(feedback.textContent).toContain(
+                'Missing < from the right side of the statement');
+        });
     });
     describe('Wrong Variable', () => {
         it('Check for x with y', async() => {

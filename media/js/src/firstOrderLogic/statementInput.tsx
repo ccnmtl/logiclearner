@@ -214,10 +214,6 @@ export const StatementInput: React.FC<StatementProps> = ({
     }, [difficulty]);
 
     useEffect(() => {
-        setEvalObj(parseStatement(correctStatement.formalFOLStatement));
-    }, [correctStatement]);
-
-    useEffect(() => {
         setSubmitted(false);
     }, []);
 
