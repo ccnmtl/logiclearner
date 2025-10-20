@@ -61,7 +61,7 @@
     background-color: #e1f5fe;
     border: 0.125rem solid #81d4fa;
     border-radius: 0.3rem;
-    font-size: 1rem;
+    font-size: 0.875rem;
     font-weight: 500;
     color: $gray-900;
     text-align: left;
@@ -71,6 +71,9 @@
         border: 0.125rem solid #4FC3F7;
         color: $gray-900;
         text-decoration: none;
+    }
+    @include media-breakpoint-up(lg) {
+        font-size: 1rem;
     }
 }
 

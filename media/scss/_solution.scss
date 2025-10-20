@@ -26,6 +26,12 @@
     }
 }
 
+.grid-step__prompt {
+    font-size: 1.125rem;
+    @include media-breakpoint-up(lg) {
+        font-size: 1.25rem;
+    }
+}
 
 .solution-actions {
     padding-top: 2.5rem;
