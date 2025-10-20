@@ -85,8 +85,14 @@
                         </div>
                     </button>
 
-                    <button class="btn-grid-selection d-flex">
+                    <button class="btn-grid-selection d-flex selection-correct">
+                        <div class="selection-feedback">
+                            <div class="selection-feedback-icon">
+                                &check;
+                            </div>
+                        </div>
                         <div class="selection-text flex-grow-1">
+                            <div class="selection-answer pb-2">For every red circle, there is a triangle to its right that has a value greater than 4.</div>
                             <div class="selection-label">∀x ((Shape(x, circle) ∧ Color(x, Red)) → ∃y (Shape(y, triangle) ∧ Value(y) > 4 ∧ Adjacency(y, RightOf, x)))</div>
                         </div>
                     </button>

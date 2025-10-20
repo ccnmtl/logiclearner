@@ -23,6 +23,20 @@ class FOLSelect(View):
         return render(request, self.template_name)
 
 
+class FOLSelectWrong(View):
+    template_name = 'FOLdesign/selectinputwrong.html'
+
+    def get(self, request, *args, **kwargs):
+        return render(request, self.template_name)
+
+
+class FOLSelectCorrect(View):
+    template_name = 'FOLdesign/selectinputcorrect.html'
+
+    def get(self, request, *args, **kwargs):
+        return render(request, self.template_name)
+
+
 class FOLText(View):
     template_name = 'FOLdesign/textinput.html'
 

@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block title %}Design - FOL Multiple Choice Default{% endblock %}
+{% block title %}Design - FOL Multiple Choice Wrong Selection{% endblock %}
 {% block pagetype %}--selctinput{% endblock %}
 
 {% block content %}
@@ -79,8 +79,14 @@
                 <section id="solution">
                     <p class="solution-step__prompt py-md-0">Select the best matching statement</p>
 
-                    <button class="btn-grid-selection d-flex">
+                    <button class="btn-grid-selection d-flex selection-incorrect">
+                        <div class="selection-feedback">
+                            <div class="selection-feedback-icon">
+                                !
+                            </div>
+                        </div>
                         <div class="selection-text flex-grow-1">
+                            <div class="selection-answer pb-2">Every green square has at least one triangle with value of at least 2 located above it.</div>
                             <div class="selection-label">∀x ((Shape(x, square) ∧ Color(x, Green)) → ∃y (Shape(y, triangle) ∧ Value(y) ≥ 2 ∧ Adjacency(y, Above, x)))</div>
                         </div>
                     </button>
