@@ -7,6 +7,7 @@ import { Options } from './options';
 import { StatementInput } from './statementInput';
 import { Progress } from './progress';
 import { useLocation } from 'react-router-dom';
+import { FolBanner } from './folBanner';
 
 export const STATIC_URL = LogicLearner.staticUrl;
 
@@ -227,28 +228,37 @@ export const FirstOrderLogic: React.FC = () => {
         setIsCorrect(false);
     }, [mode]);
 
-    return <section id='grid-game'
-        className='container d-flex justify-content-center'
-    >
-        <div className="row w-100">
-            <div className='col-8'>
-                <Grid grid={grid} size={size}/>
-                <ul className='row'>
-                    {settings.map((setting, i) =>
-                        <li key={i} className='list-group-item col-4 px-2'>
-                            {setting}
-                        </li>)}
-                </ul>
-                {mode === 0 &&
-                    <Progress difficulty={difficulty} score={score} />}
-            </div>
-            {mode === 0 && <Options options={options}
-                correctIndex={correctIndex} isCorrect={isCorrect}
-                setIsCorrect={setIsCorrect} selected={selected}
-                setSelected={setSelected} handleAttempt={handleAttempt}/>}
-            {mode === 1 && <StatementInput correctStatement={correctStatement}
-                difficulty={difficulty} setIsCorrect={setIsCorrect} text={text}
-                setText={setText} />}
-        </div>
-    </section>;
+    return (
+        <>
+            <FolBanner />
+            <section id='grid-game'
+                className='container d-flex justify-content-center'>
+                <div className="row w-100">
+                    <div className='col-8'>
+                        <Grid grid={grid} size={size}/>
+                        <ul className='row'>
+                            {settings.map((setting, i) =>
+                                <li key={i}
+                                    className='list-group-item col-4 px-2'>
+                                    {setting}
+                                </li>)}
+                        </ul>
+                        {mode === 0 &&
+                            <Progress difficulty={difficulty} score={score} />}
+                    </div>
+                    {mode === 0 &&
+                    <Options options={options}
+                        correctIndex={correctIndex} isCorrect={isCorrect}
+                        setIsCorrect={setIsCorrect} selected={selected}
+                        setSelected={setSelected}
+                        handleAttempt={handleAttempt}/>}
+                    {mode === 1 &&
+                    <StatementInput correctStatement={correctStatement}
+                        setIsCorrect={setIsCorrect} text={text}
+                        difficulty={difficulty}
+                        setText={setText} />}
+                </div>
+            </section>
+        </>
+    );
 };
