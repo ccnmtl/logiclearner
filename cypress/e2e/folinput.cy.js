@@ -5,7 +5,7 @@ describe('First-Order Logic', () => {
     });
 
     it('renders the Grid component', () => {
-        cy.get('#grid-game').should('exist');
+        cy.get('#grid').should('exist');
     });
 
     describe('Statement Inputs', () => {

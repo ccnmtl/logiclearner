@@ -224,10 +224,10 @@ export const FirstOrderLogic: React.FC<FirstOrderLogicProps> = ({mode}) => {
     return (
         <>
             <FolBanner />
-            <section id='grid-game'
-                className='container d-flex justify-content-center'>
-                <div className="row w-100">
-                    <div className='col-8'>
+            <section className="container content-body exercise-space"
+                id="maincontent">
+                <div className="row">
+                    <div className="col-md-6">
                         <Grid grid={grid} size={size}/>
                         <ul className='row'>
                             {settings.map((setting, i) =>

@@ -17,9 +17,9 @@ export const Options: React.FC<OptionProps> = ({
 }:OptionProps) => {
     const showResult = (i:number) => {
         if (selected != null && selected === i)
-            if (isCorrect) return 'success';
-            else return 'danger';
-        else return 'outline-primary';
+            if (isCorrect) return 'selection-correct';
+            else return 'selection-incorrect';
+        else return '';
     };
 
     useEffect(() => {
@@ -30,19 +30,27 @@ export const Options: React.FC<OptionProps> = ({
         }
     }, [selected]);
 
-    return <section className='col-4'>
-        <div className="row">
+    return <div className="col-md-6 py-md-0 solution-step">
+        <section id="solution">
+            <p className="solution-step__prompt py-md-0">
+                Select the best matching statement</p>
             {options.map((option, i) =>
-                <div className='my-1' key={i}>
-                    <button className={`btn btn-large w-100 my-1
-                        btn-${showResult(i)}`} onClick={() => setSelected(i)}
-                    >
-                        {selected === i &&
-                            <p>{option.naturalLanguageStatement}</p>}
-                        <strong>{option.formalFOLStatement}</strong>
-                    </button>
-                </div>
+                <button key={i} onClick={() => setSelected(i)} className={
+                    `btn-grid-selection d-flex ${showResult(i)}`}
+                >
+                    {selected === i &&
+                        <div className="selection-feedback">
+                            <div className="selection-feedback-icon">
+                                {isCorrect ? '✓' : '!'}
+                            </div>
+                        </div>}
+                    <div className="selection-text flex-grow-1">
+                        <div className="selection-label">
+                            {option.formalFOLStatement}
+                        </div>
+                    </div>
+                </button>
             )}
-        </div>
-    </section>;
+        </section>
+    </div>;
 };
