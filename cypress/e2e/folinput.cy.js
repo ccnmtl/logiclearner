@@ -1,11 +1,7 @@
 describe('First-Order Logic', () => {
     beforeEach(() => {
-        cy.visit('http://localhost:8000/fol');
+        cy.visit('http://localhost:8000/fol/express/');
         cy.get('#cu-privacy-notice-button').click();
-    });
-
-    it('renders the FOL component', () => {
-        cy.get('#grid-game').should('exist');
     });
 
     it('renders the Grid component', () => {
@@ -13,10 +9,6 @@ describe('First-Order Logic', () => {
     });
 
     describe('Statement Inputs', () => {
-        beforeEach(() => {
-            cy.get('select#mode').select(1);
-        });
-
         it('renders the component', () => {
             cy.get('[data-testid=statement-input]').should('exist');
         });

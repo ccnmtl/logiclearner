@@ -6,6 +6,7 @@ import { ExerciseSpace } from './exerciseSpace';
 import { NotFound } from './notFound';
 import ReactGA from 'react-ga4';
 import { FirstOrderLogic } from './firstOrderLogic/firstOrderLogic';
+import { FolDashboard } from './firstOrderLogic/folDashboard';
 import '../rudderstack/rudderstack';
 
 export const App: React.FC = () => {
@@ -47,8 +48,15 @@ export const App: React.FC = () => {
                     element={<ExerciseSpace />} />
 
                 <Route path="/fol/"
-                    element={<FirstOrderLogic />} />
+                    element={<FolDashboard />} />
 
+                <Route path="/fol/match/"
+                    element={<FirstOrderLogic
+                        mode={0} />} />
+
+                <Route path="/fol/express/"
+                    element={<FirstOrderLogic
+                        mode={1} />} />
             </Routes>
         </Router>
     );

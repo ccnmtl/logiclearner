@@ -1,13 +1,28 @@
 import React from 'react';
+import { useLocation } from 'react-router-dom';
 
 export const STATIC_URL = LogicLearner.staticUrl;
 
 export const FolBanner: React.FC = () => {
+    const location = useLocation();
+
+    let bannerTitle;
+    let url;
+    if (location.pathname === '/fol/') {
+        bannerTitle = 'First Order Logic';
+        url = '/';
+    } else if (location.pathname === '/fol/match/') {
+        bannerTitle = 'FOL: Matching Game';
+        url = '/fol/';
+    } else if (location.pathname === '/fol/express/') {
+        bannerTitle = 'FOL: Expression Game';
+        url = '/fol/';
+    }
 
     return (<>
         <header className="main-banner exercise-space-banner sticky-top">
             <div className="container d-flex justify-content-start">
-                <a href="#"
+                <a href={url}
                     className="main-banner__nav
                     d-flex justify-content-start">
                     <div className="main-banner__prompt">
@@ -24,7 +39,7 @@ export const FolBanner: React.FC = () => {
                                 Go to First Order Logic </span>
                         </span>
                         <span className="main-banner__title">
-                            FOL: Matching Game
+                            {bannerTitle}
                         </span>
                     </h1>
                 </a>
