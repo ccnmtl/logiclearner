@@ -11,7 +11,11 @@ import { FolBanner } from './folBanner';
 
 export const STATIC_URL = LogicLearner.staticUrl;
 
-export const FirstOrderLogic: React.FC = () => {
+interface FirstOrderLogicProps {
+    mode: number;
+}
+
+export const FirstOrderLogic: React.FC<FirstOrderLogicProps> = ({mode}) => {
     const [correctStatement, setCorrectStatement] =
         useState<GridStatement|null>();
     const [correctIndex, setCorrectIndex] = useState<number|null>();
@@ -25,7 +29,6 @@ export const FirstOrderLogic: React.FC = () => {
     const [text, setText] = useState<string>('');
     const [isCorrect, setIsCorrect] = useState<boolean>(false);
     const [selected, setSelected] = useState<number|null>();
-    const [mode, setMode] = useState<number>(0);
     const [isDone, setIsDone] = useState<boolean>(false);
     const [attempt, setAttempt] = useState<number>(4);
 
@@ -41,11 +44,6 @@ export const FirstOrderLogic: React.FC = () => {
         ['easy', 'Easy'],
         ['medium', 'Medium'],
         ['hard', 'Hard']
-    ];
-
-    const inputOptions = [  // [value, innerText]
-        [0, 'Multiple Choice'],
-        [1, 'Text Input']
     ];
 
     function generateIncorrectStatements(templateBank, correctTemplate) {
@@ -88,10 +86,6 @@ export const FirstOrderLogic: React.FC = () => {
         setDifficulty(e.target.value);
     };
 
-    const handleMode = (e) => {
-        setMode(Number(e.target.value));
-    };
-
     const handleAttempt = (result:boolean) => {
         if (!isDone) {
             if (result) {
@@ -130,7 +124,6 @@ export const FirstOrderLogic: React.FC = () => {
 
     const settings = [
         mkSelect(diffOptions, handleDifficulty, 'difficulty'),
-        mkSelect(inputOptions, handleMode, 'mode'),
         <button className='btn btn-primary mt-2' onClick={handleNewGrid}>
             Next Grid
         </button>
@@ -252,7 +245,7 @@ export const FirstOrderLogic: React.FC = () => {
                         setIsCorrect={setIsCorrect} selected={selected}
                         setSelected={setSelected}
                         handleAttempt={handleAttempt}/>}
-                    {mode === 1 &&
+                    {mode === 1 && correctStatement &&
                     <StatementInput correctStatement={correctStatement}
                         setIsCorrect={setIsCorrect} text={text}
                         difficulty={difficulty}
