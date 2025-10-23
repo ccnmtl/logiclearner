@@ -33,17 +33,68 @@
     <!-- Section for FOL Matching game content-->
     <section class="container content-body exercise-space"
         id="maincontent">
+
+        <div class="grid-level-progress">
+            <div class="grid-level-label me-2 pt-2">
+                Level:
+            </div>
+            <div class="me-3">
+                <select class="form-select">
+                    <option value="easy">Easy</option>
+                    <option value="medium">Medium</option>
+                    <option value="hard">Hard</option>
+                </select>
+            </div>
+            <div class="progress-state d-flex">
+                <div class="progress-state__4">
+                    <img alt="Go to Questions list for this level"
+                    src="{% static 'img/icon-clover-4.svg' %}" />
+                    1
+                </div>
+                <div class="progress-state__3">
+                    <img alt="Go to Questions list for this level"
+                    src="{% static 'img/icon-clover-3.svg' %}" />
+                    3
+                </div>
+                <div class="progress-state__2">
+                    <img alt="Go to Questions list for this level"
+                    src="{% static 'img/icon-clover-2.svg' %}" />
+                    30
+                </div>
+                <div class="progress-state__1">
+                    <img alt="Go to Questions list for this level"
+                    src="{% static 'img/icon-clover-1.svg' %}" />
+                    5
+                </div>
+                <div class="progress-state__0">
+                    <img alt="Go to Questions list for this level"
+                    src="{% static 'img/icon-clover-0.svg' %}" />
+                    50
+                </div>
+            </div>
+        </div>
+
+        <!-- <div class="row mb-4 border border-primary">
+            <div class="col-5 col-md-2 d-flex ">
+                <div class="me-1 align-self-center">Level:</div>
+            </div>
+
+            <div class="col-7 col-md-4 progress-state d-flex">
+            </div>
+        </div> -->
+
         <div class="row">
-            <div class="col-md-6">
+            <div class="col-12 col-md-6">
                 <section id="grid" class="container grid-container"><!-- Replace the <section> tag in the grid with this new one -->
                     <!-- Below is the placeholder for the grid -->
                      <!-- Replace the content below with actual grid <svg> content -->
                         {% include "FOLdesign/gridsvg.html" %}
                     <!-- Above is the placeholder for the grid -->
                     <!-- Replace the content above with actual grid -->
+                     <button class="btn btn-primary mt-2">Next Grid</button>
                 </section>
             </div>
-            <div class="col-md-6 py-md-0
+            <div class="col-12 col-md-6 py-md-0
                 solution-step">
                 <section id="solution">
                     <p class="solution-step__prompt grid-step__prompt py-md-0">Select the best matching statement</p>
@@ -76,16 +127,6 @@
             </div>
         </div>
     </section>
-                    <div class="viewport-test py-1-5 bg-info-subtle mt-5 w-25">
-                        <ul>
-                            <li class="d-none d-xxl-block pe-3">Giant monitor xxl</li>
-                            <li class="d-none d-xl-block d-xxl-none pe-3">Big monitor xl</li>
-                            <li class="d-none d-lg-block d-xl-none pe-3">Tablet L lg</li>
-                            <li class="d-none d-md-block d-lg-none pe-3">Tablet P md</li>
-                            <li class="d-none d-sm-block d-md-none pe-3">Smartphone sm</li>
-                            <li class="d-block d-sm-none pe-3">Tiny phone xs</li>
-                        </ul>
-                    </div>
 
 </main>
 
