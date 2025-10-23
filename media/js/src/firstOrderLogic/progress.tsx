@@ -15,6 +15,8 @@ export const Progress: React.FC<ProgressProps> = ({
      * want to be more explicit with your expression of the progress shapes.
      * @returns An array of SVG text elements corresponding to the different
      * progress states
+     *
+     * UPDATE: 5 states 4-1 is score on correct answer, 0 is a skip
      */
     // const mkArr = (
     //     length: number, sign: 1 | -1
