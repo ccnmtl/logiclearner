@@ -45,6 +45,10 @@ export const Options: React.FC<OptionProps> = ({
                             </div>
                         </div>}
                     <div className="selection-text flex-grow-1">
+                        {selected === i &&
+                            <div className="selection-answer pb-2">
+                                {option.naturalLanguageStatement}
+                            </div>}
                         <div className="selection-label">
                             {option.formalFOLStatement}
                         </div>
