@@ -48,19 +48,20 @@ export const Grid: React.FC<GridProps> = (
 
     return <section id="grid" className="container grid-container">
         <svg viewBox='0 0 150 160' width='100%'>
+            <rect x={3} y={1} fill='#eceff1'  width={150} height={158}/>
             {chunks(grid, size).map((row, i) =>
                 row.map((item, j) =>
                     <svg x={30*j} y={32*i} width={30} height={32} key={i*10+j}
                         viewBox='0 0 100 120'>
                         <rect x={4} y={4} width={104} height={112}
-                            fill='#eceff1'>
+                            fill='#ffffff'>
                         </rect>
-                        <svg x={14} y={-10} width={80} height={120}
+                        <svg x={15} y={-10} width={80} height={120}
                             viewBox='0 0 120 120' >
                             {createShape(item.shape, item.color)}
                             {placeText(item.number)}
                         </svg>
-                        <text x={52} y='100' dominantBaseline='middle'
+                        <text x={55} y='100' dominantBaseline='middle'
                             textAnchor='middle' fill={item.color}
                             fontSize='1.2rem' fontWeight={600}
                             className='grid-color-label'
