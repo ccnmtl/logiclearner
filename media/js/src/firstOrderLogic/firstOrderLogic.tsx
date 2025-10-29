@@ -111,7 +111,7 @@ export const FirstOrderLogic: React.FC<FirstOrderLogicProps> = ({mode}) => {
         while (newArr === correctTemplate) {
             newArr = getRandomElement(templateBank);
         }
-        if (attempt < 4) {
+        if (!isDone && attempt < 4) {
             setScore({...score,
                 [difficulty]: score[difficulty].map((val, i) =>
                     i === 4 ? val + 1 : val)});
