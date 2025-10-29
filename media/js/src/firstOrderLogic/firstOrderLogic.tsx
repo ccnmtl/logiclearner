@@ -8,6 +8,7 @@ import { StatementInput } from './statementInput';
 import { Progress } from './progress';
 import { useLocation } from 'react-router-dom';
 import { FolBanner } from './folBanner';
+import { rudderAnalytics } from '../../rudderstack/rudderstack';
 
 export const STATIC_URL = LogicLearner.staticUrl;
 
@@ -32,8 +33,13 @@ export const FirstOrderLogic: React.FC<FirstOrderLogicProps> = ({mode}) => {
     const [isDone, setIsDone] = useState<boolean>(false);
     const [attempt, setAttempt] = useState<number>(4);
 
-    const scoreDefault = {easy: [], medium: [], hard: []};
-    const [score, setScore] = useState<Score>(scoreDefault);
+    const baseTally = [0, 0, 0, 0, 0];
+    const baseScore = {
+        easy: baseTally,
+        medium: baseTally,
+        hard: baseTally
+    };
+    const [score, setScore] = useState<Score>(baseScore);
 
     const [correctTemplate, setCorrectTemplate] =
         useState<GridTemplate>(getRandomElement(templateBank));
@@ -92,8 +98,8 @@ export const FirstOrderLogic: React.FC<FirstOrderLogicProps> = ({mode}) => {
                 setIsDone(true);
                 setScore({
                     ...score,
-                    [difficulty]: [...(score[difficulty]), attempt]
-                });
+                    [difficulty]: score[difficulty].map((val, i) =>
+                        attempt === 4-i ? val + 1 : val)});
             } else {
                 setAttempt(Math.max(attempt - 1, 1));
             }
@@ -105,9 +111,10 @@ export const FirstOrderLogic: React.FC<FirstOrderLogicProps> = ({mode}) => {
         while (newArr === correctTemplate) {
             newArr = getRandomElement(templateBank);
         }
-        if (!isDone) {
+        if (attempt < 4) {
             setScore({...score,
-                [difficulty]: [...(score[difficulty]), -attempt]});
+                [difficulty]: score[difficulty].map((val, i) =>
+                    i === 4 ? val + 1 : val)});
         }
         setCorrectTemplate(newArr);
         setSelected(null);
@@ -115,19 +122,6 @@ export const FirstOrderLogic: React.FC<FirstOrderLogicProps> = ({mode}) => {
         setAttempt(4);
         setIsDone(false);
     };
-
-    const mkSelect = (options, action, id='') =>
-        <select className='form-select mt-2' id={id} onChange={action}>
-            {options.map((option, i) =>
-                <option key={i} value={option[0]}>{option[1]}</option>)}
-        </select>;
-
-    const settings = [
-        mkSelect(diffOptions, handleDifficulty, 'difficulty'),
-        <button className='btn btn-primary mt-2' onClick={handleNewGrid}>
-            Next Grid
-        </button>
-    ];
 
     useEffect(() => {
         setTemplateBank(getTemplatesByDifficulty(difficulty));
@@ -188,28 +182,29 @@ export const FirstOrderLogic: React.FC<FirstOrderLogicProps> = ({mode}) => {
     }, [correctStatement]);
 
     useEffect(() => {
-        if (score != scoreDefault) {
+        if (score != baseScore) {
             localStorage.setItem('fol', JSON.stringify({score, attempt}));
         }
     }, [score, attempt]);
 
-    // useEffect(() => {
-    //     // RudderStack page call
-    //     rudderAnalytics.page({userId: 0, name: location});
-    //     setSelected(null);
-    //     const store = JSON.parse(localStorage.getItem('fol'));
-    //     if (store) {
-    //         setAttempt(store.attempt ?? 4);
-    //         setScore(store.score ?? scoreDefault);
-    //     }
-    // }, []);
+    useEffect(() => {
+        // RudderStack page call
+        rudderAnalytics.page({userId: 0, name: location});
+        setSelected(null);
+        const store = JSON.parse(localStorage.getItem('fol'));
+        if (store) {
+            setAttempt(store.attempt ?? 4);
+            setScore(store.score ?? baseScore);
+        }
+    }, []);
 
     useEffect(() => {
         if (
             window.rudderanalytics &&
             typeof window.rudderanalytics.page === 'function'
         ) {
-            console.log('Sending page view to RudderStack:', location.pathname);
+            console.log('Sending page view to RudderStack:',
+                location.pathname);
             window.rudderanalytics.page({
                 path: location.pathname,
                 name: 'FirstOrderLogic',
@@ -226,18 +221,26 @@ export const FirstOrderLogic: React.FC<FirstOrderLogicProps> = ({mode}) => {
             <FolBanner />
             <section className="container content-body exercise-space"
                 id="maincontent">
+                <div className="grid-level-progress">
+                    <div className="grid-level-label me-2 pt-2">
+                        Level:
+                    </div>
+                    <div className="me-3">
+                        <select className='form-select'
+                            onChange={handleDifficulty}>
+                            {diffOptions.map((option, i) =>
+                                <option key={i} value={option[0]}>
+                                    {option[1]}
+                                </option>)}
+                        </select>
+                    </div>
+                    {mode === 0 &&
+                        <Progress difficulty={difficulty} score={score} />}
+                </div>
                 <div className="row">
-                    <div className="col-md-6">
-                        <Grid grid={grid} size={size}/>
-                        <ul className='row'>
-                            {settings.map((setting, i) =>
-                                <li key={i}
-                                    className='list-group-item col-4 px-2'>
-                                    {setting}
-                                </li>)}
-                        </ul>
-                        {mode === 0 &&
-                            <Progress difficulty={difficulty} score={score} />}
+                    <div className="col-12 col-md-6">
+                        <Grid grid={grid} size={size}
+                            handleNewGrid={handleNewGrid}/>
                     </div>
                     {mode === 0 &&
                     <Options options={options}
