@@ -3,10 +3,13 @@ import { GridItem, getColorName } from './utils';
 
 interface GridProps {
     grid: GridItem[],
-    size: number
+    size: number,
+    handleNewGrid: () => void
 }
 
-export const Grid: React.FC<GridProps> = ({grid, size}:GridProps) => {
+export const Grid: React.FC<GridProps> = (
+    {grid, size, handleNewGrid}:GridProps
+) => {
     const chunks = (arr:GridItem[], n:number) => {
         const result = [];
         const limit = Math.min(arr.length, n);
@@ -67,5 +70,7 @@ export const Grid: React.FC<GridProps> = ({grid, size}:GridProps) => {
                 )
             )}
         </svg>
+        <button className='btn btn-primary mt-2'
+            onClick={handleNewGrid}>Next Grid</button>
     </section>;
 };
