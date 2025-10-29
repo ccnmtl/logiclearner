@@ -92,7 +92,7 @@ const authedFetch = function(url: string, method: HTTPMethod, data?: unknown) {
 };
 
 /**
- * Get statments according to difficulty.
+ * Get statements according to difficulty.
  */
 export const getStatements = async function(difficulty: number) {
 
@@ -110,7 +110,7 @@ export const getStatements = async function(difficulty: number) {
 };
 
 /**
- * Get statments according to question pk.
+ * Get statements according to question pk.
  */
 export const getStatement = async function(id: number) {
 

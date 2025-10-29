@@ -218,8 +218,8 @@ export const StatementInput: React.FC<StatementProps> = ({
     }, []);
 
     return <section data-testid='statement-input' className='col-4'>
-        <p>Enter the statment that defines the following relationship:</p>
-        <strong className='mx-2'>
+        <p>Enter the statement that defines the following relationship:</p>
+        <strong>
             {correctStatement.naturalLanguageStatement}
         </strong>
         {mkBtnList(buttonList)}
