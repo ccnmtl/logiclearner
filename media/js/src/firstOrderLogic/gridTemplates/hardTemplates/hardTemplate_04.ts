@@ -21,7 +21,7 @@ function replacePlaceholders(template, details) {
 
 function randomValueRange() {
     // pick a threshold in [1..5] for "value < threshold"
-    const max = randomIntFromInterval(2, 6);
+    const max = randomIntFromInterval(1, 5);
     return max;
 }
 
@@ -94,7 +94,7 @@ export const hardTemplate_04 = {
                                 || below.number >= valueThreshold) {
                                 below.shape = shape2;
                                 below.number = randomIntFromInterval(
-                                    1, valueThreshold - 1);
+                                    0, valueThreshold - 1);
                             }
                         }
                     }
@@ -110,7 +110,7 @@ export const hardTemplate_04 = {
                         bCell.shape = shape2;
                         if (bCell.number >= valueThreshold) {
                             bCell.number = randomIntFromInterval(
-                                1, valueThreshold - 1);
+                                0, valueThreshold - 1);
                         }
                     }
                 }
@@ -130,7 +130,7 @@ export const hardTemplate_04 = {
             if (violatingX) {
                 const bCell = cellBelow(violatingX);
                 if (bCell) {
-                    bCell.number = randomIntFromInterval(valueThreshold, 10);
+                    bCell.number = randomIntFromInterval(valueThreshold, 9);
                 }
             } else {
                 // fallback: place X in row=4 => can't have below neighbor
