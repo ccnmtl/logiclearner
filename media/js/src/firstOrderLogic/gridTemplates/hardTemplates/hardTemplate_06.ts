@@ -20,10 +20,10 @@ function replacePlaceholders(template, details) {
 }
 
 /**
- * Picks a random threshold in [2..6], used for "value < threshold"
+ * Picks a random threshold in [1..5], used for "value < threshold"
  */
 function randomValueThreshold() {
-    return randomIntFromInterval(2, 6);
+    return randomIntFromInterval(1, 5);
 }
 
 export const hardTemplate_06 = {
@@ -100,7 +100,7 @@ export const hardTemplate_06 = {
                                 || diagTR.number >= threshold) {
                                 diagTR.shape = shape2;
                                 diagTR.number = randomIntFromInterval(
-                                    1, threshold - 1);
+                                    0, threshold - 1);
                             }
                         }
                     }
@@ -118,7 +118,7 @@ export const hardTemplate_06 = {
                             trCell.shape = shape2;
                             if (trCell.number >= threshold) {
                                 trCell.number = randomIntFromInterval(
-                                    1, threshold - 1);
+                                    0, threshold - 1);
                             }
                         }
                     }

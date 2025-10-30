@@ -24,8 +24,8 @@ function replacePlaceholders(template, details) {
  * or "value greater than min" for the wording.
  */
 function randomValueRange() {
-    // e.g. pick min in [1..5] for "Value(y) > min"
-    const min = randomIntFromInterval(1, 5);
+    // e.g. pick min in [0..4] for "Value(y) > min"
+    const min = randomIntFromInterval(0, 4);
     return min;
 }
 
@@ -114,7 +114,7 @@ export const hardTemplate_01 = {
                             || theRight.number <= valueThreshold) {
                             theRight.shape = shape2;
                             theRight.number = randomIntFromInterval(
-                                valueThreshold + 1, 10);
+                                valueThreshold + 1, 9);
                             // color can be anything as it's not
                             // relevant to the statement
                         }
@@ -135,7 +135,7 @@ export const hardTemplate_01 = {
                         rightCell.shape = shape2;
                         if (rightCell.number <= valueThreshold) {
                             rightCell.number = randomIntFromInterval(
-                                valueThreshold + 1, 10);
+                                valueThreshold + 1, 9);
                         }
                     }
                 }

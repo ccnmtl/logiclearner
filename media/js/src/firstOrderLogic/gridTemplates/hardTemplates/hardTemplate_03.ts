@@ -20,8 +20,8 @@ function replacePlaceholders(template, details) {
 }
 
 function randomValueRange() {
-    // pick a threshold for "value >= threshold" in [1..5]
-    const min = randomIntFromInterval(1, 5);
+    // pick a threshold for "value >= threshold" in [0..4]
+    const min = randomIntFromInterval(0, 4);
     return min;
 }
 
@@ -95,7 +95,7 @@ export const hardTemplate_03 = {
                                 || aboveCell.number < valueThreshold) {
                                 aboveCell.shape = shape2;
                                 aboveCell.number = randomIntFromInterval(
-                                    valueThreshold, 10);
+                                    valueThreshold, 9);
                             }
                         }
                     }
@@ -111,7 +111,7 @@ export const hardTemplate_03 = {
                         aCell.shape = shape2;
                         if (aCell.number < valueThreshold) {
                             aCell.number = randomIntFromInterval(
-                                valueThreshold, 10);
+                                valueThreshold, 9);
                         }
                     }
                 }

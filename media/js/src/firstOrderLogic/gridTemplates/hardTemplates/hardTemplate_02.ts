@@ -20,8 +20,8 @@ function replacePlaceholders(template, details) {
 }
 
 function randomValueRange() {
-    // e.g. pick some "max" in [6..10]
-    const max = randomIntFromInterval(6, 10);
+    // e.g. pick some "max" in [5..9]
+    const max = randomIntFromInterval(5, 9);
     return max;
 }
 
@@ -95,7 +95,7 @@ export const hardTemplate_02 = {
                             || leftCell.number >= valueThreshold) {
                             leftCell.shape = shape2;
                             leftCell.number = randomIntFromInterval(
-                                1, valueThreshold - 1);
+                                0, valueThreshold - 1);
                             // color can be anything
                         }
                     }
@@ -111,7 +111,7 @@ export const hardTemplate_02 = {
                         lCell.shape = shape2;
                         if (lCell.number >= valueThreshold) {
                             lCell.number = randomIntFromInterval(
-                                1, valueThreshold - 1);
+                                0, valueThreshold - 1);
                         }
                     }
                 }
