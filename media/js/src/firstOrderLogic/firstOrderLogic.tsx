@@ -88,7 +88,16 @@ export const FirstOrderLogic: React.FC<FirstOrderLogicProps> = ({mode}) => {
         return incorrectStatements;
     }
 
+    const registerSkip = (diff:string) => {
+        if (!isDone && attempt < 4) {
+            setScore({...score,
+                [diff]: score[diff].map((val, i) =>
+                    i === 4 ? val + 1 : val)});
+        }
+    };
+
     const handleDifficulty = (e) => {
+        registerSkip(difficulty);
         setDifficulty(e.target.value);
     };
 
@@ -106,15 +115,10 @@ export const FirstOrderLogic: React.FC<FirstOrderLogicProps> = ({mode}) => {
         }
     };
 
-    const handleNewGrid = () => {
+    const generateGrid = () => {
         let newArr = getRandomElement(templateBank);
         while (newArr === correctTemplate) {
             newArr = getRandomElement(templateBank);
-        }
-        if (!isDone && attempt < 4) {
-            setScore({...score,
-                [difficulty]: score[difficulty].map((val, i) =>
-                    i === 4 ? val + 1 : val)});
         }
         setCorrectTemplate(newArr);
         setSelected(null);
@@ -123,12 +127,18 @@ export const FirstOrderLogic: React.FC<FirstOrderLogicProps> = ({mode}) => {
         setIsDone(false);
     };
 
+    const handleNewGrid = () => {
+        registerSkip(difficulty);
+        generateGrid();
+    };
+
     useEffect(() => {
         setTemplateBank(getTemplatesByDifficulty(difficulty));
-        handleNewGrid();
+        generateGrid();
     }, [difficulty]);
 
     useEffect(() => {
+        registerSkip(difficulty);
         handleNewGrid();
     }, [mode]);
 
