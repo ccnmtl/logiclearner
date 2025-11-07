@@ -5,13 +5,12 @@ import { GridStatement } from './utils';
 interface StatementProps {
     correctStatement: GridStatement
     difficulty: string
-    setIsCorrect: React.Dispatch<React.SetStateAction<boolean>>
     text: string
     setText: React.Dispatch<React.SetStateAction<string>>
 }
 
 export const StatementInput: React.FC<StatementProps> = ({
-    correctStatement, difficulty, setIsCorrect, text, setText
+    correctStatement, difficulty, text, setText
 }:StatementProps) => {
     const [feedback, setFeedback] = useState<string[]>(
         ['ERROR: This feedback should not be visible.']);
@@ -169,7 +168,6 @@ export const StatementInput: React.FC<StatementProps> = ({
             errors.push('The statement requires one implication (→) character');
         }
         setFeedback(errors);
-        return errors.length === 0;
     };
 
     const handleCheck = () => {
@@ -179,7 +177,7 @@ export const StatementInput: React.FC<StatementProps> = ({
             .value.replace(/\s/g, '').toLowerCase();
         const check = parseStatement(value);
         if (value.match(regex[difficulty])) {
-            setIsCorrect(evaluate(check));
+            evaluate(check);
         } else {
             setFeedback(['The statement must begin with ∀x, independent and ' +
                 'dependent predicates separated by → ' +
@@ -187,7 +185,6 @@ export const StatementInput: React.FC<StatementProps> = ({
                     ', and dependent predicates are preceded by ∃y':
                     ''
                 }`]);
-            setIsCorrect(false);
         }
     };
 
