@@ -36,7 +36,6 @@ beforeEach(() => {
                     }
                 }}
                 difficulty='hard'
-                setIsCorrect={setIsCorrect}
                 text={text}
                 setText={setText}
             />

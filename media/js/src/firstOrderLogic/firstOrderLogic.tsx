@@ -28,8 +28,8 @@ export const FirstOrderLogic: React.FC<FirstOrderLogicProps> = ({mode}) => {
         getTemplatesByDifficulty(difficulty)
     );
     const [text, setText] = useState<string>('');
-    const [isCorrect, setIsCorrect] = useState<boolean>(false);
-    const [selected, setSelected] = useState<number|null>();
+    const emptySelect = [false, false, false, false];
+    const [selected, setSelected] = useState<boolean[]>(emptySelect);
     const [isDone, setIsDone] = useState<boolean>(false);
     const [attempt, setAttempt] = useState<number>(4);
 
@@ -90,9 +90,8 @@ export const FirstOrderLogic: React.FC<FirstOrderLogicProps> = ({mode}) => {
 
     const registerSkip = (diff:string) => {
         if (!isDone && attempt < 4) {
-            setScore({...score,
-                [diff]: score[diff].map((val, i) =>
-                    i === 4 ? val + 1 : val)});
+            setScore({...score, [diff]: score[diff].map((val, i) =>
+                i === 4 ? val + 1 : val)});
         }
     };
 
@@ -105,8 +104,7 @@ export const FirstOrderLogic: React.FC<FirstOrderLogicProps> = ({mode}) => {
         if (!isDone) {
             if (result) {
                 setIsDone(true);
-                setScore({
-                    ...score,
+                setScore({...score,
                     [difficulty]: score[difficulty].map((val, i) =>
                         attempt === 4-i ? val + 1 : val)});
             } else {
@@ -115,13 +113,13 @@ export const FirstOrderLogic: React.FC<FirstOrderLogicProps> = ({mode}) => {
         }
     };
 
-    const generateGrid = () => {
+    const reset = () => {
         let newArr = getRandomElement(templateBank);
         while (newArr === correctTemplate) {
             newArr = getRandomElement(templateBank);
         }
         setCorrectTemplate(newArr);
-        setSelected(null);
+        setSelected(emptySelect);
         setText('');
         setAttempt(4);
         setIsDone(false);
@@ -129,16 +127,15 @@ export const FirstOrderLogic: React.FC<FirstOrderLogicProps> = ({mode}) => {
 
     const handleNewGrid = () => {
         registerSkip(difficulty);
-        generateGrid();
+        reset();
     };
 
     useEffect(() => {
         setTemplateBank(getTemplatesByDifficulty(difficulty));
-        generateGrid();
+        reset();
     }, [difficulty]);
 
     useEffect(() => {
-        registerSkip(difficulty);
         handleNewGrid();
     }, [mode]);
 
@@ -193,18 +190,17 @@ export const FirstOrderLogic: React.FC<FirstOrderLogicProps> = ({mode}) => {
 
     useEffect(() => {
         if (score != baseScore) {
-            localStorage.setItem('fol', JSON.stringify({score, attempt}));
+            localStorage.setItem('fol', JSON.stringify(score));
         }
-    }, [score, attempt]);
+    }, [score]);
 
     useEffect(() => {
         // RudderStack page call
         rudderAnalytics.page({userId: 0, name: location});
-        setSelected(null);
+        setSelected(emptySelect);
         const store = JSON.parse(localStorage.getItem('fol'));
         if (store) {
-            setAttempt(store.attempt ?? 4);
-            setScore(store.score ?? baseScore);
+            setScore(store ?? baseScore);
         }
     }, []);
 
@@ -213,8 +209,6 @@ export const FirstOrderLogic: React.FC<FirstOrderLogicProps> = ({mode}) => {
             window.rudderanalytics &&
             typeof window.rudderanalytics.page === 'function'
         ) {
-            console.log('Sending page view to RudderStack:',
-                location.pathname);
             window.rudderanalytics.page({
                 path: location.pathname,
                 name: 'FirstOrderLogic',
@@ -223,7 +217,7 @@ export const FirstOrderLogic: React.FC<FirstOrderLogicProps> = ({mode}) => {
     }, [location.pathname]);
 
     useEffect(() => {
-        setIsCorrect(false);
+        setSelected(emptySelect);
     }, [mode]);
 
     return (
@@ -254,14 +248,12 @@ export const FirstOrderLogic: React.FC<FirstOrderLogicProps> = ({mode}) => {
                     </div>
                     {mode === 0 &&
                     <Options options={options}
-                        correctIndex={correctIndex} isCorrect={isCorrect}
-                        setIsCorrect={setIsCorrect} selected={selected}
+                        correctIndex={correctIndex} selected={selected}
                         setSelected={setSelected}
                         handleAttempt={handleAttempt}/>}
                     {mode === 1 && correctStatement &&
                     <StatementInput correctStatement={correctStatement}
-                        setIsCorrect={setIsCorrect} text={text}
-                        difficulty={difficulty}
+                        text={text} difficulty={difficulty}
                         setText={setText} />}
                 </div>
             </section>

@@ -4,29 +4,29 @@ import { GridStatement } from './utils';
 interface OptionProps {
     options: GridStatement[]
     correctIndex: number
-    isCorrect: boolean
-    setIsCorrect: React.Dispatch<React.SetStateAction<boolean>>;
-    selected: number|null
-    setSelected: React.Dispatch<React.SetStateAction<number|null>>
+    selected: boolean[]
+    setSelected: React.Dispatch<React.SetStateAction<boolean[]>>
     handleAttempt: (isCorrect:boolean) => void
 }
 
 export const Options: React.FC<OptionProps> = ({
-    options, correctIndex, isCorrect, setIsCorrect, selected, setSelected,
+    options, correctIndex, selected, setSelected,
     handleAttempt
 }:OptionProps) => {
     const showResult = (i:number) => {
-        if (selected != null && selected === i)
-            if (isCorrect) return 'selection-correct';
+        if (selected[i])
+            if (i === correctIndex) return 'selection-correct';
             else return 'selection-incorrect';
         else return '';
     };
 
+    const handleSelect = (i:number) => {
+        setSelected(selected.map((val, idx) => i === idx ? true: val));
+    };
+
     useEffect(() => {
-        const result = correctIndex === selected;
-        setIsCorrect(result);
-        if (selected != null) {
-            handleAttempt(result);
+        if (selected.includes(true)) {
+            handleAttempt(selected[correctIndex]);
         }
     }, [selected]);
 
@@ -35,17 +35,17 @@ export const Options: React.FC<OptionProps> = ({
             <p className="solution-step__prompt py-md-0">
                 Select the best matching statement</p>
             {options.map((option, i) =>
-                <button key={i} onClick={() => setSelected(i)} className={
-                    `btn-grid-selection d-flex ${showResult(i)}`}
+                <button key={i} onClick={() => handleSelect(i)}
+                    className={`btn-grid-selection d-flex ${showResult(i)}`}
                 >
-                    {selected === i &&
+                    {selected[i] &&
                         <div className="selection-feedback">
                             <div className="selection-feedback-icon">
-                                {isCorrect ? '✓' : '!'}
+                                {i === correctIndex ? '✓' : '!'}
                             </div>
                         </div>}
                     <div className="selection-text flex-grow-1">
-                        {selected === i &&
+                        {selected[i] &&
                             <div className="selection-answer pb-2">
                                 {option.naturalLanguageStatement}
                             </div>}
