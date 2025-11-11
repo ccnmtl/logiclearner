@@ -28,8 +28,8 @@ export const FirstOrderLogic: React.FC<FirstOrderLogicProps> = ({mode}) => {
         getTemplatesByDifficulty(difficulty)
     );
     const [text, setText] = useState<string>('');
-    const emptySelect = [false, false, false, false];
-    const [selected, setSelected] = useState<boolean[]>(emptySelect);
+    const emptyShow = [false, false, false, false];
+    const [showList, setShowList] = useState<boolean[]>(emptyShow);
     const [isDone, setIsDone] = useState<boolean>(false);
     const [attempt, setAttempt] = useState<number>(4);
 
@@ -119,7 +119,7 @@ export const FirstOrderLogic: React.FC<FirstOrderLogicProps> = ({mode}) => {
             newArr = getRandomElement(templateBank);
         }
         setCorrectTemplate(newArr);
-        setSelected(emptySelect);
+        setShowList(emptyShow);
         setText('');
         setAttempt(4);
         setIsDone(false);
@@ -197,7 +197,7 @@ export const FirstOrderLogic: React.FC<FirstOrderLogicProps> = ({mode}) => {
     useEffect(() => {
         // RudderStack page call
         rudderAnalytics.page({userId: 0, name: location});
-        setSelected(emptySelect);
+        setShowList(emptyShow);
         const store = JSON.parse(localStorage.getItem('fol'));
         if (store) {
             setScore(store ?? baseScore);
@@ -217,7 +217,7 @@ export const FirstOrderLogic: React.FC<FirstOrderLogicProps> = ({mode}) => {
     }, [location.pathname]);
 
     useEffect(() => {
-        setSelected(emptySelect);
+        setShowList(emptyShow);
     }, [mode]);
 
     return (
@@ -248,8 +248,8 @@ export const FirstOrderLogic: React.FC<FirstOrderLogicProps> = ({mode}) => {
                     </div>
                     {mode === 0 &&
                     <Options options={options}
-                        correctIndex={correctIndex} selected={selected}
-                        setSelected={setSelected}
+                        correctIndex={correctIndex} showList={showList}
+                        setShowList={setShowList}
                         handleAttempt={handleAttempt}/>}
                     {mode === 1 && correctStatement &&
                     <StatementInput correctStatement={correctStatement}
