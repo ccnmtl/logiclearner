@@ -127,6 +127,31 @@
     }
 }
 
+.selected {
+    background-color: $blue-100;
+    border: 0.125rem solid $blue;
+    &:hover {
+        background-color: $blue-100;
+        border: 0.125rem solid $blue;
+    }
+    & .selection-feedback-icon {
+        margin-right: 1rem;
+        display: inline-block;
+        width: 2rem;
+        height: 2rem;
+        background-color: $gray-100;
+        border: 0.125rem solid $blue-300;
+        border-radius: 50%;
+        color: $blue;
+        font-family: "Gentium Plus", serif;
+        font-weight: 700;
+        line-height: 2rem;
+        font-size: 2rem;
+        text-align: center;
+        align-self: center;
+    }
+}
+
 .btn-shrink {
     @include media-breakpoint-down(md) {
         padding: 0.125rem 0.5rem;

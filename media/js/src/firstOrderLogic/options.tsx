@@ -1,51 +1,63 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { GridStatement } from './utils';
 
 interface OptionProps {
     options: GridStatement[]
     correctIndex: number
-    selected: boolean[]
-    setSelected: React.Dispatch<React.SetStateAction<boolean[]>>
+    showList: boolean[]
+    setShowList: React.Dispatch<React.SetStateAction<boolean[]>>
     handleAttempt: (isCorrect:boolean) => void
 }
 
 export const Options: React.FC<OptionProps> = ({
-    options, correctIndex, selected, setSelected,
+    options, correctIndex, showList, setShowList,
     handleAttempt
 }:OptionProps) => {
+    const [selected, setSelected] = useState<number>(-1);
+
     const showResult = (i:number) => {
-        if (selected[i])
+        if (showList[i])
             if (i === correctIndex) return 'selection-correct';
             else return 'selection-incorrect';
+        else if (selected === i) {
+            return 'selected';
+        }
         else return '';
     };
 
-    const handleSelect = (i:number) => {
-        setSelected(selected.map((val, idx) => i === idx ? true: val));
+    const handleSubmit = () => {
+        if (selected !== -1) {
+            setShowList(showList.map((val, i) => i === selected ? true : val));
+        }
+    };
+
+    const mkFeedback = (content:string) => {
+        return <div className="selection-feedback">
+            <div className="selection-feedback-icon">
+                {content}
+            </div>
+        </div>;
     };
 
     useEffect(() => {
-        if (selected.includes(true)) {
-            handleAttempt(selected[correctIndex]);
+        if (showList.includes(true)) {
+            handleAttempt(showList[correctIndex]);
+            setSelected(-1);
         }
-    }, [selected]);
+    }, [showList]);
 
     return <div className="col-md-6 py-md-0 solution-step">
         <section id="solution">
             <p className="solution-step__prompt py-md-0">
                 Select the best matching statement</p>
             {options.map((option, i) =>
-                <button key={i} onClick={() => handleSelect(i)}
+                <button key={i} onClick={() => setSelected(i)}
                     className={`btn-grid-selection d-flex ${showResult(i)}`}
+                    disabled={showList[i]}
                 >
-                    {selected[i] &&
-                        <div className="selection-feedback">
-                            <div className="selection-feedback-icon">
-                                {i === correctIndex ? '✓' : '!'}
-                            </div>
-                        </div>}
+                    {showList[i] && mkFeedback(i === correctIndex ? '✓' : '!')}
                     <div className="selection-text flex-grow-1">
-                        {selected[i] &&
+                        {showList[i] &&
                             <div className="selection-answer pb-2">
                                 {option.naturalLanguageStatement}
                             </div>}
@@ -56,5 +68,7 @@ export const Options: React.FC<OptionProps> = ({
                 </button>
             )}
         </section>
+        <button className='btn btn-primary mt-2'
+            onClick={handleSubmit}>Submit</button>
     </div>;
 };
