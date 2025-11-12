@@ -200,7 +200,16 @@ export const FirstOrderLogic: React.FC<FirstOrderLogicProps> = ({mode}) => {
         setShowList(emptyShow);
         const store = JSON.parse(localStorage.getItem('fol'));
         if (store) {
-            setScore(store ?? baseScore);
+            try {
+                // Checks for the correct score model.
+                if (Object.keys(baseScore).every(diff => score[diff])) {
+                    setScore(score);
+                } else {
+                    setScore(baseScore);
+                }
+            } catch {
+                setScore(baseScore);
+            }
         }
     }, []);
 
