@@ -44,5 +44,29 @@ main,
         padding: 0 1.5rem;
         font-size: 1rem;
     }
+}
 
+.grid-actions {
+    margin: 0;
+    padding: 1rem;
+    border: none;
+    border-top: 0.0625rem solid #ffe0b2;
+    text-align: right;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: #fff3e0;
+    box-shadow: 0 -0.125rem 0.25rem 0 rgba(128, 128, 128, 0.25);
+    @include media-breakpoint-up(md) {
+        position: relative;
+        bottom: 0;
+        left: 0;
+        padding: 0;
+        margin: 2rem 0 0 0;
+        width: 100%;
+        border: none;
+        background-color: transparent;
+        box-shadow: none;
+    }
 }
