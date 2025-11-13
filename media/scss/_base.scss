@@ -62,10 +62,11 @@ main,
         position: relative;
         bottom: 0;
         left: 0;
-        padding: 0;
+        padding: 1rem 0 0 0;
         margin: 2rem 0 0 0;
         width: 100%;
         border: none;
+        border-top: 0.0625rem dotted #0d6efd;
         background-color: transparent;
         box-shadow: none;
     }
