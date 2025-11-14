@@ -7,11 +7,12 @@ interface OptionProps {
     showList: boolean[]
     setShowList: React.Dispatch<React.SetStateAction<boolean[]>>
     handleAttempt: (isCorrect:boolean) => void
+    handleNewGrid: () => void
 }
 
 export const Options: React.FC<OptionProps> = ({
     options, correctIndex, showList, setShowList,
-    handleAttempt
+    handleAttempt, handleNewGrid
 }:OptionProps) => {
     const [selected, setSelected] = useState<number>(-1);
 
@@ -68,7 +69,11 @@ export const Options: React.FC<OptionProps> = ({
                 </button>
             )}
         </section>
-        <button className='btn btn-primary mt-2'
-            onClick={handleSubmit}>Submit</button>
+        <button className='btn btn-success w-25 d-block ms-auto mb-4 mb-md-0'
+            onClick={handleSubmit}>Go!</button>
+        <div className="grid-actions">
+            <button className="btn btn-outline-primary" onClick={handleNewGrid}>
+                {showList[correctIndex] ? 'Next': 'Skip this'} grid »</button>
+        </div>
     </div>;
 };

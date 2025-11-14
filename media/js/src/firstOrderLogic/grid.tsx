@@ -3,12 +3,11 @@ import { GridItem, getColorName } from './utils';
 
 interface GridProps {
     grid: GridItem[],
-    size: number,
-    handleNewGrid: () => void
+    size: number
 }
 
 export const Grid: React.FC<GridProps> = (
-    {grid, size, handleNewGrid}:GridProps
+    {grid, size}:GridProps
 ) => {
     const chunks = (arr:GridItem[], n:number) => {
         const result = [];
@@ -71,7 +70,5 @@ export const Grid: React.FC<GridProps> = (
                 )
             )}
         </svg>
-        <button className='btn btn-primary mt-2'
-            onClick={handleNewGrid}>Next Grid</button>
     </section>;
 };
