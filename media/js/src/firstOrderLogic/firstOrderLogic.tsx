@@ -252,14 +252,14 @@ export const FirstOrderLogic: React.FC<FirstOrderLogicProps> = ({mode}) => {
                 </div>
                 <div className="row">
                     <div className="col-12 col-md-6">
-                        <Grid grid={grid} size={size}
-                            handleNewGrid={handleNewGrid}/>
+                        <Grid grid={grid} size={size} />
                     </div>
                     {mode === 0 &&
                     <Options options={options}
                         correctIndex={correctIndex} showList={showList}
                         setShowList={setShowList}
-                        handleAttempt={handleAttempt}/>}
+                        handleAttempt={handleAttempt}
+                        handleNewGrid={handleNewGrid}/>}
                     {mode === 1 && correctStatement &&
                     <StatementInput correctStatement={correctStatement}
                         text={text} difficulty={difficulty}
