@@ -105,15 +105,15 @@ export const StatementInput: React.FC<StatementProps> = ({
     const mkList = (items:string[], uniqueClass='') =>
         <ul className={`list-group-flush ps-2 ${uniqueClass}`}>
             {items.map((item, i) =>
-                <li key={i} className='list-group-item'>{item}</li>
+                <li key={i} className="list-group-item">{item}</li>
             )}
         </ul>;
 
     const mkBtnList = (items:string[]) =>
         <ul className="list-inline  row my-2">
             {items.map((item:string, i:number) =>
-                <li key={i} className='col-auto'>
-                    <button className='btn btn-outline-secondary'
+                <li key={i} className="col-auto">
+                    <button className="btn btn-outline-secondary"
                         aria-label={`Add a ${item} symbol to the statement.`}
                         onClick={mkAddChar(item)}
                     >
@@ -216,7 +216,7 @@ export const StatementInput: React.FC<StatementProps> = ({
 
     return (
         <div className="col-md-6 py-md-0 solution-step">
-            <section data-testid='statement-input' id="solution">
+            <section data-testid="statement-input" id="solution">
                 <p>
                     Enter the statement that defines the following relationship:
                 </p>
@@ -224,22 +224,25 @@ export const StatementInput: React.FC<StatementProps> = ({
                     {correctStatement.naturalLanguageStatement}
                 </strong>
                 {mkBtnList(buttonList)}
-                <textarea id='statement-text' data-testid='statement-text'
-                    className='form-control mb-2'
+                <textarea id="statement-text" data-testid="statement-text"
+                    className="form-control mb-2"
                     onChange={handleText}
-                    placeholder='Enter the value here' value={text}></textarea>
-                <button type='submit' className='btn btn-primary my-2'
-                    onClick={handleCheck} data-testid='submit-button'
+                    placeholder="Enter the value here" value={text}></textarea>
+                <button
+                    type="submit"
+                    className="btn btn-success w-30 d-block ms-auto mb-4 \
+                    mb-md-0"
+                    onClick={handleCheck} data-testid="submit-button"
                 >
                     Check Statement
                 </button>
                 {submitted &&
-                <div data-testid='feedback' >
+                <div data-testid="feedback" >
                     {feedback.length > 0 ?
                         mkList(feedback, 'text-danger'):
-                        <p className='text-success'>Success!</p>}
+                        <p className="text-success">Success!</p>}
                 </div>}
-                <p className='col-12 fs-4 my-2'>Predicates</p>
+                <p className="col-12 fs-4 my-2">Predicates</p>
                 <div className="row">
                     <div className="col-6">
                         <strong>Object</strong>
