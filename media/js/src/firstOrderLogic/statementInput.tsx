@@ -214,35 +214,43 @@ export const StatementInput: React.FC<StatementProps> = ({
         setSubmitted(false);
     }, []);
 
-    return <section data-testid='statement-input' className='col-4'>
-        <p>Enter the statement that defines the following relationship:</p>
-        <strong>
-            {correctStatement.naturalLanguageStatement}
-        </strong>
-        {mkBtnList(buttonList)}
-        <textarea id='statement-text' data-testid='statement-text'
-            className='form-control mb-2'
-            onChange={handleText}
-            placeholder='Enter the value here' value={text}></textarea>
-        <button type='submit' className='btn btn-primary my-2'
-            onClick={handleCheck} data-testid='submit-button'
-        >
-            Check Statement
-        </button>
-        {submitted && <div data-testid='feedback' >{feedback.length > 0 ?
-            mkList(feedback, 'text-danger'):
-            <p className='text-success'>Success!</p>
-        }</div>}
-        <p className='col-12 fs-4 my-2'>Predicates</p>
-        <div className="row">
-            <div className="col-6">
-                <strong>Object</strong>
-                {mkList(objectRelationships)}
-            </div>
-            <div className="col-6">
-                <strong>Adjacency(y, [direction], x)</strong>
-                {mkList(directionalRelationships)}
-            </div>
+    return (
+        <div className="col-md-6 py-md-0 solution-step">
+            <section data-testid='statement-input' id="solution">
+                <p>
+                    Enter the statement that defines the following relationship:
+                </p>
+                <strong>
+                    {correctStatement.naturalLanguageStatement}
+                </strong>
+                {mkBtnList(buttonList)}
+                <textarea id='statement-text' data-testid='statement-text'
+                    className='form-control mb-2'
+                    onChange={handleText}
+                    placeholder='Enter the value here' value={text}></textarea>
+                <button type='submit' className='btn btn-primary my-2'
+                    onClick={handleCheck} data-testid='submit-button'
+                >
+                    Check Statement
+                </button>
+                {submitted &&
+                <div data-testid='feedback' >
+                    {feedback.length > 0 ?
+                        mkList(feedback, 'text-danger'):
+                        <p className='text-success'>Success!</p>}
+                </div>}
+                <p className='col-12 fs-4 my-2'>Predicates</p>
+                <div className="row">
+                    <div className="col-6">
+                        <strong>Object</strong>
+                        {mkList(objectRelationships)}
+                    </div>
+                    <div className="col-6">
+                        <strong>Adjacency(y, [direction], x)</strong>
+                        {mkList(directionalRelationships)}
+                    </div>
+                </div>
+            </section>
         </div>
-    </section>;
+    );
 };
