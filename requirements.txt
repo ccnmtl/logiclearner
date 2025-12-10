@@ -101,7 +101,7 @@ entrypoints==0.4
 aiocontextvars==0.2.2
 django-s3sign<=0.4.0
 
-python-cas==1.6.0
+python-cas==1.7.1
 django-cas-ng==5.1.0
 
 # logictools
