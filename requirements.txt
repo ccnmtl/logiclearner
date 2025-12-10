@@ -21,7 +21,7 @@ lxml==5.3.0
 fuzzywuzzy==0.18.0
 sure==3.0a2
 pyasn1==0.6.0
-cffi==1.17.0 # pyOpenSSL
+cffi==2.0.0 # pyOpenSSL
 cryptography==43.0.0  # pyOpenSSL
 pyOpenSSL==24.2.1
 ndg-httpsclient==0.5.1
