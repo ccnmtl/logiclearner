@@ -65,7 +65,7 @@ django-debug-toolbar==4.4.1
 django-smoketest==1.2.1
 # For django-extensions
 typing==3.7.4.1; python_version < '3.5'
-django-extensions==3.2.1
+django-extensions==4.1
 django-stagingcontext==0.1.0
 django-ga-context==0.1.0
 django-impersonate==1.9.1
