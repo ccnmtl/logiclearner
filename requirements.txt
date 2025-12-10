@@ -102,7 +102,7 @@ aiocontextvars==0.2.2
 django-s3sign<=0.4.0
 
 python-cas==1.6.0
-django-cas-ng==5.0.0
+django-cas-ng==5.1.0
 
 # logictools
 lark==1.2.1
