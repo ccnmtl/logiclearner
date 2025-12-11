@@ -68,7 +68,7 @@ typing==3.7.4.1; python_version < '3.5'
 django-extensions==4.1
 django-stagingcontext==0.1.0
 django-ga-context==0.1.0
-django-impersonate==1.9.1
+django-impersonate==1.9.5
 gunicorn==23.0.0
 django-infranil==1.1.0
 django-flatblocks==1.0.0
