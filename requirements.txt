@@ -22,7 +22,7 @@ fuzzywuzzy==0.18.0
 sure==3.0a2
 pyasn1==0.6.0
 cffi==2.0.0 # pyOpenSSL
-cryptography==43.0.0  # pyOpenSSL
+cryptography==46.0.3  # pyOpenSSL
 pyOpenSSL==24.2.1
 ndg-httpsclient==0.5.1
 urllib3==2.2.1  # requests, sentry-sdk
