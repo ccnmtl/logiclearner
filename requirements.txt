@@ -109,7 +109,7 @@ lark==1.2.1
 logiclearnertools==0.1.9
 
 mpmath==1.3.0  # sympy
-sympy==1.13.0  # torch
+sympy==1.14.0  # torch
 
 --extra-index-url https://download.pytorch.org/whl/cpu
 torch==2.9.1+cpu
