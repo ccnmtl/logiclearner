@@ -91,7 +91,7 @@ pyparsing==3.2.5
 
 pbr==7.0.3 # bandit
 pyyaml==6.0.3 # bandit
-stevedore==5.3.0  # bandit
+stevedore==5.6.0  # bandit
 bandit==1.7.0
 
 django-smtp-ssl==1.0
