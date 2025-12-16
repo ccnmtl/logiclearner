@@ -37,7 +37,7 @@ pylint==4.0.4
 
 six==1.17.0
 faker==38.2.0  # factory_boy
-factory_boy==3.3.0
+factory_boy==3.3.3
 
 ldap3==2.9.1
 sqlparse==0.5.4
