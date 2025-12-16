@@ -7,6 +7,7 @@ import { NotFound } from './notFound';
 import ReactGA from 'react-ga4';
 import { FirstOrderLogic } from './firstOrderLogic/firstOrderLogic';
 import { FolDashboard } from './firstOrderLogic/folDashboard';
+import { RudderPageTracker } from './rudderPageTracker';
 import '../rudderstack/rudderstack';
 
 export const App: React.FC = () => {
@@ -26,6 +27,7 @@ export const App: React.FC = () => {
     }, []);
     return (
         <Router>
+            <RudderPageTracker />
             <Routes>
                 <Route path='*' element={<NotFound />} />
                 <Route path="/" element={<LevelsDashboard />} />

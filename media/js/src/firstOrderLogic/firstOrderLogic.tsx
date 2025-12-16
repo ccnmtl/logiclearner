@@ -6,9 +6,7 @@ import { Grid } from './grid';
 import { Options } from './options';
 import { StatementInput } from './statementInput';
 import { Progress } from './progress';
-import { useLocation } from 'react-router-dom';
 import { FolBanner } from './folBanner';
-import { rudderAnalytics } from '../../rudderstack/rudderstack';
 
 export const STATIC_URL = LogicLearner.staticUrl;
 
@@ -43,8 +41,6 @@ export const FirstOrderLogic: React.FC<FirstOrderLogicProps> = ({mode}) => {
 
     const [correctTemplate, setCorrectTemplate] =
         useState<GridTemplate>(getRandomElement(templateBank));
-
-    const location = useLocation();
 
     const diffOptions = [  // [value, innerText]
         ['easy', 'Easy'],
@@ -100,6 +96,19 @@ export const FirstOrderLogic: React.FC<FirstOrderLogicProps> = ({mode}) => {
         setDifficulty(e.target.value);
     };
 
+    const track = (event: string, props: Record<string, unknown>) => {
+        if (window.rudderanalytics &&
+            typeof window.rudderanalytics.track === 'function') {
+            window.rudderanalytics.track(event, props ?? {});
+        } else {
+            console.warn(
+                'rudderanalytics.track not mounted yet',
+                window.rudderanalytics
+            );
+        }
+    };
+
+
     const handleAttempt = (result:boolean) => {
         if (!isDone) {
             if (result) {
@@ -111,6 +120,11 @@ export const FirstOrderLogic: React.FC<FirstOrderLogicProps> = ({mode}) => {
                 setAttempt(Math.max(attempt - 1, 1));
             }
         }
+        track('fol_question_attempted', {
+            fol_mode: mode === 0 ? 'match' : 'express',
+            difficulty,
+            is_correct: result,
+        });
     };
 
     const reset = () => {
@@ -195,8 +209,6 @@ export const FirstOrderLogic: React.FC<FirstOrderLogicProps> = ({mode}) => {
     }, [score]);
 
     useEffect(() => {
-        // RudderStack page call
-        rudderAnalytics.page({userId: 0, name: location});
         setShowList(emptyShow);
         const store = JSON.parse(localStorage.getItem('fol'));
         if (store) {
@@ -212,18 +224,6 @@ export const FirstOrderLogic: React.FC<FirstOrderLogicProps> = ({mode}) => {
             }
         }
     }, []);
-
-    useEffect(() => {
-        if (
-            window.rudderanalytics &&
-            typeof window.rudderanalytics.page === 'function'
-        ) {
-            window.rudderanalytics.page({
-                path: location.pathname,
-                name: 'FirstOrderLogic',
-            });
-        }
-    }, [location.pathname]);
 
     useEffect(() => {
         setShowList(emptyShow);
