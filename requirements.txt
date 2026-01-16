@@ -100,7 +100,7 @@ django-contact-us==1.1.0
 asgiref==3.11.0
 entrypoints==0.4
 aiocontextvars==0.2.2
-django-s3sign<=0.6.0
+django-s3sign<=0.6.1
 
 python-cas==1.7.1
 django-cas-ng==5.1.0
