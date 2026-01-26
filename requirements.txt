@@ -93,7 +93,7 @@ pbr==7.0.3 # bandit
 pyyaml==6.0.3 # bandit
 stevedore==5.6.0  # bandit
 rich==14.3.1  # bandit
-bandit==1.9.2
+bandit==1.9.3
 
 django-smtp-ssl==1.0
 django-contact-us==1.1.0
