@@ -88,7 +88,7 @@ if 'integrationserver' in sys.argv:
             'HOST': '',
             'PORT': '',
             'USER': '',
-            'PASSWORD': '',
+            'PASSWORD': '',  # nosec
             'ATOMIC_REQUESTS': True,
         }
     }
