@@ -92,7 +92,7 @@ pyparsing==3.3.2
 pbr==7.0.3 # bandit
 pyyaml==6.0.3 # bandit
 stevedore==5.6.0  # bandit
-rich==14.3.1  # bandit
+rich==14.3.2  # bandit
 bandit==1.9.3
 
 django-smtp-ssl==1.0
