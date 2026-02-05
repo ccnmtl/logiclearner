@@ -42,6 +42,13 @@ export const FirstOrderLogic: React.FC<FirstOrderLogicProps> = ({mode}) => {
     const [correctTemplate, setCorrectTemplate] =
         useState<GridTemplate>(getRandomElement(templateBank));
 
+    const [isNarrow, setIsNarrow] = useState<boolean>(
+        window.innerWidth < 768);
+
+    const swapSkip = () => {
+        setIsNarrow(window.innerWidth < 768);
+    };
+
     const diffOptions = [  // [value, innerText]
         ['easy', 'Easy'],
         ['medium', 'Medium'],
@@ -223,6 +230,8 @@ export const FirstOrderLogic: React.FC<FirstOrderLogicProps> = ({mode}) => {
                 setScore(baseScore);
             }
         }
+        ['DOMContentLoaded', 'load', 'resize', 'scroll'].forEach(event =>
+            window.addEventListener(event, swapSkip));
     }, []);
 
     useEffect(() => {
@@ -258,6 +267,7 @@ export const FirstOrderLogic: React.FC<FirstOrderLogicProps> = ({mode}) => {
                     <Options options={options}
                         correctIndex={correctIndex} showList={showList}
                         setShowList={setShowList}
+                        isNarrow={isNarrow}
                         handleAttempt={handleAttempt}
                         handleNewGrid={handleNewGrid}/>}
                     {mode === 1 && correctStatement &&
@@ -266,6 +276,14 @@ export const FirstOrderLogic: React.FC<FirstOrderLogicProps> = ({mode}) => {
                         setText={setText} />}
                 </div>
             </section>
+            {isNarrow && <div className="grid-actions"
+                style={{position: 'sticky'}}>
+                <button className="btn btn-outline-primary"
+                    onClick={handleNewGrid}
+                >
+                    {showList[correctIndex] ? 'Next': 'Skip this'} grid »
+                </button>
+            </div>}
         </>
     );
 };

@@ -45,7 +45,7 @@ export const Grid: React.FC<GridProps> = (
         );
     };
 
-    return <section id="grid" className="container grid-container">
+    return <section id="grid" className="container grid-container pb-2">
         <svg viewBox='0 0 150 160' width='100%'>
             <rect x={3} y={2} fill='#eceff1'  width={150} height={156}/>
             {chunks(grid, size).map((row, i) =>

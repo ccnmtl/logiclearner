@@ -11,7 +11,7 @@ export const Progress: React.FC<ProgressProps> = ({
     difficulty,
     score
 }:ProgressProps) => {
-    return <button className="progress-state d-flex btn"
+    return <div className="progress-state d-flex btn"
         data-bs-toggle="modal" data-bs-target="#progressModal"
     >
         {score[difficulty].map((val, i) => {
@@ -54,5 +54,5 @@ export const Progress: React.FC<ProgressProps> = ({
                 </div>
             </div>
         </div>
-    </button>;
+    </div>;
 };
