@@ -2,27 +2,35 @@
     &__4 {
         text-align: center;
         width: 1.5rem;
-        margin-right: 1rem
+        margin-right: 1rem;
     }
     &__3 {
         text-align: center;
         width: 1.5rem;
-        margin-right: 1rem
+        margin-right: 1rem;
     }
     &__2 {
         text-align: center;
         width: 1.5rem;
-        margin-right: 1rem
+        margin-right: 1rem;
     }
     &__1 {
         text-align: center;
         width: 1.5rem;
-        margin-right: 1rem
+        margin-right: 1rem;
     }
     &__0 {
         text-align: center;
         width: 1.5rem;
-        margin-right: 1rem
+        margin-right: 1rem;
+    }
+    &__i {
+        text-align: center;
+        width: 1.5rem;
+        margin-right: 0;
+        @include media-breakpoint-up(md) {
+            margin-right: 1rem;
+        }
     }
 }
 
