@@ -23,6 +23,13 @@ class FOLSelect(View):
         return render(request, self.template_name)
 
 
+class FOLSelectCloverModal(View):
+    template_name = 'FOLdesign/clovermodal.html'
+
+    def get(self, request, *args, **kwargs):
+        return render(request, self.template_name)
+
+
 class FOLSelectWrong(View):
     template_name = 'FOLdesign/selectinputwrong.html'
 

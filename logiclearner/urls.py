@@ -49,6 +49,8 @@ urlpatterns = [
             name='design-folgrid'),
     re_path(r'^design/selectinput/$', FOLdesign.FOLSelect.as_view(),
             name='design-folselect'),
+    re_path(r'^design/clovermodal/$', FOLdesign.FOLSelectCloverModal.as_view(),
+            name='design-folselectclovermodal'),
     re_path(r'^design/selectinputwrong/$', FOLdesign.FOLSelectWrong.as_view(),
             name='design-folselectwrong'),
     re_path(r'^design/selectinputcorrect/$',
