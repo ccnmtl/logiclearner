@@ -1,0 +1,266 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Design - FOL Multiple Choice Default{% endblock %}
+{% block pagetype %}--selctinput{% endblock %}
+
+{% block content %}
+<main class="main-app">
+    <!-- Header banner for FOL Matching game-->
+    <header class="main-banner exercise-space-banner sticky-top">
+        <div class="container d-flex justify-content-start">
+            <a href="#"
+                class="main-banner__nav
+                    d-flex justify-content-start">
+                <div class="main-banner__prompt">
+                    &lsaquo;
+                </div>
+                <figure
+                    class="main-banner__avatar align-self-center">
+                    <img alt="Go to Questions list for this level"
+                    src="{% static 'img/avatar-fol-temp.png' %}" />
+                </figure>
+                <h1 class="align-self-center">
+                    <span class="main-banner__subhead">
+                        <span class='visually-hidden'>
+                            Go to First Order Logic </span>
+                    </span>
+                    <span class="main-banner__title">FOL: Matching Game</span>
+                </h1>
+            </a>
+        </div>
+    </header>
+    <!-- Section for FOL Matching game content-->
+    <section class="container content-body exercise-space"
+        id="maincontent">
+
+        <div class="grid-level-progress">
+            <div class="grid-level-label me-2 pt-2">
+                Level:
+            </div>
+            <div class="me-3">
+                <select class="form-select">
+                    <option value="easy">Easy</option>
+                    <option value="medium">Medium</option>
+                    <option value="hard">Hard</option>
+                </select>
+            </div>
+            <div class="progress-state d-flex">
+                <div class="progress-state__4">
+                    <img alt="Go to Questions list for this level"
+                    src="{% static 'img/icon-clover-4.svg' %}" />
+                    1
+                </div>
+                <div class="progress-state__3">
+                    <img alt="Go to Questions list for this level"
+                    src="{% static 'img/icon-clover-3.svg' %}" />
+                    3
+                </div>
+                <div class="progress-state__2">
+                    <img alt="Go to Questions list for this level"
+                    src="{% static 'img/icon-clover-2.svg' %}" />
+                    30
+                </div>
+                <div class="progress-state__1">
+                    <img alt="Go to Questions list for this level"
+                    src="{% static 'img/icon-clover-1.svg' %}" />
+                    5
+                </div>
+                <div class="progress-state__0">
+                    <img alt="Go to Questions list for this level"
+                    src="{% static 'img/icon-clover-0.svg' %}" />
+                    50
+                </div>
+                <div class="progress-state__i">
+                    <img alt="Go to Questions list for this level"
+                    src="{% static 'img/icon-clover-i.svg' %}" />
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-12 col-md-6">
+                <section id="grid" class="container grid-container"><!-- Replace the <section> tag in the grid with this new one -->
+                    <!-- Below is the placeholder for the grid -->
+                     <!-- Replace the content below with actual grid <svg> content -->
+                        {% include "FOLdesign/gridsvg.html" %}
+                    <!-- Above is the placeholder for the grid -->
+                    <!-- Replace the content above with actual grid -->
+                </section>
+            </div>
+            <div class="col-12 col-md-6 py-md-0
+                solution-step">
+                <section id="solution">
+                    <p class="solution-step__prompt grid-step__prompt py-md-0">Select the best matching statement</p>
+
+                    <button class="btn-grid-selection d-flex">
+                        <div class="selection-text flex-grow-1">
+                            <div class="selection-label">∀x ((Shape(x, square) ∧ Color(x, Green)) → ∃y (Shape(y, triangle) ∧ Value(y) ≥ 2 ∧ Adjacency(y, Above, x)))</div>
+                        </div>
+                    </button>
+
+                    <button class="btn-grid-selection d-flex">
+                        <div class="selection-text flex-grow-1">
+                            <div class="selection-label">∀x ((Shape(x, circle) ∧ Color(x, Red)) → ∃y (Shape(y, triangle) ∧ Value(y) > 4 ∧ Adjacency(y, RightOf, x)))</div>
+                        </div>
+                    </button>
+                    
+                    <button class="btn-grid-selection d-flex">
+                        <div class="selection-text flex-grow-1">
+                            <div class="selection-label">∀x ((Shape(x, square) ∧ Color(x, Green)) → ∃y (Shape(y, circle) ∧ Value(y) < 6 ∧ Adjacency(y, LeftOf, x)))</div>
+                        </div>
+                    </button>
+                    
+                    <button class="btn-grid-selection d-flex">
+                        <div class="selection-text flex-grow-1">
+                            <div class="selection-label">∀x ((Shape(x, square) ∧ Color(x, Red)) → ∃y (Shape(y, triangle) ∧ Value(y) < 4 ∧ Adjacency(y, TopRightOf, x)))</div>
+                        </div>
+                    </button>
+
+                </section>
+
+                <button class="btn btn-success w-25 d-block ms-auto mb-4 mb-md-0">Go!</button>
+
+                <div class="grid-actions">
+                    <button class="btn btn-outline-primary">Next grid &raquo;</button>
+                    <button class="btn btn-outline-primary">Skip this grid &raquo;</button>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- ###### NOTE: make sure the id and aria-labelledby attributes match, here I used CloverModal and CloverModalLabel ###### -->
+    <div class="modal fade show" id="CloverModal" tabindex="-1" aria-labelledby="CloverModalLabel" aria-modal="true" role="dialog" style="display: block;">
+        <div class="modal-dialog modal-dialog-scrollable modal-dialog-variable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <!-- ###### NOTE: make sure the id and aria-labelledby attributes match, here I used CloverModalLabel ###### -->
+                    <h5 class="modal-title" id="CloverModalLabel">Your progress in Level Easy</h5>
+                    <button class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <!-- ###### Begin modal body ###### -->
+                <div class="modal-body">
+                    <h4>Key</h4>
+                    <table class="table table-borderless">
+                        <tbody>
+                            <tr>
+                                <td class="progress-state__key">
+                                    <img alt="Correct on first attempt"
+                                    src="{% static 'img/icon-clover-4.svg' %}" />
+                                </td>
+                                <td>9 rounds correct on <strong>first</strong> attempt</td>
+                            </tr>
+                            <tr>
+                                <td class="progress-state__key">
+                                    <img alt="Correct on second attempt"
+                                    src="{% static 'img/icon-clover-3.svg' %}" />
+                                </td>
+                                <td>9 rounds correct on <strong>second</strong> attempt</td>
+                            </tr>
+                            <tr>
+                                <td class="progress-state__key">
+                                    <img alt="Correct on third attempt"
+                                    src="{% static 'img/icon-clover-2.svg' %}" />
+                                </td>
+                                <td>9 rounds correct on <strong>third</strong> attempt</td>
+                            </tr>
+                            <tr>
+                                <td class="progress-state__key">
+                                    <img alt="Correct on fourth attempt"
+                                    src="{% static 'img/icon-clover-1.svg' %}" />
+                                </td>
+                                <td>9 rounds correct on <strong>fourth</strong> attempt</td>
+                            </tr>
+                            <tr>
+                                <td class="progress-state__key">
+                                    <img alt="Skipped"
+                                    src="{% static 'img/icon-clover-0.svg' %}" />
+                                </td>
+                                <td>9 rounds correct <strong>skipped</strong></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <hr />
+                    <h4>Your progress breakdown</h4>
+
+                    <p class="mt-3">
+                        This text is for when user hasn't started the game: You haven&rsquo;t started the game yet. Once you&rsquo;ve played a few rounds, come back here to see a breakdown of your progress.
+                    </p>
+                    <p class="mt-3">
+                        This text is for when user started the game, but doesn't have 3 perfect scores in a row : You have played <strong>6 rounds</strong>. Keep playing a few more rounds to learn and understand the patterns. Practice will help you get better each time.
+                    </p>
+                    <p class="mt-3">
+                        This text is for when user started the game, and has 3 perfect scores in a row : You have played <strong>15 rounds</strong>. Excellent work! You&rsquo;ve mastered this level, so go ahead and challenge yourself with the next one!
+                    </p>
+                    <div class="d-flex flex-wrap">
+                        <div class="progress-state__key mx-1">
+                            <img alt="Correct on first attempt"
+                            src="{% static 'img/icon-clover-4.svg' %}" />
+                            R12
+                        </div>
+                        <div class="progress-state__key mx-1">
+                            <img alt="Correct on first attempt"
+                            src="{% static 'img/icon-clover-4.svg' %}" />
+                            R11
+                        </div>
+                        <div class="progress-state__key mx-1">
+                            <img alt="Correct on first attempt"
+                            src="{% static 'img/icon-clover-4.svg' %}" />
+                            R10
+                        </div>
+                        <div class="progress-state__key mx-1">
+                            <img alt="Correct on second attempt"
+                            src="{% static 'img/icon-clover-3.svg' %}" />
+                            R9
+                        </div>
+                        <div class="progress-state__key mx-1">
+                            <img alt="Correct on second attempt"
+                            src="{% static 'img/icon-clover-3.svg' %}" />
+                            R8
+                        </div>
+                        <div class="progress-state__key mx-1">
+                            <img alt="Correct on second attempt"
+                            src="{% static 'img/icon-clover-3.svg' %}" />
+                            R7
+                        </div>
+                        <div class="progress-state__key mx-1">
+                            <img alt="Correct on first attempt"
+                            src="{% static 'img/icon-clover-4.svg' %}" />
+                            R6
+                        </div>
+                        <div class="progress-state__key mx-1">
+                            <img alt="Skipped"
+                            src="{% static 'img/icon-clover-0.svg' %}" />
+                            R5
+                        </div>
+                        <div class="progress-state__key mx-1">
+                            <img alt="Correct on fourth attempt"
+                            src="{% static 'img/icon-clover-1.svg' %}" />
+                            R4
+                        </div>
+                        <div class="progress-state__key mx-1">
+                            <img alt="Correct on third attempt"
+                            src="{% static 'img/icon-clover-2.svg' %}" />
+                            R3
+                        </div>
+                        <div class="progress-state__key mx-1">
+                            <img alt="Correct on fourth attempt"
+                            src="{% static 'img/icon-clover-1.svg' %}" />
+                            R2
+                        </div>
+                        <div class="progress-state__key mx-1">
+                            <img alt="Correct on fourth attempt"
+                            src="{% static 'img/icon-clover-1.svg' %}" />
+                            R1
+                        </div>
+                    </div>
+                </div><!-- ###### End modal body ###### -->
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+{% endblock %}
+{% block footer%}{% endblock %}
