@@ -6,12 +6,13 @@ interface OptionProps {
     correctIndex: number
     showList: boolean[]
     setShowList: React.Dispatch<React.SetStateAction<boolean[]>>
+    isNarrow: boolean
     handleAttempt: (isCorrect:boolean) => void
     handleNewGrid: () => void
 }
 
 export const Options: React.FC<OptionProps> = ({
-    options, correctIndex, showList, setShowList,
+    options, correctIndex, showList, setShowList, isNarrow,
     handleAttempt, handleNewGrid
 }:OptionProps) => {
     const [selected, setSelected] = useState<number>(-1);
@@ -71,9 +72,9 @@ export const Options: React.FC<OptionProps> = ({
         </section>
         <button className='btn btn-success w-25 d-block ms-auto mb-4 mb-md-0'
             onClick={handleSubmit}>Go!</button>
-        <div className="grid-actions">
+        {!isNarrow && <div className="grid-actions">
             <button className="btn btn-outline-primary" onClick={handleNewGrid}>
                 {showList[correctIndex] ? 'Next': 'Skip this'} grid »</button>
-        </div>
+        </div>}
     </div>;
 };
