@@ -2,6 +2,12 @@
 
 export const gridSize = 5;
 
+export const dTitle = {
+    easy: 'Easy',
+    medium: 'Medium',
+    hard: 'Hard'
+};
+
 export interface GridItem {
     color:string
     number:number

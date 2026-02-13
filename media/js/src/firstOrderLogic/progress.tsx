@@ -1,51 +1,116 @@
-import React from 'react';
-import { Score } from './utils';
+import React, { useEffect, useState } from 'react';
+import { Score, dTitle } from './utils';
 import { STATIC_URL } from './firstOrderLogic';
 
 interface ProgressProps {
     difficulty: string
-    score: Score,
+    score: Score
+    rounds: Score
 }
 
+const mkClover = (i:number, alt:string) =>
+    <img alt={alt}
+        src={`${STATIC_URL}img/icon-clover-${4-i}.svg`} />;
+
+const rank = ['first', 'second', 'third', 'fourth', 'skipped'];
+const rankKey = Array.from(rank, (place, i) => i === 4 ? 'Skipped' :
+    `Correct on ${place} attempt`);
+const rankKeyHTML = Array.from(rank, (place, i) => i === 4 ?
+    <strong>{place}</strong> :
+    <>correct on <strong>{place}</strong> attempt</>);
+
+
 export const Progress: React.FC<ProgressProps> = ({
-    difficulty,
-    score
+    difficulty, score, rounds
 }:ProgressProps) => {
-    return <button className="progress-state d-flex btn"
-        data-bs-toggle="modal" data-bs-target="#progressModal"
-    >
+    const emptyStatus = <>You haven't started the game yet. Once you've played
+        a few rounds, come back here to see a breakdown of your progress.</>;
+    const [rStatus, setRStatus] = useState(emptyStatus);
+
+    useEffect(() => {
+        const diff = rounds[difficulty];
+        const len = diff.length;
+        if (len > 0) {
+            const status = <p>You have played <strong>{len} round
+                {len === 1 ? '' : 's'}</strong>.</p>;
+            const progress = len > 2 && diff.slice(0, 3).every(x => x === 4) ?
+                'Excellent work! You\'ve mastered this level, so ' +
+                    'go ahead and challenge yourself with the next one!'
+                :
+                'Keep playing a few more rounds to learn and ' +
+                    'understand the patterns. Practice will help you get ' +
+                    'better each time.';
+            setRStatus(<>{status} {progress}</>);
+        } else {
+            setRStatus(emptyStatus);
+        }
+    }, [rounds, difficulty]);
+
+    return <div className="progress-state d-flex">
         {score[difficulty].map((val, i) => {
             return <div className="progress-state d-flex" key={i}>
                 <div className={`progress-state__${4-i}`}>
-                    <img alt="Go to Questions list for this level"
-                        src={`${STATIC_URL}img/icon-clover-${4-i}.svg`} />
+                    {mkClover(i, 'Go to Questions list for this level')}
                     {val}
                 </div>
             </div>;
         })}
-        <div className="modal fade" id="progressModal" tabIndex={-1}
-            aria-labelledby="progressModal" aria-hidden="true">
+        <div className="btn p-0 progress-state d-flex" data-bs-toggle="modal"
+            data-bs-target="#CloverModal"
+        >
+            <div className="progress-state__i">
+                <img alt="Go to Questions list for this level"
+                    src={`${STATIC_URL}img/icon-clover-i.svg`} />
+            </div>
+        </div>
+        <div className="modal fade" id="CloverModal" tabIndex={-1}
+            aria-labelledby="CloverModal" aria-hidden="true">
             <div className={`modal-dialog modal-dialog-scrollable
                 modal-dialog-variable`}
             >
                 <div className="modal-content">
                     <div className="modal-header">
                         <h5 className="modal-title" id="progressInfoLabel">
-                            Your progress in Level {difficulty}
+                            Your progress in Level {dTitle[difficulty]}
                         </h5>
                         <button type="button" className="btn-close"
                             data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div className="modal-body">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing
-                        elit, sed do eiusmod tempor incididunt ut labore et
-                        dolore magna aliqua. Ut enim ad minim veniam, quis
-                        nostrud exercitation ullamco laboris nisi ut aliquip ex
-                        ea commodo consequat. Duis aute irure dolor in
-                        reprehenderit in voluptate velit esse cillum dolore eu
-                        fugiat nulla pariatur. Excepteur sint occaecat
-                        cupidatat non proident, sunt in culpa qui officia
-                        deserunt mollit anim id est laborum.
+                        <h4>Key</h4>
+                        <table className="table table-borderless">
+                            <tbody>
+                                {rankKey.map((alt, i) => {
+                                    const round = score[difficulty][i];
+                                    return <tr key={i}>
+                                        <td className="progress-state__key">
+                                            {mkClover(i, alt)}
+                                        </td>
+                                        <td>
+                                            {round} round
+                                            {round === 1 ? ' ' : 's '}
+                                            {rankKeyHTML[i]}
+                                        </td>
+                                    </tr>;
+                                })}
+                            </tbody>
+                        </table>
+                        <hr />
+                        <h4>Your progress breakdown</h4>
+                        <p className="mt-3">
+                            {rStatus}
+                        </p>
+                        <div className="d-flex flex-wrap">
+                            {rounds[difficulty].map((round, i) => {
+                                const len = rounds[difficulty].length;
+                                return <div key={i}
+                                    className="progress-state__key mx-1"
+                                >
+                                    {mkClover(4 - round, rankKey[round])}
+                                    R{len - i}
+                                </div>;
+                            })}
+                        </div>
                     </div>
                     <div className="modal-footer">
                         <button type="button" className="btn btn-secondary"
@@ -54,5 +119,5 @@ export const Progress: React.FC<ProgressProps> = ({
                 </div>
             </div>
         </div>
-    </button>;
+    </div>;
 };

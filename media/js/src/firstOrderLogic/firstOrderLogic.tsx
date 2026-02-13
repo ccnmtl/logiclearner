@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { shuffleArray, getRandomElement, GridItem, GridStatement,
-    GridTemplate, Score } from './utils';
+    GridTemplate, Score, dTitle} from './utils';
 import { getTemplatesByDifficulty } from './statementGenerator';
 import { Grid } from './grid';
 import { Options } from './options';
@@ -31,6 +31,12 @@ export const FirstOrderLogic: React.FC<FirstOrderLogicProps> = ({mode}) => {
     const [isDone, setIsDone] = useState<boolean>(false);
     const [attempt, setAttempt] = useState<number>(4);
 
+    const baseRounds = {
+        easy: [],
+        medium: [],
+        hard: []
+    };
+    const [rounds, setRounds] = useState<Score>(baseRounds);
     const baseTally = [0, 0, 0, 0, 0];
     const baseScore = {
         easy: baseTally,
@@ -41,12 +47,6 @@ export const FirstOrderLogic: React.FC<FirstOrderLogicProps> = ({mode}) => {
 
     const [correctTemplate, setCorrectTemplate] =
         useState<GridTemplate>(getRandomElement(templateBank));
-
-    const diffOptions = [  // [value, innerText]
-        ['easy', 'Easy'],
-        ['medium', 'Medium'],
-        ['hard', 'Hard']
-    ];
 
     function generateIncorrectStatements(templateBank, correctTemplate) {
         const incorrectStatements = [];
@@ -88,6 +88,7 @@ export const FirstOrderLogic: React.FC<FirstOrderLogicProps> = ({mode}) => {
         if (!isDone && attempt < 4) {
             setScore({...score, [diff]: score[diff].map((val, i) =>
                 i === 4 ? val + 1 : val)});
+            setRounds({...rounds, [diff]: [0, ...rounds[diff]]});
         }
     };
 
@@ -116,6 +117,8 @@ export const FirstOrderLogic: React.FC<FirstOrderLogicProps> = ({mode}) => {
                 setScore({...score,
                     [difficulty]: score[difficulty].map((val, i) =>
                         attempt === 4-i ? val + 1 : val)});
+                setRounds({...rounds,
+                    [difficulty]: [attempt, ...rounds[difficulty]]});
             } else {
                 setAttempt(Math.max(attempt - 1, 1));
             }
@@ -204,23 +207,28 @@ export const FirstOrderLogic: React.FC<FirstOrderLogicProps> = ({mode}) => {
 
     useEffect(() => {
         if (score != baseScore) {
-            localStorage.setItem('fol', JSON.stringify(score));
+            localStorage.setItem('fol', JSON.stringify({score, rounds}));
         }
-    }, [score]);
+    }, [score, rounds]);
 
     useEffect(() => {
         setShowList(emptyShow);
         const store = JSON.parse(localStorage.getItem('fol'));
         if (store) {
             try {
-                // Checks for the correct score model.
-                if (Object.keys(baseScore).every(diff => score[diff])) {
-                    setScore(score);
+                // Checks for the correct data models.
+                if (['score', 'rounds'].map(check => Object.keys(baseScore)
+                    .every(diff => Array.isArray(store[check][diff])))
+                ) {
+                    setScore(store['score']);
+                    setRounds(store['rounds']);
                 } else {
                     setScore(baseScore);
+                    setRounds(baseRounds);
                 }
             } catch {
                 setScore(baseScore);
+                setRounds(baseRounds);
             }
         }
     }, []);
@@ -241,14 +249,15 @@ export const FirstOrderLogic: React.FC<FirstOrderLogicProps> = ({mode}) => {
                     <div className="me-3">
                         <select className='form-select'
                             onChange={handleDifficulty}>
-                            {diffOptions.map((option, i) =>
+                            {Object.entries(dTitle).map((option, i) =>
                                 <option key={i} value={option[0]}>
                                     {option[1]}
                                 </option>)}
                         </select>
                     </div>
                     {mode === 0 &&
-                        <Progress difficulty={difficulty} score={score} />}
+                        <Progress difficulty={difficulty} score={score}
+                            rounds={rounds}/>}
                 </div>
                 <div className="row">
                     <div className="col-12 col-md-6">
