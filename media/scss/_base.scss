@@ -52,11 +52,12 @@ main,
     border: none;
     border-top: 0.0625rem solid #ffe0b2;
     text-align: right;
-    position: fixed;
+    position: sticky;
     bottom: 0;
     left: 0;
     width: 100%;
     background-color: #fff3e0;
+    z-index: 1020;
     box-shadow: 0 -0.125rem 0.25rem 0 rgba(128, 128, 128, 0.25);
     @include media-breakpoint-up(md) {
         position: relative;
