@@ -16,8 +16,21 @@ export const StatementInput: React.FC<StatementProps> = ({
         ['ERROR: This feedback should not be visible.']);
     const [submitted, setSubmitted] = useState<boolean>(false);
     const [evalObj, setEvalObj] = useState([{}, {}]);
-
-    const buttonList = ['∀', '→', '∧', '≤', '≥', '∃'];
+    const operatorList = ['∀', '∃', '→', '∧', '≤', '≥', '=', '(', ')', ','];
+    const variableList = ['x', 'y', 'z'];
+    const predicateList = [
+        'Shape', 'Color', 'Value', 'Even',
+        'Odd', 'Prime', 'Location', 'MultipleOf'
+    ];
+    const adjacencyList = [
+        'Above', 'TopLeftOf', 'TopRightOf', 'LeftOf',
+        'RightOf', 'Below', 'BottomLeftOf', 'BottomRightOf'
+    ];
+    const constantList = [
+        '0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
+        'Circle', 'Square', 'Triangle', 'Blue', 'Green',
+        'Red', 'Top', 'Bottom', 'Left', 'Right', 'Row', 'Column'
+    ];
 
     const LaTexConversion = {
         '\\and': '∧',
@@ -92,16 +105,6 @@ export const StatementInput: React.FC<StatementProps> = ({
         'hard': /^\∀x.*\→\∃y.*$/
     };
 
-    const directionalRelationships = ['Above', 'TopLeftOf',
-        'TopRightOf', 'LeftOf', 'RightOf', 'Below',
-        'BottomLeftOf', 'BottomRightOf'];
-
-    const objectRelationships = ['Shape(x/y, Circle/Square/Triangle)',
-        'Color(x/y, Blue/Green/Red))', 'Value(x/y, 0 to 9))',
-        'Even(Value(x/y))', 'Odd(Value(x/y))', 'Prime(Value(x/y))',
-        'Location(x/y, top/bottom/left/right rows/columns',
-        'MultipleOf(Value(x/y))'];
-
     const mkList = (items:string[], uniqueClass='') =>
         <ul className={`list-group-flush ps-2 ${uniqueClass}`}>
             {items.map((item, i) =>
@@ -109,18 +112,25 @@ export const StatementInput: React.FC<StatementProps> = ({
             )}
         </ul>;
 
-    const mkBtnList = (items:string[]) =>
-        <ul className="list-inline  row my-2">
-            {items.map((item:string, i:number) =>
-                <li key={i} className="col-auto">
-                    <button className="btn btn-outline-secondary"
-                        aria-label={`Add a ${item} symbol to the statement.`}
-                        onClick={mkAddChar(item)}
-                    >
-                        {item}</button>
-                </li>
-            )}
-        </ul>;
+    const mkBtnList = (title: string, items: string[]) => (
+        <div className="mb-2">
+            <span className="me-2 fw-bold">{title}</span>
+            <ul className="list-inline d-inline-block mb-0">
+                {items.map((item:string, i:number) =>
+                    <li key={i} className="list-inline-item mb-1">
+                        <button
+                            className="btn btn-outline-secondary btn-sm"
+                            aria-label={
+                                `Add a ${item} symbol to the statement.`
+                            }
+                            onClick={mkAddChar(item)}
+                        >
+                            {item}</button>
+                    </li>
+                )}
+            </ul>
+        </div>
+    );
 
     const mkAddChar = (char:string) => () => {
         const el =
@@ -131,7 +141,8 @@ export const StatementInput: React.FC<StatementProps> = ({
         setText(newText);
         el.value = newText;
         el.focus();
-        el.selectionEnd = pos + 1;
+        const newPos = pos !== null ? pos + char.length : newText.length;
+        el.setSelectionRange(newPos, newPos);
     };
 
     const evaluate = (check:object[]) => {
@@ -223,35 +234,29 @@ export const StatementInput: React.FC<StatementProps> = ({
                 <strong>
                     {correctStatement.naturalLanguageStatement}
                 </strong>
-                {mkBtnList(buttonList)}
                 <textarea id="statement-text" data-testid="statement-text"
-                    className="form-control mb-2"
+                    className="form-control my-2"
                     onChange={handleText}
                     placeholder="Enter the value here" value={text}></textarea>
                 <button
                     type="submit"
-                    className="btn btn-success w-30 d-block ms-auto mb-4 \
-                    mb-md-0"
+                    className="btn btn-success w-30 d-block ms-auto mb-3"
                     onClick={handleCheck} data-testid="submit-button"
                 >
                     Check Statement
                 </button>
                 {submitted &&
-                <div data-testid="feedback" >
+                <div data-testid="feedback" className="mb-3">
                     {feedback.length > 0 ?
                         mkList(feedback, 'text-danger'):
                         <p className="text-success">Success!</p>}
                 </div>}
-                <p className="col-12 fs-4 my-2">Predicates</p>
-                <div className="row">
-                    <div className="col-6">
-                        <strong>Object</strong>
-                        {mkList(objectRelationships)}
-                    </div>
-                    <div className="col-6">
-                        <strong>Adjacency(y, [direction], x)</strong>
-                        {mkList(directionalRelationships)}
-                    </div>
+                <div className="d-flex flex-column mb-3">
+                    {mkBtnList('Operators', operatorList)}
+                    {mkBtnList('Variables', variableList)}
+                    {mkBtnList('Predicates', predicateList)}
+                    {mkBtnList('Adjacencies', adjacencyList)}
+                    {mkBtnList('Constants', constantList)}
                 </div>
             </section>
         </div>
