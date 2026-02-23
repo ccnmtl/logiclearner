@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { GridStatement } from './utils';
 
 interface OptionProps {
@@ -8,14 +8,14 @@ interface OptionProps {
     setShowList: React.Dispatch<React.SetStateAction<boolean[]>>
     handleAttempt: (isCorrect:boolean) => void
     handleNewGrid: () => void
+    selected: number
+    setSelected: React.Dispatch<React.SetStateAction<number>>
 }
 
 export const Options: React.FC<OptionProps> = ({
     options, correctIndex, showList, setShowList,
-    handleAttempt, handleNewGrid
+    handleAttempt, handleNewGrid , selected, setSelected
 }:OptionProps) => {
-    const [selected, setSelected] = useState<number>(-1);
-
     const showResult = (i:number) => {
         if (showList[i])
             if (i === correctIndex) return 'selection-correct';

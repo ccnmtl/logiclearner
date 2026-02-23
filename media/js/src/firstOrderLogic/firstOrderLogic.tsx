@@ -30,6 +30,7 @@ export const FirstOrderLogic: React.FC<FirstOrderLogicProps> = ({mode}) => {
     const [showList, setShowList] = useState<boolean[]>(emptyShow);
     const [isDone, setIsDone] = useState<boolean>(false);
     const [attempt, setAttempt] = useState<number>(4);
+    const [selected, setSelected] = useState<number>(-1);
 
     const baseRounds = {
         easy: [],
@@ -90,6 +91,7 @@ export const FirstOrderLogic: React.FC<FirstOrderLogicProps> = ({mode}) => {
                 i === 4 ? val + 1 : val)});
             setRounds({...rounds, [diff]: [0, ...rounds[diff]]});
         }
+        setSelected(-1);
     };
 
     const handleDifficulty = (e) => {
@@ -268,7 +270,9 @@ export const FirstOrderLogic: React.FC<FirstOrderLogicProps> = ({mode}) => {
                         correctIndex={correctIndex} showList={showList}
                         setShowList={setShowList}
                         handleAttempt={handleAttempt}
-                        handleNewGrid={handleNewGrid}/>}
+                        handleNewGrid={handleNewGrid}
+                        selected={selected}
+                        setSelected={setSelected}/>}
                     {mode === 1 && correctStatement &&
                     <StatementInput correctStatement={correctStatement}
                         text={text} difficulty={difficulty}
