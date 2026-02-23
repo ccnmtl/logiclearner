@@ -47,6 +47,10 @@ export const Options: React.FC<OptionProps> = ({
         }
     }, [showList]);
 
+    useEffect(() => {
+        setSelected(-1);
+    }, [options]);
+
     return <div className="col-md-6 py-md-0 solution-step">
         <section id="solution">
             <p className="solution-step__prompt py-md-0">
