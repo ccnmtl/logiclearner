@@ -275,6 +275,13 @@ export const FirstOrderLogic: React.FC<FirstOrderLogicProps> = ({mode}) => {
                         setText={setText} />}
                 </div>
             </section>
+            {mode === 0 && <div className="grid-actions d-md-none">
+                <button className="btn btn-outline-primary"
+                    onClick={handleNewGrid}
+                >
+                    {showList[correctIndex] ? 'Next': 'Skip this'} grid »
+                </button>
+            </div>}
         </>
     );
 };
