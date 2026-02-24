@@ -70,7 +70,9 @@ export const Options: React.FC<OptionProps> = ({
             )}
         </section>
         <button className='btn btn-success w-25 d-block ms-auto mb-4 mb-md-0'
-            onClick={handleSubmit}>Go!</button>
+            onClick={handleSubmit} disabled={showList[correctIndex]}
+        >
+            Go!</button>
         <div className="grid-actions">
             <button className="btn btn-outline-primary" onClick={handleNewGrid}>
                 {showList[correctIndex] ? 'Next': 'Skip this'} grid »</button>
