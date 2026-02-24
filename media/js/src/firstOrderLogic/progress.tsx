@@ -23,8 +23,8 @@ const rankKeyHTML = Array.from(rank, (place, i) => i === 4 ?
 export const Progress: React.FC<ProgressProps> = ({
     difficulty, score, rounds
 }:ProgressProps) => {
-    const emptyStatus = <>You haven't started the game yet. Once you've played
-        a few rounds, come back here to see a breakdown of your progress.</>;
+    const emptyStatus = <p>You haven't started the game yet. Once you've played
+        a few rounds, come back here to see a breakdown of your progress.</p>;
     const [rStatus, setRStatus] = useState(emptyStatus);
 
     useEffect(() => {
@@ -33,13 +33,14 @@ export const Progress: React.FC<ProgressProps> = ({
         if (len > 0) {
             const status = <p>You have played <strong>{len} round
                 {len === 1 ? '' : 's'}</strong>.</p>;
-            const progress = len > 2 && diff.slice(0, 3).every(x => x === 4) ?
+            const progress = <p>{len > 2 &&
+                diff.slice(0, 3).every(x => x === 4) ?
                 'Excellent work! You\'ve mastered this level, so ' +
                     'go ahead and challenge yourself with the next one!'
                 :
                 'Keep playing a few more rounds to learn and ' +
                     'understand the patterns. Practice will help you get ' +
-                    'better each time.';
+                    'better each time.'}</p>;
             setRStatus(<>{status} {progress}</>);
         } else {
             setRStatus(emptyStatus);
@@ -97,9 +98,9 @@ export const Progress: React.FC<ProgressProps> = ({
                         </table>
                         <hr />
                         <h4>Your progress breakdown</h4>
-                        <p className="mt-3">
+                        <div className="mt-3">
                             {rStatus}
-                        </p>
+                        </div>
                         <div className="d-flex flex-wrap">
                             {rounds[difficulty].map((round, i) => {
                                 const len = rounds[difficulty].length;
