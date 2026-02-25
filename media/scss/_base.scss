@@ -72,3 +72,13 @@ main,
         box-shadow: none;
     }
 }
+
+.fol-statement-input {
+    position: sticky;
+    bottom: 0;
+    z-index: 1020;
+    @include media-breakpoint-up(md) {
+        position: static;
+        z-index: auto;
+    }
+}

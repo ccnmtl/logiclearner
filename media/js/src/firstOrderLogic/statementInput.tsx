@@ -227,36 +227,45 @@ export const StatementInput: React.FC<StatementProps> = ({
 
     return (
         <div className="col-md-6 py-md-0 solution-step">
-            <section data-testid="statement-input" id="solution">
-                <p>
-                    Enter the statement that defines the following relationship:
-                </p>
-                <strong>
-                    {correctStatement.naturalLanguageStatement}
-                </strong>
-                <textarea id="statement-text" data-testid="statement-text"
-                    className="form-control my-2"
-                    onChange={handleText}
-                    placeholder="Enter the value here" value={text}></textarea>
-                <button
-                    type="submit"
-                    className="btn btn-success w-30 d-block ms-auto mb-3"
-                    onClick={handleCheck} data-testid="submit-button"
-                >
-                    Check Statement
-                </button>
-                {submitted &&
-                <div data-testid="feedback" className="mb-3">
-                    {feedback.length > 0 ?
-                        mkList(feedback, 'text-danger'):
-                        <p className="text-success">Success!</p>}
-                </div>}
-                <div className="d-flex flex-column mb-3">
+            <section data-testid="statement-input" id="solution"
+                className="d-flex flex-column">
+                <div className="order-1">
+                    <p>
+                        Enter the statement that defines the following
+                        relationship:
+                    </p>
+                    <strong>
+                        {correctStatement.naturalLanguageStatement}
+                    </strong>
+                </div>
+                <div className="d-flex flex-column my-3 order-2 order-md-3">
                     {mkBtnList('Operators', operatorList)}
                     {mkBtnList('Variables', variableList)}
                     {mkBtnList('Predicates', predicateList)}
                     {mkBtnList('Adjacencies', adjacencyList)}
                     {mkBtnList('Constants', constantList)}
+                </div>
+                <div
+                    className={
+                        'order-3 order-md-2 fol-statement-input pb-2 pt-1 ' +
+                        'bg-white'}>
+                    <textarea id="statement-text" data-testid="statement-text"
+                        className="form-control my-2"
+                        onChange={handleText}
+                        placeholder="Enter the value here"
+                        value={text}></textarea>
+                    <button
+                        type="submit"
+                        className="btn btn-success w-30 d-block ms-auto mb-3"
+                        onClick={handleCheck} data-testid="submit-button">
+                        Check Statement
+                    </button>
+                    {submitted &&
+                    <div data-testid="feedback" className="mb-3">
+                        {feedback.length > 0 ?
+                            mkList(feedback, 'text-danger'):
+                            <p className="text-success">Success!</p>}
+                    </div>}
                 </div>
             </section>
         </div>
