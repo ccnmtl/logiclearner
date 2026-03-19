@@ -73,7 +73,7 @@ gunicorn==25.1.0
 django-infranil==1.1.0
 django-flatblocks==1.0.0
 
-djangorestframework==3.16.1
+djangorestframework==3.17.0
 
 
 django-storages==1.14.6
