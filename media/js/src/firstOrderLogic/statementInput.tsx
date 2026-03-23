@@ -7,10 +7,14 @@ interface StatementProps {
     difficulty: string
     text: string
     setText: React.Dispatch<React.SetStateAction<string>>
+    handleAttempt: (isCorrect:boolean) => void
+    handleNewGrid: () => void
+    isDone: boolean
 }
 
 export const StatementInput: React.FC<StatementProps> = ({
-    correctStatement, difficulty, text, setText
+    correctStatement, difficulty, text, setText,
+    handleAttempt, handleNewGrid, isDone
 }:StatementProps) => {
     const [feedback, setFeedback] = useState<string[]>(
         ['ERROR: This feedback should not be visible.']);
@@ -179,6 +183,7 @@ export const StatementInput: React.FC<StatementProps> = ({
             errors.push('The statement requires one implication (→) character');
         }
         setFeedback(errors);
+        handleAttempt(errors.length === 0);
     };
 
     const handleCheck = () => {
@@ -196,6 +201,7 @@ export const StatementInput: React.FC<StatementProps> = ({
                     ', and dependent predicates are preceded by ∃y':
                     ''
                 }`]);
+            handleAttempt(false);
         }
     };
 
@@ -257,7 +263,8 @@ export const StatementInput: React.FC<StatementProps> = ({
                     <button
                         type="submit"
                         className="btn btn-success w-30 d-block ms-auto mb-3"
-                        onClick={handleCheck} data-testid="submit-button">
+                        onClick={handleCheck} data-testid="submit-button"
+                        disabled={isDone}>
                         Check Statement
                     </button>
                     {submitted &&
@@ -266,6 +273,11 @@ export const StatementInput: React.FC<StatementProps> = ({
                             mkList(feedback, 'text-danger'):
                             <p className="text-success">Success!</p>}
                     </div>}
+                    <div className="grid-actions d-none d-md-block">
+                        <button className="btn btn-outline-primary"
+                            onClick={handleNewGrid}>
+                            {isDone ? 'Next': 'Skip this'} grid »</button>
+                    </div>
                 </div>
             </section>
         </div>

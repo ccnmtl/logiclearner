@@ -38,6 +38,9 @@ beforeEach(() => {
                 difficulty='hard'
                 text={text}
                 setText={setText}
+                handleAttempt={jest.fn()}
+                handleNewGrid={jest.fn()}
+                isDone={false}
             />
         );
     };
