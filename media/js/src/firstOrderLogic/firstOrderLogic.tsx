@@ -85,7 +85,7 @@ export const FirstOrderLogic: React.FC<FirstOrderLogicProps> = ({mode}) => {
     }
 
     const registerSkip = (diff:string) => {
-        if (!isDone && attempt < 4) {
+        if (mode === 0 && !isDone && attempt < 4) {
             setScore({...score, [diff]: score[diff].map((val, i) =>
                 i === 4 ? val + 1 : val)});
             setRounds({...rounds, [diff]: [0, ...rounds[diff]]});
@@ -114,13 +114,17 @@ export const FirstOrderLogic: React.FC<FirstOrderLogicProps> = ({mode}) => {
         if (!isDone) {
             if (result) {
                 setIsDone(true);
-                setScore({...score,
-                    [difficulty]: score[difficulty].map((val, i) =>
-                        attempt === 4-i ? val + 1 : val)});
-                setRounds({...rounds,
-                    [difficulty]: [attempt, ...rounds[difficulty]]});
+                if (mode === 0) {
+                    setScore({...score,
+                        [difficulty]: score[difficulty].map((val, i) =>
+                            attempt === 4-i ? val + 1 : val)});
+                    setRounds({...rounds,
+                        [difficulty]: [attempt, ...rounds[difficulty]]});
+                }
             } else {
-                setAttempt(Math.max(attempt - 1, 1));
+                if (mode === 0) {
+                    setAttempt(Math.max(attempt - 1, 1));
+                }
             }
         }
         track('fol_question_attempted', {
@@ -272,16 +276,21 @@ export const FirstOrderLogic: React.FC<FirstOrderLogicProps> = ({mode}) => {
                     {mode === 1 && correctStatement &&
                     <StatementInput correctStatement={correctStatement}
                         text={text} difficulty={difficulty}
-                        setText={setText} />}
+                        setText={setText}
+                        handleAttempt={handleAttempt}
+                        handleNewGrid={handleNewGrid}
+                        isDone={isDone} />}
                 </div>
             </section>
-            {mode === 0 && <div className="grid-actions d-md-none">
+            <div className="grid-actions d-md-none">
                 <button className="btn btn-outline-primary"
-                    onClick={handleNewGrid}
-                >
-                    {showList[correctIndex] ? 'Next': 'Skip this'} grid »
+                    onClick={handleNewGrid} >
+                    {(mode === 0 ? showList[correctIndex] : isDone)
+                        ? 'Next'
+                        : 'Skip this'
+                    } grid »
                 </button>
-            </div>}
+            </div>
         </>
     );
 };
