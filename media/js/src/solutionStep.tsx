@@ -111,7 +111,7 @@ export const SolutionStep: React.FC<SolutionStepProps> = (
             step_list: [''],
             answer: ''
         };
-        let lastCorrectStep = '';
+        let lastCorrectStep;
 
         if (stepList.length > 1) {
             lastCorrectStep = stepList[stepList.length - 2][1];

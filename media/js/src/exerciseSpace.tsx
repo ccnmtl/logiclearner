@@ -111,7 +111,7 @@ export const ExerciseSpace: React.FC = () => {
                 setHint([toolsData['hint'].nextStep[1],
                     toolsData['hint'].nextStep[0]]);
             } else {
-                let lastCorrectStep = '';
+                let lastCorrectStep;
                 if (stepList.length > 1){
                     lastCorrectStep = stepList[stepList.length - 2][1];
                 } else {

@@ -128,7 +128,7 @@ export const QuestionsDashboard: React.FC<QuestionsDashboardProps> = (
                 <ol className="cardset cardset-listnum"
                     aria-labelledby="cardset-label">
                     {statements.map((statement, idx) => {
-                        let questionStatus = '';
+                        let questionStatus;
                         try {
                             const data = JSON.parse(
                                 window.localStorage.getItem(
