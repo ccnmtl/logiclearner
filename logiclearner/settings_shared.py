@@ -25,6 +25,18 @@ MIDDLEWARE += [ # noqa
     'django_cas_ng.middleware.CASMiddleware',
 ]
 
+DEVELOPMENT = 'runserver' in sys.argv
+
+if DEVELOPMENT:
+    INSTALLED_APPS = [
+        *INSTALLED_APPS,
+        'debug_toolbar',
+    ]
+    MIDDLEWARE = [
+        'debug_toolbar.middleware.DebugToolbarMiddleware',
+        *MIDDLEWARE,
+    ]
+
 # Translate CUIT's CAS user attributes to the Django user model.
 # https://cuit.columbia.edu/content/cas-3-ticket-validation-response
 CAS_APPLY_ATTRIBUTES_TO_USER = True
