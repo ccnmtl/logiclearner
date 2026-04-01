@@ -54,7 +54,7 @@ export const hardTemplate_03 = {
         );
         const formalFOLStatement = `∀x ((Shape(x, ${shape1}) ∧ 
             Color(x, ${colorName})) → ∃y (Shape(y, ${shape2}) ∧ 
-            Value(y) ≥ ${valueThreshold} ∧ Adjacency(y, Above, x)))`.trim();
+            Value(y) ≥ ${valueThreshold} ∧ Above(x)))`.trim();
 
         return { naturalLanguageStatement, formalFOLStatement, details };
     },
