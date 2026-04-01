@@ -66,7 +66,7 @@ export const StatementInput: React.FC<StatementProps> = ({
      */
     const pullData = (text:string):object => {
         const rules = {};
-        const predicates = text.match(/\w+\(\w+[,\w]+\)/g);
+        const predicates = text.match(/\w+\(\w+[,\w]*\)/g);
         if (predicates) {
             predicates.forEach((keyValue) => {
                 const key = keyValue.match(/[^xy\W]\w+(?=\(\w)/);
