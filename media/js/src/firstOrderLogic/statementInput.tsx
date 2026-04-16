@@ -23,11 +23,8 @@ export const StatementInput: React.FC<StatementProps> = ({
     const operatorList = ['∀', '∃', '→', '∧', '≤', '≥', '=', '(', ')', ','];
     const variableList = ['x', 'y', 'z'];
     const predicateList = [
-        'Shape', 'Color', 'Value', 'Even',
-        'Odd', 'Prime', 'Location', 'MultipleOf'
-    ];
-    const adjacencyList = [
-        'Above', 'TopLeftOf', 'TopRightOf', 'LeftOf',
+        'Shape', 'Color', 'Value', 'Even', 'Odd', 'Prime', 'Location',
+        'MultipleOf', 'Above', 'TopLeftOf', 'TopRightOf', 'LeftOf',
         'RightOf', 'Below', 'BottomLeftOf', 'BottomRightOf'
     ];
     const constantList = [
@@ -248,7 +245,6 @@ export const StatementInput: React.FC<StatementProps> = ({
                     {mkBtnList('Operators', operatorList)}
                     {mkBtnList('Variables', variableList)}
                     {mkBtnList('Predicates', predicateList)}
-                    {mkBtnList('Adjacencies', adjacencyList)}
                     {mkBtnList('Constants', constantList)}
                 </div>
                 <div
