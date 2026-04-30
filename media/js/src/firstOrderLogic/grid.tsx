@@ -1,13 +1,16 @@
-import React from 'react';
-import { GridItem, getColorName } from './utils';
+import React, { ReactNode } from 'react';
+import { GridItem, getColorName, predicateList } from './utils';
 
 interface GridProps {
     grid: GridItem[],
+    mkBtnList: (title:string, items:string[]) => ReactNode,
+    inBtnRange: boolean,
+    mode: number,
     size: number
 }
 
 export const Grid: React.FC<GridProps> = (
-    {grid, size}:GridProps
+    {grid, mkBtnList, inBtnRange, mode, size}:GridProps
 ) => {
     const chunks = (arr:GridItem[], n:number) => {
         const result = [];
@@ -70,5 +73,8 @@ export const Grid: React.FC<GridProps> = (
                 )
             )}
         </svg>
+        {mode === 1 && <>
+            {!inBtnRange && mkBtnList('Predicate', predicateList)}
+        </>}
     </section>;
 };

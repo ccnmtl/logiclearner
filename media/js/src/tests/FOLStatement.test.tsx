@@ -2,6 +2,7 @@ import React from 'react';
 import { render, fireEvent, screen, act } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import { StatementInput } from '../firstOrderLogic/statementInput';
+import { ExpressButton } from '../firstOrderLogic/expressionButtons';
 
 
 const naturalLanguageStatement = 'For all circles that are Green, there ' +
@@ -35,6 +36,11 @@ beforeEach(() => {
                         shape: 'Not needed',
                     }
                 }}
+                inBtnRange={false}
+                mkBtnList={(title: string, items: string[]) => (
+                    <ExpressButton title={title} items={items}
+                        onClick={jest.fn()} />
+                )}
                 difficulty='hard'
                 text={text}
                 setText={setText}
