@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { HomeBanner } from './homebanner';
+import { PropositionalBanner } from './propositionalBanner';
 import {completionCount, getStatements, ExerciseData, Statement} from './utils';
 
 export const STATIC_URL = LogicLearner.staticUrl;
@@ -7,7 +7,7 @@ const novice = 0;
 const learner = 1;
 const apprentice = 2;
 
-export const LevelsDashboard: React.FC = () => {
+export const PropositionalDashboard: React.FC = () => {
     const [questionsList, setquestionsList] = useState([]);
     const [noviceCount, setnoviceCount] = useState<number>(0);
     const [learnerCount, setlearnerCount] = useState<number>(0);
@@ -45,7 +45,7 @@ export const LevelsDashboard: React.FC = () => {
 
     return (
         <>
-            <HomeBanner />
+            <PropositionalBanner />
             <section className="container content-body" id="maincontent"
                 data-testid={'LevelsDashboard'}>
                 <h2 id="cardset-label"
@@ -54,7 +54,8 @@ export const LevelsDashboard: React.FC = () => {
                     aria-labelledby="cardset-label">
                     <li className="cardset-card">
                         <a className='cardset-card__button'
-                            href={'/tutorial/'} data-cy="tutorial-link">
+                            href={'propositional/tutorial/'}
+                            data-cy="tutorial-link">
                             <figure className="cardset-card__avatar">
                                 <img alt=""
                                     src={
@@ -67,10 +68,11 @@ export const LevelsDashboard: React.FC = () => {
                                     Tutorial
                                 </div>
                                 <div className="cardset-card__title level-name">
-                                    Using Logic Learner
+                                    Using Propositional Learner
                                 </div>
                                 <div className="cardset-card__text">
-                                    Learn how to use Logic Learner.</div>
+                                    Learn the essentials for navigating
+                                    Propositional Learner.</div>
                             </div>
                             <div className="cardset-card__prompt ms-auto">
                                 &rsaquo;
@@ -79,7 +81,7 @@ export const LevelsDashboard: React.FC = () => {
                     </li>
                     <li className="cardset-card">
                         <a className='cardset-card__button'
-                            href={'/level/1'} data-cy="level-one">
+                            href={'/propositional/level/1'} data-cy="level-one">
                             <figure className="cardset-card__avatar">
                                 <img alt=""
                                     src={
@@ -110,7 +112,7 @@ export const LevelsDashboard: React.FC = () => {
                     </li>
                     <li className="cardset-card">
                         <a className='cardset-card__button'
-                            href={'/level/2'} data-cy="level-two">
+                            href={'/propositional/level/2'} data-cy="level-two">
                             <figure className="cardset-card__avatar">
                                 <img alt=""
                                     src={
@@ -140,7 +142,8 @@ export const LevelsDashboard: React.FC = () => {
                     </li>
                     <li className="cardset-card">
                         <a className='cardset-card__button'
-                            href={'/level/3'} data-cy="level-three">
+                            href={'/propositional/level/3'}
+                            data-cy="level-three">
                             <figure className="cardset-card__avatar">
                                 <img alt=""
                                     src={

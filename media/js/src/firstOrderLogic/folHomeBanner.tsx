@@ -2,7 +2,7 @@ import React from 'react';
 
 export const STATIC_URL = LogicLearner.staticUrl;
 
-export const HomeBanner: React.FC = () => {
+export const FolHomeBanner: React.FC = () => {
 
     return (<>
         <header className='main-banner banner-hero' data-testid={'HomeBanner'}>
@@ -12,14 +12,16 @@ export const HomeBanner: React.FC = () => {
                 <figure className='main-banner__avatar
                     banner-hero__avatar align-self-center'
                 aria-hidden='true'>
-                    <img src={`${STATIC_URL}img/logo-logiclearner.svg`} />
+                    <img src={`${STATIC_URL}img/avatar-fol-temp.png`} />
                 </figure>
                 <h1 className='align-self-center'>
                     <span className='main-banner__title
-                        banner-hero__title'>Logic Learner</span>
-                    {/* <span className='main-banner__text
-                        banner-hero__text'>A practice tool for writing proofs in
-                        propositional logic</span> */}
+                        banner-hero__title'>First Order Logic Learner</span>
+                    <span className='main-banner__text
+                        banner-hero__text'>
+                        Build confidence in interpreting
+                        first-order logic expressions
+                    </span>
                 </h1>
             </div>
         </header>
