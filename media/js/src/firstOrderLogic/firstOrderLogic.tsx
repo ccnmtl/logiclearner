@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { shuffleArray, getRandomElement, GridItem, GridStatement,
-    GridTemplate, Score, dTitle} from './utils';
+    GridTemplate, Score, dTitle, Store, Difficulty} from './utils';
 import { getTemplatesByDifficulty } from './statementGenerator';
 import { Grid } from './grid';
 import { Options } from './options';
@@ -18,7 +18,7 @@ export const FirstOrderLogic: React.FC<FirstOrderLogicProps> = ({mode}) => {
     const [correctStatement, setCorrectStatement] =
         useState<GridStatement|null>();
     const [correctIndex, setCorrectIndex] = useState<number|null>();
-    const [difficulty, setDifficulty] = useState<string>('easy');
+    const [difficulty, setDifficulty] = useState<Difficulty>('easy');
     const [grid, setGrid] = useState<GridItem[]>([]);
     const [options, setOptions] = useState<GridStatement[]>([]);
     const [size] = useState<number>(5);
@@ -84,11 +84,28 @@ export const FirstOrderLogic: React.FC<FirstOrderLogicProps> = ({mode}) => {
         return incorrectStatements;
     }
 
-    const registerSkip = (diff:string) => {
-        if (mode === 0 && !isDone && attempt < 4) {
-            setScore({...score, [diff]: score[diff].map((val, i) =>
-                i === 4 ? val + 1 : val)});
-            setRounds({...rounds, [diff]: [0, ...rounds[diff]]});
+    /**
+     * Increments the value in the Score object corresponding to
+     * Score[difficulty][attempt]
+     * @param check A check of the attempts index
+     * @param obj Optional. Allows for new Score objects, like what is held in
+     *            localStorage.
+     */
+    const handleScore = (check:(i:number)=>boolean, obj=score) =>
+        setScore({...obj, [difficulty]: obj[difficulty].map(
+            (val:number, i:number) => check(i) ? val + 1 : val)});
+
+    /**
+     * Adds an attempt, x, to the growing array of attempts
+     * @param x Latest attempt
+     */
+    const handleRounds = (x:number) => setRounds({
+        ...rounds, [difficulty]: [x, ...rounds[difficulty]]});
+
+    const registerSkip = (diff:string, force=false) => {
+        if (force || (mode === 0 && !isDone && attempt < 4)) {
+            handleScore(i => i === 4);
+            handleRounds(0);
         }
     };
 
@@ -109,17 +126,13 @@ export const FirstOrderLogic: React.FC<FirstOrderLogicProps> = ({mode}) => {
         }
     };
 
-
     const handleAttempt = (result:boolean) => {
         if (!isDone) {
             if (result) {
                 setIsDone(true);
                 if (mode === 0) {
-                    setScore({...score,
-                        [difficulty]: score[difficulty].map((val, i) =>
-                            attempt === 4-i ? val + 1 : val)});
-                    setRounds({...rounds,
-                        [difficulty]: [attempt, ...rounds[difficulty]]});
+                    handleScore(i => attempt === 4-i);
+                    handleRounds(attempt);
                 }
             } else {
                 if (mode === 0) {
@@ -147,7 +160,7 @@ export const FirstOrderLogic: React.FC<FirstOrderLogicProps> = ({mode}) => {
     };
 
     const handleNewGrid = () => {
-        registerSkip(difficulty);
+        registerSkip(difficulty, !isDone);
         reset();
     };
 
@@ -211,9 +224,20 @@ export const FirstOrderLogic: React.FC<FirstOrderLogicProps> = ({mode}) => {
 
     useEffect(() => {
         if (score != baseScore) {
-            localStorage.setItem('fol', JSON.stringify({score, rounds}));
+            localStorage.setItem('fol', JSON.stringify({
+                attempt, difficulty, rounds, score}));
         }
-    }, [score, rounds]);
+    }, [attempt, difficulty, rounds, score]);
+
+    const checkLastAttempt = (store:Store) => {
+        if (!store['attempt'] || store['attempt'] === 4) {
+            setScore(store['score']);
+            setRounds(store['rounds']);
+        } else {
+            handleScore(i => i === 4, store['score']);
+            handleRounds(0);
+        }
+    };
 
     useEffect(() => {
         setShowList(emptyShow);
@@ -224,8 +248,7 @@ export const FirstOrderLogic: React.FC<FirstOrderLogicProps> = ({mode}) => {
                 if (['score', 'rounds'].map(check => Object.keys(baseScore)
                     .every(diff => Array.isArray(store[check][diff])))
                 ) {
-                    setScore(store['score']);
-                    setRounds(store['rounds']);
+                    checkLastAttempt(store);
                 } else {
                     setScore(baseScore);
                     setRounds(baseRounds);
@@ -254,7 +277,8 @@ export const FirstOrderLogic: React.FC<FirstOrderLogicProps> = ({mode}) => {
                         <select className='form-select'
                             onChange={handleDifficulty}>
                             {Object.entries(dTitle).map((option, i) =>
-                                <option key={i} value={option[0]}>
+                                <option key={i} value={option[0]}
+                                    selected={option[0] === difficulty}>
                                     {option[1]}
                                 </option>)}
                         </select>

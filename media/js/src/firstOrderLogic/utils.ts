@@ -8,6 +8,15 @@ export const dTitle = {
     hard: 'Hard'
 };
 
+export type Difficulty = 'easy'|'medium'|'hard'
+
+export interface Store {
+    attempt: number,
+    difficulty: Difficulty,
+    rounds: Score,
+    score: Score
+}
+
 export interface GridItem {
     color:string
     number:number
