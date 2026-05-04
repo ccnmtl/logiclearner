@@ -30,6 +30,7 @@ declare const __BUILD__: string;
 interface Window {
     rudderanalytics?: {
         page?: (...args: unknown[]) => void;
+        track?: (event: string, properties?: Record<string, unknown>) => void;
         [key: string]: unknown;
     };
 }

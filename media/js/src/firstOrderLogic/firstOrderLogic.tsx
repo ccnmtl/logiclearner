@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { shuffleArray, getRandomElement, GridItem, GridStatement,
     GridTemplate, Score, dTitle, Store, Difficulty} from './utils';
 import { getTemplatesByDifficulty } from './statementGenerator';
@@ -15,6 +15,10 @@ interface FirstOrderLogicProps {
 }
 
 export const FirstOrderLogic: React.FC<FirstOrderLogicProps> = ({mode}) => {
+    const sessionStartRef = useRef<number>(Date.now());
+    const questionsAttemptedRef = useRef<number>(0);
+    const correctAnswersRef = useRef<number>(0);
+
     const [correctStatement, setCorrectStatement] =
         useState<GridStatement|null>();
     const [correctIndex, setCorrectIndex] = useState<number|null>();
@@ -107,6 +111,12 @@ export const FirstOrderLogic: React.FC<FirstOrderLogicProps> = ({mode}) => {
             handleScore(i => i === 4);
             handleRounds(0);
         }
+        if (!isDone) {
+            track('fol_question_skipped', {
+                fol_mode: mode === 0 ? 'match' : 'express',
+                difficulty: diff,
+            });
+        }
     };
 
     const handleDifficulty = (e) => {
@@ -140,10 +150,15 @@ export const FirstOrderLogic: React.FC<FirstOrderLogicProps> = ({mode}) => {
                 }
             }
         }
+        questionsAttemptedRef.current += 1;
+        if (result) {
+            correctAnswersRef.current += 1;
+        }
         track('fol_question_attempted', {
             fol_mode: mode === 0 ? 'match' : 'express',
             difficulty,
             is_correct: result,
+            attempts_remaining: attempt,
         });
     };
 
@@ -163,6 +178,27 @@ export const FirstOrderLogic: React.FC<FirstOrderLogicProps> = ({mode}) => {
         registerSkip(difficulty, !isDone);
         reset();
     };
+
+    // Track game session start and end for session duration
+    useEffect(() => {
+        sessionStartRef.current = Date.now();
+        questionsAttemptedRef.current = 0;
+        correctAnswersRef.current = 0;
+
+        track('fol_game_started', {
+            fol_mode: mode === 0 ? 'match' : 'express',
+        });
+
+        return () => {
+            const durationMs = Date.now() - sessionStartRef.current;
+            track('fol_game_ended', {
+                fol_mode: mode === 0 ? 'match' : 'express',
+                duration_ms: durationMs,
+                questions_attempted: questionsAttemptedRef.current,
+                correct_answers: correctAnswersRef.current,
+            });
+        };
+    }, [mode]);
 
     useEffect(() => {
         setTemplateBank(getTemplatesByDifficulty(difficulty));
