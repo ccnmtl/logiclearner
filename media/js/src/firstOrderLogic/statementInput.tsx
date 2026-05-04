@@ -146,6 +146,20 @@ export const StatementInput: React.FC<StatementProps> = ({
         el.setSelectionRange(newPos, newPos);
     };
 
+    const trackErrors = (errors: string[], userInput: string) => {
+        if (errors.length > 0 &&
+            window.rudderanalytics &&
+            typeof window.rudderanalytics.track === 'function') {
+            window.rudderanalytics.track('fol_express_error', {
+                difficulty,
+                user_input: userInput,
+                expected_statement:
+                    correctStatement.formalFOLStatement,
+                errors,
+            });
+        }
+    };
+
     const evaluate = (check:object[]) => {
         const errors = check[0]['error'];
         if (check.length == evalObj.length) {
@@ -180,6 +194,7 @@ export const StatementInput: React.FC<StatementProps> = ({
             errors.push('The statement requires one implication (→) character');
         }
         setFeedback(errors);
+        trackErrors(errors, text);
         handleAttempt(errors.length === 0);
     };
 
@@ -192,12 +207,14 @@ export const StatementInput: React.FC<StatementProps> = ({
         if (value.match(regex[difficulty])) {
             evaluate(check);
         } else {
-            setFeedback(['The statement must begin with ∀x, independent and ' +
+            const structureErrors = [
+                'The statement must begin with ∀x, independent and ' +
                 'dependent predicates separated by → ' +
                 `${difficulty === 'hard' ?
                     ', and dependent predicates are preceded by ∃y':
                     ''
-                }`]);
+                }`];
+            setFeedback(structureErrors);
             handleAttempt(false);
         }
     };
