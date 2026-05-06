@@ -33,7 +33,7 @@ export const FirstOrderLogic: React.FC<FirstOrderLogicProps> = ({mode}) => {
     const [text, setText] = useState<string>('');
     const emptyShow = [false, false, false, false];
     const [showList, setShowList] = useState<boolean[]>(emptyShow);
-    const [isDone, setIsDone] = useState<boolean>(false);
+    const [isDone, setIsDone] = useState<boolean>(true);
     const [attempt, setAttempt] = useState<number>(4);
     const [inBtnRange, setInBtnRange] = useState<boolean>(
         window.innerWidth < 768 || window.innerWidth >= 1400);
@@ -372,7 +372,7 @@ export const FirstOrderLogic: React.FC<FirstOrderLogicProps> = ({mode}) => {
                 </div>
             </section>
             <div className="grid-actions d-md-none">
-                <button className="btn btn-outline-primary"
+                <button id="next" className="btn btn-outline-primary"
                     onClick={handleNewGrid} >
                     {(mode === 0 ? showList[correctIndex] : isDone)
                         ? 'Next'

@@ -56,10 +56,10 @@ export const Progress: React.FC<ProgressProps> = ({
                 </div>
             </div>;
         })}
-        <div className="btn p-0 progress-state d-flex" data-bs-toggle="modal"
-            data-bs-target="#CloverModal"
+        <div id="info" className="btn p-0 progress-state d-flex"
+            data-bs-toggle="modal" data-bs-target="#CloverModal"
         >
-            <div className="progress-state__i">
+            <div className="progress-state__i" id="info">
                 <img alt="Go to Questions list for this level"
                     src={`${STATIC_URL}img/icon-clover-i.svg`} />
             </div>

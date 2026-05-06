@@ -1,4 +1,4 @@
-describe('First-Order Logic', () => {
+describe('First-Order Logic Expression Game', () => {
     beforeEach(() => {
         cy.visit('http://localhost:8000/fol/express/');
         cy.get('#cu-privacy-notice-button').click();
