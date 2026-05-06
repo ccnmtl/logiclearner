@@ -1,6 +1,6 @@
 describe('Question Dashboard Interactions', function() {
     beforeEach(() => {
-        let baseUrl = 'http://localhost:8000';
+        let baseUrl = 'http://localhost:8000/propositional/';
         cy.visit(baseUrl);
         cy.get('#cu-privacy-notice-button').click();
     });

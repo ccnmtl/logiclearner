@@ -41,7 +41,7 @@ urlpatterns = [
     path('about/', flatpage_views.flatpage, {'url': '/about/'}, name='about'),
     path('teaching/', flatpage_views.flatpage, {'url': '/teaching/'},
          name='teaching'),
-    path('tutorial/', TemplateView.as_view(
+    path('propositional/tutorial/', TemplateView.as_view(
         template_name="main/tutorial.html")),
 
     re_path(r'^design/$', FOLdesign.Index.as_view(), name='design-folindex'),

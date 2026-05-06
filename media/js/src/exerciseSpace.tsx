@@ -254,7 +254,7 @@ export const ExerciseSpace: React.FC = () => {
         <>
             <header className='main-banner exercise-space-banner sticky-top'>
                 <div className='container d-flex justify-content-start'>
-                    <a href={`/level/${statement.difficulty + 1}`}
+                    <a href={`/propositional/level/${statement.difficulty + 1}`}
                         className='main-banner__nav
                             d-flex justify-content-start'>
                         <div className='main-banner__prompt'>
@@ -397,7 +397,9 @@ export const ExerciseSpace: React.FC = () => {
                                 </div>
                                 <div className='col-12'>
                                     <a href={
-                                        `/level/${statement.difficulty + 1}`
+                                        `/propositional/level/${
+                                            statement.difficulty + 1
+                                        }`
                                     }
                                     data-cy="level-button"
                                     className="btn btn-lg ll-button

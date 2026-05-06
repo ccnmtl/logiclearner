@@ -1,6 +1,6 @@
 describe('Exercise Space Interactions', { testIsolation: false }, () => {
     before(() => {
-        let baseUrl = 'http://localhost:8000/';
+        let baseUrl = 'http://localhost:8000/propositional/';
         cy.visit(baseUrl);
     });
     it('Should go through level one question', function() {
@@ -61,7 +61,7 @@ describe('Exercise Space Interactions', { testIsolation: false }, () => {
         cy.get('#statementInput-1').should('not.be.disabled');
     });
     it('Should test hint functionality', function() {
-        cy.visit('http://localhost:8000/level/2');
+        cy.visit('http://localhost:8000/propositional/level/2');
         cy.get('[data-cy="question3"]').click();
         cy.wait(500);
         cy.get('[data-cy="hint-button"]').click({force: true});
