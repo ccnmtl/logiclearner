@@ -7,6 +7,7 @@ import { Options } from './options';
 import { StatementInput } from './statementInput';
 import { Progress } from './progress';
 import { FolBanner } from './folBanner';
+import { ExpressButton } from './expressionButtons';
 
 export const STATIC_URL = LogicLearner.staticUrl;
 
@@ -34,6 +35,8 @@ export const FirstOrderLogic: React.FC<FirstOrderLogicProps> = ({mode}) => {
     const [showList, setShowList] = useState<boolean[]>(emptyShow);
     const [isDone, setIsDone] = useState<boolean>(false);
     const [attempt, setAttempt] = useState<number>(4);
+    const [inBtnRange, setInBtnRange] = useState<boolean>(
+        window.innerWidth < 768 || window.innerWidth >= 1400);
 
     const baseRounds = {
         easy: [],
@@ -134,6 +137,24 @@ export const FirstOrderLogic: React.FC<FirstOrderLogicProps> = ({mode}) => {
                 window.rudderanalytics
             );
         }
+    };
+
+    const mkBtnList = (title: string, items: string[]) => (
+        <ExpressButton title={title} items={items}
+            onClick={mkAddChar} />
+    );
+
+    const mkAddChar = (char:string) => {
+        const el =
+            document.getElementById('statement-text') as HTMLInputElement;
+        const pos = el.selectionStart;
+        const newText = el.value.substring(0, pos) + char +
+            el.value.substring(pos, el.value.length);
+        setText(newText);
+        el.value = newText;
+        el.focus();
+        const newPos = pos !== null ? pos + char.length : newText.length;
+        el.setSelectionRange(newPos, newPos);
     };
 
     const handleAttempt = (result:boolean) => {
@@ -276,6 +297,11 @@ export const FirstOrderLogic: React.FC<FirstOrderLogicProps> = ({mode}) => {
     };
 
     useEffect(() => {
+        window.addEventListener('resize', () => {
+            setInBtnRange(
+                window.innerWidth < 768 || window.innerWidth >= 1400);
+        });
+
         setShowList(emptyShow);
         const store = JSON.parse(localStorage.getItem('fol'));
         if (store) {
@@ -325,7 +351,8 @@ export const FirstOrderLogic: React.FC<FirstOrderLogicProps> = ({mode}) => {
                 </div>
                 <div className="row">
                     <div className="col-12 col-md-6">
-                        <Grid grid={grid} size={size} />
+                        <Grid grid={grid} size={size} mode={mode}
+                            mkBtnList={mkBtnList} inBtnRange={inBtnRange}/>
                     </div>
                     {mode === 0 &&
                     <Options options={options}
@@ -339,6 +366,8 @@ export const FirstOrderLogic: React.FC<FirstOrderLogicProps> = ({mode}) => {
                         setText={setText}
                         handleAttempt={handleAttempt}
                         handleNewGrid={handleNewGrid}
+                        mkBtnList={mkBtnList}
+                        inBtnRange={inBtnRange}
                         isDone={isDone} />}
                 </div>
             </section>

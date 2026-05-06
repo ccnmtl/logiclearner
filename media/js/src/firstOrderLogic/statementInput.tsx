@@ -1,6 +1,6 @@
 /* eslint-disable no-useless-escape */
-import React, { useEffect, useState } from 'react';
-import { GridStatement } from './utils';
+import React, { ReactNode, useEffect, useState } from 'react';
+import { GridStatement, predicateList } from './utils';
 
 interface StatementProps {
     correctStatement: GridStatement
@@ -9,12 +9,14 @@ interface StatementProps {
     setText: React.Dispatch<React.SetStateAction<string>>
     handleAttempt: (isCorrect:boolean) => void
     handleNewGrid: () => void
+    mkBtnList: (title:string, items:string[]) => ReactNode
+    inBtnRange: boolean,
     isDone: boolean
 }
 
 export const StatementInput: React.FC<StatementProps> = ({
-    correctStatement, difficulty, text, setText,
-    handleAttempt, handleNewGrid, isDone
+    correctStatement, difficulty, text, setText, inBtnRange,
+    handleAttempt, handleNewGrid, mkBtnList, isDone
 }:StatementProps) => {
     const [feedback, setFeedback] = useState<string[]>(
         ['ERROR: This feedback should not be visible.']);
@@ -22,11 +24,6 @@ export const StatementInput: React.FC<StatementProps> = ({
     const [evalObj, setEvalObj] = useState([{}, {}]);
     const operatorList = ['∀', '∃', '→', '∧', '≤', '≥', '=', '(', ')', ','];
     const variableList = ['x', 'y', 'z'];
-    const predicateList = [
-        'Shape', 'Color', 'Value', 'Even', 'Odd', 'Prime', 'Location',
-        'MultipleOf', 'Above', 'TopLeftOf', 'TopRightOf', 'LeftOf',
-        'RightOf', 'Below', 'BottomLeftOf', 'BottomRightOf'
-    ];
     const constantList = [
         '0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
         'Circle', 'Square', 'Triangle', 'Blue', 'Green',
@@ -112,39 +109,6 @@ export const StatementInput: React.FC<StatementProps> = ({
                 <li key={i} className="list-group-item">{item}</li>
             )}
         </ul>;
-
-    const mkBtnList = (title: string, items: string[]) => (
-        <div className="mb-2">
-            <span className="me-2 fw-bold">{title}</span>
-            <ul className="list-inline d-inline-block mb-0">
-                {items.map((item:string, i:number) =>
-                    <li key={i} className="list-inline-item mb-1">
-                        <button
-                            className="btn btn-outline-secondary btn-sm"
-                            aria-label={
-                                `Add a ${item} symbol to the statement.`
-                            }
-                            onClick={mkAddChar(item)}
-                        >
-                            {item}</button>
-                    </li>
-                )}
-            </ul>
-        </div>
-    );
-
-    const mkAddChar = (char:string) => () => {
-        const el =
-            document.getElementById('statement-text') as HTMLInputElement;
-        const pos = el.selectionStart;
-        const newText = el.value.substring(0, pos) + char +
-            el.value.substring(pos, el.value.length);
-        setText(newText);
-        el.value = newText;
-        el.focus();
-        const newPos = pos !== null ? pos + char.length : newText.length;
-        el.setSelectionRange(newPos, newPos);
-    };
 
     const trackErrors = (errors: string[], userInput: string) => {
         if (errors.length > 0 &&
@@ -260,8 +224,8 @@ export const StatementInput: React.FC<StatementProps> = ({
                 </div>
                 <div className="d-flex flex-column my-3 order-2 order-md-3">
                     {mkBtnList('Operators', operatorList)}
+                    {inBtnRange && mkBtnList('Predicates', predicateList)}
                     {mkBtnList('Variables', variableList)}
-                    {mkBtnList('Predicates', predicateList)}
                     {mkBtnList('Constants', constantList)}
                 </div>
                 <div

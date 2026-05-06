@@ -2,6 +2,12 @@
 
 export const gridSize = 5;
 
+export const predicateList = [
+    'Shape', 'Color', 'Value', 'Even', 'Odd', 'Prime', 'Location',
+    'MultipleOf', 'Above', 'TopLeftOf', 'TopRightOf', 'LeftOf',
+    'RightOf', 'Below', 'BottomLeftOf', 'BottomRightOf'
+];
+
 export const dTitle = {
     easy: 'Easy',
     medium: 'Medium',
