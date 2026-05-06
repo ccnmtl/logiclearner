@@ -1,11 +1,11 @@
 describe('Levels Dashboard Interactions', function() {
     beforeEach(() => {
-        let baseUrl = 'http://localhost:8000';
+        let baseUrl = 'http://localhost:8000/propositional/';
         cy.visit(baseUrl);
         cy.get('#cu-privacy-notice-button').click();
     });
     it('Should list all levels', function() {
-        cy.get('[data-cy="tutorial-link"]').contains('Using Logic Learner');
+        cy.get('[data-cy="tutorial-link"]').contains('Using this tool');
         cy.get('[data-cy="level-one"]').contains('Novice');
         cy.get('[data-cy="level-two"]').contains('Learner');
         cy.get('[data-cy="level-three"]').contains('Apprentice');

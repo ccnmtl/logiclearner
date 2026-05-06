@@ -16,11 +16,11 @@ export const FolHomeBanner: React.FC = () => {
                 </figure>
                 <h1 className='align-self-center'>
                     <span className='main-banner__title
-                        banner-hero__title'>First Order Logic Learner</span>
+                        banner-hero__title'>First Order Logic</span>
                     <span className='main-banner__text
                         banner-hero__text'>
-                        Build confidence in interpreting
-                        first-order logic expressions
+                        Interpret and write first-order
+                        logic expressions
                     </span>
                 </h1>
             </div>

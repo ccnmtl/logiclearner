@@ -27,7 +27,7 @@ export const HomePage: React.FC = () => {
                             <div className="d-flex flex-column align-self-center
                                 me-2 me-lg-0">
                                 <div className="cardset-card__title level-name">
-                                    Propositional Learner
+                                    Propositional Logic
                                 </div>
                                 <div className="cardset-card__text">
                                     A practice tool for writing proofs in
@@ -50,10 +50,10 @@ export const HomePage: React.FC = () => {
                             <div className="d-flex flex-column align-self-center
                                 me-2 me-lg-0">
                                 <div className="cardset-card__title level-name">
-                                    First Order Logic Learner
+                                    First Order Logic
                                 </div>
                                 <div className="cardset-card__text">
-                                    Match grid rules and write first-order
+                                    Interpret and write first-order
                                     logic expressions
                                 </div>
                             </div>

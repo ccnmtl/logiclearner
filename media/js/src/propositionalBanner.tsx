@@ -16,7 +16,7 @@ export const PropositionalBanner: React.FC = () => {
                 </figure>
                 <h1 className='align-self-center'>
                     <span className='main-banner__title
-                        banner-hero__title'>Propositional Learner</span>
+                        banner-hero__title'>Propositional Logic</span>
                     <span className='main-banner__text
                         banner-hero__text'>
                         A practice tool for writing proofs in

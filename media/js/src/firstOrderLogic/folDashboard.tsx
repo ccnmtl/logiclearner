@@ -30,8 +30,8 @@ export const FolDashboard: React.FC = () => {
                                     Matching Game
                                 </div>
                                 <div className="cardset-card__text">
-                                    Lorem ipsum dolor sit amet consectetur
-                                    adipisicing elit.</div>
+                                    Build confidence in interpreting
+                                    first-order logic expressions</div>
                             </div>
                             <div className="cardset-card__prompt">
                                 &rsaquo;
@@ -53,8 +53,8 @@ export const FolDashboard: React.FC = () => {
                                     Expression Game
                                 </div>
                                 <div className="cardset-card__text">
-                                    Lorem ipsum dolor sit amet consectetur
-                                    adipisicing elit.</div>
+                                    Build confidence in writing
+                                    first-order logic expressions</div>
                             </div>
                             <div className="cardset-card__prompt">
                                 &rsaquo;

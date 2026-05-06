@@ -54,7 +54,7 @@ export const PropositionalDashboard: React.FC = () => {
                     aria-labelledby="cardset-label">
                     <li className="cardset-card">
                         <a className='cardset-card__button'
-                            href={'propositional/tutorial/'}
+                            href={'/propositional/tutorial/'}
                             data-cy="tutorial-link">
                             <figure className="cardset-card__avatar">
                                 <img alt=""
@@ -68,11 +68,11 @@ export const PropositionalDashboard: React.FC = () => {
                                     Tutorial
                                 </div>
                                 <div className="cardset-card__title level-name">
-                                    Using Propositional Learner
+                                    Using this tool
                                 </div>
                                 <div className="cardset-card__text">
                                     Learn the essentials for navigating
-                                    Propositional Learner.</div>
+                                    Propositional Logic Learner.</div>
                             </div>
                             <div className="cardset-card__prompt ms-auto">
                                 &rsaquo;

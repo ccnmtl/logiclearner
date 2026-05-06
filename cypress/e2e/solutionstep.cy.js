@@ -1,6 +1,6 @@
 describe('Exercise Space Interactions', { testIsolation: false }, () => {
     before(() => {
-        let baseUrl = 'http://localhost:8000/';
+        let baseUrl = 'http://localhost:8000/propositional/';
         cy.visit(baseUrl);
     });
     it('Should go through level one question', function() {
