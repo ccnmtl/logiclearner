@@ -16,9 +16,14 @@ interface FirstOrderLogicProps {
 }
 
 export const FirstOrderLogic: React.FC<FirstOrderLogicProps> = ({mode}) => {
+    const INACTIVITY_TIMEOUT_MS = 30 * 60 * 1000;
+    const INACTIVITY_POLL_MS = 30 * 1000;
+
     const sessionStartRef = useRef<number>(Date.now());
     const questionsAttemptedRef = useRef<number>(0);
     const correctAnswersRef = useRef<number>(0);
+    const sessionActiveRef = useRef<boolean>(false);
+    const lastActivityRef = useRef<number>(Date.now());
 
     const [correctStatement, setCorrectStatement] =
         useState<GridStatement|null>();
@@ -123,6 +128,7 @@ export const FirstOrderLogic: React.FC<FirstOrderLogicProps> = ({mode}) => {
     };
 
     const handleDifficulty = (e) => {
+        registerActivity();
         registerSkip(difficulty);
         setDifficulty(e.target.value);
     };
@@ -139,12 +145,48 @@ export const FirstOrderLogic: React.FC<FirstOrderLogicProps> = ({mode}) => {
         }
     };
 
+    const startGameSession = () => {
+        sessionStartRef.current = Date.now();
+        lastActivityRef.current = Date.now();
+        questionsAttemptedRef.current = 0;
+        correctAnswersRef.current = 0;
+        sessionActiveRef.current = true;
+
+        track('fol_game_started', {
+            fol_mode: mode === 0 ? 'match' : 'express',
+        });
+    };
+
+    const endGameSession = (reason: 'route_leave' | 'inactivity_timeout' |
+        'page_unload') => {
+        if (!sessionActiveRef.current) {
+            return;
+        }
+        sessionActiveRef.current = false;
+
+        track('fol_game_ended', {
+            fol_mode: mode === 0 ? 'match' : 'express',
+            duration_ms: Date.now() - sessionStartRef.current,
+            questions_attempted: questionsAttemptedRef.current,
+            correct_answers: correctAnswersRef.current,
+            end_reason: reason,
+        });
+    };
+
+    const registerActivity = () => {
+        if (!sessionActiveRef.current) {
+            startGameSession();
+        }
+        lastActivityRef.current = Date.now();
+    };
+
     const mkBtnList = (title: string, items: string[]) => (
         <ExpressButton title={title} items={items}
             onClick={mkAddChar} />
     );
 
     const mkAddChar = (char:string) => {
+        registerActivity();
         const el =
             document.getElementById('statement-text') as HTMLInputElement;
         const pos = el.selectionStart;
@@ -158,6 +200,7 @@ export const FirstOrderLogic: React.FC<FirstOrderLogicProps> = ({mode}) => {
     };
 
     const handleAttempt = (result:boolean) => {
+        registerActivity();
         if (!isDone) {
             if (result) {
                 setIsDone(true);
@@ -196,28 +239,35 @@ export const FirstOrderLogic: React.FC<FirstOrderLogicProps> = ({mode}) => {
     };
 
     const handleNewGrid = () => {
+        registerActivity();
         registerSkip(difficulty, !isDone);
         reset();
     };
 
     // Track game session start and end for session duration
     useEffect(() => {
-        sessionStartRef.current = Date.now();
-        questionsAttemptedRef.current = 0;
-        correctAnswersRef.current = 0;
+        startGameSession();
 
-        track('fol_game_started', {
-            fol_mode: mode === 0 ? 'match' : 'express',
-        });
+        const handlePageHide = () => {
+            endGameSession('page_unload');
+        };
+
+        const inactivityCheckId = window.setInterval(() => {
+            if (!sessionActiveRef.current) {
+                return;
+            }
+
+            if (Date.now() - lastActivityRef.current >= INACTIVITY_TIMEOUT_MS) {
+                endGameSession('inactivity_timeout');
+            }
+        }, INACTIVITY_POLL_MS);
+
+        window.addEventListener('pagehide', handlePageHide);
 
         return () => {
-            const durationMs = Date.now() - sessionStartRef.current;
-            track('fol_game_ended', {
-                fol_mode: mode === 0 ? 'match' : 'express',
-                duration_ms: durationMs,
-                questions_attempted: questionsAttemptedRef.current,
-                correct_answers: correctAnswersRef.current,
-            });
+            window.clearInterval(inactivityCheckId);
+            window.removeEventListener('pagehide', handlePageHide);
+            endGameSession('route_leave');
         };
     }, [mode]);
 
