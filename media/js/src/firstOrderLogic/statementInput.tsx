@@ -1,6 +1,7 @@
 /* eslint-disable no-useless-escape */
 import React, { ReactNode, useEffect, useState } from 'react';
-import { GridStatement, predicateList } from './utils';
+import { GridStatement, predicateList, operatorList, variableList,
+    constantList } from './utils';
 
 interface StatementProps {
     correctStatement: GridStatement
@@ -22,13 +23,6 @@ export const StatementInput: React.FC<StatementProps> = ({
         ['ERROR: This feedback should not be visible.']);
     const [submitted, setSubmitted] = useState<boolean>(false);
     const [evalObj, setEvalObj] = useState([{}, {}]);
-    const operatorList = ['∀', '∃', '→', '∧', '≤', '≥', '=', '(', ')', ','];
-    const variableList = ['x', 'y', 'z'];
-    const constantList = [
-        '0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
-        'Circle', 'Square', 'Triangle', 'Blue', 'Green',
-        'Red', 'Top', 'Bottom', 'Left', 'Right', 'Row', 'Column'
-    ];
 
     const LaTexConversion = {
         '\\and': '∧',
