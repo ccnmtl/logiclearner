@@ -12,10 +12,10 @@ export const ExpressButton: React.FC<ExpressButtonProps> = ({
 }:ExpressButtonProps) => {
     return <div className="mb-2">
         <span className="me-2 fw-bold">{title}</span>
-        <ul className="list-inline d-inline-block mb-0">
+        <ul id={title} className="list-inline d-inline-block mb-0">
             {items.map((item:string, i:number) =>
                 <li key={i} className="list-inline-item mb-1">
-                    <button
+                    <button id={item}
                         className="btn btn-outline-secondary btn-sm"
                         aria-label={
                             `Add a ${item} symbol to the statement.`

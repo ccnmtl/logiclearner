@@ -7,6 +7,13 @@ export const predicateList = [
     'MultipleOf', 'Above', 'TopLeftOf', 'TopRightOf', 'LeftOf',
     'RightOf', 'Below', 'BottomLeftOf', 'BottomRightOf'
 ];
+export const operatorList = ['∀', '∃', '→', '∧', '≤', '≥', '=', '(', ')', ','];
+export const variableList = ['x', 'y', 'z'];
+export const constantList = [
+    '0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
+    'Circle', 'Square', 'Triangle', 'Blue', 'Green',
+    'Red', 'Top', 'Bottom', 'Left', 'Right', 'Row', 'Column'
+];
 
 export const dTitle = {
     easy: 'Easy',
