@@ -42,6 +42,33 @@ export const StatementInput: React.FC<StatementProps> = ({
         '\\le': '≤'
     };
 
+    const difficultyExamples: Record<string, {
+        naturalLanguage: string,
+        folExpression: string
+    }> = {
+        easy: {
+            naturalLanguage: 'All circles are Blue.',
+            folExpression: '∀x (Shape(x, circle) → Color(x, Blue))'
+        },
+        medium: {
+            naturalLanguage:
+                'All squares with value greater than 5 are Red and ' +
+                'located in the left 2 columns of the grid.',
+            folExpression:
+                '∀x ((Shape(x, square) ∧ Value(x) > 5) → ' +
+                '(Color(x, Red) ∧ Location(x, left 2 columns)))'
+        },
+        hard: {
+            naturalLanguage:
+                'For all circles that are Green, there exists a ' +
+                'triangle with a value greater than 3 directly ' +
+                'to the right of it.',
+            folExpression:
+                '∀x ((Shape(x, circle) ∧ Color(x, Green)) → ' +
+                '∃y (Shape(y, triangle) ∧ Value(y) > 3 ∧ RightOf(x)))'
+        }
+    };
+
     const parenthesesMismatch = (text:string):boolean => {
         let [left, right] = [0, 0];
         for (const a of text) {
@@ -221,6 +248,28 @@ export const StatementInput: React.FC<StatementProps> = ({
                     <strong>
                         {correctStatement.naturalLanguageStatement}
                     </strong>
+                    <details className="fol-example mt-3"
+                        data-testid="fol-example">
+                        <summary className="fol-example__summary">
+                            See example
+                        </summary>
+                        <div className="fol-example__content mt-2">
+                            <p className="fol-example__label mb-1">
+                                <em>Natural language:</em>
+                            </p>
+                            <p className="fol-example__nl mb-2">
+                                &ldquo;{difficultyExamples[difficulty]
+                                    .naturalLanguage}&rdquo;
+                            </p>
+                            <p className="fol-example__label mb-1">
+                                <em>FOL expression:</em>
+                            </p>
+                            <code className="fol-example__expression">
+                                {difficultyExamples[difficulty]
+                                    .folExpression}
+                            </code>
+                        </div>
+                    </details>
                 </div>
                 <div className="d-flex flex-column my-3 order-2 order-md-3">
                     {mkBtnList('Operators', operatorList)}
