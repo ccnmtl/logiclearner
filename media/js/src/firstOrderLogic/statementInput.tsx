@@ -79,8 +79,8 @@ export const StatementInput: React.FC<StatementProps> = ({
      * {key: value, ..., key2: value2}
      * @param text
      */
-    const pullData = (text:string):object => {
-        const rules = {};
+    const pullData = (text:string):Record<string, string[]> => {
+        const rules: Record<string, string[]> = {};
         const predicates = text.match(/\w+\(\w+[,\w]*\)/g);
         if (predicates) {
             predicates.forEach((keyValue) => {
@@ -93,8 +93,12 @@ export const StatementInput: React.FC<StatementProps> = ({
         }
         const compKey = text.match(/[<>≤≥](?=\-?\d)/);
         if (compKey) {
-            const compVar = text.match(/\w(?=\)[<>≤≥])/);
-            rules[compKey[0]] = compVar.concat(text.match(/-?\d(?=[$∧])/));
+            const compVar = text.match(
+                new RegExp('\\w(?=\\)[<>≤≥])'));
+            if (compVar) {
+                const matchResult = text.match(/-?\d(?=[$∧])/);
+                rules[compKey[0]] = compVar.concat(matchResult || []);
+            }
         }
         return rules;
     };
@@ -104,8 +108,8 @@ export const StatementInput: React.FC<StatementProps> = ({
      * statement.
      * @param text
      */
-    const parseStatement = (text:string):object[] => {
-        const rules:object[] = [{'error': []}];
+    const parseStatement = (text:string):Record<string, string[]>[] => {
+        const rules:Record<string, string[]>[] = [{'error': []}];
         if (parenthesesMismatch(text)) {
             rules[0]['error'].push('There is an unpaired parenthesis.');
         }
@@ -145,7 +149,7 @@ export const StatementInput: React.FC<StatementProps> = ({
         }
     };
 
-    const evaluate = (check:object[]) => {
+    const evaluate = (check:Record<string, string[]>[]) => {
         const errors = check[0]['error'];
         if (check.length == evalObj.length) {
             for (let i = 1; i < evalObj.length; i++) {
@@ -189,7 +193,7 @@ export const StatementInput: React.FC<StatementProps> = ({
             document.getElementById('statement-text') as HTMLInputElement)
             .value.replace(/\s/g, '').toLowerCase();
         const check = parseStatement(value);
-        if (value.match(regex[difficulty])) {
+        if (value.match(regex[difficulty as keyof typeof regex])) {
             evaluate(check);
         } else {
             const structureErrors = [
@@ -204,11 +208,11 @@ export const StatementInput: React.FC<StatementProps> = ({
         }
     };
 
-    const handleText = (e) => {
-        let text = e.target.value.replaceAll('^', '∧');
-        text = text.replaceAll('->', '→');
+    const handleText = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+        let text = e.target.value.replace(/\^/g, '∧');
+        text = text.replace(/->/g, '→');
         setText(text.replace(/\\\w+/g, (word:string) =>
-            LaTexConversion[word] ?? word));
+            LaTexConversion[word as keyof typeof LaTexConversion] ?? word));
     };
 
     useEffect(() => {

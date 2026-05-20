@@ -26,13 +26,13 @@ export const FirstOrderLogic: React.FC<FirstOrderLogicProps> = ({mode}) => {
     const lastActivityRef = useRef<number>(Date.now());
 
     const [correctStatement, setCorrectStatement] =
-        useState<GridStatement|null>();
-    const [correctIndex, setCorrectIndex] = useState<number|null>();
+        useState<GridStatement|null>(null);
+    const [correctIndex, setCorrectIndex] = useState<number>(0);
     const [difficulty, setDifficulty] = useState<Difficulty>('easy');
     const [grid, setGrid] = useState<GridItem[]>([]);
     const [options, setOptions] = useState<GridStatement[]>([]);
     const [size] = useState<number>(5);
-    const [templateBank, setTemplateBank] = useState<object[]>(
+    const [templateBank, setTemplateBank] = useState(
         getTemplatesByDifficulty(difficulty)
     );
     const [text, setText] = useState<string>('');
@@ -60,7 +60,7 @@ export const FirstOrderLogic: React.FC<FirstOrderLogicProps> = ({mode}) => {
     const [correctTemplate, setCorrectTemplate] =
         useState<GridTemplate>(getRandomElement(templateBank));
 
-    function generateIncorrectStatements(templateBank, correctTemplate) {
+    function generateIncorrectStatements() {
         const incorrectStatements = [];
         const usedTemplates = new Set([correctTemplate]);
 
@@ -127,10 +127,10 @@ export const FirstOrderLogic: React.FC<FirstOrderLogicProps> = ({mode}) => {
         }
     };
 
-    const handleDifficulty = (e) => {
+    const handleDifficulty = (e: React.ChangeEvent<HTMLSelectElement>) => {
         registerActivity();
         registerSkip(difficulty);
-        setDifficulty(e.target.value);
+        setDifficulty(e.target.value as Difficulty);
     };
 
     const track = (event: string, props: Record<string, unknown>) => {
@@ -190,8 +190,8 @@ export const FirstOrderLogic: React.FC<FirstOrderLogicProps> = ({mode}) => {
         const el =
             document.getElementById('statement-text') as HTMLInputElement;
         const pos = el.selectionStart;
-        const newText = el.value.substring(0, pos) + char +
-            el.value.substring(pos, el.value.length);
+        const newText = el.value.substring(0, pos ?? 0) + char +
+            el.value.substring(pos ?? 0, el.value.length);
         setText(newText);
         el.value = newText;
         el.focus();
@@ -307,7 +307,7 @@ export const FirstOrderLogic: React.FC<FirstOrderLogicProps> = ({mode}) => {
     useEffect(() => {
         if (correctStatement) {
             const incorrectOptions =
-                generateIncorrectStatements(templateBank, correctTemplate);
+                generateIncorrectStatements();
 
             const newOptions = [correctStatement, ...incorrectOptions];
             const uniqueOptions = newOptions
@@ -316,7 +316,7 @@ export const FirstOrderLogic: React.FC<FirstOrderLogicProps> = ({mode}) => {
                     newOptions.find(
                         o => o.naturalLanguageStatement === nl
                     )
-                );
+                ).filter((opt): opt is GridStatement => opt !== undefined);
             shuffleArray(uniqueOptions);
             setOptions(uniqueOptions);
             setCorrectIndex(
@@ -353,7 +353,7 @@ export const FirstOrderLogic: React.FC<FirstOrderLogicProps> = ({mode}) => {
         });
 
         setShowList(emptyShow);
-        const store = JSON.parse(localStorage.getItem('fol'));
+        const store = JSON.parse(localStorage.getItem('fol') || 'null');
         if (store) {
             try {
                 // Checks for the correct data models.
@@ -387,10 +387,10 @@ export const FirstOrderLogic: React.FC<FirstOrderLogicProps> = ({mode}) => {
                     </div>
                     <div className="me-3">
                         <select className='form-select'
+                            value={difficulty}
                             onChange={handleDifficulty}>
                             {Object.entries(dTitle).map((option, i) =>
-                                <option key={i} value={option[0]}
-                                    selected={option[0] === difficulty}>
+                                <option key={i} value={option[0]}>
                                     {option[1]}
                                 </option>)}
                         </select>
