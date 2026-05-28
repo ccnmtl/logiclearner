@@ -130,6 +130,16 @@ export const ExerciseSpace: React.FC = () => {
         }
     }
 
+    const trackProp = (event: string, props?: Record<string, unknown>) => {
+        if (window.rudderanalytics &&
+            typeof window.rudderanalytics.track === 'function') {
+            window.rudderanalytics.track(event, {
+                dataset: 'propositional_logic',
+                ...props,
+            });
+        }
+    };
+
     const handleShowSolutions = (
         evt: React.MouseEvent<HTMLButtonElement>
     ): void => {
@@ -140,6 +150,11 @@ export const ExerciseSpace: React.FC = () => {
             action: 'Clicked show solutions',
             label: `${level},${statement.pk}`
         });
+        trackProp('prop_show_solutions', {
+            question: statement.question,
+            level,
+            question_id: statement.pk,
+        });
     };
     const handleResetModal = (
         evt: React.MouseEvent<HTMLButtonElement>): void => {
@@ -149,6 +164,11 @@ export const ExerciseSpace: React.FC = () => {
             category: `${statement.question}`,
             action: 'Reset proof',
             label: `${level},${statement.pk}`
+        });
+        trackProp('prop_reset_proof', {
+            question: statement.question,
+            level,
+            question_id: statement.pk,
         });
     };
     const handleHints = (
@@ -174,6 +194,12 @@ export const ExerciseSpace: React.FC = () => {
             action: 'Hit hint button',
             label: `${level},${statement.pk}`
         });
+        trackProp('prop_hint_requested', {
+            question: statement.question,
+            level,
+            question_id: statement.pk,
+            hint_count: data[0].hintCount,
+        });
     };
     const modalCancel = () => {
         setShowResetModal(false);
@@ -183,6 +209,11 @@ export const ExerciseSpace: React.FC = () => {
             category: `${statement.question}`,
             action: 'Law sheet',
             label: `${level},${statement.pk}`
+        });
+        trackProp('prop_law_sheet_opened', {
+            question: statement.question,
+            level,
+            question_id: statement.pk,
         });
     };
     const resetFunc = () => {

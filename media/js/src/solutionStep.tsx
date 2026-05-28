@@ -50,6 +50,16 @@ export const SolutionStep: React.FC<SolutionStepProps> = (
     const showButtons = isLast && isIncomplete;
     const isEditable = isIncomplete && idx === stepList.length - 1;
 
+    const trackProp = (event: string, props?: Record<string, unknown>) => {
+        if (window.rudderanalytics &&
+            typeof window.rudderanalytics.track === 'function') {
+            window.rudderanalytics.track(event, {
+                dataset: 'propositional_logic',
+                ...props,
+            });
+        }
+    };
+
     const handleDeleteStep = (
         evt: React.MouseEvent<HTMLButtonElement>): void => {
         evt.preventDefault();
@@ -85,6 +95,11 @@ export const SolutionStep: React.FC<SolutionStepProps> = (
             category: `${statement.question}`,
             action: 'Deleted Step',
             label: `${level},${statement.pk}`
+        });
+        trackProp('prop_step_deleted', {
+            question: statement.question,
+            level,
+            question_id: statement.pk,
         });
     };
     const setNext = () => {
@@ -137,6 +152,12 @@ export const SolutionStep: React.FC<SolutionStepProps> = (
                 action: `Error ${respData.errorMsg}`,
                 label: `${level},${statement.pk}`
             });
+            trackProp('prop_step_error', {
+                question: statement.question,
+                level,
+                question_id: statement.pk,
+                error_message: respData.errorMsg,
+            });
         } else if (respData.isValid && !respData.isSolution) {
 
             //If the input is valid and not the solution, add to stepList
@@ -154,6 +175,12 @@ export const SolutionStep: React.FC<SolutionStepProps> = (
                 category: `${statement.question}`,
                 action: 'Question in progress',
                 label: `${level},${statement.pk}`
+            });
+            trackProp('prop_step_valid', {
+                question: statement.question,
+                level,
+                question_id: statement.pk,
+                step_number: stepList.length,
             });
 
         } else if (respData.isValid && respData.isSolution) {
@@ -178,6 +205,13 @@ export const SolutionStep: React.FC<SolutionStepProps> = (
                 action: 'Steps vs Optimal Steps',
                 label: `Steps: ${stepList.length - 1}` +
                 `FacultySteps: ${solutions.length - 1}`
+            });
+            trackProp('prop_question_completed', {
+                question: statement.question,
+                level,
+                question_id: statement.pk,
+                user_steps: stepList.length - 1,
+                optimal_steps: solutions.length - 1,
             });
         }
     };
