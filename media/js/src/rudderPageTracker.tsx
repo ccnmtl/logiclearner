@@ -11,6 +11,11 @@ export const RudderPageTracker: React.FC = () => {
         if (path === '/fol/match/') name = 'FOL - Match';
         else if (path === '/fol/express/') name = 'FOL - Express';
         else if (path.startsWith('/fol/')) name = 'FOL';
+        else if (path === '/propositional') name = 'Propositional - Dashboard';
+        else if (path.startsWith('/propositional/level/'))
+            name = 'Propositional - Questions';
+        else if (path.startsWith('/exercise/'))
+            name = 'Propositional - Exercise';
 
         window.rudderanalytics?.page({
             name,
