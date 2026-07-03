@@ -91,7 +91,7 @@ pyparsing==3.3.2
 
 pbr==7.0.3 # bandit
 pyyaml==6.0.3 # bandit
-stevedore==5.8.0  # bandit
+stevedore==5.9.0  # bandit
 rich==15.0.0  # bandit
 bandit==1.9.4
 
