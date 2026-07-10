@@ -1,6 +1,7 @@
 
 
 import { EnumType } from 'typescript';
+import questionsData from './questions.json';
 
 
 type HTTPMethod = 'GET' | 'PUT' | 'POST' | 'DELETE'
@@ -91,58 +92,57 @@ const authedFetch = function(url: string, method: HTTPMethod, data?: unknown) {
     });
 };
 
+const DIFFICULTY_LEVELS: {[key: string]: number} = {
+    'novice': 0,
+    'learner': 1,
+    'apprentice': 2
+};
+
+const statements: Statement[] = questionsData.questions.map((question) => ({
+    pk: question.pk,
+    question: question.premise,
+    answer: question.target,
+    difficulty: DIFFICULTY_LEVELS[question.difficulty],
+    created_at: ''
+})).sort((a, b) => a.pk - b.pk);
+
 /**
  * Get statements according to difficulty.
  */
-export const getStatements = async function(difficulty: number) {
-
-    const url = `/api/statements/${difficulty}/`;
-
-    return authedFetch(url, 'GET')
-        .then(function(response) {
-            if (response.status === 200) {
-                return response.json();
-            } else {
-                throw 'Error loading Statements: ' +
-                `(${response.status}) ${response.statusText}`;
-            }
-        });
+export const getStatements = function(difficulty: number): Statement[] {
+    return statements.filter(
+        (statement) => statement.difficulty === difficulty);
 };
 
 /**
  * Get statements according to question pk.
  */
-export const getStatement = async function(id: number) {
-
-    const url = `/api/statement/${id}/`;
-
-    return authedFetch(url, 'GET')
-        .then(function(response) {
-            if (response.status === 200) {
-                return response.json();
-            } else {
-                throw 'Error loading Statement: ' +
-                `(${response.status}) ${response.statusText}`;
-            }
-        });
+export const getStatement = function(id: number): Statement {
+    const statement = statements.find((statement) => statement.pk === id);
+    if (!statement) {
+        throw `Error loading Statement: no question with id ${id}`;
+    }
+    return statement;
 };
 
 /**
  * Get solutions according to question pk.
  */
-export const getSolutions = async function(id: number) {
-
-    const url = `/api/solution/${id}/`;
-
-    return authedFetch(url, 'GET')
-        .then(function(response) {
-            if (response.status === 200) {
-                return response.json();
-            } else {
-                throw 'Error loading Solutions: ' +
-                `(${response.status}) ${response.statusText}`;
-            }
-        });
+export const getSolutions = function(id: number): Solution[] {
+    const question = questionsData.questions.find(
+        (question) => question.pk === id);
+    if (!question) {
+        throw `Error loading Solutions: no question with id ${id}`;
+    }
+    return question.solution.map((step, idx) => ({
+        pk: idx,
+        statement: id,
+        ordinal: idx,
+        text: step.statement,
+        law: step.rule,
+        created_at: '',
+        modified_at: ''
+    }));
 };
 
 /**

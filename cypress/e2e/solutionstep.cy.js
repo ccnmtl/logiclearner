@@ -5,7 +5,7 @@ describe('Exercise Space Interactions', { testIsolation: false }, () => {
     });
     it('Should go through level one question', function() {
         cy.get('[data-cy="level-one"]').click();
-        cy.get('[data-cy="question2"]').click();
+        cy.get('[data-cy="question16"]').click();
         cy.get('#laws-0').should('exist');
         cy.get('#statementInput-0').should('exist');
         //syntax error
@@ -36,12 +36,12 @@ describe('Exercise Space Interactions', { testIsolation: false }, () => {
         cy.get('.question__status__text').should('contain', 'Completed');
 
         cy.get('[data-cy="level-button"]').click({force: true});
-        cy.get('[data-cy="questions-completed"]').should('contain', '1/2');
+        cy.get('[data-cy="questions-completed"]').should('contain', '1/18');
     });
     it('Should test reset level', function() {
         cy.get('.ll-button__text').click();
         cy.get('.btn-danger').click();
-        cy.get('[data-cy="questions-completed"]').should('contain', '0/2');
+        cy.get('[data-cy="questions-completed"]').should('contain', '0/18');
     });
     it('Should test delete step function', function() {
         cy.get('[data-cy="question1"]').click();
@@ -62,7 +62,7 @@ describe('Exercise Space Interactions', { testIsolation: false }, () => {
     });
     it('Should test hint functionality', function() {
         cy.visit('http://localhost:8000/propositional/level/2');
-        cy.get('[data-cy="question3"]').click();
+        cy.get('[data-cy="question9"]').click();
         cy.wait(500);
         cy.get('[data-cy="hint-button"]').click({force: true});
         cy.get('[data-cy="law-hint"]').should('exist');
