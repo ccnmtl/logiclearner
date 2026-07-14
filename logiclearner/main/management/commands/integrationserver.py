@@ -8,19 +8,18 @@ running test server.
 deleting a database.
 
 This is largely copied from django.core.management.commands.testserver
-It reimplements the testserver functionality except that it generates
-test data dynamically using factories
+It reimplements the testserver functionality against a fresh test
+database. Exercise data ships with the frontend bundle
+(media/js/src/questions.json), so no seeding is needed.
 """
 
 from django.core.management import call_command
 from django.core.management.base import BaseCommand
 from django.db import connection
 
-from logiclearner.factories import LogicLearnerTestMixin
-
 
 class Command(BaseCommand):
-    help = 'Runs a development server with data created by factories.'
+    help = 'Runs a development server against a fresh test database.'
 
     requires_system_checks = []
 
@@ -45,11 +44,6 @@ class Command(BaseCommand):
         # Create a test database.
         db_name = connection.creation.create_test_db(
             verbosity=verbosity, autoclobber=True, serialize=False)
-
-        ll = LogicLearnerTestMixin()
-        ll.create_level_one()
-        ll.create_level_two()
-        ll.create_level_three()
 
         shutdown_message = (
             '\nServer stopped.' +
