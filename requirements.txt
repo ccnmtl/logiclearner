@@ -1,7 +1,7 @@
 Django>=5.2.12,<6
 pytz==2026.3.post1
 httplib2==0.32.0
-feedparser==6.0.12
+feedparser==6.0.13
 Markdown==3.10.2 # pyup: < 3
 psycopg[binary]==3.3.4
 versiontools==1.9.1
