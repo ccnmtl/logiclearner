@@ -33,7 +33,7 @@ requests==2.34.2
 typing_extensions==4.16.0
 
 astroid==4.3.0
-pylint==4.0.6
+pylint==4.0.7
 
 six==1.17.0
 faker==40.36.0  # factory_boy
