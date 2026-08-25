@@ -32,9 +32,6 @@ certifi==2026.7.22  # requests, sentry-sdk
 requests==2.34.2
 typing_extensions==4.16.0
 
-astroid==4.3.1
-pylint==4.0.7
-
 six==1.17.0
 faker==40.37.0  # factory_boy
 factory_boy==3.3.3
