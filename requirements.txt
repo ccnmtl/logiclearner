@@ -1,5 +1,5 @@
 Django>=6.1,<6.2
-pytz==2026.3.post1
+pytz==2026.4
 httplib2==0.32.0
 feedparser==6.0.14
 Markdown==3.10.3 # pyup: < 3
