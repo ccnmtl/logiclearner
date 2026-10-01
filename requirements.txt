@@ -82,7 +82,7 @@ django-taggit==6.1.0
 
 nameparser==2.3.0
 oauth2==1.9.0.post1
-oauthlib==3.3.1
+oauthlib==4.0.0
 
 pyparsing==3.3.3
 
