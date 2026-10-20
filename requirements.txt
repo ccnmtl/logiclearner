@@ -59,7 +59,7 @@ sentry-sdk==2.72.0
 
 django-debug-toolbar==8.0.0
 
-django-smoketest==1.2.1
+django-smoketest==1.2.2
 # For django-extensions
 typing==3.7.4.1; python_version < '3.5'
 django-extensions==4.1
