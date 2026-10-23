@@ -40,7 +40,7 @@ ldap3==2.9.1
 sqlparse==0.6.0
 
 # boto3 deps
-s3transfer==0.19.2
+s3transfer==0.19.3
 jmespath==1.1.0
 
 boto3
