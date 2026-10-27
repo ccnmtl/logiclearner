@@ -15,6 +15,7 @@ module.exports = {
     // Mocks out all these file formats when tests are run.
     "\\.(jpg|ico|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$":
         "<rootDir>/src/__mocks__/fileMock.ts",
+    "^react-ga4$": "<rootDir>/media/js/src/__mocks__/react-ga4.ts",
     "\\.(css|less|scss|sass)$": "identity-obj-proxy"
   }
 };
