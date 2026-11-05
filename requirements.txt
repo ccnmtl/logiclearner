@@ -60,8 +60,6 @@ sentry-sdk==2.73.0
 django-debug-toolbar==8.0.0
 
 django-smoketest==1.2.2
-# For django-extensions
-typing==3.7.4.1; python_version < '3.5'
 django-extensions==4.1
 django-stagingcontext==0.1.0
 django-ga-context==0.1.0
@@ -116,7 +114,6 @@ numpy<3
 levenshtein==0.27.5
 rapidfuzz==3.14.6
 
-backports.zoneinfo==0.2.1; python_version < '3.9'
 webencodings==0.6.1 # django-markdownify
 tinycss2==1.5.1 # django-markdownify
 bleach==6.4.0 # django-markdownify
