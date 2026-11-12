@@ -29,7 +29,7 @@
     "@popperjs/core": "^2.11.2",
     "@rudderstack/analytics-js": "^3.23.2",
     "autoprefixer": "^10.4.21",
-    "babel-loader": "^10.0.0",
+    "babel-loader": "^10.1.1",
     "bootstrap": "^5.1.1",
     "postcss": "^8.2.13",
     "precss": "^4.0.0",
@@ -40,8 +40,8 @@
     "typescript": "^5.4.5"
   },
   "devDependencies": {
-    "@babel/cli": "^8.0.6",
-    "@babel/core": "^8.0.9",
+    "@babel/cli": "^8.1.0",
+    "@babel/core": "^8.1.2",
     "@babel/preset-env": "^8.0.7",
     "@babel/preset-react": "^8.0.1",
     "@babel/preset-typescript": "^8.0.7",
